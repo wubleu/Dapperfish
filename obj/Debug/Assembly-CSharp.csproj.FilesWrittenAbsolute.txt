@@ -1,0 +1,13 @@
+/Users/rwilson/Dapperfish/Temp/bin/Debug/UnityEngine.dll
+/Users/rwilson/Dapperfish/Temp/bin/Debug/UnityEditor.dll
+/Users/rwilson/Dapperfish/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/rwilson/Dapperfish/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/rwilson/Dapperfish/Temp/bin/Debug/Mono.Cecil.dll
+/Users/rwilson/Dapperfish/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/rwilson/Dapperfish/Temp/bin/Debug/Unity.DataContract.dll
+/Users/rwilson/Dapperfish/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/rwilson/Dapperfish/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/rwilson/Dapperfish/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/rwilson/Dapperfish/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/rwilson/Dapperfish/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/rwilson/Dapperfish/Temp/bin/Debug/Mono.Cecil.Mdb.dll
