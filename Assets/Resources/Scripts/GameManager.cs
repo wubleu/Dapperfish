@@ -4,28 +4,55 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 
 	// PARAMETERS
-	Color backgroundColor = new Color((100f/256f), (180f/256f), (100f/256f));
+	Color backgroundColor = new Color((100f/256f), (150f/256f), (100f/256f));
 
-	GameObject player;
+	GameObject necromancer;
 	GameObject background;
 	GameObject infectionBar;
+	GameObject eManager;
 
 
-	// Use this for initialization
-	void Start () {
-		player = new GameObject ();
-		player.AddComponent<PlayerController> ().init (this);
-
-		background = GameObject.CreatePrimitive (PrimitiveType.Quad);
-		background.transform.localScale = new Vector3 (180, 100, 1);
-		background.GetComponent<Renderer> ().material.color = backgroundColor;
+	void Start(){
+		init ();
 	}
+
+
+	void init () {
+		necromancer = new GameObject ();
+		GameObject camera = GameObject.Find ("Main Camera");
+		camera.transform.position = new Vector3 (necromancer.transform.position.x, necromancer.transform.position.y, camera.transform.position.z);
+		eManager = new GameObject ();
+		PlayerController necroContr = necromancer.AddComponent<PlayerController> ();
+		EnemyManager eMan = eManager.AddComponent<EnemyManager> ();
+		necroContr.init (this, eMan);
+		eMan.init (this, necroContr);
+		if (background == null) {
+			background = GameObject.CreatePrimitive (PrimitiveType.Quad);
+			background.transform.localScale = new Vector3 (180, 100, 1);
+			background.GetComponent<Renderer> ().material.color = backgroundColor;
+		}
+	}
+
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
 
+
+	public void Death() {
+		GameObject.Find ("Main Camera").transform.SetParent (null, true);
+		foreach (AIBehavior unit in FindObjectsOfType<AIBehavior>()) {
+			Destroy (unit.gameObject);
+		}
+		foreach (SpellShot unit in FindObjectsOfType<SpellShot>()) {
+			Destroy (unit.gameObject);
+		}
+		Destroy(eManager);
+		Destroy (necromancer);
+		init ();
+	}
+		
 
 	public void MakeSprite(GameObject obj, string textureName, Transform parentTransform, 
 						   float x, float y, float xScale, float yScale, float pixelsPer, params float[] pivot) {
@@ -43,6 +70,5 @@ public class GameManager : MonoBehaviour {
 		}
 		rend.sprite  = Sprite.Create (texture,
 			new Rect(0, 0, texture.width, texture.height), new Vector2 (xPiv, yPiv), pixelsPer);
-		print (obj.GetComponent<SpriteRenderer> ().sprite.texture.ToString ());
 	}
 }

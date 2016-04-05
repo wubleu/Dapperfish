@@ -18,9 +18,10 @@ public class SpellShot : MonoBehaviour {
 		necromancer = owner;
 		gManager = gMan;
 
-		gManager.MakeSprite (gameObject, "Circle", necromancer.transform, 0, 0, .22f, .22f, 200);
+		gManager.MakeSprite (gameObject, "Circle", necromancer.transform, 0, 0, .25f, .25f, 200);
 		transform.parent = gManager.transform;
 		gameObject.name = "SpellShot";
+		gameObject.AddComponent<CircleCollider2D> ().isTrigger = true;
 		spellShotMaterial = GetComponent<SpriteRenderer> ().material;
 		spellShotMaterial.color = spellShotColor;
 
@@ -30,12 +31,20 @@ public class SpellShot : MonoBehaviour {
 		direction = new Vector3 (direction.x / directionMagnitude, direction.y / directionMagnitude, 0);
 		transform.Translate (direction.x*.3f, direction.y*.3f, 0);
 	}
-	
+
+
 	// Update is called once per frame
 	void Update () {
 		if (Mathf.Abs(transform.position.x-necromancer.transform.position.x) > 9 || Mathf.Abs(transform.position.y-necromancer.transform.position.y) > 5) {
 			Destroy (gameObject);
 		}
 		transform.Translate (direction.x*speed, direction.y*speed, 0);
+	}
+
+
+	void OnTriggerEnter2D(Collider2D coll) {
+		if (coll.name != "Necromancer") {
+			Destroy (gameObject);
+		}
 	}
 }
