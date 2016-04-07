@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour {
 		if (background == null) {
 			background = GameObject.CreatePrimitive (PrimitiveType.Quad);
 			background.transform.localScale = new Vector3 (180, 100, 1);
-			background.GetComponent<Renderer> ().material.color = backgroundColor;
+//			background.GetComponent<Renderer> ().material.color = backgroundColor;
 		}
 	}
 
