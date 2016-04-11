@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour {
 		playerMaterial = GetComponent<SpriteRenderer> ().material;
 		playerMaterial.color = necroColor;
 		gameObject.AddComponent<Rigidbody> ().isKinematic = true;
-		gameObject.AddComponent<SphereCollider> ();
+		gameObject.AddComponent<SphereCollider> ().radius = .3f;
 
 		GameObject infectBar = new GameObject();
 		infectionBar = infectBar.AddComponent<InfectionBar> ();

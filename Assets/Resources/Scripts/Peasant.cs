@@ -20,7 +20,7 @@ public class Peasant : AIBehavior {
 		isEnemy = true;
 		base.init (gMan, owner, "Circle", 0, 0, .3f, .3f);
 		name = "Peasant";
-		gameObject.AddComponent<SphereCollider> ();
+		gameObject.AddComponent<SphereCollider> ().radius = .17f;
 	}
 
 	
