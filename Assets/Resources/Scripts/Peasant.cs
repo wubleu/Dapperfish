@@ -20,7 +20,7 @@ public class Peasant : AIBehavior {
 		isEnemy = true;
 		base.init (gMan, owner, "Circle", 0, 0, .3f, .3f);
 		name = "Peasant";
-		gameObject.AddComponent<CircleCollider2D> ();
+		gameObject.AddComponent<SphereCollider> ();
 	}
 
 	
@@ -31,12 +31,12 @@ public class Peasant : AIBehavior {
 	}
 		
 
-	void OnCollisionStay2D(Collision2D coll) {
+	void OnCollisionStay(Collision coll) {
 		base.OnCollision (coll);
 	}
 
 
-	void OnTriggerEnter2D(Collider2D coll) {
+	void OnTriggerEnter(Collider coll) {
 		base.TakeHit (coll.gameObject);
 	}
 }

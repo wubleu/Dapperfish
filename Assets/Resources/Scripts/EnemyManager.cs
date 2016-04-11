@@ -17,6 +17,7 @@ public class EnemyManager : MonoBehaviour {
 		name = "EnemyManager";
 		peasantSpawnRate = 5f;
 		peasantCount = 0;
+		transform.rotation = transform.parent.rotation;
 	}
 
 	
@@ -34,25 +35,23 @@ public class EnemyManager : MonoBehaviour {
 			GameObject peasant = new GameObject ();
 			peasant.AddComponent<Peasant> ().init (gManager, this);
 			if (rand > 0) {
-				peasant.transform.position = new Vector3 (necromancerController.gameObject.transform.position.x-11, 
+				peasant.transform.position = new Vector3 (necromancerController.gameObject.transform.position.x-11, 0,
 					necromancerController.gameObject.transform.position.y+Random.Range (-6, 6));
 			} else {
-				peasant.transform.position = new Vector3 (necromancerController.gameObject.transform.position.x+Random.Range (-11, 11), 
+				peasant.transform.position = new Vector3 (necromancerController.gameObject.transform.position.x+Random.Range (-11, 11), 0,
 					necromancerController.gameObject.transform.position.y-6);
 			}
-			print (peasant.transform.position.ToString());
 			return true;
 		} else if (Mathf.Abs (rand) <= peasantSpawnRate*2) {
 			GameObject peasant = new GameObject ();
 			peasant.AddComponent<Peasant> ().init (gManager, this);
 			if (rand > 0) {
-				peasant.transform.position = new Vector3 (necromancerController.gameObject.transform.position.x+11, 
+				peasant.transform.position = new Vector3 (necromancerController.gameObject.transform.position.x+11, 0,
 					necromancerController.gameObject.transform.position.y+Random.Range (-6, 6));
 			} else {
-				peasant.transform.position = new Vector3 (necromancerController.gameObject.transform.position.x+Random.Range (-11, 11), 
+				peasant.transform.position = new Vector3 (necromancerController.gameObject.transform.position.x+Random.Range (-11, 11), 0,
 					necromancerController.gameObject.transform.position.y+6);
 			}
-			print (peasant.transform.position.ToString());
 			return true;
 		}
 		return false;
