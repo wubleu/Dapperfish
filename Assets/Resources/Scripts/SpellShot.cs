@@ -22,11 +22,12 @@ public class SpellShot : MonoBehaviour {
 		transform.parent = gManager.transform;
 		gameObject.name = "SpellShot";
 		gameObject.AddComponent<SphereCollider> ().isTrigger = true;
+		gameObject.GetComponent<SphereCollider> ().radius = .07f;
 		spellShotMaterial = GetComponent<SpriteRenderer> ().material;
 		spellShotMaterial.color = spellShotColor;
 
 		Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		direction = new Vector3 (mousePos.x-transform.position.x, mousePos.y-transform.position.y, 0);
+		direction = new Vector3 (mousePos.x-transform.position.x, mousePos.z-transform.position.z, 0);
 		float directionMagnitude = Mathf.Sqrt (Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.y, 2));
 		direction = new Vector3 (direction.x / directionMagnitude, direction.y / directionMagnitude, 0);
 		transform.Translate (direction.x*.3f, direction.y*.3f, 0);
