@@ -27,6 +27,6 @@ public class HealthBar : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		transform.localScale = new Vector3 (1, necromancer.hp / maxHealth, 0);
+		transform.localScale = new Vector3 (1, necromancer.hp / maxHealth, 1);
 	}
 }

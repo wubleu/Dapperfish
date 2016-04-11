@@ -20,7 +20,7 @@ public class AIBehavior : MonoBehaviour {
 	protected Material material;
 	protected float switchDirTimer;
 	protected float meleeTimer;
-	protected bool isEnemy;
+	public bool isEnemy;
 	protected float hp;
 
 
@@ -30,7 +30,7 @@ public class AIBehavior : MonoBehaviour {
 		gManager = gMan;
 		gManager.MakeSprite (gameObject, textureName, eManager.transform, x, y, xScale, yScale, 200);
 		material = GetComponent<SpriteRenderer> ().material;
-		gameObject.AddComponent<Rigidbody2D> ().gravityScale = 0;
+		gameObject.AddComponent<Rigidbody> ().useGravity = false;
 		meleeTimer = 0;
 		switchDirTimer = 0;
 		material.color = enemyColor;
@@ -55,9 +55,9 @@ public class AIBehavior : MonoBehaviour {
 			SwitchTargets ();
 		}
 
-		Vector3 direction = new Vector3 (target.transform.position.x-transform.position.x, target.transform.position.y-transform.position.y);
-		float directionMagnitude = Mathf.Sqrt (Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.y, 2));
-		direction = new Vector3 (direction.x / directionMagnitude, direction.y / directionMagnitude, 0);
+		Vector3 direction = new Vector3 (target.transform.position.x-transform.position.x, 0, target.transform.position.z-transform.position.z);
+		float directionMagnitude = Mathf.Sqrt (Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.z, 2));
+		direction = new Vector3 (direction.x / directionMagnitude, direction.z / directionMagnitude);
 		transform.Translate (direction.x*speed*Time.deltaTime, direction.y*speed*Time.deltaTime, 0);
 	}
 
@@ -86,12 +86,12 @@ public class AIBehavior : MonoBehaviour {
 	}
 
 
-	protected void Melee(Collision2D coll) {
-		if (coll == null) {
+	protected void Melee(Collision coll) {
+		if (coll == null || coll.gameObject.name == "Quad") {
 			return;
 		}
 		AIBehavior unit = coll.gameObject.GetComponent<AIBehavior> ();
-		if (unit == null && isEnemy) {
+		if (coll.gameObject.name == "Necromancer") {
 			coll.gameObject.GetComponent<PlayerController> ().TakeHit (coll.gameObject);
 			meleeTimer = 0;
 		} else if (unit.isEnemy == !isEnemy) {
@@ -132,7 +132,7 @@ public class AIBehavior : MonoBehaviour {
 	}
 
 
-	protected void OnCollision(Collision2D coll) {
+	protected void OnCollision(Collision coll) {
 		if (meleeTimer > meleeThreshold) {
 			Melee (coll);
 		}

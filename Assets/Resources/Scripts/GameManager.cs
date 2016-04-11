@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour {
 
 
 	void Start(){
+		gameObject.transform.Rotate (90, 180, 180);
+		GameObject camera = GameObject.Find ("Main Camera");
+		camera.transform.position = new Vector3 (0, 10, 0);
+		camera.transform.Rotate (90, 0, 0);
 		init ();
 	}
 
@@ -20,17 +24,17 @@ public class GameManager : MonoBehaviour {
 	void init () {
 		necromancer = new GameObject ();
 		GameObject camera = GameObject.Find ("Main Camera");
-		camera.transform.position = new Vector3 (necromancer.transform.position.x, necromancer.transform.position.y, camera.transform.position.z);
+		camera.transform.position = new Vector3 (necromancer.transform.position.x, 10, necromancer.transform.position.z);
 		eManager = new GameObject ();
 		PlayerController necroContr = necromancer.AddComponent<PlayerController> ();
 		EnemyManager eMan = eManager.AddComponent<EnemyManager> ();
 		necroContr.init (this, eMan);
 		eMan.init (this, necroContr);
-		if (background == null) {
-			background = GameObject.CreatePrimitive (PrimitiveType.Quad);
-			background.transform.localScale = new Vector3 (180, 100, 1);
+//		if (background == null) {
+//			background = GameObject.CreatePrimitive (PrimitiveType.Quad);
+//			background.transform.localScale = new Vector3 (180, 1, 100);
 //			background.GetComponent<Renderer> ().material.color = backgroundColor;
-		}
+//		}
 	}
 
 	
@@ -57,6 +61,7 @@ public class GameManager : MonoBehaviour {
 	public void MakeSprite(GameObject obj, string textureName, Transform parentTransform, 
 						   float x, float y, float xScale, float yScale, float pixelsPer, params float[] pivot) {
 		obj.transform.parent = parentTransform;
+		obj.transform.rotation = obj.transform.parent.rotation;
 		obj.transform.localPosition = new Vector3 (x, y, 0);
 		obj.transform.localScale = new Vector3 (xScale, yScale, 1);
 		obj.name = textureName;
