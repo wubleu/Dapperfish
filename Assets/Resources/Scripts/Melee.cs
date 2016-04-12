@@ -4,15 +4,19 @@ using System.Collections;
 public class Melee : MonoBehaviour {
 
 	int frame;
-	CircleCollider2D col;
+	SphereCollider col;
 
 	void Start () {
-		col = gameObject.AddComponent<CircleCollider2D>();
-		col.radius = 1.5f;
-		col.enabled = false;
+		col = gameObject.AddComponent<SphereCollider>();
+		col.isTrigger = true;
+		col.radius = 1;
 	}
 
 	void Update () {
+		Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		mouse.y = 0;
+		transform.localEulerAngles = new Vector3(0, 0, 90 + Mathf.Rad2Deg * Mathf.Atan2(transform.position.x - mouse.x, mouse.z - transform.position.z));
+
 		if (col.enabled) {
 			if (frame != Time.frameCount) {
 				col.enabled = false;
@@ -21,10 +25,10 @@ public class Melee : MonoBehaviour {
 	}
 
 	void OnTriggerStay(Collider other) {
-		if (other.tag == "Enemy") {
+		if (other.name == "Peasant") {
 			Vector3 direction = other.transform.position - transform.position;
-			if (Vector3.Angle(direction, transform.right) < 45 * 0.5f) {
-				//damage
+			if (Vector3.Angle(direction, transform.right) < 45) {
+				other.GetComponent<Peasant>().Damage(10);
 			}
 		}
 	}

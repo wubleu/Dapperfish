@@ -16,13 +16,16 @@ public class SpellEffect : MonoBehaviour {
 	}
 
 	void OnTriggerStay(Collider col) {
-		if (col.gameObject.tag == "Enemy") {
+		if (col.gameObject.name == "Peasant") {
 			switch (name) {
 				case "Blight":
+					col.GetComponent<Peasant>().Infect();
 					return;
 				case "Root":
+					col.GetComponent<Peasant>().Root();
 					return;
 				case "Damage":
+					col.GetComponent<Peasant>().Damage(10);
 					return;
 			}
 		}

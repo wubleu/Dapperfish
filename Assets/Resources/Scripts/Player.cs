@@ -60,10 +60,10 @@ public class Player : MonoBehaviour {
 			Abilities.Damage(mouse);
 			clocks[3] = timers[3];
 		}
-		if (Input.GetKeyDown("space") && clocks[4] <= 0) {
-			Abilities.Blink(mouse, transform);
-			clocks[4] = timers[4];
-		}
+//		if (Input.GetKeyDown("space") && clocks[4] <= 0) {
+//			Abilities.Blink(mouse, transform);
+//			clocks[4] = timers[4];
+//		}
 	}
 
 	public void Damage(float damage) {

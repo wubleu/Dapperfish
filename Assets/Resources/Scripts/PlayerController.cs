@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour {
 	public float hp = 120;
 	float speed = 1.1f;
 	Color necroColor = new Color(120f / 256f, 0f / 256f, 100f / 256f);
-	float[] clocks = new float[5] {0, 0, 0, 0, 0}, timers = new float[5] {1, 1, 1, 1, 1};
+	float[] clocks = new float[5] {0, 0, 0, 0, 0}, timers = new float[5] {0.5f, 3, 3, 3, 3};
 	Melee melee;
 	// spellShotInterval = .2f
 
@@ -68,8 +68,7 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		mouse.z = 0;
-		transform.localEulerAngles = new Vector3(0, 0, Vector3.Angle(transform.position, mouse));
+		mouse.y = 0;
 
 		for (int i = 0; i < 5; i++) {
 			if (clocks[i] > 0) {
@@ -83,6 +82,7 @@ public class PlayerController : MonoBehaviour {
 						break;
 					case 1: // blight
 						Abilities.Blight(mouse);
+						infectionBar.infectionCharge = 0;
 						break;
 					case 2: // root
 						Abilities.Root(mouse);
@@ -91,7 +91,8 @@ public class PlayerController : MonoBehaviour {
 						Abilities.Damage(mouse);
 						break;
 					case 4: // blink
-						Abilities.Blink(mouse, transform);
+						float a = Mathf.PI / 2 + Mathf.Atan2(transform.position.x - mouse.x, mouse.z - transform.position.z);
+						Abilities.Blink(a, transform);
 						break;
 				}
 				    

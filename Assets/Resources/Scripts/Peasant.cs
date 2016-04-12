@@ -37,6 +37,6 @@ public class Peasant : AIBehavior {
 
 
 	void OnTriggerEnter(Collider coll) {
-		base.TakeHit (coll.gameObject);
+//		base.TakeHit (coll.gameObject);
 	}
 }

@@ -6,7 +6,7 @@ public class AIBehavior : MonoBehaviour {
 	// PARAMETERS
 	protected Color allyColor, enemyColor;
 	public float maxHP;
-	protected float speed, infectionCost, switchDirThreshold, meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, hp;
+	protected float speed, infectionCost, switchDirThreshold, meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp;
 
 	protected GameObject necromancer, target;
 	protected GameManager gManager;
@@ -24,8 +24,6 @@ public class AIBehavior : MonoBehaviour {
 		Rigidbody rbody = gameObject.AddComponent<Rigidbody> ();
 		rbody.useGravity = false;
 		rbody.constraints = RigidbodyConstraints.FreezeRotation;
-		meleeTimer = 0;
-		switchDirTimer = 0;
 		material.color = enemyColor;
 		necromancer = target = GameObject.Find("Necromancer");
 		hp = maxHP;
@@ -35,6 +33,12 @@ public class AIBehavior : MonoBehaviour {
 	protected void Update() {
 		meleeTimer += Time.deltaTime;
 		switchDirTimer += Time.deltaTime;
+		if (root > 0) {
+			root -= Time.deltaTime;
+			if (root <= 0) {
+				speed = 1.1f;
+			}
+		}
 	}
 
 
@@ -82,7 +86,6 @@ public class AIBehavior : MonoBehaviour {
 			}
 		}
 	}
-
 
 	protected void Melee(Collision coll) {
 		if (coll == null || coll.gameObject.name == "Quad") {
@@ -135,6 +138,23 @@ public class AIBehavior : MonoBehaviour {
 	protected void OnCollision(Collision coll) {
 		if (meleeTimer > meleeThreshold) {
 			Melee (coll);
+		}
+	}
+
+	public void Root() {
+		root = 1.5f;
+		speed = 0;
+	}
+
+	public void Damage(float damage) {
+		hp -= damage;
+		if (hp <= 0) { 
+			if (isEnemy) {
+				eManager.peasantCount -= 1;
+			} else {
+				necromancer.GetComponent<PlayerController> ().minionCount -= 1;
+			}
+			Destroy (gameObject);
 		}
 	}
 }
