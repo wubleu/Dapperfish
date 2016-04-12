@@ -30,8 +30,9 @@ public class AIBehavior : MonoBehaviour {
 		gManager = gMan;
 		gManager.MakeSprite (gameObject, textureName, eManager.transform, x, y, xScale, yScale, 200);
 		material = GetComponent<SpriteRenderer> ().material;
-		gameObject.AddComponent<Rigidbody> ().useGravity = false ;
-		gameObject.GetComponent<Rigidbody> ().freezeRotation = true;
+		Rigidbody rbody = gameObject.AddComponent<Rigidbody> ();
+		rbody.useGravity = false;
+		rbody.constraints = RigidbodyConstraints.FreezeRotation;
 		meleeTimer = 0;
 		switchDirTimer = 0;
 		material.color = enemyColor;
@@ -99,8 +100,10 @@ public class AIBehavior : MonoBehaviour {
 		}
 		AIBehavior unit = coll.gameObject.GetComponent<AIBehavior> ();
 		if (coll.gameObject.name == "Necromancer") {
-			coll.gameObject.GetComponent<PlayerController> ().TakeHit (coll.gameObject);
-			meleeTimer = 0;
+			if (isEnemy) {
+				coll.gameObject.GetComponent<PlayerController> ().TakeHit (coll.gameObject);
+				meleeTimer = 0;
+			}
 		} else if (unit.isEnemy == !isEnemy) {
 			unit.TakeHit (coll.gameObject);
 			meleeTimer = 0;

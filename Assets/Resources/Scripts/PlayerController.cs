@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
 	// PARAMETERS
-	public float hp = 120;
+	public float hp = 12;
 	float speed = 1.1f;
 	float spellShotInterval = .2f;
 	Color necroColor = new Color (120f/256f, 0f/256f, 100f/256f);
@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour {
 	KeyCode blinkKey = KeyCode.Mouse0;
 	KeyCode meleeKey = KeyCode.Mouse0;
 	KeyCode shootKey = KeyCode.Mouse0;
+
+	GameObject background;
 
 	public int minionCount;
 	float shotClock;
@@ -51,19 +53,20 @@ public class PlayerController : MonoBehaviour {
 
 		shotClock = 0;
 		minionCount = 0;
+		background = GameObject.Find ("Background");
 	}
 
 
 	// Update is called once per frame
 	void Update () {
 		// moves player by speed*Time.deltaTime based on WASD
-		if (Input.GetKey (KeyCode.A) && !(transform.position.x <= -85)) {
+		if (Input.GetKey (KeyCode.A) && !(transform.position.x <= -3)) {
 			transform.Translate (-speed*Time.deltaTime, 0, 0);
-		} if (Input.GetKey (KeyCode.D) && !(transform.position.x >= 85)) {
+		} if (Input.GetKey (KeyCode.D) && !(transform.position.x >= 28.5f)) {
 			transform.Translate (speed*Time.deltaTime, 0, 0);
-		} if (Input.GetKey (KeyCode.W) && !(transform.position.z >= 46.5)) {
+		} if (Input.GetKey (KeyCode.W) && !(transform.position.z >= 3)) {
 			transform.Translate (0, speed*Time.deltaTime, 0);
-		} if (Input.GetKey (KeyCode.S) && !(transform.position.z <= -46.5)) {
+		} if (Input.GetKey (KeyCode.S) && !(transform.position.z <= -21)) {
 			transform.Translate (0, -speed*Time.deltaTime, 0);
 		}
 		// if space key is down and enough time has passed, fires spellShot
