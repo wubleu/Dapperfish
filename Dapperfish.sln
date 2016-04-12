@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{49C7496D-916A-2838-5ECF-7EA2E65CA3F8}") = "Dapperfish", "Assembly-CSharp.csproj", "{0406831D-3373-F61F-4A8E-6E9F590ECF53}"
 EndProject
+Project("{49C7496D-916A-2838-5ECF-7EA2E65CA3F8}") = "Dapperfish", "Assembly-CSharp-Editor.csproj", "{070ED74C-A029-496E-EFDD-B7D7C03804C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{0406831D-3373-F61F-4A8E-6E9F590ECF53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0406831D-3373-F61F-4A8E-6E9F590ECF53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0406831D-3373-F61F-4A8E-6E9F590ECF53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{070ED74C-A029-496E-EFDD-B7D7C03804C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{070ED74C-A029-496E-EFDD-B7D7C03804C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{070ED74C-A029-496E-EFDD-B7D7C03804C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{070ED74C-A029-496E-EFDD-B7D7C03804C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
