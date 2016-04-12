@@ -45,6 +45,8 @@ public class PlayerController : MonoBehaviour {
 		gameObject.GetComponent<Rigidbody> ().freezeRotation = true;
 		gameObject.AddComponent<SphereCollider> ().radius = .3f;
 		gameObject.AddComponent<NavMeshAgent> ().updateRotation = false;
+		gameObject.GetComponent<NavMeshAgent> ().radius = .25f;
+
 
 		GameObject infectBar = new GameObject();
 		infectionBar = infectBar.AddComponent<InfectionBar> ();

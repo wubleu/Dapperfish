@@ -31,6 +31,7 @@ public class AIBehavior : MonoBehaviour {
 		necromancer = target = GameObject.Find("Necromancer");
 		hp = maxHP;
 		agent.speed = speed;
+		agent.radius = .1f;
 	}
 
 
@@ -40,8 +41,10 @@ public class AIBehavior : MonoBehaviour {
 		if (root > 0) {
 			root -= Time.deltaTime;
 			if (root <= 0) {
-				agent.speed = 1.1f;
+				agent.speed = 1.5f;
 			}
+		} else {
+			MoveToward ();
 		}
 	}
 
@@ -49,15 +52,17 @@ public class AIBehavior : MonoBehaviour {
 	void LateUpdate() {
 		transform.position = new Vector3 (transform.position.x, .01f, transform.position.z);
 		gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+		print (necromancer.GetComponent<PlayerController> ().minionCount + "   " + eManager.peasantCount);
 	}
 
 
 	protected void MoveToward() {
 		if ((isEnemy && eManager.necromancerController.minionCount <= 0) || (!isEnemy && eManager.peasantCount <= 0)) {
 			agent.destination = necromancer.transform.position;
+			target = necromancer;
 		} else if (meleeTimer >= meleeThreshold) {
 			SwitchTargets ();
-		} else if (target == null) {
+		} else {
 			SwitchTargets ();
 		}
 
@@ -71,6 +76,7 @@ public class AIBehavior : MonoBehaviour {
 	protected virtual void SwitchTargets() {
 		float targetDist = 100;
 		if (target == null && isEnemy) {
+			agent.destination = necromancer.transform.position;
 			target = necromancer;
 		}
 		if (target != null) {
@@ -92,7 +98,7 @@ public class AIBehavior : MonoBehaviour {
 	}
 
 	protected void Melee(Collision coll) {
-		if (coll == null || coll.gameObject.name == "Quad") {
+		if (coll == null || coll.gameObject.name == "Terrain") {
 			return;
 		}
 		AIBehavior unit = coll.gameObject.GetComponent<AIBehavior> ();
@@ -129,13 +135,15 @@ public class AIBehavior : MonoBehaviour {
 
 
 	public void Infect() {
-		eManager.peasantCount--;
-		necromancer.GetComponent<PlayerController> ().minionCount++;
-		isEnemy = false;
-		SwitchTargets();
-		material.color = allyColor;
-		target = null;
-		hp = maxHP;
+		if (isEnemy) {
+			eManager.peasantCount--;
+			necromancer.GetComponent<PlayerController> ().minionCount++;
+			isEnemy = false;
+			SwitchTargets ();
+			material.color = allyColor;
+			target = null;
+			hp = maxHP;
+		}
 	}
 
 

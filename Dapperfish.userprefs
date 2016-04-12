@@ -1,14 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Scripts/Peasant.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Scripts/AIBehavior.cs">
     <Files>
-      <File FileName="Assets/Resources/Scripts/Peasant.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/EnemyManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Resources/Scripts/GameManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/PlayerController.cs" Line="105" Column="53" />
-      <File FileName="Assets/Resources/Scripts/SpellEffect.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/PlayerController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/AIBehavior.cs" Line="57" Column="1" />
+      <File FileName="Assets/Resources/Scripts/EnemyManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/HealthBar.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/InfectionBar.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/Blight.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/SpellShot.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/Peasant.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/Melee.cs" Line="1" Column="1" />
       <File FileName="Assets/Resources/Scripts/Player.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/Abilities.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

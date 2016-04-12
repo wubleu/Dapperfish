@@ -12,7 +12,7 @@ public class Peasant : AIBehavior {
 		enemyColor = new Color (1, 1, 1);
 		speed = 1.5f;
 		maxHP = 3f;
-		infectionCost = 9;
+		infectionCost = 15;
 		switchDirThreshold = .5f;
 		meleeThreshold = 1f;
 		meleeDamage = 1f;
@@ -21,6 +21,7 @@ public class Peasant : AIBehavior {
 		base.init (gMan, owner, "Circle", 0, 0, .3f, .3f);
 		name = "Peasant";
 		gameObject.AddComponent<SphereCollider> ().radius = .17f;
+		gameObject.GetComponent<NavMeshAgent> ().radius = .17f;
 	}
 
 	
