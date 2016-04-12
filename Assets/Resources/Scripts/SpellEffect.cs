@@ -3,8 +3,16 @@ using System.Collections;
 
 public class SpellEffect : MonoBehaviour {
 
+	int frame;
+
+	void Start() {
+		frame = Time.frameCount;
+	}
+
 	void Update() {
-		Destroy(gameObject);
+		if (frame != Time.frameCount) {
+			Destroy(gameObject);
+		}
 	}
 
 	void OnTriggerStay(Collider col) {

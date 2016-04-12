@@ -4,38 +4,26 @@ using System.Collections;
 public class AIBehavior : MonoBehaviour {
 
 	// PARAMETERS
-	protected Color allyColor;
-	protected Color enemyColor;
-	protected float speed;
+	protected Color allyColor, enemyColor;
 	public float maxHP;
-	protected float infectionCost;
-	protected float switchDirThreshold;
-	protected float meleeThreshold;
-	protected float meleeDamage;
+	protected float speed, infectionCost, switchDirThreshold, meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, hp;
 
-	protected GameObject necromancer;
-	protected GameObject target;
+	protected GameObject necromancer, target;
 	protected GameManager gManager;
 	protected EnemyManager eManager;
 	protected Material material;
-	protected float switchDirTimer;
-	protected float meleeTimer;
-	public bool isEnemy;
-	protected float hp;
+	public bool isEnemy = true;
 
 
 	// Use this for initialization
-	protected void init (GameManager gMan, EnemyManager owner, string textureName, float x, float y, float xScale, float yScale) {
+	protected void init(GameManager gMan, EnemyManager owner, string textureName, float x, float y, float xScale, float yScale) {
 		eManager = owner;
 		gManager = gMan;
-		gManager.MakeSprite (gameObject, textureName, eManager.transform, x, y, xScale, yScale, 200);
-		material = GetComponent<SpriteRenderer> ().material;
-		gameObject.AddComponent<Rigidbody> ().useGravity = false;
-		meleeTimer = 0;
-		switchDirTimer = 0;
+		gManager.MakeSprite(gameObject, textureName, eManager.transform, x, y, xScale, yScale, 200);
+		material = GetComponent<SpriteRenderer>().material;
+		gameObject.AddComponent<Rigidbody>().useGravity = false;
 		material.color = enemyColor;
-		necromancer = GameObject.Find ("Necromancer");
-		target = necromancer;
+		necromancer = target = GameObject.Find("Necromancer");
 		hp = maxHP;
 	}
 
