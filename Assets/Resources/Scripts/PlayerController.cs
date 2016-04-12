@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
 	// PARAMETERS
-	public float hp = 12;
+	public float hp = 120;
 	float speed = 1.1f;
 	float spellShotInterval = .2f;
 	Color necroColor = new Color (120f/256f, 0f/256f, 100f/256f);
@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour {
 		playerMaterial = GetComponent<SpriteRenderer> ().material;
 		playerMaterial.color = necroColor;
 		gameObject.AddComponent<Rigidbody> ().isKinematic = true;
+		gameObject.GetComponent<Rigidbody> ().freezeRotation = true;
 		gameObject.AddComponent<SphereCollider> ().radius = .3f;
 
 		GameObject infectBar = new GameObject();

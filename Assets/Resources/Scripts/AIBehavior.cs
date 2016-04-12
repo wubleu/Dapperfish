@@ -30,7 +30,8 @@ public class AIBehavior : MonoBehaviour {
 		gManager = gMan;
 		gManager.MakeSprite (gameObject, textureName, eManager.transform, x, y, xScale, yScale, 200);
 		material = GetComponent<SpriteRenderer> ().material;
-		gameObject.AddComponent<Rigidbody> ().useGravity = false;
+		gameObject.AddComponent<Rigidbody> ().useGravity = false ;
+		gameObject.GetComponent<Rigidbody> ().freezeRotation = true;
 		meleeTimer = 0;
 		switchDirTimer = 0;
 		material.color = enemyColor;
@@ -43,6 +44,12 @@ public class AIBehavior : MonoBehaviour {
 	protected void Update() {
 		meleeTimer += Time.deltaTime;
 		switchDirTimer += Time.deltaTime;
+	}
+
+
+	void LateUpdate() {
+		transform.position = new Vector3 (transform.position.x, 0, transform.position.z);
+		gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 	}
 
 
@@ -70,13 +77,13 @@ public class AIBehavior : MonoBehaviour {
 		if (target != null) {
 			targetDist = Mathf.Sqrt(
 				Mathf.Pow ((target.gameObject.transform.position.x - transform.position.x), 2) + 
-				Mathf.Pow ((target.gameObject.transform.position.y - transform.position.y), 2));
+				Mathf.Pow ((target.gameObject.transform.position.z - transform.position.z), 2));
 		} 
 		foreach (AIBehavior AI in FindObjectsOfType<AIBehavior>()) {
 			if (AI.isEnemy == !isEnemy) {
 				float AIDist = Mathf.Sqrt (
 					               Mathf.Pow ((AI.gameObject.transform.position.x - transform.position.x), 2) +
-					               Mathf.Pow ((AI.gameObject.transform.position.y - transform.position.y), 2));
+					               Mathf.Pow ((AI.gameObject.transform.position.z - transform.position.z), 2));
 				if (AIDist < targetDist) {
 					targetDist = AIDist;
 					target = AI.gameObject;
