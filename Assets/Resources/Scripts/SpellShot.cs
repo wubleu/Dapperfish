@@ -21,12 +21,13 @@ public class SpellShot : MonoBehaviour {
 		gManager.MakeSprite (gameObject, "Circle", necromancer.transform, 0, 0, .25f, .25f, 200);
 		transform.parent = gManager.transform;
 		gameObject.name = "SpellShot";
-		gameObject.AddComponent<CircleCollider2D> ().isTrigger = true;
+		gameObject.AddComponent<SphereCollider> ().isTrigger = true;
+		gameObject.GetComponent<SphereCollider> ().radius = .07f;
 		spellShotMaterial = GetComponent<SpriteRenderer> ().material;
 		spellShotMaterial.color = spellShotColor;
 
 		Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		direction = new Vector3 (mousePos.x-transform.position.x, mousePos.y-transform.position.y, 0);
+		direction = new Vector3 (mousePos.x-transform.position.x, mousePos.z-transform.position.z, 0);
 		float directionMagnitude = Mathf.Sqrt (Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.y, 2));
 		direction = new Vector3 (direction.x / directionMagnitude, direction.y / directionMagnitude, 0);
 		transform.Translate (direction.x*.3f, direction.y*.3f, 0);
@@ -42,7 +43,7 @@ public class SpellShot : MonoBehaviour {
 	}
 
 
-	void OnTriggerEnter2D(Collider2D coll) {
+	void OnTriggerEnter(Collider coll) {
 		if (coll.name != "Necromancer") {
 			Destroy (gameObject);
 		}

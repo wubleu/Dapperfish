@@ -21,11 +21,11 @@ public class Blight : MonoBehaviour {
 		necromancer = owner;
 		gManager = gMan;
 		Vector3 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-		gManager.MakeSprite (gameObject, "SolidCircle", gMan.transform, mousePos.x, mousePos.y, size, size, 200);
+		gManager.MakeSprite (gameObject, "SolidCircle", gMan.transform, mousePos.x, mousePos.z, size, size, 200);
 		material = gameObject.GetComponent<SpriteRenderer> ().material;
 		material.color = blightColor;
 		name = "Blight";
-		gameObject.AddComponent<CircleCollider2D> ().isTrigger = true;
+		gameObject.AddComponent<SphereCollider> ().isTrigger = true;
 		blightPower = blightStrength;
 		infected = new List<AIBehavior> ();
 	}

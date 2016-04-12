@@ -9,6 +9,14 @@ public class PlayerController : MonoBehaviour {
 	float spellShotInterval = .2f;
 	Color necroColor = new Color (120f/256f, 0f/256f, 100f/256f);
 
+	// CONTROLS PARAMETERS
+	KeyCode blightKey = KeyCode.Mouse1;
+	KeyCode graspingKey = KeyCode.Mouse0;
+	KeyCode beamKey = KeyCode.Mouse0;
+	KeyCode blinkKey = KeyCode.Mouse0;
+	KeyCode meleeKey = KeyCode.Mouse0;
+	KeyCode shootKey = KeyCode.Mouse0;
+
 	public int minionCount;
 	float shotClock;
 	GameManager gManager;
@@ -27,8 +35,8 @@ public class PlayerController : MonoBehaviour {
 		gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "PlayerController";
 		playerMaterial = GetComponent<SpriteRenderer> ().material;
 		playerMaterial.color = necroColor;
-		gameObject.AddComponent<Rigidbody2D> ().isKinematic = true;
-		gameObject.AddComponent<CircleCollider2D> ();
+		gameObject.AddComponent<Rigidbody> ().isKinematic = true;
+		gameObject.AddComponent<SphereCollider> ().radius = .3f;
 
 		GameObject infectBar = new GameObject();
 		infectionBar = infectBar.AddComponent<InfectionBar> ();
@@ -52,9 +60,9 @@ public class PlayerController : MonoBehaviour {
 			transform.Translate (-speed*Time.deltaTime, 0, 0);
 		} if (Input.GetKey (KeyCode.D) && !(transform.position.x >= 85)) {
 			transform.Translate (speed*Time.deltaTime, 0, 0);
-		} if (Input.GetKey (KeyCode.W) && !(transform.position.y >= 46.5)) {
+		} if (Input.GetKey (KeyCode.W) && !(transform.position.z >= 46.5)) {
 			transform.Translate (0, speed*Time.deltaTime, 0);
-		} if (Input.GetKey (KeyCode.S) && !(transform.position.y <= -46.5)) {
+		} if (Input.GetKey (KeyCode.S) && !(transform.position.z <= -46.5)) {
 			transform.Translate (0, -speed*Time.deltaTime, 0);
 		}
 		// if space key is down and enough time has passed, fires spellShot
@@ -73,6 +81,7 @@ public class PlayerController : MonoBehaviour {
 
 
 	public void TakeHit(GameObject collObj) {
+		print ("taking hit");
 		hp -= 1;
 		if (hp <= 0) {
 			gManager.Death ();
