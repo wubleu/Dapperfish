@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
 	// PARAMETERS
-	public float hp = 120;
+	public float hp = 12;
 	float speed = 1.1f;
 	float spellShotInterval = .2f;
 	Color necroColor = new Color (120f/256f, 0f/256f, 100f/256f);
