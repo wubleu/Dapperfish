@@ -36,10 +36,10 @@ public class EnemyManager : MonoBehaviour {
 			peasant.AddComponent<Peasant> ().init (gManager, this);
 			if (rand > 0) {
 				peasant.transform.position = new Vector3 (necromancerController.gameObject.transform.position.x-11, 0,
-					necromancerController.gameObject.transform.position.y+Random.Range (-6, 6));
+					necromancerController.gameObject.transform.position.z+Random.Range (-6, 6));
 			} else {
 				peasant.transform.position = new Vector3 (necromancerController.gameObject.transform.position.x+Random.Range (-11, 11), 0,
-					necromancerController.gameObject.transform.position.y-6);
+					necromancerController.gameObject.transform.position.z-6);
 			}
 			return true;
 		} else if (Mathf.Abs (rand) <= peasantSpawnRate*2) {
@@ -47,10 +47,10 @@ public class EnemyManager : MonoBehaviour {
 			peasant.AddComponent<Peasant> ().init (gManager, this);
 			if (rand > 0) {
 				peasant.transform.position = new Vector3 (necromancerController.gameObject.transform.position.x+11, 0,
-					necromancerController.gameObject.transform.position.y+Random.Range (-6, 6));
+					necromancerController.gameObject.transform.position.z+Random.Range (-6, 6));
 			} else {
 				peasant.transform.position = new Vector3 (necromancerController.gameObject.transform.position.x+Random.Range (-11, 11), 0,
-					necromancerController.gameObject.transform.position.y+6);
+					necromancerController.gameObject.transform.position.z+6);
 			}
 			return true;
 		}

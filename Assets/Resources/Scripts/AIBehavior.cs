@@ -20,8 +20,12 @@ public class AIBehavior : MonoBehaviour {
 		eManager = owner;
 		gManager = gMan;
 		gManager.MakeSprite(gameObject, textureName, eManager.transform, x, y, xScale, yScale, 200);
-		material = GetComponent<SpriteRenderer>().material;
-		gameObject.AddComponent<Rigidbody>().useGravity = false;
+		material = GetComponent<SpriteRenderer> ().material;
+		Rigidbody rbody = gameObject.AddComponent<Rigidbody> ();
+		rbody.useGravity = false;
+		rbody.constraints = RigidbodyConstraints.FreezeRotation;
+		meleeTimer = 0;
+		switchDirTimer = 0;
 		material.color = enemyColor;
 		necromancer = target = GameObject.Find("Necromancer");
 		hp = maxHP;
@@ -31,6 +35,12 @@ public class AIBehavior : MonoBehaviour {
 	protected void Update() {
 		meleeTimer += Time.deltaTime;
 		switchDirTimer += Time.deltaTime;
+	}
+
+
+	void LateUpdate() {
+		transform.position = new Vector3 (transform.position.x, 0, transform.position.z);
+		gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 	}
 
 
@@ -58,13 +68,13 @@ public class AIBehavior : MonoBehaviour {
 		if (target != null) {
 			targetDist = Mathf.Sqrt(
 				Mathf.Pow ((target.gameObject.transform.position.x - transform.position.x), 2) + 
-				Mathf.Pow ((target.gameObject.transform.position.y - transform.position.y), 2));
+				Mathf.Pow ((target.gameObject.transform.position.z - transform.position.z), 2));
 		} 
 		foreach (AIBehavior AI in FindObjectsOfType<AIBehavior>()) {
 			if (AI.isEnemy == !isEnemy) {
 				float AIDist = Mathf.Sqrt (
 					               Mathf.Pow ((AI.gameObject.transform.position.x - transform.position.x), 2) +
-					               Mathf.Pow ((AI.gameObject.transform.position.y - transform.position.y), 2));
+					               Mathf.Pow ((AI.gameObject.transform.position.z - transform.position.z), 2));
 				if (AIDist < targetDist) {
 					targetDist = AIDist;
 					target = AI.gameObject;
@@ -80,8 +90,10 @@ public class AIBehavior : MonoBehaviour {
 		}
 		AIBehavior unit = coll.gameObject.GetComponent<AIBehavior> ();
 		if (coll.gameObject.name == "Necromancer") {
-			coll.gameObject.GetComponent<PlayerController> ().TakeHit (coll.gameObject);
-			meleeTimer = 0;
+			if (isEnemy) {
+				coll.gameObject.GetComponent<PlayerController> ().TakeHit (coll.gameObject);
+				meleeTimer = 0;
+			}
 		} else if (unit.isEnemy == !isEnemy) {
 			unit.TakeHit (coll.gameObject);
 			meleeTimer = 0;
