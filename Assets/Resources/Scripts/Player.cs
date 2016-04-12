@@ -12,6 +12,7 @@ public class Player : MonoBehaviour {
 		gameObject.name = "Necromancer";
 		gameObject.AddComponent<CapsuleCollider>();
 		gameObject.AddComponent<Rigidbody>().isKinematic = true;
+		gameObject.AddComponent<NavMeshAgent> ();
 		SpriteRenderer rend = gameObject.AddComponent<SpriteRenderer>();
 		rend.sprite = Resources.Load<Sprite>("Textures/Circle2");
 		rend.color = new Color (120f/256f, 0f/256f, 100f/256f);

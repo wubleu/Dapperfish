@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour {
 		gameObject.AddComponent<Rigidbody> ().isKinematic = true;
 		gameObject.GetComponent<Rigidbody> ().freezeRotation = true;
 		gameObject.AddComponent<SphereCollider> ().radius = .3f;
+		gameObject.AddComponent<NavMeshAgent> ().updateRotation = false;
 
 		GameObject infectBar = new GameObject();
 		infectionBar = infectBar.AddComponent<InfectionBar> ();
@@ -99,13 +100,13 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 		// moves player by speed*Time.deltaTime based on WASD
-		if (Input.GetKey (KeyCode.A) && !(transform.position.x <= -3)) {
+		if (Input.GetKey (KeyCode.A) ) {
 			transform.Translate (-speed*Time.deltaTime, 0, 0);
-		} if (Input.GetKey (KeyCode.D) && !(transform.position.x >= 28.5f)) {
+		} if (Input.GetKey (KeyCode.D) ) {
 			transform.Translate (speed*Time.deltaTime, 0, 0);
-		} if (Input.GetKey (KeyCode.W) && !(transform.position.z >= 3)) {
+		} if (Input.GetKey (KeyCode.W) ) {
 			transform.Translate (0, speed*Time.deltaTime, 0);
-		} if (Input.GetKey (KeyCode.S) && !(transform.position.z <= -21)) {
+		} if (Input.GetKey (KeyCode.S) ) {
 			transform.Translate (0, -speed*Time.deltaTime, 0);
 		}
 		// if space key is down and enough time has passed, fires spellShot

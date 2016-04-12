@@ -12,6 +12,7 @@ public class AIBehavior : MonoBehaviour {
 	protected GameManager gManager;
 	protected EnemyManager eManager;
 	protected Material material;
+	protected NavMeshAgent agent;
 	public bool isEnemy = true;
 
 
@@ -22,11 +23,14 @@ public class AIBehavior : MonoBehaviour {
 		gManager.MakeSprite(gameObject, textureName, eManager.transform, x, y, xScale, yScale, 200);
 		material = GetComponent<SpriteRenderer> ().material;
 		Rigidbody rbody = gameObject.AddComponent<Rigidbody> ();
+		agent = gameObject.AddComponent<NavMeshAgent> ();
+		agent.updateRotation = false;
 		rbody.useGravity = false;
 		rbody.constraints = RigidbodyConstraints.FreezeRotation;
 		material.color = enemyColor;
 		necromancer = target = GameObject.Find("Necromancer");
 		hp = maxHP;
+		agent.speed = speed;
 	}
 
 
@@ -36,31 +40,31 @@ public class AIBehavior : MonoBehaviour {
 		if (root > 0) {
 			root -= Time.deltaTime;
 			if (root <= 0) {
-				speed = 1.1f;
+				agent.speed = 1.1f;
 			}
 		}
 	}
 
 
 	void LateUpdate() {
-		transform.position = new Vector3 (transform.position.x, 0, transform.position.z);
+		transform.position = new Vector3 (transform.position.x, .01f, transform.position.z);
 		gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 	}
 
 
 	protected void MoveToward() {
 		if ((isEnemy && eManager.necromancerController.minionCount <= 0) || (!isEnemy && eManager.peasantCount <= 0)) {
-			target = necromancer;
+			agent.destination = necromancer.transform.position;
 		} else if (meleeTimer >= meleeThreshold) {
 			SwitchTargets ();
 		} else if (target == null) {
 			SwitchTargets ();
 		}
 
-		Vector3 direction = new Vector3 (target.transform.position.x-transform.position.x, 0, target.transform.position.z-transform.position.z);
-		float directionMagnitude = Mathf.Sqrt (Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.z, 2));
-		direction = new Vector3 (direction.x / directionMagnitude, direction.z / directionMagnitude);
-		transform.Translate (direction.x*speed*Time.deltaTime, direction.y*speed*Time.deltaTime, 0);
+		//Vector3 direction = new Vector3 (target.transform.position.x-transform.position.x, 0, target.transform.position.z-transform.position.z);
+		//float directionMagnitude = Mathf.Sqrt (Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.z, 2));
+		//direction = new Vector3 (direction.x / directionMagnitude, direction.z / directionMagnitude);
+		//transform.Translate (direction.x*speed*Time.deltaTime, direction.y*speed*Time.deltaTime, 0);
 	}
 
 
@@ -81,7 +85,7 @@ public class AIBehavior : MonoBehaviour {
 					               Mathf.Pow ((AI.gameObject.transform.position.z - transform.position.z), 2));
 				if (AIDist < targetDist) {
 					targetDist = AIDist;
-					target = AI.gameObject;
+					agent.destination = AI.gameObject.transform.position;
 				}
 			}
 		}
