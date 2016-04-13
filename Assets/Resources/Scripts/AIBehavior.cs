@@ -157,7 +157,7 @@ public class AIBehavior : MonoBehaviour {
 
 	public virtual void Root() {
 		root = 1.5f;
-		speed = 0;
+		agent.speed = 0;
 	}
 
 	public virtual void Damage(float damage) {

@@ -8,22 +8,28 @@ public class SpellEffect : MonoBehaviour {
 	float damageSpellSpeed = .2f;
 
 	float clock;
+	float radius;
 	public Vector3 angle;
 
 	void Start() {
 		clock = 0;
+		radius = transform.localScale.x;
+		transform.parent = GameObject.Find ("Game Manager").transform;
+		transform.rotation = transform.parent.rotation;
 	}
 
 	void Update() {
 		if (name == "Damage") {
-			transform.Translate(angle*damageSpellSpeed);
 			if ((clock += Time.deltaTime) > lifetime*2) {
 				Destroy (gameObject);
 			}
+			transform.Translate(Abilities.xyNormalizeVector(angle)*damageSpellSpeed);
 		}
 		else if ((clock += Time.deltaTime) > lifetime) {
 			Destroy (gameObject);
 		}
+		radius -= radius*(Time.deltaTime / lifetime);
+		gameObject.transform.localScale = new Vector3 (radius, radius, radius);
 	}
 
 	void OnTriggerStay(Collider col) {
