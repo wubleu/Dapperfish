@@ -54,11 +54,9 @@
      <Compile Include="Assets\Resources\Scripts\InfectionBar.cs" />
      <Compile Include="Assets\Resources\Scripts\Melee.cs" />
      <Compile Include="Assets\Resources\Scripts\Peasant.cs" />
-     <Compile Include="Assets\Resources\Scripts\Player.cs" />
      <Compile Include="Assets\Resources\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Resources\Scripts\SpellEffect.cs" />
      <Compile Include="Assets\Resources\Scripts\SpellShot.cs" />
-     <Compile Include="Assets\Resources\Scripts\TestManager.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -3,38 +3,40 @@ using System.Collections;
 
 public class SpellEffect : MonoBehaviour {
 
-	int frame;
-	float clock = 0;
+	// PARAMETERS
+	float lifetime = .5f;
+	float damageSpellSpeed = .2f;
+
+	float clock;
 	public Vector3 angle;
 
 	void Start() {
-		frame = Time.frameCount;
+		clock = 0;
 	}
 
 	void Update() {
 		if (name == "Damage") {
-			clock += Time.deltaTime;
-			if (clock < 3) {
-				transform.Translate(angle);
-			} else {
-				Destroy(gameObject);
+			transform.Translate(angle*damageSpellSpeed);
+			if ((clock += Time.deltaTime) > lifetime*2) {
+				Destroy (gameObject);
 			}
-		} else if (frame != Time.frameCount) {
-			Destroy(gameObject);
+		}
+		else if ((clock += Time.deltaTime) > lifetime) {
+			Destroy (gameObject);
 		}
 	}
 
 	void OnTriggerStay(Collider col) {
-		if (col.gameObject.name == "Peasant") {
+		if (col.gameObject.GetComponent<AIBehavior>() != null) {
 			switch (name) {
 				case "Blight":
-					col.GetComponent<Peasant>().Infect();
+					col.GetComponent<AIBehavior>().Infect();
 					return;
 				case "Root":
-					col.GetComponent<Peasant>().Root();
+					col.GetComponent<AIBehavior>().Root();
 					return;
 				case "Damage":
-					col.GetComponent<Peasant>().Damage(10);
+					col.GetComponent<AIBehavior>().Damage(10);
 					return;
 			}
 		}

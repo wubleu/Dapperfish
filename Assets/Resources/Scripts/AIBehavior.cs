@@ -136,7 +136,14 @@ public class AIBehavior : MonoBehaviour {
 	}
 
 
-	public void Infect() {
+	protected void OnCollision(Collision coll) {
+		if (meleeTimer > meleeThreshold) {
+			Melee (coll);
+		}
+	}
+
+
+	public virtual void Infect() {
 		if (isEnemy) {
 			eManager.peasantCount--;
 			necromancer.GetComponent<PlayerController> ().minionCount++;
@@ -148,19 +155,12 @@ public class AIBehavior : MonoBehaviour {
 		}
 	}
 
-
-	protected void OnCollision(Collision coll) {
-		if (meleeTimer > meleeThreshold) {
-			Melee (coll);
-		}
-	}
-
-	public void Root() {
+	public virtual void Root() {
 		root = 1.5f;
 		speed = 0;
 	}
 
-	public void Damage(float damage) {
+	public virtual void Damage(float damage) {
 		hp -= damage;
 		if (hp <= 0) { 
 			if (isEnemy) {

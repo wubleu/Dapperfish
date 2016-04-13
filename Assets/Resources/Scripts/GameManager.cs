@@ -61,7 +61,9 @@ public class GameManager : MonoBehaviour {
 	public void MakeSprite(GameObject obj, string textureName, Transform parentTransform, 
 						   float x, float y, float xScale, float yScale, float pixelsPer, params float[] pivot) {
 		obj.transform.parent = parentTransform;
-		obj.transform.rotation = obj.transform.parent.rotation;
+		if (parentTransform != null) {
+			obj.transform.rotation = obj.transform.parent.rotation;
+		}
 		obj.transform.localPosition = new Vector3 (x, y, 0);
 		obj.transform.localScale = new Vector3 (xScale, yScale, 1);
 		obj.name = textureName;
