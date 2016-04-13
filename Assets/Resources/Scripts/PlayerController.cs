@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour {
 						Abilities.Root(mouse);
 						break;
 					case 3: // damage
-						Abilities.Damage(mouse);
+						Abilities.Damage(transform.position, Mathf.PI / 2 + Mathf.Atan2(transform.position.x - mouse.x, mouse.z - transform.position.z));
 						break;
 					case 4: // blink
 						float a = Mathf.PI / 2 + Mathf.Atan2(transform.position.x - mouse.x, mouse.z - transform.position.z);

@@ -25,9 +25,9 @@ public class Peasant : AIBehavior {
 
 	
 	// Update is called once per frame
-	void Update () {
-		base.Update ();
-		base.MoveToward ();
+	new void Update() {
+		base.Update();
+		base.MoveToward();
 	}
 		
 

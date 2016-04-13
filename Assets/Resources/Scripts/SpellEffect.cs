@@ -4,13 +4,22 @@ using System.Collections;
 public class SpellEffect : MonoBehaviour {
 
 	int frame;
+	float clock = 0;
+	public Vector3 angle;
 
 	void Start() {
 		frame = Time.frameCount;
 	}
 
 	void Update() {
-		if (frame != Time.frameCount) {
+		if (name == "Damage") {
+			clock += Time.deltaTime;
+			if (clock < 3) {
+				transform.Translate(angle);
+			} else {
+				Destroy(gameObject);
+			}
+		} else if (frame != Time.frameCount) {
 			Destroy(gameObject);
 		}
 	}
