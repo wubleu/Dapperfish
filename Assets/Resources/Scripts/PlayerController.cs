@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour {
 	public float hp = 120;
 	float speed = 1.1f;
 	Color necroColor = new Color(120f / 256f, 0f / 256f, 100f / 256f);
-	float[] clocks = new float[5] {0, 0, 0, 0, 0}, timers = new float[5] {0.5f, 3, 3, 3, 3};
+	float[] clocks = new float[5] {0, 0, 0, 0, 0}, timers = new float[5] {0.5f, 0.5f, 0.5f, 0.5f, 0.5f}, mcosts = new float[5] {0, 30, 30, 30, 30};
 	Melee melee;
 	// spellShotInterval = .2f
 
@@ -67,8 +67,6 @@ public class PlayerController : MonoBehaviour {
 		background = GameObject.Find ("Background");
 	}
 
-
-	// Update is called once per frame
 	void Update () {
 		Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		mouse.y = 0;
@@ -76,16 +74,15 @@ public class PlayerController : MonoBehaviour {
 		for (int i = 0; i < 5; i++) {
 			if (clocks[i] > 0) {
 				clocks[i] -= Time.deltaTime;
-			} else if (Input.GetKeyDown(controls[i])) {
+			} else if (Input.GetKeyDown(controls[i]) && infectionBar.infectionCharge > mcosts[i]) {
 				clocks[i] = timers[i];
-				print("Ability " + i);
+				infectionBar.infectionCharge -= mcosts[i];
 				switch (i) {
 					case 0: // auto-attack
 						melee.Enable();
 						break;
 					case 1: // blight
 						Abilities.Blight(mouse);
-						infectionBar.infectionCharge = 0;
 						break;
 					case 2: // root
 						Abilities.Root(mouse);
