@@ -44,6 +44,9 @@ public class AIBehavior : MonoBehaviour {
 				agent.speed = 1.5f;
 			}
 		} else {
+			if (switchDirTimer > switchDirTimer) {
+				SwitchTargets ();
+			}
 			MoveToward ();
 		}
 	}
