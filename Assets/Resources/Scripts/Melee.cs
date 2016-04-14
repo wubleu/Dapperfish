@@ -25,7 +25,7 @@ public class Melee : MonoBehaviour {
 	}
 
 	void OnTriggerStay(Collider other) {
-		if (other.name == "Peasant") {
+		if (other.tag == "AI") {
 			Vector3 direction = other.transform.position - transform.position;
 			if (Vector3.Angle(direction, transform.right) < 45) {
 				other.GetComponent<Peasant>().Damage(10);

@@ -18,6 +18,7 @@ public class AIBehavior : MonoBehaviour {
 
 	// Use this for initialization
 	protected void init(GameManager gMan, EnemyManager owner, string textureName, float x, float y, float xScale, float yScale) {
+		tag = "AI";
 		eManager = owner;
 		gManager = gMan;
 		gManager.MakeSprite(gameObject, textureName, eManager.transform, x, y, xScale, yScale, 200);
@@ -81,16 +82,10 @@ public class AIBehavior : MonoBehaviour {
 		}
 		if (target != null) {
 			targetDist = Vector3.Distance(target.transform.position, transform.position);
-			// Mathf.Sqrt(
-			// Mathf.Pow ((target.gameObject.transform.position.x - transform.position.x), 2) + 
-			// Mathf.Pow ((target.gameObject.transform.position.z - transform.position.z), 2));
 		} 
 		foreach (AIBehavior AI in FindObjectsOfType<AIBehavior>()) {
 			if (AI.isEnemy != isEnemy) {
 				float AIDist = Vector3.Distance(AI.transform.position, transform.position);
-//				Mathf.Sqrt (
-//				Mathf.Pow ((AI.gameObject.transform.position.x - transform.position.x), 2) +
-//				Mathf.Pow ((AI.gameObject.transform.position.z - transform.position.z), 2));
 				if (AIDist < targetDist) {
 					targetDist = AIDist;
 					agent.destination = AI.transform.position;
