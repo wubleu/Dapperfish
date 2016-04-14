@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Peasant : AIBehavior {
+public class Knight : AIBehavior {
 
+
+	// Use this for initialization
 	public void init (GameManager gMan, EnemyManager owner) {
 
 		// PARAMETERS
@@ -22,16 +24,20 @@ public class Peasant : AIBehavior {
 		gameObject.GetComponent<NavMeshAgent> ().radius = .17f;
 	}
 
+
+	// Update is called once per frame
 	new void Update() {
 		base.Update();
 		base.MoveToward();
 	}
 
+
 	void OnCollisionStay(Collision coll) {
 		base.OnCollision (coll);
 	}
 
+
 	void OnTriggerEnter(Collider coll) {
-//		base.TakeHit (coll.gameObject);
+		//		base.TakeHit (coll.gameObject);
 	}
 }

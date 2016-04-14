@@ -7,12 +7,10 @@ public class SpellEffect : MonoBehaviour {
 	float lifetime = .5f;
 	float damageSpellSpeed = .2f;
 
-	float clock;
-	float radius;
+	float clock = 0, radius;
 	public Vector3 angle;
 
 	void Start() {
-		clock = 0;
 		radius = transform.localScale.x;
 		transform.parent = GameObject.Find ("Game Manager").transform;
 		transform.rotation = transform.parent.rotation;
@@ -20,20 +18,20 @@ public class SpellEffect : MonoBehaviour {
 
 	void Update() {
 		if (name == "Damage") {
-			if ((clock += Time.deltaTime) > lifetime*2) {
-				Destroy (gameObject);
+			if ((clock += Time.deltaTime) > lifetime * 2) {
+				Destroy(gameObject);
 			}
-			transform.Translate(Abilities.xyNormalizeVector(angle)*damageSpellSpeed);
+			transform.Translate(angle * damageSpellSpeed, Space.World);
+		} else if ((clock += Time.deltaTime) > lifetime) {
+			Destroy(gameObject);
+		} else {
+			radius -= radius * (Time.deltaTime / lifetime);
+			gameObject.transform.localScale = new Vector3(radius, radius, radius);
 		}
-		else if ((clock += Time.deltaTime) > lifetime) {
-			Destroy (gameObject);
-		}
-		radius -= radius*(Time.deltaTime / lifetime);
-		gameObject.transform.localScale = new Vector3 (radius, radius, radius);
 	}
 
 	void OnTriggerStay(Collider col) {
-		if (col.gameObject.GetComponent<AIBehavior>() != null) {
+		if (col.tag == "AI") {
 			switch (name) {
 				case "Blight":
 					col.GetComponent<AIBehavior>().Infect();

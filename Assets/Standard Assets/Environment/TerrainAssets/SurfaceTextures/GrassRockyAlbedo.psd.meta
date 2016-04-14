@@ -27,14 +27,24 @@ TextureImporter:
   textureFormat: -1
   maxTextureSize: 1024
   textureSettings:
+<<<<<<< HEAD
     filterMode: 2
     aniso: 1
     mipBias: 0
+=======
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+>>>>>>> origin/RyanMechanicStudy
     wrapMode: 0
   nPOTScale: 1
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
+<<<<<<< HEAD
+=======
+  allowsAlphaSplitting: 0
+>>>>>>> origin/RyanMechanicStudy
   spriteMode: 0
   spriteExtrude: 1
   spriteMeshType: 1
@@ -44,6 +54,7 @@ TextureImporter:
   spritePixelsToUnits: 100
   alphaIsTransparency: 0
   textureType: 0
+<<<<<<< HEAD
   buildTargetSettings:
   - buildTarget: iPhone
     maxTextureSize: 256
@@ -61,6 +72,9 @@ TextureImporter:
     maxTextureSize: 256
     textureFormat: -1
     compressionQuality: 50
+=======
+  buildTargetSettings: []
+>>>>>>> origin/RyanMechanicStudy
   spriteSheet:
     sprites: []
   spritePackingTag: 

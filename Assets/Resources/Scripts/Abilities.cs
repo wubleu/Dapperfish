@@ -3,11 +3,7 @@ using System.Collections;
 
 public static class Abilities {
 
-
 	private static GameObject AOE(float radius, Color color, Vector3 pos) {
-		// AOE PARAMETERS
-		float size = 2f;
-
 		GameObject spell = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 		spell.transform.position = pos;
 		spell.transform.localScale = new Vector3(radius, radius, radius);
@@ -40,10 +36,10 @@ public static class Abilities {
 		me.Translate(4 * new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)));
 	}
 
-	public static Vector3 xyNormalizeVector(Vector3 vector) {
-		Vector3 direction = new Vector3 (vector.x, vector.y);
-		float directionMagnitude = Mathf.Sqrt (Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.y, 2));
-		direction = new Vector3 (direction.x / directionMagnitude, direction.y / directionMagnitude);
-		return direction;
-	}
+//	public static Vector3 NormalizeVector(Vector3 vector) {
+//		Vector3 direction = new Vector3 (vector.x, vector.y);
+//		float directionMagnitude = Mathf.Sqrt (Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.y, 2));
+//		direction = new Vector3 (direction.x / directionMagnitude, direction.y / directionMagnitude);
+//		return direction;
+//	}
 }
