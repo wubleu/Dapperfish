@@ -55,7 +55,6 @@ public class AIBehavior : MonoBehaviour {
 	void LateUpdate() {
 		transform.position = new Vector3 (transform.position.x, .01f, transform.position.z);
 		gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
-		print (necromancer.GetComponent<PlayerController> ().minionCount + "   " + eManager.peasantCount);
 	}
 
 
@@ -139,7 +138,7 @@ public class AIBehavior : MonoBehaviour {
 	}
 
 
-	protected void OnCollision(Collision coll) {
+	protected virtual void OnCollision(Collision coll) {
 		if (meleeTimer > meleeThreshold) {
 			Melee (coll);
 		}
