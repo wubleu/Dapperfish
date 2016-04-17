@@ -16,6 +16,8 @@ public class Archer : AIBehavior {
 		switchDirThreshold = .5f;
 		meleeThreshold = 1f;
 		meleeDamage = 1f;
+		aggroRange = 4f;
+		necroAggroModifier = 1.2f;
 
 		isEnemy = true;
 		base.init (gMan, owner, "Circle", 0, 0, .3f, .3f);

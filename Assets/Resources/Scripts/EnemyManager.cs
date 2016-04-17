@@ -34,14 +34,6 @@ public class EnemyManager : MonoBehaviour {
 		}
 	}
 
-
-	// Update is called once per frame
-//	void Update () {
-//		if (PeasantSpawn ()) {
-//			peasantCount++;
-//		}
-//	}
-
 	void PeasantSpawn(Vector3 zone, int type) {
 			GameObject peasant = new GameObject ();
 			peasant.AddComponent<Peasant> ().init (gManager, this);
