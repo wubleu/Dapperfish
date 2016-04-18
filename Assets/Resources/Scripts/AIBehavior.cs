@@ -57,18 +57,18 @@ public class AIBehavior : MonoBehaviour {
 		}
 	}
 
-
+	// makes sure our units stay on a level plane and don't get bounced by the physics engine
 	void LateUpdate() {
 		transform.position = new Vector3 (transform.position.x, .01f, transform.position.z);
 		gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 	}
 
 
-	protected virtual void MoveToward() {
-		if (meleeTimer >= meleeThreshold) {
-			SwitchTargets ();
-		}
-	}
+//	protected virtual void MoveToward() {
+//		if (meleeTimer >= meleeThreshold) {
+//			SwitchTargets ();
+//		}
+//	}
 
 	// 
 	protected virtual void SwitchTargets() {
@@ -130,8 +130,13 @@ public class AIBehavior : MonoBehaviour {
 		}
 	}
 
+	// when friendly AI has no target:
+	// if it is not yet in orbiting range of the necro, moves toward him with eManager as parent
+	// if it is in range, orbits at hoverRadius units away with necro as parent
 	protected virtual void Hover() {
+		// moving toward the necro
 		if (transform.parent != necromancer.transform) {
+			// if ready to start orbiting, starts orbiting
 			if (Vector3.Distance (transform.position, necromancer.transform.position) < hoverRadius/2f) {
 				transform.parent = necromancer.transform;
 				hoverRads = Mathf.Atan (transform.localPosition.y / transform.localPosition.x);
@@ -139,7 +144,9 @@ public class AIBehavior : MonoBehaviour {
 			} else {
 				agent.destination = necromancer.transform.position;
 			}
-		} if (transform.parent == necromancer.transform) {
+		}
+		// orbiting the necro
+		if (transform.parent == necromancer.transform) {
 			hoverRads += speed * Time.deltaTime;
 			Vector3 hoverPos = Abilities.NormalizeVector (new Vector3 (1, Mathf.Tan(hoverRads), 0));
 			if (((Mathf.PI/2) + hoverRads)%(2*Mathf.PI) < Mathf.PI) {
