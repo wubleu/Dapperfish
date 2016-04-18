@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour {
 	ManaBar manaBar;
 	HealthBar healthBar;
 	public EnemyManager eManager;
+	public bool hasKey = false;
 
 
 	// Use this for initialization
@@ -131,6 +132,14 @@ public class PlayerController : MonoBehaviour {
 //			blight.AddComponent<Blight>().init (this, gManager, infectionBar.infectionCharge);
 //			infectionBar.infectionCharge = 0;
 //		}
+
+		if (transform.position.x > 105) {
+			if (!hasKey) {
+				transform.position = new Vector3 (105, transform.position.y, transform.position.z);
+			} else {
+				print ("winner winner chicken dinner");
+			}
+		}
 	}
 
 
@@ -140,5 +149,9 @@ public class PlayerController : MonoBehaviour {
 		if (hp <= 0) {
 			gManager.Death ();
 		}
+	}
+
+	public void HasKey(){
+		hasKey = true;
 	}
 }
