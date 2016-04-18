@@ -1,36 +1,45 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HealthBar : MonoBehaviour {
+public class ManaBar : MonoBehaviour {
 
 	// PARAMETERS
-	float maxHealth;
+	public float maxMana, speed;
 
 	PlayerController necromancer;
 	SpriteRenderer bar;
 
-	public void init (float maxHP) {
+	public void init (float mana, float recharge) {
 		necromancer = GameObject.Find("Necromancer").GetComponent<PlayerController>();
 
 		gameObject.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/BarOutline");
-		name = "Health";
+		name = "Mana";
 		transform.parent = necromancer.transform;
-		transform.localPosition = new Vector3(7, 10, -6);
+		transform.localPosition = new Vector3(8.5f, 10, -6);
 		transform.localEulerAngles = new Vector3(90, 0, 0);
 
 		bar = new GameObject().AddComponent<SpriteRenderer>();
-		bar.name = "HealthBar";
+		bar.name = "ManaBar";
 		bar.transform.parent = transform;
 		bar.transform.localPosition = Vector3.zero;
 		bar.transform.localEulerAngles = new Vector3(0, 0, 0);
 		bar.sprite = Resources.Load<Sprite>("Textures/Bar");
-		bar.color = Color.green; //new Color(0, 100/256, 0, 0.5f);
+		bar.color = Color.blue; //new Color(0, 0, 155/256, 0.5f);
 
-		maxHealth = maxHP;
+		maxMana = mana;
+		speed = recharge;
 	}
+//
 
+	// Update is called once per frame
 	void Update () {
-		bar.transform.localScale = new Vector3(1, necromancer.hp / maxHealth, 1);
-		bar.transform.localPosition = new Vector3(0, (necromancer.hp / maxHealth - 1) / 2);
+		if (necromancer.mana < maxMana) {
+			necromancer.mana += speed * Time.deltaTime;
+			if (necromancer.mana > maxMana) {
+				necromancer.mana = maxMana;
+			}
+		}
+		bar.transform.localScale = new Vector3(1, necromancer.mana / maxMana, 1);
+		bar.transform.localPosition = new Vector3(0, (necromancer.mana / maxMana - 1) / 2);
 	}
 }

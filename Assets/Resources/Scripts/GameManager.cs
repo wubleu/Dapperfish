@@ -4,48 +4,28 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 
 	// PARAMETERS
-	Color backgroundColor = new Color((100f/256f), (150f/256f), (100f/256f));
+//	Color backgroundColor = new Color((100f/256f), (150f/256f), (100f/256f));
 
-	GameObject necromancer;
-	GameObject background;
-	GameObject infectionBar;
-	GameObject eManager;
+	PlayerController necromancer;
+//	GameObject background;
+//	GameObject infectionBar;
+	EnemyManager eManager;
 
 
-	void Start(){
-		gameObject.transform.Rotate (90, 180, 180);
-		GameObject camera = GameObject.Find ("Main Camera");
-		camera.transform.position = new Vector3 (0, 10, 0);
-		camera.transform.Rotate (90, 0, 0);
-		init ();
+	void Start() {
+		necromancer = new GameObject().AddComponent<PlayerController>();
+		necromancer.transform.position = new Vector3(0, 0, 0);
+		Camera.main.transform.parent = necromancer.transform;
+		Camera.main.transform.localEulerAngles = new Vector3(90, 0, 0);
+		Camera.main.transform.localPosition = new Vector3(0, 20, 0);
+		Camera.main.orthographicSize = 7;
+		eManager = new GameObject().AddComponent<EnemyManager> ();
+		eManager.init(this, necromancer);
+		necromancer.init(this, eManager);
 	}
-
-
-	void init () {
-		necromancer = new GameObject ();
-		GameObject camera = GameObject.Find ("Main Camera");
-		camera.transform.position = new Vector3 (necromancer.transform.position.x, 10, necromancer.transform.position.z);
-		eManager = new GameObject ();
-		PlayerController necroContr = necromancer.AddComponent<PlayerController> ();
-		EnemyManager eMan = eManager.AddComponent<EnemyManager> ();
-		necroContr.init (this, eMan);
-		eMan.init (this, necroContr);
-//		if (background == null) {
-//			background = GameObject.CreatePrimitive (PrimitiveType.Quad);
-//			background.transform.localScale = new Vector3 (180, 1, 100);
-//			background.GetComponent<Renderer> ().material.color = backgroundColor;
-//		}
-	}
-
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 
 	public void Death() {
-		GameObject.Find ("Main Camera").transform.SetParent (null, true);
+		Camera.main.transform.SetParent (null, true);
 		foreach (AIBehavior unit in FindObjectsOfType<AIBehavior>()) {
 			Destroy (unit.gameObject);
 		}
@@ -54,28 +34,27 @@ public class GameManager : MonoBehaviour {
 		}
 		Destroy(eManager);
 		Destroy (necromancer);
-		init ();
 	}
 		
 
-	public void MakeSprite(GameObject obj, string textureName, Transform parentTransform, 
-						   float x, float y, float xScale, float yScale, float pixelsPer, params float[] pivot) {
-		obj.transform.parent = parentTransform;
-		if (parentTransform != null) {
-			obj.transform.rotation = obj.transform.parent.rotation;
-		}
-		obj.transform.localPosition = new Vector3 (x, y, 0);
-		obj.transform.localScale = new Vector3 (xScale, yScale, 1);
-		obj.name = textureName;
-		SpriteRenderer rend = obj.AddComponent<SpriteRenderer> ();
-		Texture2D texture = Resources.Load<Texture2D> ("Textures/" + textureName);
-		float xPiv = .5f;
-		float yPiv = .5f;
-		if (pivot.Length > 1) {
-			xPiv = pivot[0];
-			yPiv = pivot [1];
-		}
-		rend.sprite  = Sprite.Create (texture,
-			new Rect(0, 0, texture.width, texture.height), new Vector2 (xPiv, yPiv), pixelsPer);
-	}
+//	public void MakeSprite(GameObject obj, string textureName, Transform parentTransform, 
+//						   float x, float y, float xScale, float yScale, float pixelsPer, params float[] pivot) {
+//		obj.transform.parent = parentTransform;
+//		if (parentTransform != null) {
+//			obj.transform.rotation = obj.transform.parent.rotation;
+//		}
+//		obj.transform.localPosition = new Vector3 (x, y, 0);
+//		obj.transform.localScale = new Vector3 (xScale, yScale, 1);
+//		obj.name = textureName;
+//		SpriteRenderer rend = obj.AddComponent<SpriteRenderer> ();
+//		Texture2D texture = Resources.Load<Texture2D> ("Textures/" + textureName);
+//		float xPiv = .5f;
+//		float yPiv = .5f;
+//		if (pivot.Length > 1) {
+//			xPiv = pivot[0];
+//			yPiv = pivot [1];
+//		}
+//		rend.sprite  = Sprite.Create (texture,
+//			new Rect(0, 0, texture.width, texture.height), new Vector2 (xPiv, yPiv), pixelsPer);
+//	}
 }

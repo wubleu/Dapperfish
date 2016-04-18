@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Peasant : AIBehavior {
 
-	public void init (GameManager gMan, EnemyManager owner) {
+	public void initPeasant () {
 
 		// PARAMETERS
 		allyColor = new Color (0, 0, 0);
@@ -16,10 +16,11 @@ public class Peasant : AIBehavior {
 		meleeDamage = 1f;
 
 		isEnemy = true;
-		base.init (gMan, owner, "Circle", 0, 0, .3f, .3f);
-		name = "Peasant";
-		gameObject.AddComponent<SphereCollider> ().radius = .17f;
-		gameObject.GetComponent<NavMeshAgent> ().radius = .17f;
+		base.init();
+//		base.init (gMan, owner, "Circle", 0, 0, .3f, .3f);
+//		name = "Peasant";
+//		gameObject.AddComponent<SphereCollider> ().radius = .17f;
+//		gameObject.GetComponent<NavMeshAgent> ().radius = .17f;
 	}
 
 	new void Update() {

@@ -28,12 +28,12 @@ public static class Abilities {
 
 	public static void Damage(Vector3 pos, float angle) {
 		GameObject spell = AOE(.8f, new Color(0, 1, 0, .4f), pos);
-		spell.GetComponent<SpellEffect>().angle = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle));
+		spell.GetComponent<SpellEffect>().angle = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle));
 		spell.name = "Damage";
 	}
 
 	public static void Blink(float angle, Transform me) {
-		me.Translate(4 * new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)));
+		me.Translate(4 * new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
 	}
 
 //	public static Vector3 NormalizeVector(Vector3 vector) {

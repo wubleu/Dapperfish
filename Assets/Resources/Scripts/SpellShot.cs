@@ -18,7 +18,7 @@ public class SpellShot : MonoBehaviour {
 		necromancer = owner;
 		gManager = gMan;
 
-		gManager.MakeSprite (gameObject, "Circle", necromancer.transform, 0, 0, .25f, .25f, 200);
+//		gManager.MakeSprite (gameObject, "Circle", necromancer.transform, 0, 0, .25f, .25f, 200);
 		transform.parent = gManager.transform;
 		gameObject.name = "SpellShot";
 		gameObject.AddComponent<SphereCollider> ().isTrigger = true;

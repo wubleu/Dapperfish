@@ -14,7 +14,7 @@ public class EnemyManager : MonoBehaviour {
 		gManager = gMan;
 		necromancerController = pController;
 		transform.parent = gManager.transform;
-		name = "EnemyManager";
+		name = "Enemy Manager";
 		peasantSpawnRate = 5f;
 		peasantCount = 0;
 		transform.rotation = transform.parent.rotation;
@@ -23,17 +23,15 @@ public class EnemyManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (PeasantSpawn ()) {
+		if (PeasantSpawn()) {
 			peasantCount++;
 		}
 	}
 
-
 	bool PeasantSpawn() {
 		float rand = Random.Range (-100, 100);
 		if (Mathf.Abs (rand) <= peasantSpawnRate) {
-			GameObject peasant = new GameObject ();
-			peasant.AddComponent<Peasant> ().init (gManager, this);
+			GameObject peasant = Enemies.makePeasant();
 			if (rand > 0) {
 				peasant.transform.position = new Vector3 (necromancerController.gameObject.transform.position.x-11, 0,
 					necromancerController.gameObject.transform.position.z+Random.Range (-6, 6));
@@ -43,8 +41,7 @@ public class EnemyManager : MonoBehaviour {
 			}
 			return true;
 		} else if (Mathf.Abs (rand) <= peasantSpawnRate*2) {
-			GameObject peasant = new GameObject ();
-			peasant.AddComponent<Peasant> ().init (gManager, this);
+			GameObject peasant = Enemies.makePeasant();
 			if (rand > 0) {
 				peasant.transform.position = new Vector3 (necromancerController.gameObject.transform.position.x+11, 0,
 					necromancerController.gameObject.transform.position.z+Random.Range (-6, 6));

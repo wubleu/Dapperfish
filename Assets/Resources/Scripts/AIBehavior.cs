@@ -6,33 +6,33 @@ public class AIBehavior : MonoBehaviour {
 	// PARAMETERS
 	protected Color allyColor, enemyColor;
 	public float maxHP;
-	protected float speed, infectionCost, switchDirThreshold, meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp;
+	public float speed, infectionCost, switchDirThreshold, meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp;
 
 	protected GameObject necromancer, target;
 	protected GameManager gManager;
 	protected EnemyManager eManager;
-	protected Material material;
-	protected NavMeshAgent agent;
+	protected SpriteRenderer rend;
+	public NavMeshAgent agent;
 	public bool isEnemy = true;
 
 
 	// Use this for initialization
-	protected void init(GameManager gMan, EnemyManager owner, string textureName, float x, float y, float xScale, float yScale) {
-		tag = "AI";
-		eManager = owner;
-		gManager = gMan;
-		gManager.MakeSprite(gameObject, textureName, eManager.transform, x, y, xScale, yScale, 200);
-		material = GetComponent<SpriteRenderer> ().material;
-		agent = gameObject.AddComponent<NavMeshAgent> ();
-		agent.updateRotation = false;
-		Rigidbody rbody = gameObject.AddComponent<Rigidbody> ();
-		rbody.useGravity = false;
-		rbody.constraints = RigidbodyConstraints.FreezeRotation;
-		material.color = enemyColor;
+	protected void init() {
+		eManager = GameObject.Find("Enemy Manager").GetComponent<EnemyManager>();
+		gManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 		necromancer = target = GameObject.Find("Necromancer");
-		hp = maxHP;
-		agent.speed = speed;
-		agent.radius = .1f;
+		agent = GetComponent<NavMeshAgent>();
+		rend = GetComponentInChildren<SpriteRenderer>();
+//		gManager.MakeSprite(gameObject, textureName, eManager.transform, x, y, xScale, yScale, 200);
+//		material = GetComponent<SpriteRenderer> ().material;
+//		agent = gameObject.AddComponent<NavMeshAgent> ();
+//		agent.updateRotation = false;
+//		Rigidbody rbody = gameObject.AddComponent<Rigidbody> ();
+//		rbody.useGravity = false;
+//		rbody.constraints = RigidbodyConstraints.FreezeRotation;
+//		material.color = enemyColor;
+//		agent.speed = speed;
+//		agent.radius = .1f;
 	}
 
 
@@ -53,7 +53,6 @@ public class AIBehavior : MonoBehaviour {
 	void LateUpdate() {
 		transform.position = new Vector3 (transform.position.x, .01f, transform.position.z);
 		gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
-		print (necromancer.GetComponent<PlayerController> ().minionCount + "   " + eManager.peasantCount);
 	}
 
 
@@ -113,7 +112,7 @@ public class AIBehavior : MonoBehaviour {
 
 	public virtual void TakeHit(GameObject collObj) {
 		if (collObj.name == "Blight") {
-			collObj.GetComponent<Blight> ().Infect (infectionCost, this);
+			Infect();
 			return;
 		} else if (collObj.name == "SpellShot") {
 			hp -= 3;
@@ -144,7 +143,7 @@ public class AIBehavior : MonoBehaviour {
 			necromancer.GetComponent<PlayerController> ().minionCount++;
 			isEnemy = false;
 			SwitchTargets ();
-			material.color = allyColor;
+			rend.color = allyColor;
 			target = null;
 			hp = maxHP;
 		}
