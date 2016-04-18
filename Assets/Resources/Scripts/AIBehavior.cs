@@ -10,17 +10,17 @@ public class AIBehavior : MonoBehaviour {
 					meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp;
 	public GameObject target = null;
 	protected GameObject necromancer;
-	protected GameManager gManager;
+	public GameManager gManager;
 	protected EnemyManager eManager;
 	protected SpriteRenderer rend;
 	protected NavMeshAgent agent;
 	protected float hoverRads;
 	public bool hovering = false, isEnemy = true;
 
-	protected void init() {
-		eManager = GameObject.Find("Enemy Manager").GetComponent<EnemyManager>();
-		gManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-		necromancer = target = GameObject.Find("Necromancer");
+	protected void init(GameManager gMan, EnemyManager owner, PlayerController necro = null) {
+		eManager = owner; //GameObject.Find("Enemy Manager").GetComponent<EnemyManager>();
+		gManager = gMan; //GameObject.Find("Game Manager").GetComponent<GameManager>();
+		necromancer = target = necro.gameObject; //GameObject.Find("Necromancer");
 		agent = GetComponent<NavMeshAgent>();
 		rend = GetComponentInChildren<SpriteRenderer>();
 //		gManager.MakeSprite(gameObject, textureName, eManager.transform, x, y, xScale, yScale, 200);

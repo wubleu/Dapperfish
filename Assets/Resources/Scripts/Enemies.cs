@@ -3,10 +3,10 @@ using System.Collections;
 
 public static class Enemies {
 
-	static GameObject makeEnemy(float x, float z, float scale, string texture) {
+	static GameObject makeEnemy(Vector3 pos, float scale, string texture) {
 		GameObject enemy = new GameObject();
 		enemy.tag = "AI";
-		enemy.transform.position = new Vector3(x, 0, z);
+		enemy.transform.position = pos;
 		enemy.transform.localScale = new Vector3(scale, scale, scale);
 
 		NavMeshAgent agent = enemy.AddComponent<NavMeshAgent>();
@@ -33,11 +33,27 @@ public static class Enemies {
 		return enemy;
 	}
 
-	public static GameObject makePeasant(float x = 0, float z = 0) {
-		GameObject peasant = makeEnemy(x, z, 0.17f, "Circle");
+	public static GameObject makePeasant(GameManager gMan, EnemyManager owner, PlayerController necro, Vector3 pos) {
+		GameObject peasant = makeEnemy(pos, 0.17f, "Circle");
 		peasant.name = "Peasant";
-		peasant.AddComponent<Peasant>().initPeasant();
+		peasant.AddComponent<Peasant>().initPeasant(gMan, owner, necro);
 
 		return peasant;
+	}
+
+	public static GameObject makeArcher(GameManager gMan, EnemyManager owner, Vector3 pos) {
+		GameObject archer = makeEnemy(pos, 0.3f, "Circle");
+		archer.name = "Archer";
+		archer.AddComponent<Archer>().initArcher(gMan, owner);
+
+		return archer;
+	}
+
+	public static GameObject makeKnight(GameManager gMan, EnemyManager owner, Vector3 pos) {
+		GameObject knight = makeEnemy(pos, 0.3f, "Circle");
+		knight.name = "Knight";
+		knight.AddComponent<Knight>().initKnight(gMan, owner);
+
+		return knight;
 	}
 }

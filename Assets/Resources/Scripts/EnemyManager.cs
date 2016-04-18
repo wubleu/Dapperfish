@@ -34,9 +34,7 @@ public class EnemyManager : MonoBehaviour {
 	}
 
 	void PeasantSpawn(Vector3 zone, int type) {
-			GameObject peasant = new GameObject ();
-			peasant.AddComponent<Peasant> ().init (gManager, this);
-			peasant.transform.position = zone;
-			peasantCount++;
+		Enemies.makePeasant(gManager, this, necromancerController, zone);
+		peasantCount++;
 	}
 }

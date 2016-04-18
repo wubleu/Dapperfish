@@ -3,14 +3,13 @@ using System.Collections;
 
 public class Peasant : AIBehavior {
 
-	public void initPeasant () {
+	public void initPeasant(GameManager gMan, EnemyManager owner, PlayerController necro) {
 
 		// PARAMETERS
 		allyColor = new Color (0, 0, 0);
 		enemyColor = new Color (1, 1, 1);
 		speed = 1.5f;
 		maxHP = 3f;
-		infectionCost = 15;
 		switchDirThreshold = .5f;
 		meleeThreshold = 1f;
 		meleeDamage = 1f;
@@ -19,12 +18,7 @@ public class Peasant : AIBehavior {
 		chaseThreshold = 1f;
 		hoverRadius = 3f;
 
-		isEnemy = true;
-		base.init();
-//		base.init (gMan, owner, "Circle", 0, 0, .3f, .3f);
-//		name = "Peasant";
-//		gameObject.AddComponent<SphereCollider> ().radius = .17f;
-//		gameObject.GetComponent<NavMeshAgent> ().radius = .17f;
+		base.init(gMan, owner, necro);
 	}
 
 	new void Update() {

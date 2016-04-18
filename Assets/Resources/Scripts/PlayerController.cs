@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour {
 	public void init (GameManager owner, EnemyManager eMan) {
 		eManager = eMan;
 		gManager = owner;
-		name = "Necromancer";
+		gameObject.name = "Necromancer";
 
 		gameObject.AddComponent<SphereCollider>().radius = size;
 		NavMeshAgent nav = gameObject.AddComponent<NavMeshAgent>();
