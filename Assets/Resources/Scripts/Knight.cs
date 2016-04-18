@@ -14,7 +14,7 @@ public class Knight : AIBehavior {
 	public void initKnight(GameManager gMan, EnemyManager owner) {
 
 		// PARAMETERS
-		allyColor = new Color (0, 0, 0);
+		allyColor = new Color(1, 0, 0);
 		enemyColor = new Color (1, 1, 1);
 		speed = normalspeed;
 		maxHP = 8f;
@@ -22,7 +22,7 @@ public class Knight : AIBehavior {
 		meleeThreshold = 1f;
 		meleeDamage = 5f;
 		aggroRange = 4f;
-		necroAggroModifier = 1.3f;
+		necroAggroModifier = 1.5f;
 
 		base.init(gMan, owner);
 	}
