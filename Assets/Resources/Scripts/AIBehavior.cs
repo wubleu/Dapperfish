@@ -15,6 +15,7 @@ public class AIBehavior : MonoBehaviour {
 	protected EnemyManager eManager;
 	protected Material material;
 	protected NavMeshAgent agent;
+	protected float hoverRads;
 	public bool hovering = false;
 	public bool isEnemy = true;
 
@@ -74,16 +75,20 @@ public class AIBehavior : MonoBehaviour {
 		float targetDist = aggroRange;
 		// if this AI has had a target for chaseThreshold or more seconds, and the target is outside of aggro distance, attempts to switch targets
 		if (target != null) {
-			float currTargetDist = Vector3.Distance (target.transform.position, transform.position);
-			agent.destination = target.transform.position;
-			if ((chaseClock += Time.deltaTime) > chaseThreshold) {
-				chaseClock = 0;
-				if (currTargetDist < aggroRange) {
-					targetDist = 0;	
-				} else {
-					target = null;
-				}
-			} 
+			if (!isEnemy && !target.GetComponent<AIBehavior> ().isEnemy) {
+				target = null;
+			} else {
+				float currTargetDist = Vector3.Distance (target.transform.position, transform.position);
+				agent.destination = target.transform.position;
+				if ((chaseClock += Time.deltaTime) > chaseThreshold) {
+					chaseClock = 0;
+					if (currTargetDist < aggroRange) {
+						targetDist = 0;	
+					} else {
+						target = null;
+					}
+				} 
+			}
 		}
 		// if the old target has moved out of range or did not exist, looks for new target
 		if (target == null) {
@@ -92,6 +97,7 @@ public class AIBehavior : MonoBehaviour {
 				if (AI.isEnemy != isEnemy) {
 					float AIDist = Vector3.Distance (AI.transform.position, transform.position);
 					if (AIDist < targetDist) {
+						target = AI.gameObject;
 						targetDist = AIDist;
 						agent.destination = AI.transform.position;
 						agent.speed = speed;
@@ -125,15 +131,22 @@ public class AIBehavior : MonoBehaviour {
 	}
 
 	protected virtual void Hover() {
-		print (Vector3.Distance (transform.position, necromancer.transform.position));
 		if (transform.parent != necromancer.transform) {
-			if (Vector3.Distance (transform.position, necromancer.transform.position) < hoverRadius) {
+			if (Vector3.Distance (transform.position, necromancer.transform.position) < hoverRadius/2f) {
 				transform.parent = necromancer.transform;
+				hoverRads = Mathf.Atan (transform.localPosition.y / transform.localPosition.x);
+				agent.speed = 0;
 			} else {
 				agent.destination = necromancer.transform.position;
 			}
-		} if (transform.parent == necromancer) {
-			agent.destination = new Vector3 (-transform.position.y, transform.position.x);
+		} if (transform.parent == necromancer.transform) {
+			hoverRads += speed * Time.deltaTime;
+			Vector3 hoverPos = Abilities.NormalizeVector (new Vector3 (1, Mathf.Tan(hoverRads), 0));
+			if (((Mathf.PI/2) + hoverRads)%(2*Mathf.PI) < Mathf.PI) {
+				transform.localPosition = new Vector3 (hoverRadius * hoverPos.x, hoverRadius * hoverPos.y);
+			} else {
+				transform.localPosition = new Vector3 (-hoverRadius * hoverPos.x, -hoverRadius * hoverPos.y);
+			}
 		}
 		SwitchTargets ();
 	}
@@ -188,9 +201,9 @@ public class AIBehavior : MonoBehaviour {
 		if (isEnemy) {
 			eManager.peasantCount--;
 			necromancer.GetComponent<PlayerController> ().minionCount++;
-			isEnemy = false;
 			SwitchTargets ();
 			material.color = allyColor;
+			isEnemy = false;
 			target = null;
 			hp = maxHP;
 		}
