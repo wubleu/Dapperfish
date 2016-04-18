@@ -64,13 +64,13 @@ public class AIBehavior : MonoBehaviour {
 	}
 
 
-//	protected virtual void MoveToward() {
-//		if (meleeTimer >= meleeThreshold) {
-//			SwitchTargets ();
-//		}
-//	}
+	protected virtual void MoveToward() {
+		if (meleeTimer >= meleeThreshold) {
+			SwitchTargets ();
+		}
+	}
 
-	// 
+	 
 	protected virtual void SwitchTargets() {
 		float targetDist = aggroRange;
 		// if this AI has had a target for chaseThreshold or more seconds, and the target is outside of aggro distance, attempts to switch targets
