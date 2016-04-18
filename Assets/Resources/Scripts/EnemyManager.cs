@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
+using System;
+using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class EnemyManager : MonoBehaviour {
-
+	
 	GameManager gManager;
 	public PlayerController necromancerController;
-	float peasantSpawnRate;
-	public int peasantCount;
-
+	public int peasantCount = 0;
+	
 
 	// Use this for initialization
 	public void init (GameManager gMan, PlayerController pController) {
@@ -15,42 +18,25 @@ public class EnemyManager : MonoBehaviour {
 		necromancerController = pController;
 		transform.parent = gManager.transform;
 		name = "Enemy Manager";
-		peasantSpawnRate = 5f;
-		peasantCount = 0;
 		transform.rotation = transform.parent.rotation;
+		
+		string[] instructions = Resources.Load<TextAsset>("Scripts/level1").text.Split(new char[1]{'\n'});
+
+		foreach (string instruction in instructions) {
+			string[] parts = instruction.Split (new char[1]{ ':' });
+			GameObject spawner = GameObject.Find ("Spawn Zone " + parts[0]);
+			for (int i = 1; i <= 3; i++) {
+				for (int j = 0; j < Int32.Parse (parts [i]); j++) {
+					PeasantSpawn (spawner.transform.position, i);
+				}
+			}
+		}
 	}
 
-	
-	// Update is called once per frame
-	void Update () {
-		if (PeasantSpawn()) {
+	void PeasantSpawn(Vector3 zone, int type) {
+			GameObject peasant = new GameObject ();
+			peasant.AddComponent<Peasant> ().init (gManager, this);
+			peasant.transform.position = zone;
 			peasantCount++;
-		}
-	}
-
-	bool PeasantSpawn() {
-		float rand = Random.Range (-100, 100);
-		if (Mathf.Abs (rand) <= peasantSpawnRate) {
-			GameObject peasant = Enemies.makePeasant();
-			if (rand > 0) {
-				peasant.transform.position = new Vector3 (necromancerController.gameObject.transform.position.x-11, 0,
-					necromancerController.gameObject.transform.position.z+Random.Range (-6, 6));
-			} else {
-				peasant.transform.position = new Vector3 (necromancerController.gameObject.transform.position.x+Random.Range (-11, 11), 0,
-					necromancerController.gameObject.transform.position.z-6);
-			}
-			return true;
-		} else if (Mathf.Abs (rand) <= peasantSpawnRate*2) {
-			GameObject peasant = Enemies.makePeasant();
-			if (rand > 0) {
-				peasant.transform.position = new Vector3 (necromancerController.gameObject.transform.position.x+11, 0,
-					necromancerController.gameObject.transform.position.z+Random.Range (-6, 6));
-			} else {
-				peasant.transform.position = new Vector3 (necromancerController.gameObject.transform.position.x+Random.Range (-11, 11), 0,
-					necromancerController.gameObject.transform.position.z+6);
-			}
-			return true;
-		}
-		return false;
 	}
 }

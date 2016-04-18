@@ -36,10 +36,10 @@ public static class Abilities {
 		me.Translate(4 * new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
 	}
 
-//	public static Vector3 NormalizeVector(Vector3 vector) {
-//		Vector3 direction = new Vector3 (vector.x, vector.y);
-//		float directionMagnitude = Mathf.Sqrt (Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.y, 2));
-//		direction = new Vector3 (direction.x / directionMagnitude, direction.y / directionMagnitude);
-//		return direction;
-//	}
+	public static Vector3 NormalizeVector(Vector3 vector) {
+		Vector3 direction = new Vector3 (vector.x, vector.y);
+		float directionMagnitude = Mathf.Sqrt (Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.y, 2));
+		direction = new Vector3 (direction.x / directionMagnitude, direction.y / directionMagnitude);
+		return direction;
+	}
 }
