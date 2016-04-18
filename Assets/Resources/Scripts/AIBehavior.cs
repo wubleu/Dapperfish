@@ -20,9 +20,11 @@ public class AIBehavior : MonoBehaviour {
 	protected void init(GameManager gMan, EnemyManager owner, PlayerController necro = null) {
 		eManager = owner; //GameObject.Find("Enemy Manager").GetComponent<EnemyManager>();
 		gManager = gMan; //GameObject.Find("Game Manager").GetComponent<GameManager>();
-		necromancer = target = necro.gameObject; //GameObject.Find("Necromancer");
+		necromancer = necro.gameObject; //GameObject.Find("Necromancer");
 		agent = GetComponent<NavMeshAgent>();
 		rend = GetComponentInChildren<SpriteRenderer>();
+		transform.parent = eManager.transform;
+		agent.speed = speed;
 //		gManager.MakeSprite(gameObject, textureName, eManager.transform, x, y, xScale, yScale, 200);
 //		material = GetComponent<SpriteRenderer> ().material;
 //		agent = gameObject.AddComponent<NavMeshAgent> ();
@@ -45,7 +47,7 @@ public class AIBehavior : MonoBehaviour {
 		if (root > 0) {
 			root -= Time.deltaTime;
 			if (root <= 0) {
-				agent.speed = 1.5f;
+				agent.speed = speed;
 			}
 		} if (switchDirTimer > switchDirThreshold) {
 			SwitchTargets ();
@@ -69,21 +71,18 @@ public class AIBehavior : MonoBehaviour {
 	 
 	protected virtual void SwitchTargets() {
 		float targetDist = aggroRange;
-		// if this AI has had a target for chaseThreshold or more seconds, and the target is outside of aggro distance, attempts to switch targets
+		// if the target is within aggroRange, keeps target
 		if (target != null) {
-			if (!isEnemy && !target.GetComponent<AIBehavior> ().isEnemy) {
+			if (target != necromancer && !isEnemy && !target.GetComponent<AIBehavior> ().isEnemy) {
 				target = null;
 			} else {
 				float currTargetDist = Vector3.Distance (target.transform.position, transform.position);
 				agent.destination = target.transform.position;
-				if ((chaseClock += Time.deltaTime) > chaseThreshold) {
-					chaseClock = 0;
-					if (currTargetDist < aggroRange) {
-						targetDist = 0;	
-					} else {
-						target = null;
-					}
-				} 
+				if (currTargetDist < aggroRange) {
+					targetDist = 0;	
+				} else {
+					target = null;
+				}
 			}
 		}
 		// if the old target has moved out of range or did not exist, looks for new target
@@ -113,11 +112,12 @@ public class AIBehavior : MonoBehaviour {
 		// if a target still has not been set, initiates hovering behavior for allied AI's and stops enemy AI's
 		if (target == null) {
 			if (isEnemy) {
-				agent.speed = 0;
+				agent.enabled = true;
 			} else {
 				if (!hovering) {
 					hovering = true;
 					agent.destination = necromancer.transform.position;
+					Hover ();
 				}
 			}
 		} else if (!isEnemy) {
@@ -130,13 +130,17 @@ public class AIBehavior : MonoBehaviour {
 	// if it is not yet in orbiting range of the necro, moves toward him with eManager as parent
 	// if it is in range, orbits at hoverRadius units away with necro as parent
 	protected virtual void Hover() {
+		print (agent.speed);
 		// moving toward the necro
 		if (transform.parent != necromancer.transform) {
 			// if ready to start orbiting, starts orbiting
-			if (Vector3.Distance (transform.position, necromancer.transform.position) < hoverRadius/2f) {
+			if (Vector3.Distance (transform.position, necromancer.transform.position) < hoverRadius) {
 				transform.parent = necromancer.transform;
-				hoverRads = Mathf.Atan (transform.localPosition.y / transform.localPosition.x);
-				agent.speed = 0;
+				hoverRads = Mathf.Atan (transform.localPosition.z / transform.localPosition.x);
+				if (transform.localPosition.x > 0) {
+					hoverRads += Mathf.PI;
+				}
+				agent.enabled = false;
 			} else {
 				agent.destination = necromancer.transform.position;
 			}
@@ -144,11 +148,11 @@ public class AIBehavior : MonoBehaviour {
 		// orbiting the necro
 		if (transform.parent == necromancer.transform) {
 			hoverRads += speed * Time.deltaTime;
-			Vector3 hoverPos = Abilities.NormalizeVector (new Vector3 (1, Mathf.Tan(hoverRads), 0));
+			Vector3 hoverPos = Abilities.NormalizeVector (new Vector3 (1, Mathf.Tan(hoverRads)));
 			if (((Mathf.PI/2) + hoverRads)%(2*Mathf.PI) < Mathf.PI) {
-				transform.localPosition = new Vector3 (hoverRadius * hoverPos.x, hoverRadius * hoverPos.y);
+				transform.localPosition = new Vector3 (-hoverRadius * hoverPos.x, 0, -hoverRadius * hoverPos.y);
 			} else {
-				transform.localPosition = new Vector3 (-hoverRadius * hoverPos.x, -hoverRadius * hoverPos.y);
+				transform.localPosition = new Vector3 (hoverRadius * hoverPos.x, 0, hoverRadius * hoverPos.y);
 			}
 		}
 		SwitchTargets ();
@@ -205,9 +209,9 @@ public class AIBehavior : MonoBehaviour {
 			isEnemy = false;
 			eManager.peasantCount--;
 			necromancer.GetComponent<PlayerController> ().minionCount++;
+			target = null;
 			SwitchTargets();
 			rend.color = allyColor;
-			target = null;
 			hp = maxHP;
 		}
 	}
