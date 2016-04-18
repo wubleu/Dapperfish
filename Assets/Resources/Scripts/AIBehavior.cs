@@ -123,6 +123,7 @@ public class AIBehavior : MonoBehaviour {
 		} else if (!isEnemy) {
 			hovering = false;
 			transform.parent = eManager.transform;
+			agent.enabled = true;
 		}
 	}
 
@@ -143,6 +144,7 @@ public class AIBehavior : MonoBehaviour {
 				agent.enabled = false;
 			} else {
 				agent.destination = necromancer.transform.position;
+				agent.enabled = true;
 			}
 		}
 		// orbiting the necro
