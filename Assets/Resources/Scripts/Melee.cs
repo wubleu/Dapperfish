@@ -10,7 +10,7 @@ public class Melee : MonoBehaviour {
 		name = "Melee";
 		col = gameObject.AddComponent<SphereCollider>();
 		col.isTrigger = true;
-		col.radius = 1;
+		col.radius = 1.5f;
 	}
 
 	void Update () {
