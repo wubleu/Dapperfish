@@ -6,7 +6,7 @@ public class AIBehavior : MonoBehaviour {
 	// PARAMETERS
 	protected Color allyColor, enemyColor;
 	public float hoverRadius, chaseThreshold, chaseClock, aggroRange, necroAggroModifier, speed, switchDirThreshold,
-					meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp, maxHP;
+					meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp, maxHP, infectionCost;
 	public GameObject target = null;
 	protected GameObject necromancer;
 	public GameManager gManager;
@@ -183,6 +183,7 @@ public class AIBehavior : MonoBehaviour {
 	}
 
 	public virtual void Infect() {
+		print (name);
 		if (isEnemy && !immune) {
 			isEnemy = false;
 			GetComponent<NavMeshAgent>().stoppingDistance = 0;
