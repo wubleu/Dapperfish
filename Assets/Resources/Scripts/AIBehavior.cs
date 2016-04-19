@@ -26,12 +26,11 @@ public class AIBehavior : MonoBehaviour {
 		agent.speed = speed;
 	}
 
-
 	protected void Update() {
 		meleeTimer += Time.deltaTime;
 		switchDirTimer += Time.deltaTime;
 		if (hovering) {
-			Hover ();
+			Hover();
 		}
 		if (root > 0) {
 			root -= Time.deltaTime;
@@ -39,7 +38,7 @@ public class AIBehavior : MonoBehaviour {
 				agent.speed = speed;
 			}
 		} if (switchDirTimer > switchDirThreshold) {
-			SwitchTargets ();
+			SwitchTargets();
 			switchDirTimer = 0;
 		}
 	}
@@ -50,14 +49,6 @@ public class AIBehavior : MonoBehaviour {
 		gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 	}
 
-
-	protected virtual void MoveToward() {
-		if (meleeTimer >= meleeThreshold) {
-			SwitchTargets ();
-		}
-	}
-
-	 
 	protected virtual void SwitchTargets() {
 		float targetDist = aggroRange;
 		// if the target is within aggroRange, keeps target
@@ -120,7 +111,6 @@ public class AIBehavior : MonoBehaviour {
 	// if it is not yet in orbiting range of the necro, moves toward him with eManager as parent
 	// if it is in range, orbits at hoverRadius units away with necro as parent
 	protected virtual void Hover() {
-		print (agent.speed);
 		// moving toward the necro
 		if (transform.parent != necromancer.transform) {
 			// if ready to start orbiting, starts orbiting
@@ -167,7 +157,6 @@ public class AIBehavior : MonoBehaviour {
 		}
 	}
 
-
 	public virtual void TakeHit(GameObject collObj) {
 		if (collObj.name == "Blight") {
 			Infect();
@@ -187,17 +176,16 @@ public class AIBehavior : MonoBehaviour {
 		}
 	}
 
-
 	protected virtual void OnCollision(Collision coll) {
 		if (meleeTimer > meleeThreshold) {
 			Melee (coll);
 		}
 	}
 
-
 	public virtual void Infect() {
 		if (isEnemy && !immune) {
 			isEnemy = false;
+			GetComponent<NavMeshAgent>().stoppingDistance = 0;
 			eManager.peasantCount--;
 			necromancer.GetComponent<PlayerController> ().minionCount++;
 			target = null;

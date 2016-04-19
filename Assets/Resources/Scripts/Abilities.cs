@@ -30,24 +30,31 @@ public static class Abilities {
 	public static void Damage(Vector3 pos, float angle) {
 		GameObject spell = AOE(.8f, new Color(0, 1, 0, .4f), pos);
 		spell.name = "Damage";
-		spell.AddComponent<SpellEffect>().init(1, 5, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
+		spell.AddComponent<SpellEffect>().init(2, 5, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
 	}
 
-	public static void Blink(float angle, Transform me) {
+	public static void Blink(Transform me, float angle) {
 		me.Translate(4 * new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
 	}
 
 	public static bool Bullet(Vector3 pos, float angle) {
-		GameObject spell = AOE(.3f, Color.black, pos);
+		GameObject spell = AOE(.3f, Color.black, pos + 0.5f * new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
 		spell.name = "Bullet";
 		spell.AddComponent<SpellEffect>().init(1, 10, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
 		return true;
 	}
 
+	public static bool Arrow(Vector3 pos, float angle, bool enemy) {
+		GameObject spell = AOE(.3f, Color.red, pos + 0.5f * new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
+		spell.name = "Arrow";
+		spell.AddComponent<SpellEffect>().init(1, 10, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)), enemy);
+		return true;
+	}
+
 	public static Vector3 NormalizeVector(Vector3 vector) {
-		Vector3 direction = new Vector3 (vector.x, vector.y);
-		float directionMagnitude = Mathf.Sqrt (Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.y, 2));
-		direction = new Vector3 (direction.x / directionMagnitude, direction.y / directionMagnitude);
+		Vector3 direction = new Vector3(vector.x, vector.y);
+		float directionMagnitude = Mathf.Sqrt(Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.y, 2));
+		direction = new Vector3(direction.x / directionMagnitude, direction.y / directionMagnitude);
 		return direction;
 	}
 }

@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour {
 		eManager = new GameObject().AddComponent<EnemyManager> ();
 		eManager.init(this, necromancer);
 		necromancer.init(this, eManager);
+		testing123();
 	}
 
 	public void Death() {
@@ -43,26 +44,11 @@ public class GameManager : MonoBehaviour {
 		Destroy (death, 1);
 
 	}
-		
 
-//	public void MakeSprite(GameObject obj, string textureName, Transform parentTransform, 
-//						   float x, float y, float xScale, float yScale, float pixelsPer, params float[] pivot) {
-//		obj.transform.parent = parentTransform;
-//		if (parentTransform != null) {
-//			obj.transform.rotation = obj.transform.parent.rotation;
-//		}
-//		obj.transform.localPosition = new Vector3 (x, y, 0);
-//		obj.transform.localScale = new Vector3 (xScale, yScale, 1);
-//		obj.name = textureName;
-//		SpriteRenderer rend = obj.AddComponent<SpriteRenderer> ();
-//		Texture2D texture = Resources.Load<Texture2D> ("Textures/" + textureName);
-//		float xPiv = .5f;
-//		float yPiv = .5f;
-//		if (pivot.Length > 1) {
-//			xPiv = pivot[0];
-//			yPiv = pivot [1];
-//		}
-//		rend.sprite  = Sprite.Create (texture,
-//			new Rect(0, 0, texture.width, texture.height), new Vector2 (xPiv, yPiv), pixelsPer);
-//	}
+	void testing123() {
+		for (int i = 0; i < 5; i++) {
+			Enemies.makeArcher(this, eManager, necromancer, new Vector3(40 + i, 0, 4));
+		}
+	}
+
 }

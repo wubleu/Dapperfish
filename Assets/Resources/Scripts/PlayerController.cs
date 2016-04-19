@@ -5,15 +5,17 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour {
 
 	// PARAMETERS
+<<<<<<< HEAD
 	public float hp = 50, mana = 100, recharge = 20, size = 1f, speed = 1.1f, mclock = 0, mtime = 0.5f, castcd = .25f;
 	bool isMelee = true, casted = false;
+=======
+	public float hp = 50, mana = 150, recharge = 10, size = 1, speed = 1.1f, mclock = 0, mtime = 0.5f;
+	bool isMelee = true;
+>>>>>>> origin/RyanMechanicStudy
 	Color necroColor = new Color(120f / 256f, 0f / 256f, 100f / 256f);
 	float[] mcosts = new float[6] {0, 60, 30, 80, 30, 0};
 	Melee melee;
-
-
 	protected Sprite[] cSprites;
-	// spellShotInterval = .2f
 
 	// CONTROLS PARAMETERS
 	KeyCode[] controls = new KeyCode[6] {
@@ -187,8 +189,7 @@ public class PlayerController : MonoBehaviour {
 						lamodel.transform.localPosition = new Vector3(-0.3f, 1, 0.45f);
 						break;
 					case 4: // blink
-						float a = Mathf.PI / 2 + Mathf.Atan2(transform.position.x - mouse.x, mouse.z - transform.position.z);
-						Abilities.Blink(a, transform);
+						Abilities.Blink(transform, Mathf.PI / 2 - Mathf.Atan2(mouse.x - transform.position.x, mouse.z - transform.position.z));
 						break;
 					case 5: // switch weapons
 						isMelee = !isMelee;
@@ -244,5 +245,12 @@ public class PlayerController : MonoBehaviour {
 
 	public void HasKey(){
 		hasKey = true;
+	}
+
+	public void Damage(float damage) {
+		hp -= 1;
+		if (hp <= 0) {
+			gManager.Death();
+		}
 	}
 }

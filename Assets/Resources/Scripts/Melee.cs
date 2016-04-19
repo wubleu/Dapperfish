@@ -10,7 +10,7 @@ public class Melee : MonoBehaviour {
 		name = "Melee";
 		col = gameObject.AddComponent<SphereCollider>();
 		col.isTrigger = true;
-		col.radius = 1;
+		col.radius = 1.5f;
 	}
 
 	void Update () {
@@ -29,7 +29,7 @@ public class Melee : MonoBehaviour {
 		if (other.tag == "AI") {
 			Vector3 direction = other.transform.position - transform.position;
 			if (Vector3.Angle(direction, transform.right) < 45) {
-				other.GetComponent<Knight>().Damage(4);
+				other.GetComponent<AIBehavior>().Damage(4);
 			}
 		}
 	}

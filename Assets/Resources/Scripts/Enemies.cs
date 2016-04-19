@@ -41,10 +41,10 @@ public static class Enemies {
 		return peasant;
 	}
 
-	public static GameObject makeArcher(GameManager gMan, EnemyManager owner, Vector3 pos) {
+	public static GameObject makeArcher(GameManager gMan, EnemyManager owner, PlayerController necro, Vector3 pos) {
 		GameObject archer = makeEnemy(pos, 0.3f, "Circle");
 		archer.name = "Archer";
-		archer.AddComponent<Archer>().initArcher(gMan, owner);
+		archer.AddComponent<Archer>().initArcher(gMan, owner, necro);
 
 		return archer;
 	}

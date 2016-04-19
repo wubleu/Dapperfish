@@ -23,7 +23,6 @@ public class Peasant : AIBehavior {
 
 	new void Update() {
 		base.Update();
-		base.MoveToward();
 	}
 
 	void OnCollisionStay(Collision coll) {

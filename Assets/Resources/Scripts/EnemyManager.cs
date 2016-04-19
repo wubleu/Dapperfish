@@ -32,20 +32,22 @@ public class EnemyManager : MonoBehaviour {
 			}
 		}
 	}
-
+		
 	void Spawn(Vector3 zone, int type, int radius) {
 		zone = new Vector3 (zone.x + UnityEngine.Random.Range (-radius, radius) + UnityEngine.Random.value, 0, zone.z + UnityEngine.Random.Range (-radius, radius) + UnityEngine.Random.value);
-		if (type == 1) {
-			Enemies.makePeasant (gManager, this, necromancerController, zone);
-			peasantCount++;
-		}
-		if (type == 2) {
-			Enemies.makePeasant (gManager, this, necromancerController, zone);
-			peasantCount++;
-		}
-		if (type == 2) {
-			Enemies.makeKnight (gManager, this, necromancerController, zone);
-			peasantCount++;
+		switch (type) {
+			case 1:
+				Enemies.makePeasant(gManager, this, necromancerController, zone);
+				peasantCount++;
+				break;
+			case 2:
+				Enemies.makeArcher(gManager, this, necromancerController, zone);
+				peasantCount++;
+				break;
+			case 3:
+				Enemies.makeKnight(gManager, this, necromancerController, zone);
+				peasantCount++;
+				break;
 		}
 	}
 }
