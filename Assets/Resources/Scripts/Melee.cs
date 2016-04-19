@@ -36,6 +36,16 @@ public class Melee : MonoBehaviour {
 
 	public bool Enable() {
 		col.enabled = true;
+		GameObject mel = new GameObject ();
+		mel.transform.position = col.transform.position;
+		mel.transform.localEulerAngles = new Vector3 (90, 0, 0);
+		mel.transform.localScale = new Vector3 (1.5f, 1.25f, 1.5f);
+		SpriteRenderer rend = mel.AddComponent<SpriteRenderer> ();
+		rend.sortingLayerName = "PlayerController";
+		rend.sortingOrder = 5;
+		Animator anim = mel.AddComponent<Animator> ();
+		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Melee Controller");
+		Destroy (mel.gameObject, .5f);
 		frame = Time.frameCount;
 		return true;
 	}

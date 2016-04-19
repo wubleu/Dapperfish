@@ -5,13 +5,8 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour {
 
 	// PARAMETERS
-<<<<<<< HEAD
 	public float hp = 50, mana = 100, recharge = 20, size = 1f, speed = 1.1f, mclock = 0, mtime = 0.5f, castcd = .25f;
 	bool isMelee = true, casted = false;
-=======
-	public float hp = 50, mana = 150, recharge = 10, size = 1, speed = 1.1f, mclock = 0, mtime = 0.5f;
-	bool isMelee = true;
->>>>>>> origin/RyanMechanicStudy
 	Color necroColor = new Color(120f / 256f, 0f / 256f, 100f / 256f);
 	float[] mcosts = new float[6] {0, 60, 30, 80, 30, 0};
 	Melee melee;
