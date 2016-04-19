@@ -3,8 +3,9 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
+    <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{0406831D-3373-F61F-4A8E-6E9F590ECF53}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -33,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.XML" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
@@ -41,31 +43,30 @@
     <Reference Include="UnityEditor">
       <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Resources\Scripts\AIBehavior.cs" />
-    <Compile Include="Assets\Resources\Scripts\Abilities.cs" />
-    <Compile Include="Assets\Resources\Scripts\Archer.cs" />
-    <Compile Include="Assets\Resources\Scripts\Enemies.cs" />
-    <Compile Include="Assets\Resources\Scripts\EnemyManager.cs" />
-    <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Resources\Scripts\HealthBar.cs" />
-    <Compile Include="Assets\Resources\Scripts\Key.cs" />
-    <Compile Include="Assets\Resources\Scripts\Knight.cs" />
-    <Compile Include="Assets\Resources\Scripts\ManaBar.cs" />
-    <Compile Include="Assets\Resources\Scripts\Melee.cs" />
-    <Compile Include="Assets\Resources\Scripts\Peasant.cs" />
-    <Compile Include="Assets\Resources\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\Resources\Scripts\SpellEffect.cs" />
-    <Compile Include="Assets\Resources\Scripts\SpellShot.cs" />
-    <None Include="Assets\Resources\Scripts\level1.txt" />
-    <Reference Include="UnityEngine.UI">
-      <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
-    </Reference>
+     <Compile Include="Assets\Resources\Scripts\AIBehavior.cs" />
+     <Compile Include="Assets\Resources\Scripts\Abilities.cs" />
+     <Compile Include="Assets\Resources\Scripts\Archer.cs" />
+     <Compile Include="Assets\Resources\Scripts\Enemies.cs" />
+     <Compile Include="Assets\Resources\Scripts\EnemyManager.cs" />
+     <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Resources\Scripts\HealthBar.cs" />
+     <Compile Include="Assets\Resources\Scripts\Key.cs" />
+     <Compile Include="Assets\Resources\Scripts\Knight.cs" />
+     <Compile Include="Assets\Resources\Scripts\ManaBar.cs" />
+     <Compile Include="Assets\Resources\Scripts\Melee.cs" />
+     <Compile Include="Assets\Resources\Scripts\Peasant.cs" />
+     <Compile Include="Assets\Resources\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Resources\Scripts\SpellEffect.cs" />
+     <Compile Include="Assets\Resources\Scripts\SpellShot.cs" />
+     <None Include="Assets\Resources\Scripts\level1.txt" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -75,4 +76,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  
 </Project>

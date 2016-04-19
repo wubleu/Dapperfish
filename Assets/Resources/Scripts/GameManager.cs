@@ -28,9 +28,16 @@ public class GameManager : MonoBehaviour {
 		foreach (SpellShot unit in FindObjectsOfType<SpellShot>()) {
 			Destroy (unit.gameObject);
 		}
-		makeText("Game Over.\nYou suck!");
 		Destroy(eManager);
-		Destroy(necromancer);
+		GameObject death = new GameObject();
+		death.transform.position = necromancer.transform.position;
+		death.transform.localEulerAngles = new Vector3 (90, 0, 0);
+		death.AddComponent<SpriteRenderer>();
+		Animator anim = death.AddComponent<Animator>();
+		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Necromancer Death Controller");
+		makeText("Game Over.\nYou suck!");
+		Destroy(necromancer.gameObject);
+		Destroy(death, 1);
 	}
 
 	public void Finish() {
