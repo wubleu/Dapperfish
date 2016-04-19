@@ -12,7 +12,6 @@ public class Archer : AIBehavior {
 		enemyColor = new Color (1, 1, 1);
 		speed = 1.5f;
 		maxHP = hp = 3f;
-		switchDirThreshold = .5f;
 		meleeThreshold = 1f;
 		meleeDamage = 1f;
 		aggroRange = 8f;

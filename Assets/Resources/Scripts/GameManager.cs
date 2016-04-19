@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
 		Camera.main.transform.parent = necromancer.transform;
 		Camera.main.transform.localEulerAngles = new Vector3(90, 0, 0);
 		Camera.main.transform.localPosition = new Vector3(0, 20, 0);
-		Camera.main.orthographicSize = 7;
+		Camera.main.orthographicSize = 10;
 		eManager = new GameObject().AddComponent<EnemyManager> ();
 		eManager.init(this, necromancer);
 		necromancer.init(this, eManager);

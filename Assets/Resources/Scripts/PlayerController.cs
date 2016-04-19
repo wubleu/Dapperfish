@@ -5,15 +5,15 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour {
 
 	// PARAMETERS
-	public float hp = 50, mana = 100, recharge = 10, size = 1f, speed = 1.1f, mclock = 0, mtime = 0.5f, castcd = .25f;
+	public float hp = 50, mana = 100, recharge = 5, size = 1f, speed = 1.1f, mclock = 0, mtime = 0.5f, castcd = .25f;
 	bool isMelee = true, casted = false;
 	Color necroColor = new Color(120f / 256f, 0f / 256f, 100f / 256f);
 	float[] mcosts = new float[6] { // mana costs
 		0,  // melee
 		60, // infect
-		30, // root
-		70, // damage
-		30, // blink
+		15, // root
+		50, // damage
+		20, // blink
 		0   // switch weapons
 	};
 	Melee melee;
