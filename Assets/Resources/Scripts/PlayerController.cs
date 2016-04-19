@@ -5,10 +5,10 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour {
 
 	// PARAMETERS
-	public float hp = 500, mana = 100, recharge = 20, size = 1f;
-	float speed = 1.1f;
+	public float hp = 50, mana = 100, recharge = 20, size = 0.3f, speed = 1.1f, mclock = 0, mtime = 0.5f;
+	bool isMelee = true;
 	Color necroColor = new Color(120f / 256f, 0f / 256f, 100f / 256f);
-	float[] clocks = new float[5] {0, 0, 0, 0, 0}, timers = new float[5] {0.5f, 0.5f, 0.5f, 0.5f, 0.5f}, mcosts = new float[5] {0, 60, 30, 80, 30};
+	float[] mcosts = new float[6] {0, 60, 30, 80, 30, 0};
 	Melee melee;
 
 
@@ -16,12 +16,13 @@ public class PlayerController : MonoBehaviour {
 	// spellShotInterval = .2f
 
 	// CONTROLS PARAMETERS
-	KeyCode[] controls = new KeyCode[5] {
+	KeyCode[] controls = new KeyCode[6] {
 		KeyCode.Mouse0, // auto-attack
 		KeyCode.Mouse1, // blight
 		KeyCode.LeftShift, // root
 		KeyCode.LeftControl, // damage
-		KeyCode.Space // blink
+		KeyCode.Space, // blink
+		KeyCode.Tab // switch weapon
 	};
 
 	public int minionCount = 0;
@@ -123,16 +124,19 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 		Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		mouse.y = 0;
-
-		for (int i = 0; i < 5; i++) {
-			if (clocks[i] > 0) {
-				clocks[i] -= Time.deltaTime;
-			} else if (Input.GetKeyDown(controls[i]) && mana > mcosts[i]) {
-				clocks[i] = timers[i];
+		if (mclock > 0) {
+			mclock -= Time.deltaTime;
+		}
+		for (int i = 0; i < mcosts.Length; i++) {
+			if (Input.GetKeyDown(controls[i]) && mana > mcosts[i]) {
 				mana -= mcosts[i];
 				switch (i) {
 					case 0: // auto-attack
-						melee.Enable();
+						if (mclock <= 0) {
+							mclock = mtime;
+							if (isMelee) melee.Enable();
+							else Abilities.Bullet(transform.position, Mathf.PI / 2 + Mathf.Atan2(transform.position.x - mouse.x, mouse.z - transform.position.z));
+						}
 						break;
 					case 1: // blight
 						Abilities.Blight(mouse);
@@ -146,6 +150,9 @@ public class PlayerController : MonoBehaviour {
 					case 4: // blink
 						float a = Mathf.PI / 2 + Mathf.Atan2(transform.position.x - mouse.x, mouse.z - transform.position.z);
 						Abilities.Blink(a, transform);
+						break;
+					case 5: // switch weapons
+						isMelee = !isMelee;
 						break;
 				}
 				    
@@ -172,18 +179,6 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			transform.Translate(b[0] * speed * Time.deltaTime, 0, b[1] * speed * Time.deltaTime);
 		}
-		// if space key is down and enough time has passed, fires spellShot
-//		shotClock += Time.deltaTime;
-//		if (Input.GetKey (KeyCode.Space) && shotClock > spellShotInterval) {
-//			GameObject shot = new GameObject ();
-//			shot.AddComponent<SpellShot> ().init (this, gManager);
-//			shotClock = 0;
-//		}
-//		if (Input.GetMouseButton(0) && infectionBar.infectionCharge > 50) {
-//			GameObject blight = new GameObject ();
-//			blight.AddComponent<Blight>().init (this, gManager, infectionBar.infectionCharge);
-//			infectionBar.infectionCharge = 0;
-//		}
 
 		if (transform.position.x > 105) {
 			if (!hasKey) {

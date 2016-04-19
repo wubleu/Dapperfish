@@ -5,9 +5,8 @@ public class AIBehavior : MonoBehaviour {
 
 	// PARAMETERS
 	protected Color allyColor, enemyColor;
-	public float maxHP;
 	public float hoverRadius, chaseThreshold, chaseClock, aggroRange, necroAggroModifier, speed, switchDirThreshold,
-					meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp;
+					meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp, maxHP;
 	public GameObject target = null;
 	protected GameObject necromancer;
 	public GameManager gManager;
@@ -25,16 +24,6 @@ public class AIBehavior : MonoBehaviour {
 		rend = GetComponentInChildren<SpriteRenderer>();
 		transform.parent = eManager.transform;
 		agent.speed = speed;
-//		gManager.MakeSprite(gameObject, textureName, eManager.transform, x, y, xScale, yScale, 200);
-//		material = GetComponent<SpriteRenderer> ().material;
-//		agent = gameObject.AddComponent<NavMeshAgent> ();
-//		agent.updateRotation = false;
-//		Rigidbody rbody = gameObject.AddComponent<Rigidbody> ();
-//		rbody.useGravity = false;
-//		rbody.constraints = RigidbodyConstraints.FreezeRotation;
-//		material.color = enemyColor;
-//		agent.speed = speed;
-//		agent.radius = .1f;
 	}
 
 

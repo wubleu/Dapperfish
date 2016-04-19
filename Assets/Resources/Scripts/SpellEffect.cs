@@ -4,33 +4,29 @@ using System.Collections;
 public class SpellEffect : MonoBehaviour {
 
 	// PARAMETERS
-	float lifetime = .5f;
-	float damageSpellSpeed = .2f;
+	float lifetime, spellSpeed, radius, clock = 0;
+	Vector3 angle;
 
-	float clock = 0, radius;
-	public Vector3 angle;
-
-	void Start() {
+	public void init(float life, float speed = 0, Vector3 dir = default(Vector3)) {
 		radius = transform.localScale.x;
-		transform.parent = GameObject.Find ("Game Manager").transform;
-		transform.rotation = transform.parent.rotation;
+		lifetime = life;
+		spellSpeed = speed;
+		angle = dir;
 	}
 
 	void Update() {
-		if (name == "Damage") {
-			if ((clock += Time.deltaTime) > lifetime * 2) {
-				Destroy(gameObject);
-			}
-			transform.Translate(angle * damageSpellSpeed, Space.World);
-		} else if ((clock += Time.deltaTime) > lifetime) {
+		if ((clock += Time.deltaTime) > lifetime) {
 			Destroy(gameObject);
+		}
+		if (name == "Damage" || name == "Bullet") {
+			transform.Translate(angle * spellSpeed * Time.deltaTime, Space.World);
 		} else {
 			radius -= radius * (Time.deltaTime / lifetime);
 			gameObject.transform.localScale = new Vector3(radius, radius, radius);
 		}
 	}
 
-	void OnTriggerStay(Collider col) {
+	void OnTriggerEnter(Collider col) {
 		if (col.tag == "AI") {
 			switch (name) {
 				case "Blight":
@@ -41,6 +37,10 @@ public class SpellEffect : MonoBehaviour {
 					return;
 				case "Damage":
 					col.GetComponent<AIBehavior>().Damage(10);
+					return;
+				case "Bullet":
+					col.GetComponent<AIBehavior>().Damage(1);
+					Destroy(gameObject);
 					return;
 			}
 		}

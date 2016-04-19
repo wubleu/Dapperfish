@@ -34,8 +34,9 @@ public class Melee : MonoBehaviour {
 		}
 	}
 
-	public void Enable() {
+	public bool Enable() {
 		col.enabled = true;
 		frame = Time.frameCount;
+		return true;
 	}
 }
