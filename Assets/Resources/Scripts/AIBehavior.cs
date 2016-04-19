@@ -159,14 +159,7 @@ public class AIBehavior : MonoBehaviour {
 	}
 
 	public virtual void TakeHit(GameObject collObj) {
-		if (collObj.name == "Blight") {
-			Infect();
-			return;
-		} else if (collObj.name == "SpellShot") {
-			hp -= 3;
-		} else {
-			hp -= 1;
-		}
+		hp -= 1;
 		if (hp <= 0) { 
 			if (isEnemy) {
 				eManager.peasantCount -= 1;
@@ -197,8 +190,8 @@ public class AIBehavior : MonoBehaviour {
 		}
 	}
 
-	public virtual void Root() {
-		root = 1.5f;
+	public virtual void Root(float length) {
+		root = length;
 		agent.speed = 0;
 	}
 
