@@ -60,7 +60,8 @@ public class AIBehavior : MonoBehaviour {
 				float currTargetDist = Vector3.Distance (target.transform.position, transform.position);
 				agent.destination = target.transform.position;
 				if (currTargetDist < aggroRange) {
-					targetDist = 0;	
+					targetDist = currTargetDist/2f;	
+					target = null;
 				} else {
 					target = null;
 				}
@@ -83,7 +84,7 @@ public class AIBehavior : MonoBehaviour {
 			// enemy AIs check the necro. necro is a bit more intimidating than other targets.
 			if (isEnemy) {
 				float necroDist = Vector3.Distance (necromancer.transform.position, transform.position);
-				if (necroDist < targetDist * necroAggroModifier) {
+				if (necroDist < targetDist * necroAggroModifier && necroDist < aggroRange) {
 					target = necromancer;
 					agent.destination = necromancer.transform.position;
 					agent.speed = speed;
