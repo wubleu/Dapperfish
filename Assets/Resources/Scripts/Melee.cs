@@ -17,7 +17,6 @@ public class Melee : MonoBehaviour {
 		Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		mouse.y = 0;
 		transform.localEulerAngles = new Vector3(0, 270 - Mathf.Rad2Deg * Mathf.Atan2(transform.position.x - mouse.x, mouse.z - transform.position.z), 0);
-
 		if (col.enabled) {
 			if (frame != Time.frameCount) {
 				col.enabled = false;

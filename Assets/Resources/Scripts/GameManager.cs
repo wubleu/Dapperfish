@@ -3,12 +3,7 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
-	// PARAMETERS
-//	Color backgroundColor = new Color((100f/256f), (150f/256f), (100f/256f));
-
 	PlayerController necromancer;
-//	GameObject background;
-//	GameObject infectionBar;
 	EnemyManager eManager;
 
 
@@ -33,8 +28,13 @@ public class GameManager : MonoBehaviour {
 		foreach (SpellShot unit in FindObjectsOfType<SpellShot>()) {
 			Destroy (unit.gameObject);
 		}
+		makeText("Game Over.\nYou suck!");
 		Destroy(eManager);
-		Destroy (necromancer);
+		Destroy(necromancer);
+	}
+
+	public void Finish() {
+		makeText("You beat the level!");
 	}
 
 	void testing123() {
@@ -43,4 +43,15 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	public void makeText(string stuff) {
+		GameObject textObject = new GameObject();
+		textObject.name = "text";
+		textObject.transform.position = necromancer.transform.position;
+		textObject.transform.eulerAngles = new Vector3(90, 0, 0);
+		textObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+		TextMesh text = textObject.AddComponent<TextMesh>();
+		text.fontSize = 85;
+		text.color = new Color(0, 0, 0);
+		text.text = stuff;
+	}
 }
