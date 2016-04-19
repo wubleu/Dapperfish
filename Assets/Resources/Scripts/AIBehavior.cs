@@ -5,7 +5,7 @@ public class AIBehavior : MonoBehaviour {
 
 	// PARAMETERS
 	protected Color allyColor, enemyColor;
-	public float hoverRadius, chaseThreshold, chaseClock, aggroRange, necroAggroModifier, speed, switchDirThreshold,
+	public float hoverRadius, chaseThreshold, chaseClock, aggroRange, necroAggroModifier, speed, switchDirThreshold = Random.Range(.5f, 1f),
 					meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp, maxHP, infectionCost;
 	public GameObject target = null;
 	protected GameObject necromancer;
@@ -36,6 +36,7 @@ public class AIBehavior : MonoBehaviour {
 			root -= Time.deltaTime;
 			if (root <= 0) {
 				agent.speed = speed;
+				meleeTimer = 0;
 			}
 		} if (switchDirTimer > switchDirThreshold) {
 			SwitchTargets();

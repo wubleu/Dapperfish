@@ -18,7 +18,6 @@ public class Knight : AIBehavior {
 		enemyColor = new Color (1, 1, 1);
 		speed = normalspeed;
 		maxHP = 24f;
-		switchDirThreshold = .5f;
 		meleeThreshold = 1f;
 		meleeDamage = 25f;
 		aggroRange = 7f;

@@ -5,10 +5,10 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour {
 
 	// PARAMETERS
-	public float hp = 50, mana = 100, recharge = 10, size = 1f, speed = 1.1f, mclock = 0, mtime = 0.5f, castcd = .25f;
+	public float hp = 50, mana = 100, recharge = 5, size = 1f, speed = 1.1f, mclock = 0, mtime = 0.5f, castcd = .25f;
 	bool isMelee = true, casted = false;
 	Color necroColor = new Color(120f / 256f, 0f / 256f, 100f / 256f);
-	float[] mcosts = new float[6] {0, 60, 30, 100, 30, 0};
+	float[] mcosts = new float[6] {0, 95, 15, 50, 20, 0};
 	Melee melee;
 	protected Sprite[] cSprites;
 
