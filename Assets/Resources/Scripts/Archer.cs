@@ -3,38 +3,34 @@ using System.Collections;
 
 public class Archer : AIBehavior {
 
+	float range = 4.5f;
 
-	// Use this for initialization
-	public void initArcher(GameManager gMan, EnemyManager owner) {
+	public void initArcher(GameManager gMan, EnemyManager owner, PlayerController necro) {
 
 		// PARAMETERS
 		allyColor = new Color (0, 0, 0);
 		enemyColor = new Color (1, 1, 1);
 		speed = 1.5f;
-		maxHP = 3f;
+		maxHP = hp = 3f;
 		switchDirThreshold = .5f;
 		meleeThreshold = 1f;
 		meleeDamage = 1f;
 		aggroRange = 4f;
 		necroAggroModifier = 1.2f;
+		GetComponent<NavMeshAgent>().stoppingDistance = 4;
 
-		base.init(gMan, owner);
+		base.init(gMan, owner, necro);
 	}
 
-
-	// Update is called once per frame
 	new void Update() {
 		base.Update();
-		base.MoveToward();
-	}
-
-
-	void OnCollisionStay(Collision coll) {
-		base.OnCollision (coll);
-	}
-
-
-	void OnTriggerEnter(Collider coll) {
-		//		base.TakeHit (coll.gameObject);
+		if (target != null) {
+			if (Vector3.Distance(transform.position, target.transform.position) < range) {
+				if (meleeTimer > meleeThreshold) {
+					Abilities.Arrow(transform.position, Mathf.PI / 2 - Mathf.Atan2(target.transform.position.x - transform.position.x, target.transform.position.z - transform.position.z), isEnemy);
+					meleeTimer = 0;
+				}
+			}
+		}
 	}
 }

@@ -46,7 +46,6 @@ public class Knight : AIBehavior {
 			agent.speed = speed;
 		}
 		base.Update();
-		base.MoveToward();
 	}
 
 	void Attack(){
