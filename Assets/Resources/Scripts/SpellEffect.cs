@@ -4,7 +4,7 @@ using System.Collections;
 public class SpellEffect : MonoBehaviour {
 
 	// PARAMETERS
-	float lifetime, spellSpeed, radius, clock = 0;
+	float lifetime, spellSpeed, radius, clock = 0, infectPower = 100;
 	bool enemy;
 	Vector3 angle;
 
@@ -31,25 +31,29 @@ public class SpellEffect : MonoBehaviour {
 	void OnTriggerEnter(Collider col) {
 		if (col.tag == "AI") {
 			switch (name) {
-				case "Blight":
-					col.GetComponent<AIBehavior>().Infect();
-					return;
-				case "Root":
-					col.GetComponent<AIBehavior>().Root();
-					return;
-				case "Damage":
-					col.GetComponent<AIBehavior>().Damage(10);
-					return;
-				case "Bullet":
+			case "Blight":
+				AIBehavior AI = col.GetComponent<AIBehavior> ();
+				if (AI != null && infectPower >= AI.infectionCost) {
+					AI.Infect ();
+					infectPower -= AI.infectionCost;
+				}
+				return;
+			case "Root":
+				col.GetComponent<AIBehavior>().Root();
+				return;
+			case "Damage":
+				col.GetComponent<AIBehavior>().Damage(10);
+				return;
+			case "Bullet":
+				col.GetComponent<AIBehavior>().Damage(1);
+				Destroy(gameObject);
+				return;
+			case "Arrow":
+				if (enemy != col.GetComponent<AIBehavior>().isEnemy) {
 					col.GetComponent<AIBehavior>().Damage(1);
 					Destroy(gameObject);
-					return;
-				case "Arrow":
-					if (enemy != col.GetComponent<AIBehavior>().isEnemy) {
-						col.GetComponent<AIBehavior>().Damage(1);
-						Destroy(gameObject);
-					}
-					return;
+				}
+				return;
 			}
 		} else if (col.name == "Necromancer" && enemy) {
 			col.GetComponent<PlayerController>().Damage(1);

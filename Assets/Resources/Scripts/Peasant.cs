@@ -17,6 +17,7 @@ public class Peasant : AIBehavior {
 		necroAggroModifier = 1.2f;
 		chaseThreshold = 1f;
 		hoverRadius = 3f;
+		infectionCost = 25;
 
 		base.init(gMan, owner, necro);
 	}

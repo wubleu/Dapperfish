@@ -18,6 +18,7 @@ public class Archer : AIBehavior {
 		aggroRange = 8f;
 		necroAggroModifier = 1.2f;
 		GetComponent<NavMeshAgent>().stoppingDistance = 4;
+		infectionCost = 35;
 
 		base.init(gMan, owner, necro);
 	}
