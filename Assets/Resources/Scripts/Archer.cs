@@ -15,7 +15,7 @@ public class Archer : AIBehavior {
 		switchDirThreshold = .5f;
 		meleeThreshold = 1f;
 		meleeDamage = 1f;
-		aggroRange = 4f;
+		aggroRange = 8f;
 		necroAggroModifier = 1.2f;
 		GetComponent<NavMeshAgent>().stoppingDistance = 4;
 

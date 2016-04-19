@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour {
 
 	PlayerController necromancer;
 	EnemyManager eManager;
-
+	bool done = false;
 
 	void Start() {
 		necromancer = new GameObject().AddComponent<PlayerController>();
@@ -41,7 +41,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void Finish() {
-		makeText("You beat the level!");
+		if (!done) {
+			makeText ("You beat the level!");
+			done = true;
+		}
 	}
 
 	void testing123() {

@@ -13,7 +13,7 @@ public class Peasant : AIBehavior {
 		switchDirThreshold = .5f;
 		meleeThreshold = 1f;
 		meleeDamage = 1f;
-		aggroRange = 4f;
+		aggroRange = 7f;
 		necroAggroModifier = 1.2f;
 		chaseThreshold = 1f;
 		hoverRadius = 3f;

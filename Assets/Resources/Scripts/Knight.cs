@@ -21,7 +21,7 @@ public class Knight : AIBehavior {
 		switchDirThreshold = .5f;
 		meleeThreshold = 1f;
 		meleeDamage = 25f;
-		aggroRange = 4f;
+		aggroRange = 7f;
 		necroAggroModifier = 2f;
 		immune = true;
 		base.init(gMan, owner, necro);

@@ -219,7 +219,7 @@ public class PlayerController : MonoBehaviour {
 			if (!hasKey) {
 				transform.position = new Vector3 (105, transform.position.y, transform.position.z);
 			} else {
-				print ("winner winner chicken dinner");
+				gManager.Finish();
 			}
 		}
 	}
