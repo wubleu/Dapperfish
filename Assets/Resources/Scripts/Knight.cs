@@ -3,10 +3,12 @@ using System.Collections;
 
 public class Knight : AIBehavior {
 
-	int chargespeed = 5;
+	int chargespeed = 8;
 	float normalspeed = 1.3f;
-	float chargetimer = .3f;
+	float chargetimer = .5f;
 	float chargedist = 2.5f;
+	float chargecd= 1;
+	bool cd = false;
 	bool charging = false;
 
 
@@ -24,6 +26,7 @@ public class Knight : AIBehavior {
 		necroAggroModifier = 2f;
 		immune = true;
 		base.init(gMan, owner, necro);
+		this.GetComponentInChildren<SpriteRenderer> ().color = new Color (1, 0, 0);
 	}
 
 
@@ -31,7 +34,7 @@ public class Knight : AIBehavior {
 	new void Update() {
 		if (target != null) {
 			float TargDist = Vector3.Distance (target.transform.position, transform.position);
-			if (TargDist <= chargedist && charging == false) {
+			if (TargDist <= chargedist && charging == false && cd == false) {
 				agent.speed = chargespeed;
 				charging = true;
 			}
@@ -41,8 +44,16 @@ public class Knight : AIBehavior {
 		}
 		if (chargetimer <= 0) {
 			charging = false;
-			chargetimer = .3f;
+			cd = true;
+			chargetimer = .5f;
 			agent.speed = speed;
+		}
+		if (cd) {
+			chargecd -= Time.deltaTime;
+		}
+		if (chargecd <= 0) {
+			cd = false;
+			chargecd = 1;
 		}
 		base.Update();
 	}
