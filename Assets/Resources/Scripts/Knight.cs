@@ -3,28 +3,28 @@ using System.Collections;
 
 public class Knight : AIBehavior {
 
-	int chargespeed = 2;
+	int chargespeed = 5;
 	float normalspeed = 1.3f;
-	float chargetimer = .5f;
+	float chargetimer = .3f;
 	float chargedist = 2.5f;
 	bool charging = false;
 
 
 	// Use this for initialization
-	public void initKnight(GameManager gMan, EnemyManager owner) {
+	public void initKnight(GameManager gMan, EnemyManager owner, PlayerController necro) {
 
 		// PARAMETERS
-		allyColor = new Color(1, 0, 0);
+		allyColor = new Color(0, 0, 0);
 		enemyColor = new Color (1, 1, 1);
 		speed = normalspeed;
-		maxHP = 8f;
+		maxHP = 24f;
 		switchDirThreshold = .5f;
 		meleeThreshold = 1f;
-		meleeDamage = 5f;
+		meleeDamage = 25f;
 		aggroRange = 4f;
-		necroAggroModifier = 1.5f;
-
-		base.init(gMan, owner);
+		necroAggroModifier = 2f;
+		immune = true;
+		base.init(gMan, owner, necro);
 	}
 
 
@@ -32,19 +32,18 @@ public class Knight : AIBehavior {
 	new void Update() {
 		if (target != null) {
 			float TargDist = Vector3.Distance (target.transform.position, transform.position);
-			if (TargDist <= chargedist) {
-				speed = chargespeed;
+			if (TargDist <= chargedist && charging == false) {
+				agent.speed = chargespeed;
 				charging = true;
 			}
 		}
-
 		if (charging) {
 			chargetimer -= Time.deltaTime;
 		}
 		if (chargetimer <= 0) {
 			charging = false;
-			chargetimer = .5f;
-			speed = normalspeed;
+			chargetimer = .3f;
+			agent.speed = speed;
 		}
 		base.Update();
 		base.MoveToward();
@@ -55,8 +54,8 @@ public class Knight : AIBehavior {
 	void OnCollisionStay(Collision coll) {
 		if (coll.gameObject == target) {
 			charging = false;
-			chargetimer = .5f;
-			speed = normalspeed;
+			chargetimer = .3f;
+			agent.speed = speed;
 		}
 		base.OnCollision (coll);
 	}

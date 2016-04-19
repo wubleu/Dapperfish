@@ -29,7 +29,7 @@ public class Melee : MonoBehaviour {
 		if (other.tag == "AI") {
 			Vector3 direction = other.transform.position - transform.position;
 			if (Vector3.Angle(direction, transform.right) < 45) {
-				other.GetComponent<Peasant>().Damage(10);
+				other.GetComponent<Knight>().Damage(4);
 			}
 		}
 	}

@@ -34,7 +34,7 @@ public class EnemyManager : MonoBehaviour {
 	}
 
 	void PeasantSpawn(Vector3 zone, int type) {
-		Enemies.makePeasant(gManager, this, necromancerController, zone);
+		Enemies.makeKnight(gManager, this, necromancerController, zone);
 		peasantCount++;
 	}
 }

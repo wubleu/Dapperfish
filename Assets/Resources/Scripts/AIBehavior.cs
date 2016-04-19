@@ -15,7 +15,7 @@ public class AIBehavior : MonoBehaviour {
 	protected SpriteRenderer rend;
 	protected NavMeshAgent agent;
 	protected float hoverRads;
-	public bool hovering = false, isEnemy = true;
+	public bool hovering = false, isEnemy = true, immune = false;
 
 	protected void init(GameManager gMan, EnemyManager owner, PlayerController necro = null) {
 		eManager = owner; //GameObject.Find("Enemy Manager").GetComponent<EnemyManager>();
@@ -207,7 +207,7 @@ public class AIBehavior : MonoBehaviour {
 
 
 	public virtual void Infect() {
-		if (isEnemy) {
+		if (isEnemy && !immune) {
 			isEnemy = false;
 			eManager.peasantCount--;
 			necromancer.GetComponent<PlayerController> ().minionCount++;
