@@ -15,7 +15,7 @@ public class ManaBar : MonoBehaviour {
 		gameObject.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/BarOutline");
 		name = "Mana";
 		transform.parent = necromancer.transform;
-		transform.localPosition = new Vector3(8.5f, 10, -6);
+		transform.localPosition = new Vector3(8.5f, 10, -7);
 		transform.localEulerAngles = new Vector3(90, 0, 0);
 
 		bar = new GameObject().AddComponent<SpriteRenderer>();
@@ -40,6 +40,5 @@ public class ManaBar : MonoBehaviour {
 			}
 		}
 		bar.transform.localScale = new Vector3(1, necromancer.mana / maxMana, 1);
-		bar.transform.localPosition = new Vector3(0, (necromancer.mana / maxMana - 1) / 2);
 	}
 }

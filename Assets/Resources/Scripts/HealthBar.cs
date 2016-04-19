@@ -15,7 +15,7 @@ public class HealthBar : MonoBehaviour {
 		gameObject.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/BarOutline");
 		name = "Health";
 		transform.parent = necromancer.transform;
-		transform.localPosition = new Vector3(7, 10, -6);
+		transform.localPosition = new Vector3(7, 10, -7);
 		transform.localEulerAngles = new Vector3(90, 0, 0);
 
 		bar = new GameObject().AddComponent<SpriteRenderer>();
@@ -31,6 +31,5 @@ public class HealthBar : MonoBehaviour {
 
 	void Update () {
 		bar.transform.localScale = new Vector3(1, necromancer.hp / maxHealth, 1);
-		bar.transform.localPosition = new Vector3(0, (necromancer.hp / maxHealth - 1) / 2);
 	}
 }
