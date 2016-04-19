@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour {
 
 	// PARAMETERS
-	public float hp = 50, mana = 100, recharge = 20, size = 1f, speed = 1.1f, mclock = 0, mtime = 0.5f;
-	bool isMelee = true;
+	public float hp = 50, mana = 100, recharge = 20, size = 1f, speed = 1.1f, mclock = 0, mtime = 0.5f, castcd = .25f;
+	bool isMelee = true, casted = false;
 	Color necroColor = new Color(120f / 256f, 0f / 256f, 100f / 256f);
 	float[] mcosts = new float[6] {0, 60, 30, 80, 30, 0};
 	Melee melee;
@@ -39,6 +39,9 @@ public class PlayerController : MonoBehaviour {
 	SpriteRenderer lamodel;
 	SpriteRenderer bodymodel;
 	SpriteRenderer ramodel;
+	GameObject shooter;
+
+
 
 	// Use this for initialization
 	public void init (GameManager owner, EnemyManager eMan) {
@@ -106,6 +109,9 @@ public class PlayerController : MonoBehaviour {
 		ramodel.sortingOrder = 2;
 		ramodel.sprite = cSprites [19];
 
+		shooter = new GameObject ();
+		shooter.transform.parent = ramodel.transform;
+
 
 		//model.color = necroColor;
 
@@ -118,7 +124,7 @@ public class PlayerController : MonoBehaviour {
 
 		melee = new GameObject().AddComponent<Melee>();
 		melee.transform.parent = transform;
-		melee.transform.localPosition = new Vector3(0, 0, 0);
+		melee.transform.localPosition = new Vector3(0, 1, 0);
 	}
 
 	void Update () {
@@ -126,6 +132,22 @@ public class PlayerController : MonoBehaviour {
 		mouse.y = 0;
 		if (mclock > 0) {
 			mclock -= Time.deltaTime;
+			if (mclock <= .25f) {
+				ramodel.sprite = cSprites [19];
+				ramodel.transform.localPosition = new Vector3(0.12f, 1, 0.29f);
+				if (!casted) {
+					lamodel.transform.localPosition = new Vector3 (-0.136f, 1, 0.382f);
+				}
+			}
+		}
+		if (casted) {
+			castcd -= Time.deltaTime;
+		}
+		if (castcd <= 0) {
+			casted = false;
+			castcd = .25f;
+			lamodel.transform.localPosition = new Vector3(-0.136f, 1, 0.382f);
+			lamodel.sprite = cSprites [14];
 		}
 		for (int i = 0; i < mcosts.Length; i++) {
 			if (Input.GetKeyDown(controls[i]) && mana > mcosts[i]) {
@@ -134,18 +156,35 @@ public class PlayerController : MonoBehaviour {
 					case 0: // auto-attack
 						if (mclock <= 0) {
 							mclock = mtime;
-							if (isMelee) melee.Enable();
-							else Abilities.Bullet(transform.position, Mathf.PI / 2 + Mathf.Atan2(transform.position.x - mouse.x, mouse.z - transform.position.z));
+						if (isMelee)
+							melee.Enable ();
+						else {
+							Abilities.Bullet(shooter.transform.position, Mathf.PI / 2 + Mathf.Atan2(transform.position.x - mouse.x, mouse.z - transform.position.z));
+							ramodel.sprite = cSprites [17];
+							if (!casted) {
+								lamodel.transform.localPosition = new Vector3 (-0.126f, 1, 0.347f);
+							}
+							ramodel.transform.localPosition = new Vector3(0.103f, 1, 0.266f);
 						}
+								}
 						break;
 					case 1: // blight
-						Abilities.Blight(mouse);
+						Abilities.Blight (mouse);
+						casted = true;
+						lamodel.sprite = cSprites [13];
+						lamodel.transform.localPosition = new Vector3(-0.3f, 1, 0.45f);
 						break;
 					case 2: // root
 						Abilities.Root(mouse);
+						casted = true;
+						lamodel.sprite = cSprites [12];
+						lamodel.transform.localPosition = new Vector3(-0.3f, 1, 0.45f);
 						break;
 					case 3: // damage
 						Abilities.Damage(transform.position, Mathf.PI / 2 + Mathf.Atan2(transform.position.x - mouse.x, mouse.z - transform.position.z));
+						casted = true;
+						lamodel.sprite = cSprites [11];
+						lamodel.transform.localPosition = new Vector3(-0.3f, 1, 0.45f);
 						break;
 					case 4: // blink
 						float a = Mathf.PI / 2 + Mathf.Atan2(transform.position.x - mouse.x, mouse.z - transform.position.z);

@@ -33,7 +33,15 @@ public class GameManager : MonoBehaviour {
 			Destroy (unit.gameObject);
 		}
 		Destroy(eManager);
-		Destroy (necromancer);
+		GameObject death = new GameObject ();
+		death.transform.position = necromancer.transform.position;
+		death.transform.localEulerAngles = new Vector3 (90, 0, 0);
+		death.AddComponent<SpriteRenderer> ();
+		Animator anim = death.AddComponent<Animator> ();
+		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Necromancer Death Controller");
+		Destroy (necromancer.gameObject);
+		Destroy (death, 1);
+
 	}
 		
 
