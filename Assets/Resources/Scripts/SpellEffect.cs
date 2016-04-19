@@ -39,13 +39,13 @@ public class SpellEffect : MonoBehaviour {
 				}
 				return;
 			case "Root":
-				col.GetComponent<AIBehavior>().Root(1.5f); // length of root
+				col.GetComponent<AIBehavior>().Root();
 				return;
 			case "Damage":
-				col.GetComponent<AIBehavior>().Damage(10); // amount of damage dealt
+				col.GetComponent<AIBehavior>().Damage(10);
 				return;
 			case "Bullet":
-				col.GetComponent<AIBehavior>().Damage(1); // amount of damage dealt
+				col.GetComponent<AIBehavior>().Damage(1);
 				Destroy(gameObject);
 				return;
 			case "Arrow":

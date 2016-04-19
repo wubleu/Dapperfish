@@ -15,7 +15,6 @@ public static class Abilities {
 		return spell;
 	}
 
-	// HEY! If you want to change the radius of the ability, change the first parameter in the call to AOE!!!! :)
 	public static void Blight(Vector3 pos) {
 		GameObject spell = AOE(3, new Color(1, 0, 0, .4f), pos);
 		spell.name = "Blight";
