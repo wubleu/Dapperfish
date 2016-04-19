@@ -27,22 +27,27 @@ public class EnemyManager : MonoBehaviour {
 			GameObject spawner = GameObject.Find ("Spawn Zone " + parts[0]);
 			for (int i = 1; i <= 3; i++) {
 				for (int j = 0; j < Int32.Parse (parts [i]); j++) {
-					PeasantSpawn (spawner.transform.position, i);
+					Spawn (spawner.transform.position, i, Int32.Parse(parts[4]));
 				}
 			}
 		}
 	}
-
-	void PeasantSpawn(Vector3 zone, int type) {
-		Enemies.makePeasant(gManager, this, necromancerController, zone);
-		peasantCount++;
-	}
-
-	void ArcherSpawn(Vector3 zone) {
-		Enemies.makeArcher(gManager, this, necromancerController, zone);
-	}
-
-	void KnightSpawn(Vector3 zone, int type) {
-		Enemies.makeKnight(gManager, this, necromancerController, zone);
+		
+	void Spawn(Vector3 zone, int type, int radius) {
+		zone = new Vector3 (zone.x + UnityEngine.Random.Range (-radius, radius) + UnityEngine.Random.value, 0, zone.z + UnityEngine.Random.Range (-radius, radius) + UnityEngine.Random.value);
+		switch (type) {
+			case 1:
+				Enemies.makePeasant(gManager, this, necromancerController, zone);
+				peasantCount++;
+				break;
+			case 2:
+				Enemies.makeArcher(gManager, this, necromancerController, zone);
+				peasantCount++;
+				break;
+			case 3:
+				Enemies.makeKnight(gManager, this, necromancerController, zone);
+				peasantCount++;
+				break;
+		}
 	}
 }
