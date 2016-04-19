@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Key : MonoBehaviour {
 
@@ -12,6 +13,7 @@ public class Key : MonoBehaviour {
 	void OnTriggerEnter (Collider coll) {
 		if (coll.gameObject.name == "Necromancer") {
 			coll.gameObject.GetComponent<PlayerController> ().HasKey ();
+			GameObject.Find ("Text").GetComponent<Text> ().text = "Get Key Found.\n Proceed East Gate!";
 			Destroy (gameObject);
 		}
 	}

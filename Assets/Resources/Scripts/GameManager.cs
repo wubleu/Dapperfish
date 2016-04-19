@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
 	PlayerController necromancer;
 	EnemyManager eManager;
 	bool done = false;
+	public Text objectives;
+	public Text alert;
 
 	void Start() {
 		necromancer = new GameObject().AddComponent<PlayerController>();
@@ -35,14 +38,14 @@ public class GameManager : MonoBehaviour {
 		death.AddComponent<SpriteRenderer>();
 		Animator anim = death.AddComponent<Animator>();
 		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Necromancer Death Controller");
-		makeText("Game Over.\nYou suck!");
+		alert.text = "Game Over.";
 		Destroy(necromancer.gameObject);
 		Destroy(death, 1);
 	}
 
 	public void Finish() {
 		if (!done) {
-			makeText ("You beat the level!");
+			alert.text =  "You beat the level!";
 			done = true;
 		}
 	}

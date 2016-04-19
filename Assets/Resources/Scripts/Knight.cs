@@ -25,6 +25,7 @@ public class Knight : AIBehavior {
 		necroAggroModifier = 2f;
 		immune = true;
 		base.init(gMan, owner, necro);
+		this.GetComponentInChildren<SpriteRenderer> ().color = new Color (1, 0, 0);
 	}
 
 
