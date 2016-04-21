@@ -4,7 +4,11 @@ using System.Collections;
 public class SpellEffect : MonoBehaviour {
 
 	// PARAMETERS
+<<<<<<< HEAD
 	float lifetime, spellSpeed, radius, clock = 0, infectPower = 250;
+=======
+	float lifetime, spellSpeed, radius, clock = 0, infectPower = 175;
+>>>>>>> origin/RyanMechanicStudy
 	bool enemy;
 	Vector3 angle;
 

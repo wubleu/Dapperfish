@@ -4,7 +4,7 @@ using System.Collections;
 public class Knight : AIBehavior {
 
 	int chargespeed = 8;
-	float normalspeed = 1.3f;
+	float normalspeed = 4f;
 	float chargetimer = .5f;
 	float chargedist = 2.5f;
 	float chargecd= 1;
@@ -19,7 +19,7 @@ public class Knight : AIBehavior {
 		allyColor = new Color(0, 0, 0);
 		enemyColor = new Color (1, 1, 1);
 		speed = normalspeed;
-		maxHP = hp = 12f;
+		maxHP = hp = 6f;
 		meleeThreshold = 1f;
 		meleeDamage = 25f;
 		aggroRange = 7f;
