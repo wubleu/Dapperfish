@@ -1,0 +1,180 @@
+fileFormatVersion: 2
+guid: e5f401b8f78c54d6abbf3d338cb643c6
+timeCreated: 1461262046
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Key Sprite Sheet_0
+    21300002: Key Sprite Sheet_1
+    21300004: Key Sprite Sheet_2
+    21300006: Key Sprite Sheet_3
+    21300008: Key Sprite Sheet_4
+    21300010: Key Sprite Sheet_5
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Key Sprite Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 430
+        width: 135
+        height: 71
+      alignment: 9
+      pivot: {x: 0.4120445, y: 0.5334477}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -5.626007, y: 33.125214}
+        - {x: -46.626007, y: 33.125214}
+        - {x: -55.626007, y: 19.125214}
+        - {x: -55.626007, y: -28.874786}
+        - {x: -47.626007, y: -37.874786}
+        - {x: 9.373993, y: -37.874786}
+        - {x: 79.37399, y: -23.874786}
+        - {x: 79.37399, y: -1.8747864}
+        - {x: 71.37399, y: 11.125214}
+    - name: Key Sprite Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 313
+        width: 137
+        height: 80
+      alignment: 9
+      pivot: {x: 0.4191066, y: 0.4703148}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -50.417603, y: 42.374817}
+        - {x: -57.417603, y: 29.374817}
+        - {x: -57.417603, y: -37.625183}
+        - {x: 40.582397, y: -37.625183}
+        - {x: 79.5824, y: -23.625183}
+        - {x: 79.5824, y: 11.374817}
+        - {x: 18.582397, y: 42.374817}
+    - name: Key Sprite Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 310
+        width: 135
+        height: 71
+      alignment: 9
+      pivot: {x: 0.40618083, y: 0.5334477}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -4.8344116, y: 33.125214}
+        - {x: -45.83441, y: 33.125214}
+        - {x: -54.83441, y: 19.125214}
+        - {x: -54.83441, y: -28.874786}
+        - {x: -46.83441, y: -37.874786}
+        - {x: 10.165588, y: -37.874786}
+        - {x: 80.16559, y: -23.874786}
+        - {x: 80.16559, y: -1.8747864}
+        - {x: 72.16559, y: 11.125214}
+    - name: Key Sprite Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 136
+        width: 136
+        height: 71
+      alignment: 9
+      pivot: {x: 0.41269124, y: 0.52229804}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 18.873993, y: 33.91684}
+        - {x: -53.126007, y: 33.91684}
+        - {x: -56.126007, y: 24.91684}
+        - {x: -56.126007, y: -28.08316}
+        - {x: -48.126007, y: -37.08316}
+        - {x: 11.873993, y: -37.08316}
+        - {x: 79.87399, y: -24.08316}
+        - {x: 79.87399, y: 3.9168396}
+        - {x: 70.87399, y: 16.91684}
+    - name: Key Sprite Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 124
+        width: 135
+        height: 71
+      alignment: 9
+      pivot: {x: 0.4120445, y: 0.5222983}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -5.626007, y: 33.916824}
+        - {x: -46.626007, y: 33.916824}
+        - {x: -55.626007, y: 19.916824}
+        - {x: -55.626007, y: -28.083176}
+        - {x: -47.626007, y: -37.083176}
+        - {x: 9.373993, y: -37.083176}
+        - {x: 79.37399, y: -23.083176}
+        - {x: 79.37399, y: -1.0831757}
+        - {x: 71.37399, y: 11.916824}
+    - name: Key Sprite Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 28
+        width: 135
+        height: 72
+      alignment: 9
+      pivot: {x: 0.4117798, y: 0.53308284}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -43.59027, y: 33.618034}
+        - {x: -55.59027, y: 18.618034}
+        - {x: -55.59027, y: -37.381966}
+        - {x: -53.59027, y: -38.381966}
+        - {x: 23.409729, y: -38.381966}
+        - {x: 79.40973, y: -23.381966}
+        - {x: 79.40973, y: 11.618034}
+        - {x: 36.40973, y: 33.618034}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

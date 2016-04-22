@@ -1,0 +1,262 @@
+fileFormatVersion: 2
+guid: 3d8074c10df364f319ca36e4bd535219
+timeCreated: 1461291555
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: North Wall
+    21300002: Outpost Floor
+    21300004: Gate_0
+    21300006: Gate_1
+    21300008: Table 1
+    21300010: Weapon Rack
+    21300012: Gate_2
+    21300014: Table 2
+    21300016: Table 3
+    21300018: West Wall
+    21300020: North Wall 1
+    21300022: East Wall
+    21300024: North Wall 2
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: North Wall
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 506
+        width: 491
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -245.5, y: 42}
+        - {x: -245.5, y: -42}
+        - {x: 245.5, y: -42}
+        - {x: 245.5, y: 42}
+    - name: Outpost Floor
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 250
+        width: 472
+        height: 351
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -236, y: 175.5}
+        - {x: -236, y: -175.5}
+        - {x: 236, y: -175.5}
+        - {x: 236, y: 175.5}
+    - name: Gate_0
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 75
+        width: 169
+        height: 102
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -22.5, y: 102}
+        - {x: -23.5, y: 101}
+        - {x: -24.5, y: 102}
+        - {x: -84.5, y: 102}
+        - {x: -84.5, y: 0}
+        - {x: 84.5, y: 0}
+        - {x: 84.5, y: 102}
+    - name: Gate_1
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 81
+        width: 169
+        height: 76
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -84.5, y: 76}
+        - {x: -84.5, y: 0}
+        - {x: 84.5, y: 0}
+        - {x: 84.5, y: 76}
+    - name: Table 1
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 144
+        width: 123
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -61.5, y: 30.5}
+        - {x: -61.5, y: -30.5}
+        - {x: 61.5, y: -30.5}
+        - {x: 61.5, y: 30.5}
+    - name: Weapon Rack
+      rect:
+        serializedVersion: 2
+        x: 1093
+        y: 149
+        width: 104
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -40, y: 38}
+        - {x: -52, y: -3}
+        - {x: -52, y: -38}
+        - {x: 52, y: -38}
+        - {x: 52, y: -3}
+        - {x: 40, y: 38}
+    - name: Gate_2
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 85
+        width: 169
+        height: 38
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -84.5, y: 38}
+        - {x: -84.5, y: 0}
+        - {x: 84.5, y: 0}
+        - {x: 84.5, y: 38}
+    - name: Table 2
+      rect:
+        serializedVersion: 2
+        x: 806
+        y: 14
+        width: 71
+        height: 111
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 35.5, y: 55.5}
+        - {x: -35.5, y: 55.5}
+        - {x: -35.5, y: -55.5}
+        - {x: 35.5, y: -55.5}
+    - name: Table 3
+      rect:
+        serializedVersion: 2
+        x: 1005
+        y: 14
+        width: 75
+        height: 111
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -37.5, y: 55.5}
+        - {x: -37.5, y: -55.5}
+        - {x: 37.5, y: -55.5}
+        - {x: 37.5, y: 55.5}
+    - name: West Wall
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 214
+        width: 23
+        height: 377
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: North Wall 1
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 214
+        width: 163
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -81.5, y: 47.5}
+        - {x: -81.5, y: -47.5}
+        - {x: 81.5, y: -47.5}
+        - {x: 81.5, y: 47.5}
+    - name: East Wall
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 215
+        width: 25
+        height: 376
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: North Wall 2
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 215
+        width: 158
+        height: 94
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -79, y: 47}
+        - {x: -79, y: -47}
+        - {x: 79, y: -47}
+        - {x: 79, y: 47}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
