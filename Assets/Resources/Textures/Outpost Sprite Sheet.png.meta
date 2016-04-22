@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 3d8074c10df364f319ca36e4bd535219
-timeCreated: 1461291555
+timeCreated: 1461338520
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -14,9 +14,9 @@ TextureImporter:
     21300014: Table 2
     21300016: Table 3
     21300018: West Wall
-    21300020: North Wall 1
+    21300020: South Wall 1
     21300022: East Wall
-    21300024: North Wall 2
+    21300024: South Wall 2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -214,7 +214,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: North Wall 1
+    - name: South Wall 1
       rect:
         serializedVersion: 2
         x: 118
@@ -240,7 +240,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: North Wall 2
+    - name: South Wall 2
       rect:
         serializedVersion: 2
         x: 452
