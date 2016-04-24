@@ -15,13 +15,14 @@ public class Peasant : AIBehavior {
 		aggroRange = 7f;
 		necroAggroModifier = 1.2f;
 		chaseThreshold = 1f;
+		chaseDist = 1f;
 		hoverRadius = 1.5f;
 		infectionCost = 25;
 
 		base.init(gMan, owner, necro);
 	}
 
-	new void Update() {
+	void Update() {
 		base.Update();
 	}
 

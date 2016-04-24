@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour {
 
 		cSprites = Resources.LoadAll<Sprite> ("Textures/Necromancer Sprite Sheet 0");
 
-		gameObject.AddComponent<SphereCollider>().radius = size;
+		gameObject.AddComponent<SphereCollider>().radius = size*.75f;
 		NavMeshAgent nav = gameObject.AddComponent<NavMeshAgent>();
 		nav.updateRotation = false;
 		nav.radius = .25f;
@@ -231,7 +231,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void TakeHit(GameObject collObj) {
-		print ("taking hit");
 		hp -= 1;
 		if (hp <= 0) {
 			gManager.Death ();

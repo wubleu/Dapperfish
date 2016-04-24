@@ -5,7 +5,7 @@ public class AIBehavior : MonoBehaviour {
 
 	// PARAMETERS
 	protected Color allyColor, enemyColor;
-	public float hoverRadius, chaseThreshold, chaseClock, aggroRange, necroAggroModifier, speed, switchDirThreshold = Random.Range(.3f, .4f),
+	public float hoverRadius, chaseDist, chaseThreshold, chaseClock, aggroRange, necroAggroModifier, speed, switchDirThreshold = Random.Range(.3f, .4f),
 					meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp, maxHP, infectionCost;
 	public GameObject target = null;
 	protected GameObject necromancer;
@@ -24,7 +24,7 @@ public class AIBehavior : MonoBehaviour {
 		rend = GetComponentInChildren<SpriteRenderer>();
 		transform.parent = eManager.transform;
 		agent.speed = speed;
-		agent.stoppingDistance = .5f;
+		agent.stoppingDistance = .1f;
 	}
 
 	protected void Update() {
@@ -62,6 +62,9 @@ public class AIBehavior : MonoBehaviour {
 				float currTargetDist = Vector3.Distance (target.transform.position, transform.position);
 				agent.destination = target.transform.position;
 				if (currTargetDist < aggroRange) {
+					if (currTargetDist < chaseDist) {
+
+					}
 					targetDist = currTargetDist/2f;	
 					target = null;
 				} else {

@@ -16,13 +16,14 @@ public class Archer : AIBehavior {
 		meleeDamage = 1f;
 		aggroRange = 8f;
 		necroAggroModifier = 1.2f;
+		chaseDist = 2f;
 		GetComponent<NavMeshAgent>().stoppingDistance = 4;
 		infectionCost = 35;
 
 		base.init(gMan, owner, necro);
 	}
 
-	new void Update() {
+	void Update() {
 		base.Update();
 		if (target != null) {
 			if (Vector3.Distance(transform.position, target.transform.position) < range) {
