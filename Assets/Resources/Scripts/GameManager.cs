@@ -1,11 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
+	// PARAMETERS
+	public float gridSize = 10f;
+
 	PlayerController necromancer;
 	EnemyManager eManager;
+	public List<AIBehavior>[,] enemyGrid;
+	public int xGridOrigin = -20;
+	public int yGridOrigin = -80;
+	public int xDimension;
+	public int yDimension;
 	bool done = false;
 	public Text objectives;
 	public Text alert;
@@ -21,6 +30,20 @@ public class GameManager : MonoBehaviour {
 		eManager.init(this, necromancer);
 		necromancer.init(this, eManager);
 		testing123();
+
+		xDimension = 16;
+		yDimension = 10;
+		enemyGrid = new List<AIBehavior>[xDimension, yDimension];
+		for (int x = 0; x < xDimension; x++) {
+			for (int y = 0; y < yDimension; y++) {
+				enemyGrid [x, y] = new List<AIBehavior> ();
+			}
+		}
+		RefillGrid ();
+	}
+
+	void Update() {
+		RefillGrid ();
 	}
 
 	public void Death() {
@@ -66,5 +89,18 @@ public class GameManager : MonoBehaviour {
 		text.fontSize = 85;
 		text.color = new Color(0, 0, 0);
 		text.text = stuff;
+	}
+
+	private void RefillGrid() {
+		for (int x = 0; x < xDimension; x++) {
+			for (int y = 0; y < yDimension; y++) {
+				enemyGrid [x, y].Clear ();
+			}
+		}
+		foreach (AIBehavior unit in GameObject.FindObjectsOfType<AIBehavior>()) {
+			int xSquare = ((int)unit.gameObject.transform.position.x - xGridOrigin) / 10;
+			int ySquare = ((int)unit.gameObject.transform.position.y - yGridOrigin) / 10;
+			enemyGrid [xSquare - 1, ySquare - 1].Add (unit);
+		}
 	}
 }

@@ -5,7 +5,7 @@ public class AIBehavior : MonoBehaviour {
 
 	// PARAMETERS
 	protected Color allyColor, enemyColor;
-	public float hoverRadius, chaseThreshold, chaseClock, aggroRange, necroAggroModifier, speed, switchDirThreshold = Random.Range(.5f, 1f),
+	public float hoverRadius, chaseThreshold, chaseClock, aggroRange, necroAggroModifier, speed, switchDirThreshold = Random.Range(.3f, .4f),
 					meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp, maxHP, infectionCost;
 	public GameObject target = null;
 	protected GameObject necromancer;
@@ -24,6 +24,7 @@ public class AIBehavior : MonoBehaviour {
 		rend = GetComponentInChildren<SpriteRenderer>();
 		transform.parent = eManager.transform;
 		agent.speed = speed;
+		agent.stoppingDistance = .5f;
 	}
 
 	protected void Update() {
@@ -38,10 +39,11 @@ public class AIBehavior : MonoBehaviour {
 				agent.speed = speed;
 				meleeTimer = 0;
 			}
-		} if (switchDirTimer > switchDirThreshold) {
+		} 
+//		if (switchDirTimer > switchDirThreshold) {
 			SwitchTargets();
 			switchDirTimer = 0;
-		}
+//		}
 	}
 
 	// makes sure our units stay on a level plane and don't get bounced by the physics engine
@@ -67,20 +69,22 @@ public class AIBehavior : MonoBehaviour {
 				}
 			}
 		}
+
 		// if the old target has moved out of range or did not exist, looks for new target
 		if (target == null) {
 			// checks all AI's whose allegiance is different from this AI's
-			foreach (AIBehavior AI in FindObjectsOfType<AIBehavior>()) {
-				if (AI.isEnemy != isEnemy) {
-					float AIDist = Vector3.Distance (AI.transform.position, transform.position);
-					if (AIDist < targetDist) {
-						target = AI.gameObject;
-						targetDist = AIDist;
-						agent.destination = AI.transform.position;
-						agent.speed = speed;
-					}
-				}
-			}
+			targetDist = CheckAITargetsInSquare(targetDist);
+//			foreach (AIBehavior AI in FindObjectsOfType<AIBehavior>()) {
+//				if (AI.isEnemy != isEnemy) {
+//					float AIDist = Vector3.Distance (AI.transform.position, transform.position);
+//					if (AIDist < targetDist) {
+//						target = AI.gameObject;
+//						targetDist = AIDist;
+//						agent.destination = AI.transform.position;
+//						agent.speed = speed;
+//					}
+//				}
+//			}
 			// enemy AIs check the necro. necro is a bit more intimidating than other targets.
 			if (isEnemy) {
 				float necroDist = Vector3.Distance (necromancer.transform.position, transform.position);
@@ -107,6 +111,33 @@ public class AIBehavior : MonoBehaviour {
 			transform.parent = eManager.transform;
 			agent.enabled = true;
 		}
+	}
+
+	protected virtual float CheckAITargetsInSquare(float targetDist) {
+		int unitGridX = ((int)transform.position.x - gManager.xGridOrigin) / 10;
+		int unitGridY = ((int)transform.position.y - gManager.yGridOrigin) / 10;
+		int checkingX;
+		int checkingY;
+		for (int x = -1; x < 2; x++) {
+			for (int y = -1; y < 2; y++) {
+				checkingX = x + unitGridX;
+				checkingY = y + unitGridY;
+				if ((checkingX>=0 && checkingX<gManager.xDimension) && (checkingY>=0 && checkingY<gManager.yDimension)) {
+					foreach (AIBehavior AI in gManager.enemyGrid[checkingX, checkingY]) {
+						if (AI != null && AI.isEnemy != isEnemy) {
+							float AIDist = Vector3.Distance (AI.transform.position, transform.position);
+							if (AIDist < targetDist) {
+								target = AI.gameObject;
+								targetDist = AIDist;
+								agent.destination = AI.transform.position;
+								agent.speed = speed;
+							}
+						}
+					}
+				}
+			}
+		}
+		return targetDist;
 	}
 
 	// when friendly AI has no target:
@@ -179,13 +210,13 @@ public class AIBehavior : MonoBehaviour {
 	}
 
 	protected virtual void OnCollision(Collision coll) {
-		if (meleeTimer > meleeThreshold) {
+		if (meleeTimer > meleeThreshold && coll.gameObject == target) {
+			SwitchTargets ();
 			Melee (coll);
 		}
 	}
 
 	public virtual void Infect() {
-		print (name);
 		if (isEnemy && !immune) {
 			isEnemy = false;
 			GetComponent<NavMeshAgent>().stoppingDistance = 0;
