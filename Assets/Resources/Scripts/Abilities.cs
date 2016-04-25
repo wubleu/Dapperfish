@@ -16,7 +16,7 @@ public static class Abilities {
 	}
 
 	public static void Blight(Vector3 pos) {
-		GameObject spell = AOE(3, new Color(1, 0, 0, .4f), pos);
+		GameObject spell = AOE(3, new Color(0, 1, 0, .4f), pos);
 		spell.name = "Blight";
 		spell.AddComponent<SpellEffect>().init(0.5f);
 	}
@@ -28,7 +28,7 @@ public static class Abilities {
 	}
 
 	public static void Damage(Vector3 pos, float angle) {
-		GameObject spell = AOE(.8f, new Color(0, 1, 0, .4f), pos);
+		GameObject spell = AOE(.8f, new Color(1, 0, 0, .4f), pos);
 		spell.name = "Damage";
 		spell.AddComponent<SpellEffect>().init(2, 5, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
 	}
