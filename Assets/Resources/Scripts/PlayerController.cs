@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour {
 	HealthBar healthBar;
 	public EnemyManager eManager;
 	public bool hasKey = false;
+	public bool hasFortKey = false;
+	public bool needsNav = false;
 
 	GameObject necromodel;
 	GameObject rightarm;
@@ -221,6 +223,25 @@ public class PlayerController : MonoBehaviour {
 			} else {
 				gManager.Finish();
 			}
+		}
+		if (hasFortKey && 43<transform.position.x && transform.position.x<44 && -20>transform.position.z && transform.position.z>-22) {
+			gameObject.GetComponent<NavMeshAgent>().destination = new Vector3(43.5f,1.0f,-17.5f);
+		}
+		if (hasKey && hasFortKey && transform.position.y > .5f) {
+			gameObject.GetComponent<NavMeshAgent>().destination = new Vector3(43.5f,0.0f,-20.5f);
+		}
+		if (hasKey && hasFortKey && transform.position.y < .3f) {
+			hasFortKey = false;
+			NavMeshAgent oldNav = gameObject.GetComponent<NavMeshAgent> ();
+			Destroy (oldNav);
+			needsNav = true;
+		}
+		if (hasKey && needsNav && transform.position.y < .5f){
+			NavMeshAgent nav = gameObject.AddComponent<NavMeshAgent>();
+			nav.updateRotation = false;
+			nav.radius = .25f;
+			nav.height = 1;
+			needsNav = false;
 		}
 	}
 

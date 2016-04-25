@@ -12,9 +12,14 @@ public class Key : MonoBehaviour {
 	// Update is called once per frame
 	void OnTriggerEnter (Collider coll) {
 		if (coll.gameObject.name == "Necromancer") {
-			coll.gameObject.GetComponent<PlayerController> ().HasKey ();
-			GameObject.Find ("Text").GetComponent<Text> ().text = "Get Key Found.\n Proceed East Gate!";
-			Destroy (gameObject);
+			if (transform.position.z<-20) {
+				coll.gameObject.GetComponent<PlayerController> ().hasFortKey = true;
+				Destroy (gameObject);
+			} else {
+				coll.gameObject.GetComponent<PlayerController> ().HasKey ();
+				GameObject.Find ("Text").GetComponent<Text> ().text = "Get Key Found.\n Proceed East Gate!";
+				Destroy (gameObject);
+			}
 		}
 	}
 }
