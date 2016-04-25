@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour {
 	public bool hasKey = false;
 	public bool hasFortKey = false;
 	public bool needsNav = false;
+	public bool destined = false;
 
 	GameObject necromodel;
 	GameObject rightarm;
@@ -224,24 +225,30 @@ public class PlayerController : MonoBehaviour {
 				gManager.Finish();
 			}
 		}
-		if (hasFortKey && 43<transform.position.x && transform.position.x<44 && -20>transform.position.z && transform.position.z>-22) {
-			gameObject.GetComponent<NavMeshAgent>().destination = new Vector3(43.5f,1.0f,-17.5f);
-		}
-		if (hasKey && hasFortKey && transform.position.y > .5f) {
-			gameObject.GetComponent<NavMeshAgent>().destination = new Vector3(43.5f,0.0f,-20.5f);
-		}
-		if (hasKey && hasFortKey && transform.position.y < .3f) {
-			hasFortKey = false;
-			NavMeshAgent oldNav = gameObject.GetComponent<NavMeshAgent> ();
-			Destroy (oldNav);
-			needsNav = true;
-		}
-		if (hasKey && needsNav && transform.position.y < .5f){
+		//Handling off-mesh fort link
+		if (needsNav){
 			NavMeshAgent nav = gameObject.AddComponent<NavMeshAgent>();
 			nav.updateRotation = false;
 			nav.radius = .25f;
 			nav.height = 1;
 			needsNav = false;
+		}
+		NavMeshAgent agent = gameObject.GetComponent<NavMeshAgent>();
+		if (hasFortKey && 39.5f<transform.position.x && transform.position.x<40.3f && -20>transform.position.z && transform.position.z>-21 && Input.GetKey(KeyCode.W)) {
+			print ("here");
+			agent.destination = new Vector3(40f,1.0f,-18f);
+			destined = true;
+		}
+		if (destined && transform.position.x>(agent.destination.x-.05f) && transform.position.x<(agent.destination.x+.05f) && transform.position.y>(agent.destination.y-.05f) && transform.position.y<(agent.destination.y+.05f) && transform.position.z>(agent.destination.z-.05f) && transform.position.z<(agent.destination.z+.05f)) {
+			print ("here dog");
+			Destroy (agent);
+			needsNav = true;
+			destined = false;
+		}
+		if (hasFortKey && 39.5f<transform.position.x && transform.position.x<40.3f && -18.2f<transform.position.z && transform.position.z<-17.7f && Input.GetKey(KeyCode.S)) {
+			print ("here yo");
+			gameObject.GetComponent<NavMeshAgent>().destination = new Vector3(40f,0.0f,-20.5f);
+			destined = true;
 		}
 	}
 
