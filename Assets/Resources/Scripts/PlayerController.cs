@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour {
 			lamodel.transform.localPosition = new Vector3(-0.136f, 1, 0.382f);
 			lamodel.sprite = cSprites [14];
 		}
-		if (timers[0] == 0) {
+		if (timers[0] <= 0) {
 			if (Input.GetKeyDown(controls[0]) && isMelee) {
 				melee.Enable();
 				timers[0] = cd[0];
