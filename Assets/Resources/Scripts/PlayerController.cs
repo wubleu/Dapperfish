@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
 
 	// PARAMETERS
-	public float hp = 50, mana = 100, recharge = 10, size = 1f, speed = 1.8f, mclock = 0, mtime = 0.5f, castcd = .25f;
+	public float hp = 50, size = 1f, speed = 1.8f, castcd = .25f;
 	bool isMelee = true, casted = false;
-	Color necroColor = new Color(120f / 256f, 0f / 256f, 100f / 256f);
-	float[] mcosts = new float[6] {0, 60, 5, 50, 20, 0};
+	public float[] cd = new float[5] {0.5f, 5, 3, 50, 2}, timers = new float[5] {0, 0, 0, 0, 0};
 	Melee melee;
 	protected Sprite[] cSprites;
-
+	public Image[] icons = new Image[4];
+	
 	// CONTROLS PARAMETERS
 	KeyCode[] controls = new KeyCode[6] {
 		KeyCode.Mouse0, // auto-attack
@@ -24,25 +25,14 @@ public class PlayerController : MonoBehaviour {
 
 	public int minionCount = 0;
 	GameManager gManager;
-	ManaBar manaBar;
-	HealthBar healthBar;
 	public EnemyManager eManager;
 	public bool hasKey = false;
 	public bool hasFortKey = false;
 	public bool needsNav = false;
 
-	GameObject necromodel;
-	GameObject rightarm;
-	GameObject leftarm;
-	GameObject body;
-	SpriteRenderer lamodel;
-	SpriteRenderer bodymodel;
-	SpriteRenderer ramodel;
-	GameObject shooter;
+	GameObject necromodel, rightarm, leftarm, body, shooter;
+	SpriteRenderer lamodel, bodymodel, ramodel;
 
-
-
-	// Use this for initialization
 	public void init (GameManager owner, EnemyManager eMan) {
 		eManager = eMan;
 		gManager = owner;
@@ -111,14 +101,11 @@ public class PlayerController : MonoBehaviour {
 		shooter = new GameObject ();
 		shooter.transform.parent = ramodel.transform;
 
-
-		//model.color = necroColor;
-
-		// HealthBar + ManaBar
 		new GameObject().AddComponent<HealthBar>().init(hp);
-		new GameObject().AddComponent<ManaBar>().init(this.mana, recharge);
+		for (int i = 1; i <= 4; i++) {
+			icons[i - 1] = GameObject.Find("CD" + i).GetComponent<Image>();
+		}
 
-		// TEMPORARY CAMERA FOLLOW
 		GameObject.Find("Main Camera").transform.parent = transform;
 
 		melee = new GameObject().AddComponent<Melee>();
@@ -129,15 +116,20 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 		Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		mouse.y = 0;
-		if (mclock > 0) {
-			mclock -= Time.deltaTime;
-			if (mclock <= .25f) {
+		if (timers[0] > 0) {
+			if ((timers[0] -= Time.deltaTime) <= .25f && isMelee) {
 				ramodel.sprite = cSprites [19];
 				ramodel.transform.localPosition = new Vector3(0.12f, 1, 0.29f);
 				if (!casted) {
 					lamodel.transform.localPosition = new Vector3 (-0.136f, 1, 0.382f);
 				}
 			}
+		}
+		for (int i = 1; i <= 4; i++) {
+			if (timers[i] > 0 && (timers[i] -= Time.deltaTime) < 0) {
+				timers[i] = 0;
+			}
+			icons[i - 1].fillAmount = 1 - (timers[i] / cd[i]);
 		}
 		if (casted) {
 			castcd -= Time.deltaTime;
@@ -148,25 +140,29 @@ public class PlayerController : MonoBehaviour {
 			lamodel.transform.localPosition = new Vector3(-0.136f, 1, 0.382f);
 			lamodel.sprite = cSprites [14];
 		}
-		for (int i = 0; i < mcosts.Length; i++) {
-			if (Input.GetKeyDown(controls[i]) && mana > mcosts[i]) {
-				mana -= mcosts[i];
+		if (timers[0] == 0) {
+			if (Input.GetKeyDown(controls[0]) && isMelee) {
+				melee.Enable();
+				timers[0] = cd[0];
+			}
+			if (Input.GetKey(controls[0]) && !isMelee) {
+				Abilities.Bullet(shooter.transform.position, Mathf.PI / 2 + Mathf.Atan2(transform.position.x - mouse.x, mouse.z - transform.position.z));
+				ramodel.sprite = cSprites [17];
+				if (!casted) {
+					lamodel.transform.localPosition = new Vector3 (-0.126f, 1, 0.347f);
+				}
+				ramodel.transform.localPosition = new Vector3(0.103f, 1, 0.266f);
+				timers[0] = cd[0];
+			}
+		}
+		if (Input.GetKeyDown(controls[5])) {
+			isMelee = !isMelee;
+		}
+
+		for (int i = 1; i <= 4; i++) {
+			if (Input.GetKeyDown(controls[i]) && timers[i] == 0) {
+				timers[i] = cd[i];
 				switch (i) {
-					case 0: // auto-attack
-						if (mclock <= 0) {
-							mclock = mtime;
-						if (isMelee)
-							melee.Enable ();
-						else {
-							Abilities.Bullet(shooter.transform.position, Mathf.PI / 2 + Mathf.Atan2(transform.position.x - mouse.x, mouse.z - transform.position.z));
-							ramodel.sprite = cSprites [17];
-							if (!casted) {
-								lamodel.transform.localPosition = new Vector3 (-0.126f, 1, 0.347f);
-							}
-							ramodel.transform.localPosition = new Vector3(0.103f, 1, 0.266f);
-						}
-								}
-						break;
 					case 1: // blight
 						Abilities.Blight (mouse);
 						casted = true;
@@ -188,15 +184,11 @@ public class PlayerController : MonoBehaviour {
 					case 4: // blink
 						Abilities.Blink(transform, Mathf.PI / 2 - Mathf.Atan2(mouse.x - transform.position.x, mouse.z - transform.position.z));
 						break;
-					case 5: // switch weapons
-						isMelee = !isMelee;
-						break;
 				}
-				    
 			}
 		}
+
 		int[] b = new int[2] {0, 0};
-		// moves player by speed*Time.deltaTime based on WASD
 		if (Input.GetKey(KeyCode.A)) {
 			b[0] = -1;
 			transform.Translate(-speed*Time.deltaTime, 0, 0);
