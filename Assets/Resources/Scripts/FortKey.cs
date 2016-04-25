@@ -15,11 +15,11 @@ public class FortKey : MonoBehaviour {
 		
 	}
 
-	void OnTriggerStay(Collider other){
+	void OnTriggerEnter(Collider other){
 		if (other.name == "Necromancer") {
 			if (other.GetComponent<PlayerController> ().hasFortKey) {
-				anim.SetTrigger ("Closed");
-				Destroy (this.gameObject, .5f);
+				anim.SetTrigger ("Close");
+				Destroy (this.gameObject, 1);
 			}
 		}
 	}
