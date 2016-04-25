@@ -1,19 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Scripts/Key.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Scripts/PlayerController.cs">
     <Files>
-      <File FileName="Assets/Resources/Scripts/Key.cs" Line="17" Column="26" />
-      <File FileName="Assets/Resources/Scripts/PlayerController.cs" Line="233" Column="56" />
-      <File FileName="Assets/Resources/Scripts/GameManager.cs" Line="55" Column="26" />
-      <File FileName="Assets/Resources/Scripts/Peasant.cs" Line="16" Column="28" />
-      <File FileName="Assets/Resources/Scripts/AIBehavior.cs" Line="135" Column="1" />
-      <File FileName="../Hull Breach 3/Assets/Resources/JERF/GameController.cs" Line="100" Column="20" />
+      <File FileName="Assets/Resources/Scripts/PlayerController.cs" Line="135" Column="6" />
+      <File FileName="Assets/Resources/Scripts/Key.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/Peasant.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/AIBehavior.cs" Line="1" Column="1" />
       <File FileName="Assets/Resources/Scripts/HealthBar.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/level1.txt" Line="4" Column="9" />
-      <File FileName="Assets/Resources/Scripts/EnemyManager.cs" Line="44" Column="11" />
-      <File FileName="Assets/Resources/Scripts/Enemies.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/Archer.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/Knight.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/level1.txt" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/EnemyManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/FortKey.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
