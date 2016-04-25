@@ -22,7 +22,7 @@ public class Peasant : AIBehavior {
 		base.init(gMan, owner, necro);
 	}
 
-	void Update() {
+	protected override void Update() {
 		base.Update();
 	}
 

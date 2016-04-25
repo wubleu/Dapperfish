@@ -23,7 +23,7 @@ public class Archer : AIBehavior {
 		base.init(gMan, owner, necro);
 	}
 
-	void Update() {
+	protected override void Update() {
 		base.Update();
 		if (target != null) {
 			if (Vector3.Distance(transform.position, target.transform.position) < range) {
