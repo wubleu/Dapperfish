@@ -110,4 +110,36 @@ public class GameManager : MonoBehaviour {
 			enemyGrid [xSquare - 1, ySquare - 1].Add (unit);
 		}
 	}
+
+	public void EnemyDeath(Vector3 pos, string name, bool enemy, float scale){
+		GameObject death = new GameObject ();
+		SpriteRenderer rend = death.AddComponent<SpriteRenderer> ();
+		death.transform.position = pos;
+		death.transform.localEulerAngles = new Vector3 (90, 0, 0);
+		death.transform.localScale = new Vector3 (scale, scale, scale);
+		Sprite[] cSprites;
+		if (name == "Archer") {
+			cSprites = Resources.LoadAll<Sprite> ("Textures/Skeleton Archer Sprite Sheet");
+			if (enemy) {
+				rend.sprite = cSprites [2];
+			} else {
+				rend.sprite = cSprites [5];
+			}
+			Destroy (death.gameObject, 2f);
+		}
+		if (name == "Peasant") {
+			cSprites = Resources.LoadAll<Sprite> ("Textures/Zombie Sprite Sheet");
+			if (enemy) {
+				rend.sprite = cSprites [6];
+			} else {
+				rend.sprite = cSprites [2];
+			}
+			Destroy (death.gameObject, 2f);
+		}
+		if (name == "Knight") {
+			cSprites = Resources.LoadAll<Sprite> ("Textures/Knight Sprite Sheet");
+			rend.sprite = cSprites [9];
+			Destroy (death.gameObject, 2f);
+		}
+	}
 }

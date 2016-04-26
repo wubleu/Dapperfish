@@ -306,16 +306,8 @@ public class AIBehavior : MonoBehaviour {
 			} else {
 				necromancer.GetComponent<PlayerController>().minionCount -= 1;
 			}
-			/*if (name == "Archer") {
-				if (isEnemy == true) {
-					rend.sprite = cSprites [2];
-				} else {
-					rend.sprite = cSprites [5];
-				}
-				//this.GetComponent<Archer> ().enabled = false;
-				Destroy (this.gameObject,2);
-			}*/
-			Destroy(gameObject);
+			gManager.EnemyDeath (transform.position, name, isEnemy);
+			Destroy (this.gameObject);
 		}
 	}
 }
