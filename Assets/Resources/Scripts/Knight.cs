@@ -22,12 +22,8 @@ public class Knight : AIBehavior {
 		animmax = .3f;
 		animcount = animmax;
 		base.init(gMan, owner, necro);
-<<<<<<< HEAD
 		//this.GetComponentInChildren<SpriteRenderer> ().color = new Color (1, 0, 0);
-=======
-		this.GetComponentInChildren<SpriteRenderer> ().color = new Color (1, 0, 0);
 		gManager = gMan;
->>>>>>> origin/RyanMechanicStudy
 	}
 
 	protected override void Update() {
@@ -42,7 +38,6 @@ public class Knight : AIBehavior {
 					agent.speed = 0;
 				}
 			} else if (mode == 1) { // waiting
-<<<<<<< HEAD
 				timer -= Time.deltaTime;
 				if (timer < wait - (3 * (wait / 4))) {
 					rend.sprite = cSprites [4];
@@ -51,11 +46,8 @@ public class Knight : AIBehavior {
 				} else if (timer < wait - (wait / 4)) {
 					rend.sprite = cSprites [6];
 				}
-				if ((timer -= Time.deltaTime) <= 0) {
-=======
 				if ((timer -= Time.deltaTime) <= 0){
 					AudioSource.PlayClipAtPoint (gManager.chargeClip, transform.position);
->>>>>>> origin/RyanMechanicStudy
 					mode = 2;
 					timer = charge;
 					agent.speed = chargespeed;
