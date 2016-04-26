@@ -160,7 +160,6 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKeyDown(controls[5])) {
 			isMelee = !isMelee;
 		}
-
 		for (int i = 1; i <= 4; i++) {
 			if (Input.GetKeyDown(controls[i]) && timers[i] == 0) {
 				timers[i] = cd[i];
@@ -189,7 +188,6 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 		}
-
 		int[] b = new int[2] {0, 0};
 		if (Input.GetKey(KeyCode.A)) {
 			b[0] = -1;

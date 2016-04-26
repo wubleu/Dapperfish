@@ -47,9 +47,13 @@ public class AIBehavior : MonoBehaviour {
 		}
 		SwitchTargets();
 		if (hovering) {
+			agent.enabled = true;
 			Hover();
-		} else if (target != null){
+		} else if (target != null) {
+			agent.enabled = true;
 			agent.SetDestination(target.transform.position);
+		} else {
+			agent.enabled = false;
 		}
 	}
 
