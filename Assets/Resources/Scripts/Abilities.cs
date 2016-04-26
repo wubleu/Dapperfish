@@ -27,8 +27,7 @@ public static class Abilities {
 		spell.transform.localEulerAngles = new Vector3(90, 0, 0);
 		Animator anim = spell.GetComponent<Animator> ();
 		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Blight Controller");
-		spell.AddComponent<SphereCollider>();
-		spell.GetComponent<SphereCollider>().isTrigger = true;
+		spell.AddComponent<SphereCollider> ().isTrigger = true;
 		spell.name = "Blight";
 		spell.AddComponent<SpellEffect>().init(.4f);
 	}
@@ -44,7 +43,7 @@ public static class Abilities {
 		spell.transform.localEulerAngles = new Vector3(90, 0, 0);
 		Animator anim = spell.GetComponent<Animator> ();
 		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Root Controller");
-		spell.AddComponent<SphereCollider>();
+		spell.AddComponent<SphereCollider> ().isTrigger = true;
 		spell.name = "Root";
 		spell.AddComponent<SpellEffect>().init(2f);
 	}
@@ -62,9 +61,8 @@ public static class Abilities {
 		spell.transform.localEulerAngles = new Vector3 (90, GameObject.Find("Necromancer").transform.localEulerAngles.y, 0);
 		Animator anim = spell.GetComponent<Animator> ();
 		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Wave Controller");
-		spell.AddComponent<SphereCollider>();
+		spell.AddComponent<SphereCollider> ().isTrigger = true;
 		spell.transform.LookAt(mouse);
-		spell.GetComponent<SphereCollider>().isTrigger = true;
 		spell.name = "Damage";
 		spell.AddComponent<SpellEffect>().init(2, 5, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle))); 
 	}
