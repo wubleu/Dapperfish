@@ -50,11 +50,6 @@ public class Knight : AIBehavior {
 					rend.sprite = cSprites [6];
 				}
 				if ((timer -= Time.deltaTime) <= 0){
-<<<<<<< Updated upstream
-					AudioSource.PlayClipAtPoint (gManager.chargeClip, transform.position);
-=======
-					//AudioSource.PlayClipAtPoint (gManager.chargeClip, transform.position);
->>>>>>> Stashed changes
 					mode = 2;
 					timer = charge;
 					agent.speed = chargespeed;
