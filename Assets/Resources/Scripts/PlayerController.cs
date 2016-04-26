@@ -60,7 +60,6 @@ public class PlayerController : MonoBehaviour {
 		Rigidbody rigid = gameObject.AddComponent<Rigidbody>();
 		rigid.isKinematic = true;
 		rigid.freezeRotation = true;
-		gameObject.GetComponent<SphereCollider> ().isTrigger = true;
 
 		// Necromancer Model
 		necromodel = new GameObject();
