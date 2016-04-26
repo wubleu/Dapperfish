@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour {
 	public bool hasFortKey = false;
 	public bool needsNav = false;
 	public bool destined = false;
+	public float currentY = 0;
 	public float unlockTime = 0;
 
 	GameObject necromodel, rightarm, leftarm, body, shooter;
@@ -230,7 +231,7 @@ public class PlayerController : MonoBehaviour {
 			agent.destination = new Vector3(40f,1.0f,-18f);
 			destined = true;
 		}
-		if (destined && transform.position.x>(agent.destination.x-.05f) && transform.position.x<(agent.destination.x+.05f) && transform.position.y>(agent.destination.y-.05f) && transform.position.y<(agent.destination.y+.05f) && transform.position.z>(agent.destination.z-.05f) && transform.position.z<(agent.destination.z+.05f)) {
+		if (Mathf.Abs(currentY-transform.position.y)>.6||(destined && transform.position.x>(agent.destination.x-.05f) && transform.position.x<(agent.destination.x+.05f) && transform.position.y>(agent.destination.y-.05f) && transform.position.y<(agent.destination.y+.05f) && transform.position.z>(agent.destination.z-.05f) && transform.position.z<(agent.destination.z+.05f))) {
 			Destroy (agent);
 			needsNav = true;
 			destined = false;
@@ -247,6 +248,7 @@ public class PlayerController : MonoBehaviour {
 				destined = true;
 			}
 		}
+		currentY = transform.position.y;
 	}
 
 	void LateUpdate(){
