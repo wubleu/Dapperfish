@@ -14,7 +14,6 @@ public class Archer : AIBehavior {
 	protected bool backtracking = false;
 	float moveTimer = 0;
 	float firingWaitTimer = 0;
-	
 
 	public void initArcher(GameManager gMan, EnemyManager owner, PlayerController necro) {
 
@@ -60,10 +59,20 @@ public class Archer : AIBehavior {
 		} else if (!moving) {
 			SwitchTargets ();
 			if ((firingWaitTimer += Time.deltaTime) > firingWaitThreshold / 2f && target != null && !hasFired) {
+				if (isEnemy) {
+					rend.sprite = cSprites [1];
+				} else {
+					rend.sprite = cSprites [4];
+				}
 				Fire ();
 				hasFired = true;
 				firingWaitTimer = firingWaitThreshold / 1.9f;
 			} else if (hasFired && firingWaitTimer > firingWaitThreshold) {
+				if (isEnemy) {
+					rend.sprite = cSprites [0];
+				} else {
+					rend.sprite = cSprites [3];
+				}
 				moving = true;
 				hasFired = false;
 				firingWaitTimer = 0;
