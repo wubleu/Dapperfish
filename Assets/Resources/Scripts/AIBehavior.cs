@@ -83,8 +83,6 @@ public class AIBehavior : MonoBehaviour {
 				}
 			}
 		}
-//<<<<<<< HEAD
-
 		// if the old target has moved out of range or did not exist, looks for new target
 		if (target == null || keepingTarget) {
 			// checks all AI's whose allegiance is different from this AI's
@@ -92,41 +90,10 @@ public class AIBehavior : MonoBehaviour {
 
 			// enemy AIs check the necro. necro is a bit more intimidating than other targets.
 			CheckNecro(targetDist);
-		} 
-		// if a target still has not been set, initiates hovering behavior for allied AI's and stops enemy AI's
-		if (target == null) { 
-			if (!isEnemy && !hovering) {
-				hovering = true;
-				Hover ();
-			}
-		} else {
+		}
+		if (target == null) {
 			if (!isEnemy) {
-				hovering = false;
-				transform.parent = eManager.transform;
-//=======
-//		targetDist = CheckAITargetsInSquare(targetDist);
-////		foreach (AIBehavior AI in FindObjectsOfType<AIBehavior>()) {
-////			if (AI.isEnemy != isEnemy) {
-////				float AIDist = Vector3.Distance (AI.transform.position, transform.position);
-////				if (AIDist < targetDist) {
-////					target = AI.gameObject;
-////					targetDist = AIDist;
-////					agent.destination = AI.transform.position;
-////					agent.speed = speed;
-////				}
-////			}
-////		}
-//		if (isEnemy) { // check necro distance
-//			float necroDist = Vector3.Distance (necromancer.transform.position, transform.position);
-//			if (necroDist / necroAggroModifier < targetDist && necroDist < aggroRange) {
-//				target = necromancer;
-//			}
-//		}
-//		// if a target still has not been set, initiates hovering behavior for allied AI's and stops enemy AI's
-//		if (target == null) {
-//			if (!isEnemy) {
-//				hovering = true;
-//>>>>>>> origin/RyanMechanicStudy
+				hovering = true;
 			}
 		}
 	}
@@ -209,7 +176,6 @@ public class AIBehavior : MonoBehaviour {
 				transform.localPosition = new Vector3 (hoverRadius * hoverPos.x, 0, hoverRadius * hoverPos.y);
 			}
 		}
-		SwitchTargets ();
 	}
 
 	protected void Melee(Collision coll, float damage = 1) {
