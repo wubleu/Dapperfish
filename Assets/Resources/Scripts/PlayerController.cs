@@ -33,6 +33,14 @@ public class PlayerController : MonoBehaviour {
 	public float currentY = 0;
 	public float unlockTime = 0;
 
+	//Sounds
+
+	public AudioClip BlightClip;
+	public AudioClip RootClip;
+	public AudioClip DamageClip;
+	public AudioClip BlinkClip;
+
+
 	GameObject necromodel, rightarm, leftarm, body, shooter;
 	SpriteRenderer lamodel, bodymodel, ramodel;
 
@@ -115,6 +123,12 @@ public class PlayerController : MonoBehaviour {
 		melee = new GameObject().AddComponent<Melee>();
 		melee.transform.parent = transform;
 		melee.transform.localPosition = new Vector3(0, 1, 0);
+
+		DamageClip = Resources.Load ("Sounds/Damage") as AudioClip;
+		BlightClip = Resources.Load ("Sounds/Blight") as AudioClip;
+		RootClip = Resources.Load ("Sounds/Root") as AudioClip;
+		BlinkClip = Resources.Load ("Sounds/Blink") as AudioClip;
+
 	}
 
 	void Update () {
@@ -168,24 +182,31 @@ public class PlayerController : MonoBehaviour {
 				switch (i) {
 					case 1: // blight
 						Abilities.Blight (mouse);
+					AudioSource.PlayClipAtPoint (BlightClip, transform.position);	
+
 						casted = true;
 						lamodel.sprite = cSprites [13];
 						lamodel.transform.localPosition = new Vector3(-0.3f, 1, 0.45f);
 						break;
 					case 2: // root
 						Abilities.Root(mouse);
+					AudioSource.PlayClipAtPoint (RootClip, transform.position);	
+
 						casted = true;
 						lamodel.sprite = cSprites [12];
 						lamodel.transform.localPosition = new Vector3(-0.3f, 1, 0.45f);
 						break;
-					case 3: // damage
-						Abilities.Damage(transform.position, Mathf.PI / 2 + Mathf.Atan2(transform.position.x - mouse.x, mouse.z - transform.position.z));
-						casted = true;
+				case 3: // damage
+					Abilities.Damage (transform.position, Mathf.PI / 2 + Mathf.Atan2 (transform.position.x - mouse.x, mouse.z - transform.position.z));
+					AudioSource.PlayClipAtPoint (DamageClip, transform.position);	
+					casted = true;
 						lamodel.sprite = cSprites [11];
 						lamodel.transform.localPosition = new Vector3(-0.3f, 1, 0.45f);
 						break;
 					case 4: // blink
 						Abilities.Blink(transform, Mathf.PI / 2 - Mathf.Atan2(mouse.x - transform.position.x, mouse.z - transform.position.z));
+					AudioSource.PlayClipAtPoint (BlinkClip, transform.position);	
+
 						break;
 				}
 			}
