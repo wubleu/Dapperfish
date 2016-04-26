@@ -15,9 +15,9 @@ public class FortKey : MonoBehaviour {
 		
 	}
 
-	void OnTriggerEnter(Collider other){
-		if (other.name == "Necromancer") {
-			if (other.GetComponent<PlayerController> ().hasFortKey) {
+	void OnCollisionEnter(Collision coll){
+		if (coll.gameObject.name == "Necromancer") {
+			if (coll.gameObject.GetComponent<PlayerController> ().hasFortKey) {
 				anim.SetTrigger ("Close");
 				Destroy (this.gameObject, 1);
 			}

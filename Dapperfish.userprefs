@@ -1,33 +1,19 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-<<<<<<< Updated upstream
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Scripts/Key.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Scripts/Knight.cs">
     <Files>
-      <File FileName="Assets/Resources/Scripts/level1.txt" Line="20" Column="3" />
-      <File FileName="Assets/Resources/Scripts/PlayerController.cs" Line="134" Column="4" />
-      <File FileName="Assets/Resources/Scripts/Key.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/GameManager.cs" Line="103" Column="1" />
+      <File FileName="Assets/Resources/Scripts/level1.txt" Line="17" Column="17" />
+      <File FileName="Assets/Resources/Scripts/PlayerController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/Key.cs" Line="17" Column="61" />
+      <File FileName="Assets/Resources/Scripts/GameManager.cs" Line="48" Column="38" />
       <File FileName="Assets/Resources/Scripts/Peasant.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/AIBehavior.cs" Line="30" Column="3" />
-      <File FileName="../Hull Breach 3/Assets/Resources/JERF/GameController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/AIBehavior.cs" Line="1" Column="1" />
       <File FileName="Assets/Resources/Scripts/HealthBar.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/EnemyManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/EnemyManager.cs" Line="22" Column="3" />
       <File FileName="Assets/Resources/Scripts/Enemies.cs" Line="1" Column="1" />
       <File FileName="Assets/Resources/Scripts/Archer.cs" Line="1" Column="1" />
-=======
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Scripts/Archer.cs">
-    <Files>
-      <File FileName="Assets/Resources/Scripts/PlayerController.cs" Line="222" Column="18" />
-      <File FileName="Assets/Resources/Scripts/AIBehavior.cs" Line="221" Column="42" />
-      <File FileName="Assets/Resources/Scripts/Peasant.cs" Line="24" Column="3" />
-      <File FileName="Assets/Resources/Scripts/Archer.cs" Line="52" Column="53" />
-      <File FileName="Assets/Resources/Scripts/Abilities.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/GameManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/EnemyManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/Knight.cs" Line="47" Column="1" />
       <File FileName="Assets/Resources/Scripts/SpellEffect.cs" Line="1" Column="1" />
->>>>>>> Stashed changes
-      <File FileName="Assets/Resources/Scripts/Knight.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -15,7 +15,7 @@ public class Knight : AIBehavior {
 		maxHP = hp = 6;
 		meleeThreshold = 1;
 		meleeDamage = 25;
-		aggroRange = 7;
+		aggroRange = 9;
 		necroAggroModifier = 2;
 		immune = true;
 		animmax = .3f;
@@ -23,6 +23,7 @@ public class Knight : AIBehavior {
 		base.init(gMan, owner, necro);
 		//this.GetComponentInChildren<SpriteRenderer> ().color = new Color (1, 0, 0);
 		gManager = gMan;
+
 	}
 
 	protected override void Update() {
@@ -46,7 +47,6 @@ public class Knight : AIBehavior {
 					rend.sprite = cSprites [6];
 				}
 				if ((timer -= Time.deltaTime) <= 0){
-					AudioSource.PlayClipAtPoint (gManager.chargeClip, transform.position);
 					mode = 2;
 					timer = charge;
 					agent.speed = chargespeed;
