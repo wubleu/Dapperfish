@@ -211,6 +211,7 @@ public class AIBehavior : MonoBehaviour {
 		if (coll.gameObject.tag != "AI" && coll.gameObject.name != "Necromancer") {
 			return;
 		}
+		AudioSource.PlayClipAtPoint (gManager.scratch, transform.position);
 		if (coll.gameObject.name == "Necromancer") {
 			if (isEnemy) {
 				coll.gameObject.GetComponent<PlayerController> ().TakeHit (coll.gameObject);
