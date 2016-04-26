@@ -28,10 +28,10 @@ public class Archer : AIBehavior {
 		aggroRange = 10f;
 		necroAggroModifier = 1.2f;
 		chaseDist = 2f;
-		GetComponent<NavMeshAgent>().stoppingDistance = 4;
 		infectionCost = 35;
 
 		base.init(gMan, owner, necro);
+		GetComponent<NavMeshAgent>().stoppingDistance = 4;
 	}
 		
 	new void Update() {
