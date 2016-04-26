@@ -45,11 +45,11 @@ public class AIBehavior : MonoBehaviour {
 				meleeTimer = 0;
 			}
 		}
-		SwitchTargets();
 		if (hovering) {
 			agent.enabled = true;
 			Hover();
-		} else if (target != null) {
+		} else 
+			if (target != null) {
 			agent.enabled = true;
 			agent.SetDestination(target.transform.position);
 		} else {
@@ -95,6 +95,9 @@ public class AIBehavior : MonoBehaviour {
 			if (!isEnemy) {
 				hovering = true;
 			}
+		} else if (!isEnemy) {
+			hovering = false;
+			transform.parent = eManager.transform;
 		}
 	}
 
@@ -162,7 +165,6 @@ public class AIBehavior : MonoBehaviour {
 					agent.destination = transform.position-necromancer.transform.position;
 				} else {
 					agent.destination = necromancer.transform.position;
-					print ("moving to necro" + "   " + agent.destination + "  " + agent.speed);
 				}
 			}
 		}
@@ -217,7 +219,6 @@ public class AIBehavior : MonoBehaviour {
 		if (isEnemy && !immune) {
 			isEnemy = false;
 			transform.parent = eManager.transform;
-			GetComponent<NavMeshAgent>().stoppingDistance = 0;
 			eManager.peasantCount--;
 			necromancer.GetComponent<PlayerController>().minionCount++;
 			target = null;
