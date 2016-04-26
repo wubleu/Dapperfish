@@ -18,7 +18,7 @@ public static class Enemies {
 		rigid.constraints = RigidbodyConstraints.FreezeRotation;
 
 		SphereCollider col = enemy.AddComponent<SphereCollider>();
-		col.radius *= 1f;
+		col.radius *= 1.1f;
 
 //		col.isTrigger = true;
 
