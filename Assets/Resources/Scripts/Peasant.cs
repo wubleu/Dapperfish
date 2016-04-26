@@ -18,6 +18,8 @@ public class Peasant : AIBehavior {
 		chaseDist = 1f;
 		hoverRadius = 1.5f;
 		infectionCost = 25;
+		animmax = .2f;
+		animcount = animmax;
 
 		base.init(gMan, owner, necro);
 	}

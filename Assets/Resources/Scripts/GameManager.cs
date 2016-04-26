@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour {
 	public Text objectives;
 	public Text alert;
 
+	public AudioClip chargeClip;
+	public AudioClip scratch;
+
 	void Start() {
 		necromancer = new GameObject().AddComponent<PlayerController>();
 		necromancer.transform.position = new Vector3(0, 0, 0);
@@ -40,6 +43,10 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 		RefillGrid ();
+
+		chargeClip = Resources.Load ("Sounds/Charge") as AudioClip;
+		scratch = Resources.Load ("Sounds/Scratch") as AudioClip;
+
 	}
 
 	void Update() {

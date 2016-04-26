@@ -18,7 +18,7 @@ public static class Enemies {
 		rigid.constraints = RigidbodyConstraints.FreezeRotation;
 
 		SphereCollider col = enemy.AddComponent<SphereCollider>();
-		col.radius *= 1.5f;
+		col.radius *= 1f;
 
 //		col.isTrigger = true;
 
@@ -26,7 +26,7 @@ public static class Enemies {
 		model.name = "Model";
 		model.transform.parent = enemy.transform;
 		model.transform.localPosition = new Vector3(0, 1, 0);
-		model.transform.localEulerAngles = new Vector3(90, 0, 0);
+		model.transform.localEulerAngles = new Vector3(90, 180, 0);
 		model.transform.localScale = new Vector3(1, 1, 1);
 		SpriteRenderer rend = model.AddComponent<SpriteRenderer>();
 		rend.sprite = Resources.Load<Sprite>("Textures/" + texture);
@@ -35,7 +35,7 @@ public static class Enemies {
 	}
 
 	public static GameObject makePeasant(GameManager gMan, EnemyManager owner, PlayerController necro, Vector3 pos) {
-		GameObject peasant = makeEnemy(pos, 0.17f, "Circle");
+		GameObject peasant = makeEnemy(pos, .8f, "Circle");
 		peasant.name = "Peasant";
 		peasant.AddComponent<Peasant>().initPeasant(gMan, owner, necro);
 
@@ -43,7 +43,7 @@ public static class Enemies {
 	}
 
 	public static GameObject makeArcher(GameManager gMan, EnemyManager owner, PlayerController necro, Vector3 pos) {
-		GameObject archer = makeEnemy(pos, 0.3f, "Circle");
+		GameObject archer = makeEnemy(pos, .6f, "Circle");
 		archer.name = "Archer";
 		archer.AddComponent<Archer>().initArcher(gMan, owner, necro);
 
@@ -51,7 +51,9 @@ public static class Enemies {
 	}
 
 	public static GameObject makeKnight(GameManager gMan, EnemyManager owner, PlayerController necro, Vector3 pos) {
-		GameObject knight = makeEnemy(pos, 0.3f, "Circle");
+		GameObject knight = makeEnemy(pos, 1f, "Circle");
+		SphereCollider col = knight.GetComponent<SphereCollider>();
+		col.radius *= 1.5f;
 		knight.name = "Knight";
 		knight.AddComponent<Knight>().initKnight(gMan, owner, necro);
 

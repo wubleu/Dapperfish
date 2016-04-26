@@ -22,6 +22,7 @@ public class SpellEffect : MonoBehaviour {
 		}
 		if (name == "Damage" || name == "Bullet" || name == "Arrow") {
 			transform.Translate(angle * spellSpeed * Time.deltaTime, Space.World);
+			transform.position = new Vector3 (transform.position.x, .5f, transform.position.z);
 		} /*else {
 			radius -= radius * (Time.deltaTime / lifetime);
 			gameObject.transform.localScale = new Vector3(radius, radius, radius);
