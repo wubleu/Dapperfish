@@ -7,7 +7,7 @@ public class Archer : AIBehavior {
 	float range = 5f;
 	float moveThreshold = .4f;
 	float firingWaitThreshold = .7f;
-	protected float preferredRange = 4f;
+	protected float preferredRange = 2.5f;
 
 	bool moving = false;
 	bool hasFired = true;
