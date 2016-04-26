@@ -18,11 +18,23 @@ public class GameManager : MonoBehaviour {
 	bool done = false;
 	public Text objectives;
 	public Text alert;
-
 	public AudioClip chargeClip;
 	public AudioClip scratch;
 
+
 	void Start() {
+		xDimension = 16;
+		yDimension = 10;
+		enemyGrid = new List<AIBehavior>[xDimension, yDimension];
+		for (int x = 0; x < xDimension; x++) {
+			for (int y = 0; y < yDimension; y++) {
+				enemyGrid [x, y] = new List<AIBehavior> ();
+			}
+		}
+
+		chargeClip = Resources.Load ("Sounds/Charge") as AudioClip;
+		scratch = Resources.Load ("Sounds/Scratch") as AudioClip;
+
 		necromancer = new GameObject().AddComponent<PlayerController>();
 		necromancer.transform.position = new Vector3(0, 0, 0);
 		Camera.main.transform.parent = necromancer.transform;
@@ -33,20 +45,7 @@ public class GameManager : MonoBehaviour {
 		eManager.init(this, necromancer);
 		necromancer.init(this, eManager);
 		testing123();
-
-		xDimension = 16;
-		yDimension = 10;
-		enemyGrid = new List<AIBehavior>[xDimension, yDimension];
-		for (int x = 0; x < xDimension; x++) {
-			for (int y = 0; y < yDimension; y++) {
-				enemyGrid [x, y] = new List<AIBehavior> ();
-			}
-		}
 		RefillGrid ();
-
-		chargeClip = Resources.Load ("Sounds/Charge") as AudioClip;
-		scratch = Resources.Load ("Sounds/Scratch") as AudioClip;
-
 	}
 
 	void Update() {
@@ -80,37 +79,6 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	void testing123() {
-		for (int i = 0; i < 5; i++) {
-			Enemies.makeArcher(this, eManager, necromancer, new Vector3(40 + i, 0, 4));
-		}
-	}
-
-	public void makeText(string stuff) {
-		GameObject textObject = new GameObject();
-		textObject.name = "text";
-		textObject.transform.position = necromancer.transform.position;
-		textObject.transform.eulerAngles = new Vector3(90, 0, 0);
-		textObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-		TextMesh text = textObject.AddComponent<TextMesh>();
-		text.fontSize = 85;
-		text.color = new Color(0, 0, 0);
-		text.text = stuff;
-	}
-
-	private void RefillGrid() {
-		for (int x = 0; x < xDimension; x++) {
-			for (int y = 0; y < yDimension; y++) {
-				enemyGrid [x, y].Clear ();
-			}
-		}
-		foreach (AIBehavior unit in GameObject.FindObjectsOfType<AIBehavior>()) {
-			int xSquare = ((int)unit.gameObject.transform.position.x - xGridOrigin) / 10;
-			int ySquare = ((int)unit.gameObject.transform.position.y - yGridOrigin) / 10;
-			enemyGrid [xSquare - 1, ySquare - 1].Add (unit);
-		}
-	}
-
 	public void EnemyDeath(Vector3 pos, string name, bool enemy){
 		GameObject death = new GameObject ();
 		SpriteRenderer rend = death.AddComponent<SpriteRenderer> ();
@@ -139,6 +107,37 @@ public class GameManager : MonoBehaviour {
 			cSprites = Resources.LoadAll<Sprite> ("Textures/Knight Sprite Sheet");
 			rend.sprite = cSprites [9];
 			Destroy (death.gameObject, 2f);
+		}
+	}
+
+	void testing123() {
+		for (int i = 0; i < 5; i++) {
+			Enemies.makeArcher(this, eManager, necromancer, new Vector3(40 + i, 0, 4));
+		}
+	}
+
+	public void makeText(string stuff) {
+		GameObject textObject = new GameObject();
+		textObject.name = "text";
+		textObject.transform.position = necromancer.transform.position;
+		textObject.transform.eulerAngles = new Vector3(90, 0, 0);
+		textObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+		TextMesh text = textObject.AddComponent<TextMesh>();
+		text.fontSize = 85;
+		text.color = new Color(0, 0, 0);
+		text.text = stuff;
+	}
+
+	private void RefillGrid() {
+		for (int x = 0; x < xDimension; x++) {
+			for (int y = 0; y < yDimension; y++) {
+				enemyGrid [x, y].Clear ();
+			}
+		}
+		foreach (AIBehavior unit in GameObject.FindObjectsOfType<AIBehavior>()) {
+			int xSquare = ((int)unit.gameObject.transform.position.x - xGridOrigin) / 10;
+			int ySquare = ((int)unit.gameObject.transform.position.y - yGridOrigin) / 10;
+			enemyGrid [xSquare - 1, ySquare - 1].Add (unit);
 		}
 	}
 }

@@ -90,17 +90,11 @@ public class AIBehavior : MonoBehaviour {
 		}
 		if (attacked == false) {
 			switchDirTimer += Time.deltaTime;
-			if (hovering) {
-				agent.enabled = true;
-				transform.LookAt (necromancer.transform);
-				Hover ();
-			} else if (target != null) {
+			if (target != null) {
 				transform.LookAt (target.transform);
 				agent.enabled = true;
 				agent.SetDestination (target.transform.position);
-			} else {
-				agent.enabled = false;
-			}
+			} 
 		}
 	}
 
@@ -145,6 +139,14 @@ public class AIBehavior : MonoBehaviour {
 			}
 		} else if (!isEnemy) {
 			transform.parent = eManager.transform;
+		}
+
+		if (hovering) {
+			agent.destination = necromancer.transform.position;
+			agent.stoppingDistance = 2f;
+			agent.speed = speed;
+		} else {
+			agent.stoppingDistance = .2f;
 		}
 	}
 
@@ -251,7 +253,6 @@ public class AIBehavior : MonoBehaviour {
 			print (target + "  " + coll.gameObject);
 		}
 		if (coll.gameObject == target) {
-				agent.speed = speed / 5f;
 				if (meleeTimer > meleeThreshold) {
 					SwitchTargets ();
 					if (name == "Peasant") {
