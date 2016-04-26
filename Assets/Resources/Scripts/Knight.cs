@@ -3,74 +3,58 @@ using System.Collections;
 
 public class Knight : AIBehavior {
 
-	int chargespeed = 8;
-	float normalspeed = 4f;
-	float chargetimer = .5f;
-	float chargedist = 2.5f;
-	float chargecd= 1;
-	bool cd = false;
-	bool charging = false;
+	float chargespeed = 20, normalspeed = 4, wait = 0.75f, charge = 0.5f, caggro = 4, timer = 0;
+	int mode = 0;
 
-
-	// Use this for initialization
 	public void initKnight(GameManager gMan, EnemyManager owner, PlayerController necro) {
 
 		// PARAMETERS
 		allyColor = new Color(0, 0, 0);
 		enemyColor = new Color (1, 1, 1);
 		speed = normalspeed;
-		maxHP = hp = 6f;
-		meleeThreshold = 1f;
-		meleeDamage = 25f;
-		aggroRange = 7f;
-		necroAggroModifier = 2f;
+		maxHP = hp = 6;
+		meleeThreshold = 1;
+		meleeDamage = 25;
+		aggroRange = 7;
+		necroAggroModifier = 2;
 		immune = true;
 		base.init(gMan, owner, necro);
 		this.GetComponentInChildren<SpriteRenderer> ().color = new Color (1, 0, 0);
 	}
 
-
 	// Update is called once per frame
 	new void Update() {
 		if (target != null) {
-			float TargDist = Vector3.Distance (target.transform.position, transform.position);
-			if (TargDist <= chargedist && charging == false && cd == false) {
-				agent.speed = chargespeed;
-				charging = true;
+			if (mode == 0) { // walking
+				base.Update();
+				if (target != null && target.name == "Necromancer" && Vector3.Distance(transform.position, target.transform.position) < caggro) {
+					mode = 1;
+					timer = wait;
+					agent.speed = 0;
+				}
+			} else if (mode == 1) { // waiting
+				if ((timer -= Time.deltaTime) <= 0){
+					mode = 2;
+					timer = charge;
+					agent.speed = chargespeed;
+					float angle = Mathf.PI / 2 - Mathf.Atan2(target.transform.position.x - transform.position.x, target.transform.position.z - transform.position.z);
+					agent.SetDestination(transform.position + chargespeed * charge * new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
+				}
+			} else if ((timer -= Time.deltaTime) <= 0) { // charging
+				mode = 0;
+				agent.speed = normalspeed;
 			}
+		} else {
+			base.Update();
+			mode = 0;
+			agent.speed = normalspeed;
 		}
-		if (charging) {
-			chargetimer -= Time.deltaTime;
-		}
-		if (chargetimer <= 0) {
-			charging = false;
-			cd = true;
-			chargetimer = .5f;
-			agent.speed = speed;
-		}
-		if (cd) {
-			chargecd -= Time.deltaTime;
-		}
-		if (chargecd <= 0) {
-			cd = false;
-			chargecd = 1;
-		}
-		base.Update();
 	}
 
-	void Attack(){
-	}
 	void OnCollisionStay(Collision coll) {
 		if (coll.gameObject == target) {
-			charging = false;
-			chargetimer = .3f;
 			agent.speed = speed;
 		}
 		base.OnCollision (coll);
-	}
-
-
-	void OnTriggerEnter(Collider coll) {
-		//		base.TakeHit (coll.gameObject);
 	}
 }

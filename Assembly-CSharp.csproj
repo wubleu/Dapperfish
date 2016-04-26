@@ -50,11 +50,11 @@
      <Compile Include="Assets\Resources\Scripts\Archer.cs" />
      <Compile Include="Assets\Resources\Scripts\Enemies.cs" />
      <Compile Include="Assets\Resources\Scripts\EnemyManager.cs" />
+     <Compile Include="Assets\Resources\Scripts\FortKey.cs" />
      <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
      <Compile Include="Assets\Resources\Scripts\HealthBar.cs" />
      <Compile Include="Assets\Resources\Scripts\Key.cs" />
      <Compile Include="Assets\Resources\Scripts\Knight.cs" />
-     <Compile Include="Assets\Resources\Scripts\ManaBar.cs" />
      <Compile Include="Assets\Resources\Scripts\Melee.cs" />
      <Compile Include="Assets\Resources\Scripts\Peasant.cs" />
      <Compile Include="Assets\Resources\Scripts\PlayerController.cs" />

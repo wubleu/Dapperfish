@@ -21,7 +21,7 @@ public class Peasant : AIBehavior {
 
 		base.init(gMan, owner, necro);
 	}
-
+		
 	new void Update() {
 		base.Update();
 		SwitchTargets ();

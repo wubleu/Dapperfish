@@ -17,10 +17,10 @@ public class AIBehavior : MonoBehaviour {
 	public bool hovering = false, isEnemy = true, immune = false, hoverPaused = false;
 
 
-	protected void init(GameManager gMan, EnemyManager owner, PlayerController necro = null) {
-		eManager = owner; //GameObject.Find("Enemy Manager").GetComponent<EnemyManager>();
-		gManager = gMan; //GameObject.Find("Game Manager").GetComponent<GameManager>();
-		necromancer = necro.gameObject; //GameObject.Find("Necromancer");
+	protected virtual void init(GameManager gMan, EnemyManager owner, PlayerController necro) {
+		eManager = owner;
+		gManager = gMan;
+		necromancer = necro.gameObject;
 		agent = GetComponent<NavMeshAgent>();
 		rend = GetComponentInChildren<SpriteRenderer>();
 		transform.parent = eManager.transform;
@@ -31,11 +31,12 @@ public class AIBehavior : MonoBehaviour {
 		SwitchTargets ();
 	}
 
-	protected void Update() {
+	protected virtual void Update() {
 		meleeTimer += Time.deltaTime;
 		switchDirTimer += Time.deltaTime;
-		if (hovering) {
-			Hover();
+		if (root > 0 && (root -= Time.deltaTime) <= 0) {
+			agent.speed = speed;
+			meleeTimer = 0;
 		}
 		if (root > 0) {
 			root -= Time.deltaTime;
@@ -43,23 +44,29 @@ public class AIBehavior : MonoBehaviour {
 				agent.speed = speed;
 				meleeTimer = 0;
 			}
-		} 
-		switchDirTimer = 0;
+		}
+		SwitchTargets();
+		if (hovering) {
+			Hover();
+		} else if (target != null){
+			agent.SetDestination(target.transform.position);
+		}
 	}
 
 	// makes sure our units stay on a level plane and don't get bounced by the physics engine
 	void LateUpdate() {
 		transform.position = new Vector3 (transform.position.x, .01f, transform.position.z);
-		gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+		gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
 	}
 
 	protected virtual void SwitchTargets() {
+		hovering = false;
 		float targetDist = aggroRange;
 		bool keepingTarget = false;
 		// if the target is within aggroRange, keeps target
 		if (target != null) {
 			agent.enabled = true;
-			if (target != necromancer && !isEnemy && !target.GetComponent<AIBehavior> ().isEnemy) {
+			if (target.name != "Necromancer" && !isEnemy && !target.GetComponent<AIBehavior> ().isEnemy) {
 				target = null;
 			} else {
 				float currTargetDist = Vector3.Distance (target.transform.position, transform.position);
@@ -72,6 +79,7 @@ public class AIBehavior : MonoBehaviour {
 				}
 			}
 		}
+//<<<<<<< HEAD
 
 		// if the old target has moved out of range or did not exist, looks for new target
 		if (target == null || keepingTarget) {
@@ -91,6 +99,30 @@ public class AIBehavior : MonoBehaviour {
 			if (!isEnemy) {
 				hovering = false;
 				transform.parent = eManager.transform;
+//=======
+//		targetDist = CheckAITargetsInSquare(targetDist);
+////		foreach (AIBehavior AI in FindObjectsOfType<AIBehavior>()) {
+////			if (AI.isEnemy != isEnemy) {
+////				float AIDist = Vector3.Distance (AI.transform.position, transform.position);
+////				if (AIDist < targetDist) {
+////					target = AI.gameObject;
+////					targetDist = AIDist;
+////					agent.destination = AI.transform.position;
+////					agent.speed = speed;
+////				}
+////			}
+////		}
+//		if (isEnemy) { // check necro distance
+//			float necroDist = Vector3.Distance (necromancer.transform.position, transform.position);
+//			if (necroDist / necroAggroModifier < targetDist && necroDist < aggroRange) {
+//				target = necromancer;
+//			}
+//		}
+//		// if a target still has not been set, initiates hovering behavior for allied AI's and stops enemy AI's
+//		if (target == null) {
+//			if (!isEnemy) {
+//				hovering = true;
+//>>>>>>> origin/RyanMechanicStudy
 			}
 		}
 	}
@@ -114,8 +146,6 @@ public class AIBehavior : MonoBehaviour {
 								agent.enabled = true;
 								target = AI.gameObject;
 								targetDist = AIDist;
-								agent.destination = AI.transform.position;
-								agent.speed = speed;
 							}
 						}
 					}
@@ -178,7 +208,7 @@ public class AIBehavior : MonoBehaviour {
 		SwitchTargets ();
 	}
 
-	protected void Melee(Collision coll) {
+	protected void Melee(Collision coll, float damage = 1) {
 		if (coll.gameObject.tag != "AI" && coll.gameObject.name != "Necromancer") {
 			return;
 		}
@@ -191,27 +221,8 @@ public class AIBehavior : MonoBehaviour {
 		}
 		AIBehavior unit = coll.gameObject.GetComponent<AIBehavior> ();
 		if (unit.isEnemy != isEnemy) {
-			unit.TakeHit (coll.gameObject);
+			unit.Damage(damage);
 			meleeTimer = 0;
-		}
-	}
-
-	public virtual void TakeHit(GameObject collObj) {
-		if (collObj.name == "Blight") {
-			Infect();
-			return;
-		} else if (collObj.name == "SpellShot") {
-			hp -= 3;
-		} else {
-			hp -= 1;
-		}
-		if (hp <= 0) { 
-			if (isEnemy) {
-				eManager.peasantCount -= 1;
-			} else {
-				necromancer.GetComponent<PlayerController> ().minionCount -= 1;
-			}
-			Destroy (gameObject);
 		}
 	}
 
@@ -235,9 +246,10 @@ public class AIBehavior : MonoBehaviour {
 	public virtual void Infect() {
 		if (isEnemy && !immune) {
 			isEnemy = false;
+			transform.parent = eManager.transform;
 			GetComponent<NavMeshAgent>().stoppingDistance = 0;
 			eManager.peasantCount--;
-			necromancer.GetComponent<PlayerController> ().minionCount++;
+			necromancer.GetComponent<PlayerController>().minionCount++;
 			target = null;
 			SwitchTargets();
 			rend.color = allyColor;
@@ -258,7 +270,7 @@ public class AIBehavior : MonoBehaviour {
 			} else {
 				necromancer.GetComponent<PlayerController>().minionCount -= 1;
 			}
-			Destroy (gameObject);
+			Destroy(gameObject);
 		}
 	}
 }

@@ -33,7 +33,7 @@ public class Archer : AIBehavior {
 
 		base.init(gMan, owner, necro);
 	}
-
+		
 	new void Update() {
 		base.Update();
 		if (moving) {
