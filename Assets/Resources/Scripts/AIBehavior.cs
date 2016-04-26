@@ -219,7 +219,6 @@ public class AIBehavior : MonoBehaviour {
 		if (isEnemy && !immune) {
 			isEnemy = false;
 			transform.parent = eManager.transform;
-			GetComponent<NavMeshAgent>().stoppingDistance = 0;
 			eManager.peasantCount--;
 			necromancer.GetComponent<PlayerController>().minionCount++;
 			target = null;

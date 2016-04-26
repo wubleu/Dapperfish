@@ -31,7 +31,7 @@ public class Archer : AIBehavior {
 		infectionCost = 35;
 
 		base.init(gMan, owner, necro);
-		GetComponent<NavMeshAgent>().stoppingDistance = 4;
+		GetComponent<NavMeshAgent>().stoppingDistance = 2;
 	}
 		
 	new void Update() {
