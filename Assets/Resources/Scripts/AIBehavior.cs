@@ -5,7 +5,7 @@ public class AIBehavior : MonoBehaviour {
 
 	// PARAMETERS
 	protected Color allyColor, enemyColor;
-	public float hoverRadius, chaseDist, chaseThreshold, chaseClock, aggroRange, necroAggroModifier, speed, switchDirThreshold = Random.Range(.3f, .4f),
+	public float hoverRadius, chaseDist, chaseThreshold, chaseClock, aggroRange, necroAggroModifier, speed,
 					meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp, maxHP, infectionCost;
 	public GameObject target = null;
 	protected GameObject necromancer;
@@ -14,7 +14,8 @@ public class AIBehavior : MonoBehaviour {
 	protected SpriteRenderer rend;
 	protected NavMeshAgent agent;
 	protected float hoverRads;
-	public bool hovering = false, isEnemy = true, immune = false;
+	public bool hovering = false, isEnemy = true, immune = false, hoverPaused = false;
+
 
 	protected void init(GameManager gMan, EnemyManager owner, PlayerController necro = null) {
 		eManager = owner; //GameObject.Find("Enemy Manager").GetComponent<EnemyManager>();
@@ -24,7 +25,10 @@ public class AIBehavior : MonoBehaviour {
 		rend = GetComponentInChildren<SpriteRenderer>();
 		transform.parent = eManager.transform;
 		agent.speed = speed;
-		agent.stoppingDistance = .1f;
+		agent.stoppingDistance = .2f;
+		agent.acceleration = 60;
+
+		SwitchTargets ();
 	}
 
 	protected void Update() {
@@ -40,10 +44,7 @@ public class AIBehavior : MonoBehaviour {
 				meleeTimer = 0;
 			}
 		} 
-//		if (switchDirTimer > switchDirThreshold) {
-			SwitchTargets();
-			switchDirTimer = 0;
-//		}
+		switchDirTimer = 0;
 	}
 
 	// makes sure our units stay on a level plane and don't get bounced by the physics engine
@@ -54,19 +55,18 @@ public class AIBehavior : MonoBehaviour {
 
 	protected virtual void SwitchTargets() {
 		float targetDist = aggroRange;
+		bool keepingTarget = false;
 		// if the target is within aggroRange, keeps target
 		if (target != null) {
+			agent.enabled = true;
 			if (target != necromancer && !isEnemy && !target.GetComponent<AIBehavior> ().isEnemy) {
 				target = null;
 			} else {
 				float currTargetDist = Vector3.Distance (target.transform.position, transform.position);
-				agent.destination = target.transform.position;
-				if (currTargetDist < aggroRange) {
-					if (currTargetDist < chaseDist) {
-
-					}
+				if (currTargetDist < aggroRange || (target == necromancer && currTargetDist < aggroRange*necroAggroModifier)) {
 					targetDist = currTargetDist/2f;	
-					target = null;
+					agent.destination = target.transform.position;
+					keepingTarget = true;
 				} else {
 					target = null;
 				}
@@ -74,48 +74,29 @@ public class AIBehavior : MonoBehaviour {
 		}
 
 		// if the old target has moved out of range or did not exist, looks for new target
-		if (target == null) {
+		if (target == null || keepingTarget) {
 			// checks all AI's whose allegiance is different from this AI's
 			targetDist = CheckAITargetsInSquare(targetDist);
-//			foreach (AIBehavior AI in FindObjectsOfType<AIBehavior>()) {
-//				if (AI.isEnemy != isEnemy) {
-//					float AIDist = Vector3.Distance (AI.transform.position, transform.position);
-//					if (AIDist < targetDist) {
-//						target = AI.gameObject;
-//						targetDist = AIDist;
-//						agent.destination = AI.transform.position;
-//						agent.speed = speed;
-//					}
-//				}
-//			}
+
 			// enemy AIs check the necro. necro is a bit more intimidating than other targets.
-			if (isEnemy) {
-				float necroDist = Vector3.Distance (necromancer.transform.position, transform.position);
-				if (necroDist < targetDist * necroAggroModifier && necroDist < aggroRange) {
-					target = necromancer;
-					agent.destination = necromancer.transform.position;
-					agent.speed = speed;
-				}
-			}
+			CheckNecro(targetDist);
 		} 
 		// if a target still has not been set, initiates hovering behavior for allied AI's and stops enemy AI's
-		if (target == null) {
-			if (isEnemy) {
-				agent.enabled = true;
-			} else {
-				if (!hovering) {
-					hovering = true;
-					agent.destination = necromancer.transform.position;
-					Hover ();
-				}
+		if (target == null) { 
+			if (!isEnemy && !hovering) {
+				hovering = true;
+				Hover ();
 			}
-		} else if (!isEnemy) {
-			hovering = false;
-			transform.parent = eManager.transform;
-			agent.enabled = true;
+		} else {
+			if (!isEnemy) {
+				hovering = false;
+				transform.parent = eManager.transform;
+			}
 		}
 	}
 
+	// runs a targeting check on all AI in my square, all adjacent/diagonally adjacent squares
+	// takes in the distance to the current target and returns the distance to whatever the target is at the end of the function
 	protected virtual float CheckAITargetsInSquare(float targetDist) {
 		int unitGridX = ((int)transform.position.x - gManager.xGridOrigin) / 10;
 		int unitGridY = ((int)transform.position.y - gManager.yGridOrigin) / 10;
@@ -130,6 +111,7 @@ public class AIBehavior : MonoBehaviour {
 						if (AI != null && AI.isEnemy != isEnemy) {
 							float AIDist = Vector3.Distance (AI.transform.position, transform.position);
 							if (AIDist < targetDist) {
+								agent.enabled = true;
 								target = AI.gameObject;
 								targetDist = AIDist;
 								agent.destination = AI.transform.position;
@@ -143,14 +125,29 @@ public class AIBehavior : MonoBehaviour {
 		return targetDist;
 	}
 
+	// runs a targeting check on the necromancer- never targets the necromancer if I am not an enemy
+	// returns the targetDist passed in or the modified necromancer targetDist (distance * necroAggroModifier) if the necromancer is targeted
+	protected virtual float CheckNecro(float targetDist) {
+		if (isEnemy) {
+			float necroDist = Vector3.Distance (necromancer.transform.position, transform.position);
+			if (necroDist < targetDist * necroAggroModifier && necroDist < aggroRange) {
+				target = necromancer;
+				agent.destination = necromancer.transform.position;
+				agent.speed = speed;
+			}
+		}
+		return targetDist*necroAggroModifier;
+	}
+
 	// when friendly AI has no target:
-	// if it is not yet in orbiting range of the necro, moves toward him with eManager as parent
+	// if it is not yet in orbiting range of the necro, moves toward hover area with eManager as parent
 	// if it is in range, orbits at hoverRadius units away with necro as parent
 	protected virtual void Hover() {
 		// moving toward the necro
 		if (transform.parent != necromancer.transform) {
 			// if ready to start orbiting, starts orbiting
-			if (Vector3.Distance (transform.position, necromancer.transform.position) < hoverRadius) {
+			float distToNecro = Vector3.Distance (transform.position, necromancer.transform.position);
+			if (distToNecro < hoverRadius+.2f && distToNecro > hoverRadius-.2f) {
 				transform.parent = necromancer.transform;
 				hoverRads = Mathf.Atan (transform.localPosition.z / transform.localPosition.x);
 				if (transform.localPosition.x > 0) {
@@ -158,8 +155,14 @@ public class AIBehavior : MonoBehaviour {
 				}
 				agent.enabled = false;
 			} else {
-				agent.destination = necromancer.transform.position;
 				agent.enabled = true;
+				agent.speed = speed;
+				if (distToNecro < hoverRadius - .2f) {
+					agent.destination = transform.position-necromancer.transform.position;
+				} else {
+					agent.destination = necromancer.transform.position;
+					print ("moving to necro" + "   " + agent.destination + "  " + agent.speed);
+				}
 			}
 		}
 		// orbiting the necro
@@ -213,9 +216,19 @@ public class AIBehavior : MonoBehaviour {
 	}
 
 	protected virtual void OnCollision(Collision coll) {
-		if (meleeTimer > meleeThreshold && coll.gameObject == target) {
-			SwitchTargets ();
-			Melee (coll);
+		if (coll.gameObject == target) {
+			agent.speed = speed/5f;
+			if (meleeTimer > meleeThreshold) {
+				SwitchTargets ();
+				Melee (coll);
+			}
+		} 
+	}
+
+	void OnCollisionExit(Collision coll) {
+		if (coll.gameObject == target) {
+			agent.enabled = true;
+			agent.speed = speed;
 		}
 	}
 

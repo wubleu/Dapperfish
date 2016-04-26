@@ -11,3 +11,7 @@
 /Users/rwilson/Dapperfish/Temp/bin/Debug/Unity.CecilTools.dll
 /Users/rwilson/Dapperfish/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/rwilson/Dapperfish/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/rwilson/Dapperfish/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/rwilson/Dapperfish/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/rwilson/Dapperfish/obj/Debug/Assembly-CSharp.dll
+/Users/rwilson/Dapperfish/obj/Debug/Assembly-CSharp.dll.mdb

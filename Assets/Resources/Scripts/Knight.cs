@@ -31,7 +31,7 @@ public class Knight : AIBehavior {
 
 
 	// Update is called once per frame
-	void Update() {
+	new void Update() {
 		if (target != null) {
 			float TargDist = Vector3.Distance (target.transform.position, transform.position);
 			if (TargDist <= chargedist && charging == false && cd == false) {

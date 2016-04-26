@@ -8,7 +8,7 @@ public class Peasant : AIBehavior {
 		// PARAMETERS
 		allyColor = new Color (0, 0, 0);
 		enemyColor = new Color (1, 1, 1);
-		speed = 4f;
+		speed = 2.5f;
 		maxHP = hp = 3f;
 		meleeThreshold = 1f;
 		meleeDamage = 1f;
@@ -22,8 +22,9 @@ public class Peasant : AIBehavior {
 		base.init(gMan, owner, necro);
 	}
 
-	void Update() {
+	new void Update() {
 		base.Update();
+		SwitchTargets ();
 	}
 
 	void OnCollisionStay(Collision coll) {
