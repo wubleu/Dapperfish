@@ -27,7 +27,7 @@ public class AIBehavior : MonoBehaviour {
 		agent.speed = speed;
 		agent.stoppingDistance = .2f;
 		agent.acceleration = 60;
-
+		agent.autoTraverseOffMeshLink = false;
 		SwitchTargets ();
 	}
 

@@ -104,9 +104,9 @@ public class PlayerController : MonoBehaviour {
 		shooter.transform.parent = ramodel.transform;
 
 		new GameObject().AddComponent<HealthBar>().init(hp);
-		for (int i = 1; i <= 4; i++) {
-			icons[i - 1] = GameObject.Find("CD" + i).GetComponent<Image>();
-		}
+		//for (int i = 1; i <= 4; i++) {
+		//	icons[i - 1] = GameObject.Find("CD" + i).GetComponent<Image>();
+		//}
 
 		GameObject.Find("Main Camera").transform.parent = transform;
 
@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour {
 			if (timers[i] > 0 && (timers[i] -= Time.deltaTime) < 0) {
 				timers[i] = 0;
 			}
-			icons[i - 1].fillAmount = 1 - (timers[i] / cd[i]);
+	//		icons[i - 1].fillAmount = 1 - (timers[i] / cd[i]);
 		}
 		if (casted) {
 			castcd -= Time.deltaTime;
@@ -258,6 +258,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void HasKey(){
 		hasKey = true;
+		eManager.delayedSpawn ("fort");
 	}
 
 	public void Damage(float damage) {
