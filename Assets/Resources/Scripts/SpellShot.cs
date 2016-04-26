@@ -37,7 +37,7 @@ public class SpellShot : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (Mathf.Abs(transform.position.x-necromancer.transform.position.x) > 9 || Mathf.Abs(transform.position.y-necromancer.transform.position.y) > 5) {
+		if (Mathf.Abs(transform.position.x-necromancer.transform.position.x) > 7 || Mathf.Abs(transform.position.y-necromancer.transform.position.y) > 4) {
 			Destroy (gameObject);
 		}
 		transform.Translate (direction.x*speed, direction.y*speed, 0);

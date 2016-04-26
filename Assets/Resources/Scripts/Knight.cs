@@ -16,7 +16,7 @@ public class Knight : AIBehavior {
 		maxHP = hp = 6;
 		meleeThreshold = 1;
 		meleeDamage = 25;
-		aggroRange = 7;
+		aggroRange = 9;
 		necroAggroModifier = 2;
 		immune = true;
 		animmax = .3f;
