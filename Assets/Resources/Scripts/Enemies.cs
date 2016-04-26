@@ -18,15 +18,15 @@ public static class Enemies {
 		rigid.constraints = RigidbodyConstraints.FreezeRotation;
 
 		SphereCollider col = enemy.AddComponent<SphereCollider>();
-		col.radius *= 1.5f;
+		col.radius *= 1.1f;
 
 //		col.isTrigger = true;
-
+		float rand = Random.Range(0, 360);
 		GameObject model = new GameObject();
 		model.name = "Model";
 		model.transform.parent = enemy.transform;
 		model.transform.localPosition = new Vector3(0, 1, 0);
-		model.transform.localEulerAngles = new Vector3(90, 180, 0);
+		model.transform.localEulerAngles = new Vector3(90, rand, 0);
 		model.transform.localScale = new Vector3(1, 1, 1);
 		SpriteRenderer rend = model.AddComponent<SpriteRenderer>();
 		rend.sprite = Resources.Load<Sprite>("Textures/" + texture);
