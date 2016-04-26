@@ -197,6 +197,7 @@ public class PlayerController : MonoBehaviour {
 						lamodel.transform.localPosition = new Vector3(-0.3f, 1, 0.45f);
 						break;
 				case 3: // damage
+					
 					Abilities.Damage (transform.position, Mathf.PI / 2 + Mathf.Atan2 (transform.position.x - mouse.x, mouse.z - transform.position.z));
 					AudioSource.PlayClipAtPoint (DamageClip, transform.position);	
 					casted = true;
@@ -279,6 +280,15 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void TakeHit(GameObject collObj) {
+		/*if (collObj.name == "Peasant") {
+			hp -= 2;
+		}
+		if (collObj.name == "Arrow") {
+			hp -= 5;
+		}
+		if (collObj.name == "Knight") {
+			hp -= 10;
+		}*/
 		hp -= 1;
 		if (hp <= 0) {
 			gManager.Death ();

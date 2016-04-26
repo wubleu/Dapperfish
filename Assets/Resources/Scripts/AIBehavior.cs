@@ -6,7 +6,7 @@ public class AIBehavior : MonoBehaviour {
 	// PARAMETERS
 	protected Color allyColor, enemyColor;
 	public float hoverRadius, chaseDist, chaseThreshold, chaseClock, aggroRange, necroAggroModifier, speed,
-		meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp, maxHP, infectionCost, animcount, animmax;
+		meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp, maxHP, infectionCost, animcount, animmax, meleecd = .2f;
 	public GameObject target = null;
 	protected GameObject necromancer;
 	public GameManager gManager;
@@ -14,7 +14,7 @@ public class AIBehavior : MonoBehaviour {
 	protected SpriteRenderer rend;
 	protected NavMeshAgent agent;
 	protected float hoverRads;
-	public bool hovering = false, isEnemy = true, immune = false, hoverPaused = false, windup = false;
+	public bool hovering = false, isEnemy = true, immune = false, hoverPaused = false, windup = false, attacked = false;
 	protected Sprite[] cSprites;
 
 	protected virtual void init(GameManager gMan, EnemyManager owner, PlayerController necro) {
@@ -36,6 +36,10 @@ public class AIBehavior : MonoBehaviour {
 		if (name == "Peasant") {
 			cSprites = Resources.LoadAll<Sprite> ("Textures/Zombie Sprite Sheet");
 			rend.sprite = cSprites [7];
+		}
+		if (name == "Knight") {
+			cSprites = Resources.LoadAll<Sprite> ("Textures/Knight Sprite Sheet");
+			rend.sprite = cSprites [0];
 		}
 	}
 
@@ -69,18 +73,34 @@ public class AIBehavior : MonoBehaviour {
 				animcount = animmax;
 				windup = false;
 			}
+			if (name == "Knight") {
+				rend.sprite = cSprites [2];
+				animcount = animmax;
+				windup = false;
+				attacked = true;
+			}
 		}
-		switchDirTimer += Time.deltaTime;
-		if (hovering) {
-			agent.enabled = true;
-			transform.LookAt (necromancer.transform);
-			Hover();
-		} else if (target != null) {
-			transform.LookAt (target.transform);
-			agent.enabled = true;
-			agent.SetDestination(target.transform.position);
-		} else {
-			agent.enabled = false;
+		if (attacked) {
+			meleecd -= Time.deltaTime;
+			if (meleecd <= 0) {
+				attacked = false;
+				meleecd = .2f;
+				rend.sprite = cSprites [0];
+			}
+		}
+		if (attacked == false) {
+			switchDirTimer += Time.deltaTime;
+			if (hovering) {
+				agent.enabled = true;
+				transform.LookAt (necromancer.transform);
+				Hover ();
+			} else if (target != null) {
+				transform.LookAt (target.transform);
+				agent.enabled = true;
+				agent.SetDestination (target.transform.position);
+			} else {
+				agent.enabled = false;
+			}
 		}
 	}
 
@@ -227,19 +247,23 @@ public class AIBehavior : MonoBehaviour {
 
 	protected virtual void OnCollision(Collision coll) {
 		if (coll.gameObject == target) {
-			agent.speed = speed/5f;
-			if (meleeTimer > meleeThreshold) {
-				SwitchTargets ();
-				if (name == "Peasant") {
-					if (isEnemy) {
-						rend.sprite = cSprites [4];
-						windup = true;
-					} else {
-						rend.sprite = cSprites [0];
+				agent.speed = speed / 5f;
+				if (meleeTimer > meleeThreshold) {
+					SwitchTargets ();
+					if (name == "Peasant") {
+						if (isEnemy) {
+							rend.sprite = cSprites [4];
+							windup = true;
+						} else {
+							rend.sprite = cSprites [0];
+						}
 					}
+					if (name == "Knight") {
+						rend.sprite = cSprites [1];
+						windup = true;
+					}
+					Melee (coll);
 				}
-				Melee (coll);
-			}
 		} 
 	}
 
@@ -281,7 +305,7 @@ public class AIBehavior : MonoBehaviour {
 			} else {
 				necromancer.GetComponent<PlayerController>().minionCount -= 1;
 			}
-			if (name == "Archer") {
+			/*if (name == "Archer") {
 				if (isEnemy == true) {
 					rend.sprite = cSprites [2];
 				} else {
@@ -289,7 +313,7 @@ public class AIBehavior : MonoBehaviour {
 				}
 				//this.GetComponent<Archer> ().enabled = false;
 				Destroy (this.gameObject,2);
-			}
+			}*/
 			Destroy(gameObject);
 		}
 	}

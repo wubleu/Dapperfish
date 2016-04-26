@@ -59,7 +59,7 @@ public static class Abilities {
 		spell.transform.position = pos;
 		spell.transform.position = new Vector3 (spell.transform.position.x, .5f, spell.transform.position.z);
 		spell.transform.localScale = new Vector3(.5f, .5f, .5f);
-		spell.transform.localEulerAngles = new Vector3 (90, GameObject.Find("Necromancer").transform.rotation.y, 0);
+		spell.transform.localEulerAngles = new Vector3 (90, GameObject.Find("Necromancer").transform.localEulerAngles.y, 0);
 		Animator anim = spell.GetComponent<Animator> ();
 		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Wave Controller");
 		spell.AddComponent<SphereCollider>();
@@ -74,6 +74,7 @@ public static class Abilities {
 	}
 
 	public static bool Bullet(Vector3 pos, float angle) {
+		Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		//GameObject spell = AOE(.3f, Color.black, pos + 0.5f * new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
 		Sprite[] cSprites = Resources.LoadAll<Sprite> ("Textures/Spell Effects Sprite Sheet");
 		GameObject spell = new GameObject();
@@ -83,11 +84,12 @@ public static class Abilities {
 		spell.transform.position = pos;
 		spell.transform.position = new Vector3 (spell.transform.position.x, .5f, spell.transform.position.z);
 		spell.transform.localScale = new Vector3(.4f, .4f, .4f);
+		spell.transform.localEulerAngles = new Vector3 (90, GameObject.Find("Necromancer").transform.localEulerAngles.y, 0);
 		Animator anim = spell.GetComponent<Animator> ();
 		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Projectile Controller");
 		spell.AddComponent<SphereCollider>();
+		spell.transform.LookAt(mouse);
 		spell.GetComponent<SphereCollider>().isTrigger = true;
-		spell.transform.localEulerAngles = new Vector3 (90, GameObject.Find("Necromancer").transform.rotation.y, 0);
 		spell.name = "Bullet";
 		spell.AddComponent<SpellEffect>().init(1, 10, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
 		return true;
