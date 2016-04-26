@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour {
 	PlayerController necromancer;
 	EnemyManager eManager;
 	public List<AIBehavior>[,] enemyGrid;
-	public int xGridOrigin = -20;
-	public int yGridOrigin = -80;
+	public int xGridOrigin = -30;
+	public int yGridOrigin = -90;
 	public int xDimension;
 	public int yDimension;
 	bool done = false;
@@ -23,8 +23,8 @@ public class GameManager : MonoBehaviour {
 
 
 	void Start() {
-		xDimension = 16;
-		yDimension = 10;
+		xDimension = 18;
+		yDimension = 12;
 		enemyGrid = new List<AIBehavior>[xDimension, yDimension];
 		for (int x = 0; x < xDimension; x++) {
 			for (int y = 0; y < yDimension; y++) {
@@ -137,7 +137,10 @@ public class GameManager : MonoBehaviour {
 		foreach (AIBehavior unit in GameObject.FindObjectsOfType<AIBehavior>()) {
 			int xSquare = ((int)unit.gameObject.transform.position.x - xGridOrigin) / 10;
 			int ySquare = ((int)unit.gameObject.transform.position.y - yGridOrigin) / 10;
-			enemyGrid [xSquare - 1, ySquare - 1].Add (unit);
+			if (unit.transform.position.x < 0) {
+				print (xSquare + "  " + ySquare);
+			}
+			enemyGrid [xSquare, ySquare].Add (unit);
 		}
 	}
 }

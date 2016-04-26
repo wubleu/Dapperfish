@@ -162,6 +162,9 @@ public class AIBehavior : MonoBehaviour {
 				checkingX = x + unitGridX;
 				checkingY = y + unitGridY;
 				if ((checkingX>=0 && checkingX<gManager.xDimension) && (checkingY>=0 && checkingY<gManager.yDimension)) {
+					if (gManager.enemyGrid [checkingX, checkingY] == null) {
+						print (checkingX + "  " + checkingY);
+					}
 					foreach (AIBehavior AI in gManager.enemyGrid[checkingX, checkingY]) {
 						if (AI != null && AI.isEnemy != isEnemy) {
 							float AIDist = Vector3.Distance (AI.transform.position, transform.position);
@@ -250,7 +253,6 @@ public class AIBehavior : MonoBehaviour {
 
 	protected virtual void OnCollision(Collision coll) {
 		if (transform.position.x < 10 && transform.position.z < 10) {
-			print (target + "  " + coll.gameObject);
 		}
 		if (coll.gameObject == target) {
 				if (meleeTimer > meleeThreshold) {

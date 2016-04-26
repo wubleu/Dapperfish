@@ -14,6 +14,9 @@ public class SpellEffect : MonoBehaviour {
 		spellSpeed = speed;
 		angle = dir;
 		enemy = bad;
+		if (name == "Arrow") {
+			lifetime = life / speed;
+		}
 	}
 
 	void Update() {
@@ -54,6 +57,7 @@ public class SpellEffect : MonoBehaviour {
 				Destroy (gameObject);
 				return;
 			case "Arrow":
+				print (col.gameObject.name );
 				if (enemy != AI.isEnemy) {
 					AI.Damage (1);
 					Destroy (gameObject);

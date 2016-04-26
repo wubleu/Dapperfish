@@ -4,14 +4,15 @@ using System.Collections;
 public class Archer : AIBehavior {
 
 	// ENEMY SPECIFIC PARAMETERS
-	float range = 5f;
+	float range = 7f;
 	float moveThreshold = .4f;
 	float firingWaitThreshold = .7f;
-	protected float preferredRange = 2.5f;
+	protected float preferredRange = 4.5f;
 
-	bool moving = false;
-	bool hasFired = true;
-	protected bool backtracking = false;
+	public bool moving = false;
+	public bool hasFired = true;
+	protected bool strafing = false;
+	bool strafeLeft = false;
 	float moveTimer = 0;
 	float firingWaitTimer = 0;
 
@@ -39,7 +40,6 @@ public class Archer : AIBehavior {
 			return;
 		}
 		if (moving) {
-			backtracking = false;
 			SwitchTargets ();
 			if (target != null) {
 				float targetDist = Vector3.Distance (necromancer.transform.position, transform.position);
@@ -51,10 +51,21 @@ public class Archer : AIBehavior {
 			} else {
 				agent.speed = 0;
 			}
-			if ((moveTimer += Time.deltaTime) > moveThreshold) {
+			if ((moveTimer += Time.deltaTime) > moveThreshold && (
+					(target == null) ||
+					(target != null  &&  Vector3.Distance (target.transform.position, transform.position) <= range-.5f))) {
 				agent.speed = 0;
 				moving = false;
+				strafing = false;
 				moveTimer = 0;
+			} if (strafing && target != null) {
+				
+				if (strafeLeft) {
+					agent.destination = transform.position + new Vector3 (transform.position.z - target.transform.position.z, 0, target.transform.position.x - transform.position.x);
+				} else {
+					agent.destination = transform.position + new Vector3 (target.transform.position.z - transform.position.z, 0, transform.position.x - target.transform.position.x);
+				}
+				agent.speed = speed/2;
 			}
 		} else if (!moving) {
 			SwitchTargets ();
@@ -72,6 +83,14 @@ public class Archer : AIBehavior {
 					rend.sprite = cSprites [0];
 				} else {
 					rend.sprite = cSprites [3];
+				}
+				if (target != null && Vector3.Distance(target.transform.position, transform.position) < preferredRange) {
+					strafing = true;
+					if (Random.Range (0, 2) == 0) {
+						strafeLeft = true;
+					} else {
+						strafeLeft = false;
+					}
 				}
 				moving = true;
 				hasFired = false;
@@ -123,6 +142,6 @@ public class Archer : AIBehavior {
 
 
 	void Fire() {
-		Abilities.Arrow(transform.position, Mathf.PI / 2 - Mathf.Atan2(target.transform.position.x - transform.position.x, target.transform.position.z - transform.position.z), isEnemy);
+		Abilities.Arrow(transform.position, Mathf.PI / 2 - Mathf.Atan2(target.transform.position.x - transform.position.x, target.transform.position.z - transform.position.z), isEnemy, range+1);
 	}
 }
