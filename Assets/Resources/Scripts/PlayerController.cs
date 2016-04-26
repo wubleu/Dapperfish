@@ -17,10 +17,10 @@ public class PlayerController : MonoBehaviour {
 	KeyCode[] controls = new KeyCode[6] {
 		KeyCode.Mouse0, // auto-attack
 		KeyCode.Mouse1, // blight
-		KeyCode.LeftShift, // root
-		KeyCode.LeftControl, // damage
+		KeyCode.Tab, // root
+		KeyCode.F, // damage
 		KeyCode.Space, // blink
-		KeyCode.Tab // switch weapon
+		KeyCode.Q // switch weapon
 	};
 
 	public int minionCount = 0;
