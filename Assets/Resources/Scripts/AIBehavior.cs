@@ -42,6 +42,7 @@ public class AIBehavior : MonoBehaviour {
 			agent.enabled = true;
 			Hover();
 		} else if (target != null) {
+			transform.LookAt (target.transform);
 			agent.enabled = true;
 			agent.SetDestination(target.transform.position);
 		} else {
@@ -70,6 +71,7 @@ public class AIBehavior : MonoBehaviour {
 					targetDist = currTargetDist/2f;	
 					agent.destination = target.transform.position;
 					keepingTarget = true;
+					transform.LookAt (target.transform);
 				} else {
 					target = null;
 				}
