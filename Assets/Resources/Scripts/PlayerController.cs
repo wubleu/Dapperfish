@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour {
 	public bool hasFortKey = false;
 	public bool needsNav = false;
 	public bool destined = false;
+	public float unlockTime = 0;
 
 	GameObject necromodel, rightarm, leftarm, body, shooter;
 	SpriteRenderer lamodel, bodymodel, ramodel;
@@ -240,8 +241,11 @@ public class PlayerController : MonoBehaviour {
 		}
 		//handling off-mesh east gate link
 		if (hasKey && 102.5f<transform.position.x && transform.position.x<104f && -20>transform.position.z && transform.position.z>-24) {
-			agent.destination = new Vector3(106f,1.0f,-22f);
-			destined = true;
+			unlockTime = unlockTime + Time.deltaTime;
+			if (unlockTime > 3) {
+				agent.destination = new Vector3 (106f, 1.0f, -22f);
+				destined = true;
+			}
 		}
 	}
 
