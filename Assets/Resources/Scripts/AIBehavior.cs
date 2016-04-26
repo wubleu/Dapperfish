@@ -38,18 +38,10 @@ public class AIBehavior : MonoBehaviour {
 			agent.speed = speed;
 			meleeTimer = 0;
 		}
-		if (root > 0) {
-			root -= Time.deltaTime;
-			if (root <= 0) {
-				agent.speed = speed;
-				meleeTimer = 0;
-			}
-		}
 		if (hovering) {
 			agent.enabled = true;
 			Hover();
-		} else 
-			if (target != null) {
+		} else if (target != null) {
 			agent.enabled = true;
 			agent.SetDestination(target.transform.position);
 		} else {
@@ -96,7 +88,6 @@ public class AIBehavior : MonoBehaviour {
 				hovering = true;
 			}
 		} else if (!isEnemy) {
-			hovering = false;
 			transform.parent = eManager.transform;
 		}
 	}

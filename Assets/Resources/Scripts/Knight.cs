@@ -22,10 +22,10 @@ public class Knight : AIBehavior {
 		this.GetComponentInChildren<SpriteRenderer> ().color = new Color (1, 0, 0);
 	}
 
-	// Update is called once per frame
-	new void Update() {
+	protected override void Update() {
 		if (target != null) {
 			if (mode == 0) { // walking
+				SwitchTargets();
 				base.Update();
 				if (target != null && target.name == "Necromancer" && Vector3.Distance(transform.position, target.transform.position) < caggro) {
 					mode = 1;
@@ -45,6 +45,7 @@ public class Knight : AIBehavior {
 				agent.speed = normalspeed;
 			}
 		} else {
+			SwitchTargets();
 			base.Update();
 			mode = 0;
 			agent.speed = normalspeed;

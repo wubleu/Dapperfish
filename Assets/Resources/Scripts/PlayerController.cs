@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour {
 	public bool hasFortKey = false;
 	public bool needsNav = false;
 	public bool destined = false;
+	public float currentY = 0;
+	public float unlockTime = 0;
 
 	GameObject necromodel, rightarm, leftarm, body, shooter;
 	SpriteRenderer lamodel, bodymodel, ramodel;
@@ -104,9 +106,9 @@ public class PlayerController : MonoBehaviour {
 		shooter.transform.parent = ramodel.transform;
 
 		new GameObject().AddComponent<HealthBar>().init(hp);
-		//for (int i = 1; i <= 4; i++) {
-		//	icons[i - 1] = GameObject.Find("CD" + i).GetComponent<Image>();
-		//}
+		for (int i = 1; i <= 4; i++) {
+			icons[i - 1] = GameObject.Find("CD" + i).GetComponent<Image>();
+		}
 
 		GameObject.Find("Main Camera").transform.parent = transform;
 
@@ -131,7 +133,7 @@ public class PlayerController : MonoBehaviour {
 			if (timers[i] > 0 && (timers[i] -= Time.deltaTime) < 0) {
 				timers[i] = 0;
 			}
-	//		icons[i - 1].fillAmount = 1 - (timers[i] / cd[i]);
+			icons[i - 1].fillAmount = 1 - (timers[i] / cd[i]);
 		}
 		if (casted) {
 			castcd -= Time.deltaTime;
@@ -226,21 +228,27 @@ public class PlayerController : MonoBehaviour {
 		}
 		NavMeshAgent agent = gameObject.GetComponent<NavMeshAgent>();
 		if (hasFortKey && 39.5f<transform.position.x && transform.position.x<40.3f && -20>transform.position.z && transform.position.z>-21 && Input.GetKey(KeyCode.W)) {
-			print ("here");
 			agent.destination = new Vector3(40f,1.0f,-18f);
 			destined = true;
 		}
-		if (destined && transform.position.x>(agent.destination.x-.05f) && transform.position.x<(agent.destination.x+.05f) && transform.position.y>(agent.destination.y-.05f) && transform.position.y<(agent.destination.y+.05f) && transform.position.z>(agent.destination.z-.05f) && transform.position.z<(agent.destination.z+.05f)) {
-			print ("here dog");
+		if (Mathf.Abs(currentY-transform.position.y)>.6||(destined && transform.position.x>(agent.destination.x-.05f) && transform.position.x<(agent.destination.x+.05f) && transform.position.y>(agent.destination.y-.05f) && transform.position.y<(agent.destination.y+.05f) && transform.position.z>(agent.destination.z-.05f) && transform.position.z<(agent.destination.z+.05f))) {
 			Destroy (agent);
 			needsNav = true;
 			destined = false;
 		}
 		if (hasFortKey && 39.5f<transform.position.x && transform.position.x<40.3f && -18.2f<transform.position.z && transform.position.z<-17.7f && Input.GetKey(KeyCode.S)) {
-			print ("here yo");
 			gameObject.GetComponent<NavMeshAgent>().destination = new Vector3(40f,0.0f,-20.5f);
 			destined = true;
 		}
+		//handling off-mesh east gate link
+		if (hasKey && 102.5f<transform.position.x && transform.position.x<104f && -20>transform.position.z && transform.position.z>-24) {
+			unlockTime = unlockTime + Time.deltaTime;
+			if (unlockTime > 3) {
+				agent.destination = new Vector3 (106f, 1.0f, -22f);
+				destined = true;
+			}
+		}
+		currentY = transform.position.y;
 	}
 
 	void LateUpdate(){
