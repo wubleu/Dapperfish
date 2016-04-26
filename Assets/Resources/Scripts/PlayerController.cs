@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour {
 		Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		mouse.y = 0;
 		if (timers[0] > 0) {
-			if ((timers[0] -= Time.deltaTime) <= .25f && isMelee) {
+			if ((timers[0] -= Time.deltaTime) <= .25f) {
 				ramodel.sprite = cSprites [19];
 				ramodel.transform.localPosition = new Vector3(0.12f, 1, 0.29f);
 				if (!casted) {
