@@ -12,7 +12,7 @@ public class Key : MonoBehaviour {
 	// Update is called once per frame
 	void OnTriggerEnter (Collider coll) {
 		if (coll.gameObject.name == "Necromancer") {
-			if (transform.position.z<-20) {
+			if (transform.position.z<-25) {
 				coll.gameObject.GetComponent<PlayerController> ().hasFortKey = true;
 				Destroy (gameObject);
 			} else {

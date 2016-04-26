@@ -226,19 +226,21 @@ public class PlayerController : MonoBehaviour {
 		}
 		NavMeshAgent agent = gameObject.GetComponent<NavMeshAgent>();
 		if (hasFortKey && 39.5f<transform.position.x && transform.position.x<40.3f && -20>transform.position.z && transform.position.z>-21 && Input.GetKey(KeyCode.W)) {
-			print ("here");
 			agent.destination = new Vector3(40f,1.0f,-18f);
 			destined = true;
 		}
 		if (destined && transform.position.x>(agent.destination.x-.05f) && transform.position.x<(agent.destination.x+.05f) && transform.position.y>(agent.destination.y-.05f) && transform.position.y<(agent.destination.y+.05f) && transform.position.z>(agent.destination.z-.05f) && transform.position.z<(agent.destination.z+.05f)) {
-			print ("here dog");
 			Destroy (agent);
 			needsNav = true;
 			destined = false;
 		}
 		if (hasFortKey && 39.5f<transform.position.x && transform.position.x<40.3f && -18.2f<transform.position.z && transform.position.z<-17.7f && Input.GetKey(KeyCode.S)) {
-			print ("here yo");
 			gameObject.GetComponent<NavMeshAgent>().destination = new Vector3(40f,0.0f,-20.5f);
+			destined = true;
+		}
+		//handling off-mesh east gate link
+		if (hasKey && 102.5f<transform.position.x && transform.position.x<104f && -20>transform.position.z && transform.position.z>-24) {
+			agent.destination = new Vector3(106f,1.0f,-22f);
 			destined = true;
 		}
 	}
