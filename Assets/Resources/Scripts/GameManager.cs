@@ -111,12 +111,11 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void EnemyDeath(Vector3 pos, string name, bool enemy, float scale){
+	public void EnemyDeath(Vector3 pos, string name, bool enemy){
 		GameObject death = new GameObject ();
 		SpriteRenderer rend = death.AddComponent<SpriteRenderer> ();
 		death.transform.position = pos;
 		death.transform.localEulerAngles = new Vector3 (90, 0, 0);
-		death.transform.localScale = new Vector3 (scale, scale, scale);
 		Sprite[] cSprites;
 		if (name == "Archer") {
 			cSprites = Resources.LoadAll<Sprite> ("Textures/Skeleton Archer Sprite Sheet");
