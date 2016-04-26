@@ -247,6 +247,9 @@ public class AIBehavior : MonoBehaviour {
 	}
 
 	protected virtual void OnCollision(Collision coll) {
+		if (transform.position.x < 10 && transform.position.z < 10) {
+			print (target + "  " + coll.gameObject);
+		}
 		if (coll.gameObject == target) {
 				agent.speed = speed / 5f;
 				if (meleeTimer > meleeThreshold) {

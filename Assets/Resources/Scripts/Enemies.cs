@@ -18,10 +18,10 @@ public static class Enemies {
 		rigid.constraints = RigidbodyConstraints.FreezeRotation;
 
 		SphereCollider col = enemy.AddComponent<SphereCollider>();
-		col.radius *= 1f;
+		col.radius *= 1.1f;
 
 //		col.isTrigger = true;
-
+		//float rand = Random.Range(0, 360);
 		GameObject model = new GameObject();
 		model.name = "Model";
 		model.transform.parent = enemy.transform;
@@ -53,7 +53,6 @@ public static class Enemies {
 	public static GameObject makeKnight(GameManager gMan, EnemyManager owner, PlayerController necro, Vector3 pos) {
 		GameObject knight = makeEnemy(pos, 1f, "Circle");
 		SphereCollider col = knight.GetComponent<SphereCollider>();
-		col.radius *= 1.5f;
 		knight.name = "Knight";
 		knight.AddComponent<Knight>().initKnight(gMan, owner, necro);
 

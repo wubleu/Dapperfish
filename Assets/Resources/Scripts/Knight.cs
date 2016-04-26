@@ -5,7 +5,6 @@ public class Knight : AIBehavior {
 
 	float chargespeed = 85, normalspeed = 6, wait = 1f, charge = 0.3f, caggro = 4, timer = 0, chargecd = .3f;
 	int mode = 0;
-	GameManager gManager;
 
 	public void initKnight(GameManager gMan, EnemyManager owner, PlayerController necro) {
 
@@ -24,8 +23,6 @@ public class Knight : AIBehavior {
 		base.init(gMan, owner, necro);
 		//this.GetComponentInChildren<SpriteRenderer> ().color = new Color (1, 0, 0);
 		gManager = gMan;
-
-		//this.GetComponentInChildren<SpriteRenderer> ().color = new Color (1, 0, 0);
 
 	}
 
