@@ -4,13 +4,17 @@ using UnityEngine.UI;
 
 public class Key : MonoBehaviour {
 
+	AudioClip keyGrab;
+
 	// Use this for initialization
 	void Start () {
 		this.name = "key";
+		keyGrab = Resources.Load ("Sounds/keyGrab") as AudioClip;
 	}
 	
 	// Update is called once per frame
 	void OnTriggerEnter (Collider coll) {
+		AudioSource.PlayClipAtPoint (keyGrab, transform.position);
 		if (coll.gameObject.name == "Necromancer") {
 			if (transform.position.z<-25) {
 				coll.gameObject.GetComponent<PlayerController> ().hasFortKey = true;
