@@ -30,30 +30,34 @@ public class SpellEffect : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col) {
 		if (col.tag == "AI") {
+			AIBehavior AI = col.GetComponent<AIBehavior> ();
 			switch (name) {
-				case "Blight":
-					AIBehavior AI = col.GetComponent<AIBehavior> ();
-					if (AI != null && infectPower >= AI.infectionCost) {
-						AI.Infect ();
-						infectPower -= AI.infectionCost;
-					}
-					return;
-				case "Root":
-					col.GetComponent<AIBehavior>().Root();
-					return;
-				case "Damage":
-					col.GetComponent<AIBehavior>().Damage(10);
-					return;
-				case "Bullet":
-					col.GetComponent<AIBehavior>().Damage(1);
-					Destroy(gameObject);
-					return;
-				case "Arrow":
-					if (enemy != col.GetComponent<AIBehavior>().isEnemy) {
-						col.GetComponent<AIBehavior>().Damage(1);
-						Destroy(gameObject);
-					}
-					return;
+			case "Blight":
+				if (AI != null && infectPower >= AI.infectionCost) {
+					AI.Infect ();
+					infectPower -= AI.infectionCost;
+				}
+				return;
+			case "Root":
+				if (AI.isEnemy) {
+					AI.Root ();
+				}
+				return;
+			case "Damage":
+				if (AI.isEnemy) {
+					AI.Damage (10);
+				}
+				return;
+			case "Bullet":
+				AI.Damage (1);
+				Destroy (gameObject);
+				return;
+			case "Arrow":
+				if (enemy != AI.isEnemy) {
+					AI.Damage (1);
+					Destroy (gameObject);
+				}
+				return;
 			}
 		} else if (col.name == "Necromancer" && enemy) {
 			col.GetComponent<PlayerController>().Damage(1);

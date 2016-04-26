@@ -36,6 +36,9 @@ public class Archer : AIBehavior {
 		
 	new void Update() {
 		base.Update();
+		if (root > 0) {
+			return;
+		}
 		if (moving) {
 			backtracking = false;
 			SwitchTargets ();

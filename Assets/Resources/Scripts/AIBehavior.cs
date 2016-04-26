@@ -32,12 +32,14 @@ public class AIBehavior : MonoBehaviour {
 	}
 
 	protected virtual void Update() {
-		meleeTimer += Time.deltaTime;
-		switchDirTimer += Time.deltaTime;
 		if (root > 0 && (root -= Time.deltaTime) <= 0) {
 			agent.speed = speed;
 			meleeTimer = 0;
+		} else if (root > 0) {
+			return;
 		}
+		meleeTimer += Time.deltaTime;
+		switchDirTimer += Time.deltaTime;
 		if (hovering) {
 			agent.enabled = true;
 			Hover();

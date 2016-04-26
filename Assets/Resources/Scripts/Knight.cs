@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Knight : AIBehavior {
 
-	float chargespeed = 30, normalspeed = 4, wait = 0.75f, charge = 0.25f, caggro = 4, timer = 0;
+	float chargespeed = 80, normalspeed = 6, wait = 0.75f, charge = 0.25f, caggro = 4, timer = 0;
 	int mode = 0;
 
 	public void initKnight(GameManager gMan, EnemyManager owner, PlayerController necro) {
