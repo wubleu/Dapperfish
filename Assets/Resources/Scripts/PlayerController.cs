@@ -253,12 +253,13 @@ public class PlayerController : MonoBehaviour {
 			agent.destination = new Vector3(40f,1.0f,-18f);
 			destined = true;
 		}
-		if (Mathf.Abs(currentY-transform.position.y)>.6||(destined && transform.position.x>(agent.destination.x-.05f) && transform.position.x<(agent.destination.x+.05f) && transform.position.y>(agent.destination.y-.05f) && transform.position.y<(agent.destination.y+.05f) && transform.position.z>(agent.destination.z-.05f) && transform.position.z<(agent.destination.z+.05f))) {
+		if (Mathf.Abs(currentY-transform.position.y)>.9||(destined && transform.position.x>(agent.destination.x-.2f) && transform.position.x<(agent.destination.x+.2f) && transform.position.y>(agent.destination.y-.1f) && transform.position.y<(agent.destination.y+.15f) && transform.position.z>(agent.destination.z-.2f) && transform.position.z<(agent.destination.z+.2f))) {
 			Destroy (agent);
 			needsNav = true;
 			destined = false;
+			currentY = transform.position.y;
 		}
-		if (hasFortKey && 39.5f<transform.position.x && transform.position.x<40.3f && -18.2f<transform.position.z && transform.position.z<-17.7f && Input.GetKey(KeyCode.S)) {
+		if (hasFortKey && 39.5f<transform.position.x && transform.position.x<40.3f && -19f<transform.position.z && transform.position.z<-17.7f && Input.GetKey(KeyCode.S)) {
 			gameObject.GetComponent<NavMeshAgent>().destination = new Vector3(40f,0.0f,-20.5f);
 			destined = true;
 		}
@@ -270,7 +271,6 @@ public class PlayerController : MonoBehaviour {
 				destined = true;
 			}
 		}
-		currentY = transform.position.y;
 	}
 
 	void LateUpdate(){

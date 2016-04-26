@@ -14,8 +14,8 @@ public class Key : MonoBehaviour {
 	
 	// Update is called once per frame
 	void OnTriggerEnter (Collider coll) {
-		AudioSource.PlayClipAtPoint (keyGrab, transform.position);
 		if (coll.gameObject.name == "Necromancer") {
+			AudioSource.PlayClipAtPoint (keyGrab, transform.position);
 			if (transform.position.z<-25) {
 				coll.gameObject.GetComponent<PlayerController> ().hasFortKey = true;
 				GameObject.Find ("Text").GetComponent<Text> ().text = "Fort Key Found.\n Get East Gate Key From Fort";
