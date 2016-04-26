@@ -24,6 +24,9 @@ public class Knight : AIBehavior {
 		base.init(gMan, owner, necro);
 		//this.GetComponentInChildren<SpriteRenderer> ().color = new Color (1, 0, 0);
 		gManager = gMan;
+
+		//this.GetComponentInChildren<SpriteRenderer> ().color = new Color (1, 0, 0);
+
 	}
 
 	protected override void Update() {
@@ -47,7 +50,11 @@ public class Knight : AIBehavior {
 					rend.sprite = cSprites [6];
 				}
 				if ((timer -= Time.deltaTime) <= 0){
+<<<<<<< Updated upstream
 					AudioSource.PlayClipAtPoint (gManager.chargeClip, transform.position);
+=======
+					//AudioSource.PlayClipAtPoint (gManager.chargeClip, transform.position);
+>>>>>>> Stashed changes
 					mode = 2;
 					timer = charge;
 					agent.speed = chargespeed;
