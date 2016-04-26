@@ -16,19 +16,51 @@ public static class Abilities {
 	}
 
 	public static void Blight(Vector3 pos) {
-		GameObject spell = AOE(3, new Color(0, 1, 0, .4f), pos);
+		//GameObject spell = AOE(3, new Color(0, 1, 0, .4f), pos);
+		Sprite[] cSprites = Resources.LoadAll<Sprite> ("Textures/Spell Effects Sprite Sheet");
+		GameObject spell = new GameObject();
+		spell.AddComponent<SpriteRenderer>();
+		spell.AddComponent<Animator>();
+		spell.GetComponent<SpriteRenderer> ().sprite = cSprites [0];
+		spell.transform.position = pos;
+		spell.transform.localScale = new Vector3(.75f, .75f, .75f);
+		spell.transform.localEulerAngles = new Vector3(90, 0, 0);
+		Animator anim = spell.GetComponent<Animator> ();
+		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Blight Controller");
+		spell.AddComponent<SphereCollider>();
+		spell.GetComponent<SphereCollider>().isTrigger = true;
 		spell.name = "Blight";
-		spell.AddComponent<SpellEffect>().init(0.5f);
+		spell.AddComponent<SpellEffect>().init(.4f);
 	}
 
 	public static void Root(Vector3 pos) {
-		GameObject spell = AOE(3, new Color(0, 0, 1, .4f), pos);
+		Sprite[] cSprites = Resources.LoadAll<Sprite> ("Textures/Spell Effects Sprite Sheet");
+		GameObject spell = new GameObject();
+		spell.AddComponent<SpriteRenderer>();
+		spell.AddComponent<Animator>();
+		spell.GetComponent<SpriteRenderer> ().sprite = cSprites [8];
+		spell.transform.position = pos;
+		spell.transform.localScale = new Vector3(.8f, .8f, .8f);
+		spell.transform.localEulerAngles = new Vector3(90, 0, 0);
+		Animator anim = spell.GetComponent<Animator> ();
+		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Root Controller");
+		spell.AddComponent<SphereCollider>();
 		spell.name = "Root";
-		spell.AddComponent<SpellEffect>().init(0.5f);
+		spell.AddComponent<SpellEffect>().init(2f);
 	}
 
 	public static void Damage(Vector3 pos, float angle) {
-		GameObject spell = AOE(.8f, new Color(1, 0, 0, .4f), pos);
+		Sprite[] cSprites = Resources.LoadAll<Sprite> ("Textures/Spell Effects Sprite Sheet");
+		GameObject spell = new GameObject();
+		spell.AddComponent<SpriteRenderer>();
+		spell.AddComponent<Animator>();
+		spell.GetComponent<SpriteRenderer> ().sprite = cSprites [10];
+		spell.transform.position = pos;
+		spell.transform.localScale = new Vector3(.5f, .5f, .5f);
+		Animator anim = spell.GetComponent<Animator> ();
+		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Wave Controller");
+		spell.AddComponent<SphereCollider>();
+		spell.transform.LookAt(new Vector3(Mathf.Cos(angle), 180, Mathf.Sin(angle)));
 		spell.name = "Damage";
 		spell.AddComponent<SpellEffect>().init(2, 5, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
 	}

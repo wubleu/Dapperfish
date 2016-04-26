@@ -22,10 +22,10 @@ public class SpellEffect : MonoBehaviour {
 		}
 		if (name == "Damage" || name == "Bullet" || name == "Arrow") {
 			transform.Translate(angle * spellSpeed * Time.deltaTime, Space.World);
-		} else {
+		} /*else {
 			radius -= radius * (Time.deltaTime / lifetime);
 			gameObject.transform.localScale = new Vector3(radius, radius, radius);
-		}
+		}*/
 	}
 
 	void OnTriggerEnter(Collider col) {

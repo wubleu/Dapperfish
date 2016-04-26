@@ -9,9 +9,9 @@ public class SpellShot : MonoBehaviour {
 
 	PlayerController necromancer;
 	GameManager gManager;
-	Material spellShotMaterial;
+	SpriteRenderer spellShot;
 	Vector3 direction;
-
+	Animator anim;
 
 	// Use this for initialization
 	public void init (PlayerController owner, GameManager gMan) {
@@ -21,10 +21,11 @@ public class SpellShot : MonoBehaviour {
 //		gManager.MakeSprite (gameObject, "Circle", necromancer.transform, 0, 0, .25f, .25f, 200);
 		transform.parent = gManager.transform;
 		gameObject.name = "SpellShot";
+		spellShot = GetComponent<SpriteRenderer> ();
+		anim = gameObject.AddComponent<Animator> ();
 		gameObject.AddComponent<SphereCollider> ().isTrigger = true;
 		gameObject.GetComponent<SphereCollider> ().radius = .07f;
-		spellShotMaterial = GetComponent<SpriteRenderer> ().material;
-		spellShotMaterial.color = spellShotColor;
+
 
 		Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		direction = new Vector3 (mousePos.x-transform.position.x, mousePos.z-transform.position.z, 0);
