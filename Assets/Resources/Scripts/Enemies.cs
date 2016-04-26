@@ -21,7 +21,7 @@ public static class Enemies {
 		col.radius *= 1.1f;
 
 //		col.isTrigger = true;
-
+		//float rand = Random.Range(0, 360);
 		GameObject model = new GameObject();
 		model.name = "Model";
 		model.transform.parent = enemy.transform;
