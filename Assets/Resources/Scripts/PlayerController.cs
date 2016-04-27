@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour {
 	};
 
 	public int minionCount = 0;
-	GameManager gManager;
+	public GameManager gManager;
 	public EnemyManager eManager;
 	public bool hasKey = false;
 	public bool hasFortKey = false;
@@ -312,25 +312,25 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	public void HasKey(){
-		hasKey = true;
-		eManager.delayedSpawn ("fort");
-		foreach (Link l in gManager.links) {
-			if (l.name == "gate"){
-				l.unlocked = true;
-			}
-		}
-	}
-
-	public void HasFortKey(){
-		hasFortKey = true;
-		foreach (Link l in gManager.links) {
-			if (l.name == "fort"){
-				l.unlocked = true;
-			}
-		}
-	}
-
+//	public void HasKey(){
+//		hasKey = true;
+//		eManager.delayedSpawn ("fort");
+//		foreach (Link l in gManager.links) {
+//			if (l.name == "gate"){
+//				l.unlocked = true;
+//			}
+//		}
+//	}
+//
+//	public void HasFortKey(){
+//		hasFortKey = true;
+//		foreach (Link l in gManager.links) {
+//			if (l.name == "fort"){
+//				l.unlocked = true;
+//			}
+//		}
+//	}
+//
 	public void Damage(float damage) {
 		hp -= 1;
 		if (hp <= 0) {
