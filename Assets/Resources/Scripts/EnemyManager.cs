@@ -22,13 +22,25 @@ public class EnemyManager : MonoBehaviour {
 		
 		string[] instructions = Resources.Load<TextAsset>("Scripts/level1").text.Split(new char[1]{'\n'});
 
+		bool links = true;
 		foreach (string instruction in instructions) {
-			string[] parts = instruction.Split (new char[1]{ ':' });
-			if (parts.Length == 5) {
-				GameObject spawner = GameObject.Find ("Spawn Zone " + parts [0]);
-				for (int i = 1; i <= 3; i++) {
-					for (int j = 0; j < Int32.Parse (parts [i]); j++) {
-						Spawn (spawner.transform.position, i, Int32.Parse (parts [4]));
+			if (links) {
+				if (instruction == "X") {
+					links = false;
+				} else {
+					string[] parts = instruction.Split (new char[1]{ ':' });
+					Vector3 start = new Vector3(float.Parse(parts[0]),float.Parse(parts[1]),float.Parse(parts[2]));
+					Vector3 end = new Vector3(float.Parse(parts[3]),float.Parse(parts[4]),float.Parse(parts[5]));;
+					gMan.links.Add (new Link (start, end, parts [6], parts [7], parts [8], parts[9]));
+				}
+			} else {
+				string[] parts = instruction.Split (new char[1]{ ':' });
+				if (parts.Length == 5) {
+					GameObject spawner = GameObject.Find ("Spawn Zone " + parts [0]);
+					for (int i = 1; i <= 3; i++) {
+						for (int j = 0; j < Int32.Parse (parts [i]); j++) {
+							Spawn (spawner.transform.position, i, Int32.Parse (parts [4]));
+						}
 					}
 				}
 			}

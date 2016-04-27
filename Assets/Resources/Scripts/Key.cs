@@ -17,7 +17,7 @@ public class Key : MonoBehaviour {
 		if (coll.gameObject.name == "Necromancer") {
 			AudioSource.PlayClipAtPoint (keyGrab, transform.position);
 			if (transform.position.z<-25) {
-				coll.gameObject.GetComponent<PlayerController> ().hasFortKey = true;
+				coll.gameObject.GetComponent<PlayerController> ().HasFortKey();
 				GameObject.Find ("Text").GetComponent<Text> ().text = "Fort Key Found.\n Get East Gate Key From Fort";
 				Destroy (gameObject);
 			} else {

@@ -20,11 +20,13 @@ public class GameManager : MonoBehaviour {
 	public Text alert;
 	public AudioClip chargeClip;
 	public AudioClip scratch;
+	public List<Link> links;
 
 
 	void Start() {
 		xDimension = 18;
 		yDimension = 12;
+		links = new List<Link>();
 		enemyGrid = new List<AIBehavior>[xDimension, yDimension];
 		for (int x = 0; x < xDimension; x++) {
 			for (int y = 0; y < yDimension; y++) {
