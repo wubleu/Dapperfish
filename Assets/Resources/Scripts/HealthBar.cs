@@ -27,7 +27,7 @@ public class HealthBar : MonoBehaviour {
 		bar.transform.localPosition = Vector3.zero;
 		bar.transform.localEulerAngles = new Vector3(0, 0, 0);
 		bar.sprite = cSprites [0];
-		bar.color = Color.green; //new Color(0, 100/256, 0, 0.5f);
+		bar.color = Color.red; //new Color(0, 100/256, 0, 0.5f);
 
 		maxHealth = maxHP;
 	}

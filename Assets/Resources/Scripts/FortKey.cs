@@ -19,7 +19,7 @@ public class FortKey : MonoBehaviour {
 		if (coll.gameObject.name == "Necromancer") {
 			if (coll.gameObject.GetComponent<PlayerController> ().hasFortKey) {
 				anim.SetTrigger ("Close");
-				Destroy (this.gameObject, 1);
+				Destroy (this.gameObject, .5f);
 			}
 		}
 	}

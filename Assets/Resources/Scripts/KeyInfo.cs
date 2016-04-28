@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class KeyInfo : MonoBehaviour {
+public class KeyInfo {
 
 	public Vector3 location;
 	public string name;
