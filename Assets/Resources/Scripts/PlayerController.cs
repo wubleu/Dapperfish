@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour {
 	public GameManager gManager;
 	public EnemyManager eManager;
 	public bool hasKey = false;
-	public bool hasFortKey = true;
+	public bool hasFortKey = false;
 	public bool needsNav = false;
 	public bool destined = false;
 	public float currentY = 0;
