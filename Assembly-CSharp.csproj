@@ -54,7 +54,9 @@
      <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
      <Compile Include="Assets\Resources\Scripts\HealthBar.cs" />
      <Compile Include="Assets\Resources\Scripts\Key.cs" />
+     <Compile Include="Assets\Resources\Scripts\KeyInfo.cs" />
      <Compile Include="Assets\Resources\Scripts\Knight.cs" />
+     <Compile Include="Assets\Resources\Scripts\Link.cs" />
      <Compile Include="Assets\Resources\Scripts\Melee.cs" />
      <Compile Include="Assets\Resources\Scripts\Peasant.cs" />
      <Compile Include="Assets\Resources\Scripts\PlayerController.cs" />

@@ -20,11 +20,15 @@ public class GameManager : MonoBehaviour {
 	public Text alert;
 	public AudioClip chargeClip;
 	public AudioClip scratch;
+	public List<Link> links;
+	public List<KeyInfo> keys;
 
 
 	void Start() {
 		xDimension = 18;
 		yDimension = 12;
+		links = new List<Link>();
+		keys = new List<KeyInfo> ();
 		enemyGrid = new List<AIBehavior>[xDimension, yDimension];
 		for (int x = 0; x < xDimension; x++) {
 			for (int y = 0; y < yDimension; y++) {
@@ -46,6 +50,10 @@ public class GameManager : MonoBehaviour {
 		necromancer.init(this, eManager);
 		testing123();
 		RefillGrid ();
+
+		foreach (KeyInfo k in keys) {
+			print (k.location);
+		}
 	}
 
 	void Update() {
