@@ -52,6 +52,7 @@
      <Compile Include="Assets\Resources\Scripts\EnemyManager.cs" />
      <Compile Include="Assets\Resources\Scripts\FortKey.cs" />
      <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Resources\Scripts\Gate.cs" />
      <Compile Include="Assets\Resources\Scripts\HealthBar.cs" />
      <Compile Include="Assets\Resources\Scripts\Key.cs" />
      <Compile Include="Assets\Resources\Scripts\KeyInfo.cs" />
