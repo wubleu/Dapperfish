@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour {
 	};
 
 	public int minionCount = 0;
-	GameManager gManager;
+	public GameManager gManager;
 	Melee melee;
 	public EnemyManager eManager;
 
