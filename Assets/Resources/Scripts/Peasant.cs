@@ -8,10 +8,10 @@ public class Peasant : AIBehavior {
 		// PARAMETERS
 		allyColor = new Color (0, 0, 0);
 		enemyColor = new Color (1, 1, 1);
-		speed = 2.5f;
-		maxHP = hp = 3f;
+		speed = 5.2f;
+		maxHP = hp = 4f;
 		meleeThreshold = 1f;
-		meleeDamage = 1f;
+		meleeDamage = .3f;
 		aggroRange = 9f;
 		necroAggroModifier = 1.2f;
 		chaseThreshold = 1f;

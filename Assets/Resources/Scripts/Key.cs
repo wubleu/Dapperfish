@@ -5,26 +5,40 @@ using UnityEngine.UI;
 public class Key : MonoBehaviour {
 
 	AudioClip keyGrab;
-
+	PlayerController p;
+	bool made;
 	// Use this for initialization
 	void Start () {
-		this.name = "key";
-		keyGrab = Resources.Load ("Sounds/keyGrab") as AudioClip;
+		made = false;
+	}
+
+	void Update(){
+		if (!made) {
+			made = true;
+			this.name = "key";
+			keyGrab = Resources.Load ("Sounds/keyGrab") as AudioClip;
+			p = GameObject.Find("Necromancer").GetComponent<PlayerController>();
+		}
 	}
 	
 	// Update is called once per frame
 	void OnTriggerEnter (Collider coll) {
 		if (coll.gameObject.name == "Necromancer") {
+			coll.GetComponent<PlayerController> ().HasKey ();
 			AudioSource.PlayClipAtPoint (keyGrab, transform.position);
-			if (transform.position.z<-25) {
-				coll.gameObject.GetComponent<PlayerController> ().hasFortKey = true;
-				GameObject.Find ("Text").GetComponent<Text> ().text = "Fort Key Found.\n Get East Gate Key From Fort";
-				Destroy (gameObject);
-			} else {
-				coll.gameObject.GetComponent<PlayerController> ().HasKey ();
-				GameObject.Find ("Text").GetComponent<Text> ().text = "Gate Key Found.\n Proceed East Gate!\n Stand by gate 3 seconds to unlock.";
-				Destroy (gameObject);
+			foreach (KeyInfo k in p.gManager.keys) {
+				print (k.location);
+				print (transform.position);
+				if (k.location == transform.position) {
+					foreach (Link l in p.gManager.links) {
+						if (l.name == k.name) {
+							l.unlocked = true;
+							print ("here");
+						}
+					}
+				}
 			}
+			Destroy (gameObject);
 		}
 	}
 }

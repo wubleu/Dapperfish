@@ -8,15 +8,17 @@ public class HealthBar : MonoBehaviour {
 
 	PlayerController necromancer;
 	SpriteRenderer bar;
+	protected Sprite[] cSprites;
 
 	public void init (float maxHP) {
 		necromancer = GameObject.Find("Necromancer").GetComponent<PlayerController>();
 
-		gameObject.AddComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/BarOutline");
+		cSprites = Resources.LoadAll<Sprite>("Textures/Health Bar");
+		gameObject.AddComponent<SpriteRenderer> ().sprite = cSprites [1];
 		name = "Health";
 		transform.parent = necromancer.transform;
-		transform.localPosition = new Vector3(11, 10, -9);
-		transform.localScale = new Vector3(2, 2, 1);
+		transform.localPosition = new Vector3(-12, 10, 9);
+		transform.localScale = new Vector3(1, 1, 1);
 		transform.localEulerAngles = new Vector3(90, 0, 0);
 
 		bar = new GameObject().AddComponent<SpriteRenderer>();
@@ -24,13 +26,13 @@ public class HealthBar : MonoBehaviour {
 		bar.transform.parent = transform;
 		bar.transform.localPosition = Vector3.zero;
 		bar.transform.localEulerAngles = new Vector3(0, 0, 0);
-		bar.sprite = Resources.Load<Sprite>("Textures/Bar");
-		bar.color = Color.green; //new Color(0, 100/256, 0, 0.5f);
+		bar.sprite = cSprites [0];
+		bar.color = Color.red; //new Color(0, 100/256, 0, 0.5f);
 
 		maxHealth = maxHP;
 	}
 
 	void Update () {
-		bar.transform.localScale = new Vector3(1, necromancer.hp / maxHealth, 1);
+		bar.transform.localScale = new Vector3( necromancer.hp / maxHealth,1, 1);
 	}
 }

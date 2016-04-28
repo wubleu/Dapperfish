@@ -218,11 +218,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (transform.position.x > 105) {
-			if (!hasKey) {
-				transform.position = new Vector3 (105, transform.position.y, transform.position.z);
-			} else {
-				gManager.Finish();
-			}
+			gManager.Finish();
 		}
 		//Handling off-mesh fort link
 		if (needsNav){
@@ -233,27 +229,49 @@ public class PlayerController : MonoBehaviour {
 			needsNav = false;
 		}
 		NavMeshAgent agent = gameObject.GetComponent<NavMeshAgent>();
-		if (hasFortKey && 39.5f<transform.position.x && transform.position.x<40.3f && -20>transform.position.z && transform.position.z>-21 && Input.GetKey(KeyCode.W)) {
-			agent.destination = new Vector3(40f,1.0f,-18f);
-			destined = true;
+		foreach (Link l in gManager.links) {
+			if (Vector3.Distance (l.begin, transform.position) < .5 && Input.GetKey (l.into) && l.unlocked) {
+				if (l.time <= 0) {
+					agent.destination = l.end;
+					destined = true;
+				} else {
+					l.time = l.time - Time.deltaTime;
+				}
+			} else if (Vector3.Distance (l.begin, transform.position) < .5 && l.unlocked){
+				if (l.time > 0) {
+					l.time = l.time - Time.deltaTime;
+				}
+			} else if (Vector3.Distance (l.end, transform.position) < .5 && Input.GetKey (l.outof)){
+				if (l.time <= 0) {
+					agent.destination = l.begin;
+					destined = true;
+				} else {
+					l.time = l.time - Time.deltaTime;
+				}
+			}
 		}
-		if (Mathf.Abs(currentY-transform.position.y)>.6||(destined && transform.position.x>(agent.destination.x-.05f) && transform.position.x<(agent.destination.x+.05f) && transform.position.y>(agent.destination.y-.05f) && transform.position.y<(agent.destination.y+.05f) && transform.position.z>(agent.destination.z-.05f) && transform.position.z<(agent.destination.z+.05f))) {
+
+//		if (hasFortKey && 39.5f<transform.position.x && transform.position.x<40.3f && -20>transform.position.z && transform.position.z>-21 && Input.GetKey(KeyCode.W)) {
+//			agent.destination = new Vector3(40f,1.0f,-18f);
+//			destined = true;
+//		}
+		if (destined && Vector3.Distance(agent.destination,transform.position)<.2) {
 			Destroy (agent);
 			needsNav = true;
 			destined = false;
 		}
-		if (hasFortKey && 39.5f<transform.position.x && transform.position.x<40.3f && -18.2f<transform.position.z && transform.position.z<-17.7f && Input.GetKey(KeyCode.S)) {
-			gameObject.GetComponent<NavMeshAgent>().destination = new Vector3(40f,0.0f,-20.5f);
-			destined = true;
-		}
-		//handling off-mesh east gate link
-		if (hasKey && 102.5f<transform.position.x && transform.position.x<104f && -20>transform.position.z && transform.position.z>-24) {
-			unlockTime = unlockTime + Time.deltaTime;
-			if (unlockTime > 3) {
-				agent.destination = new Vector3 (106f, 1.0f, -22f);
-				destined = true;
-			}
-		}
+//		if (hasFortKey && 39.5f<transform.position.x && transform.position.x<40.3f && -18.2f<transform.position.z && transform.position.z<-17.7f && Input.GetKey(KeyCode.S)) {
+//			gameObject.GetComponent<NavMeshAgent>().destination = new Vector3(40f,0.0f,-20.5f);
+//			destined = true;
+//		}
+//		//handling off-mesh east gate link
+//		if (hasKey && 102.5f<transform.position.x && transform.position.x<104f && -20>transform.position.z && transform.position.z>-24) {
+//			unlockTime = unlockTime + Time.deltaTime;
+//			if (unlockTime > 3) {
+//				agent.destination = new Vector3 (106f, 1.0f, -22f);
+//				destined = true;
+//			}
+//		}
 		currentY = transform.position.y;
 	}
 
@@ -280,12 +298,32 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void HasKey(){
-		hasKey = true;
-		eManager.delayedSpawn ("fort");
+		if (!hasFortKey) {
+			hasFortKey = true;
+			gManager.objectives.text = "Get Gate Key from Fort.";
+		} else {
+			hasKey = true;
+			gManager.objectives.text = "Get through the East Gate. \nGate will take 3 seconds to open.";
+			eManager.delayedSpawn ("fort");
+			foreach (Link l in gManager.links) {
+				if (l.name == "gate") {
+					l.unlocked = true;
+				}
+			}
+		}
 	}
-
+//
+//	public void HasFortKey(){
+//		hasFortKey = true;
+//		foreach (Link l in gManager.links) {
+//			if (l.name == "fort"){
+//				l.unlocked = true;
+//			}
+//		}
+//	}
+//
 	public void Damage(float damage) {
-		hp -= 1;
+		hp -= damage;
 		if (hp <= 0) {
 			gManager.Death();
 		}
