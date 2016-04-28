@@ -87,6 +87,10 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	public void Reset() {
+
+	}
+
 	public void EnemyDeath(Vector3 pos, string name, bool enemy){
 		GameObject death = new GameObject ();
 		SpriteRenderer rend = death.AddComponent<SpriteRenderer> ();
