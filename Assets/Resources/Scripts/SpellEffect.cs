@@ -59,7 +59,7 @@ public class SpellEffect : MonoBehaviour {
 				Destroy (gameObject);
 				return;
 			case "Arrow":
-				print (col.gameObject.name );
+				print (col.gameObject.name);
 				if (enemy != AI.isEnemy) {
 					AI.Damage (arrowPower);
 					Destroy (gameObject);
@@ -67,8 +67,12 @@ public class SpellEffect : MonoBehaviour {
 				return;
 			}
 		} else if (col.name == "Necromancer" && enemy) {
-			col.GetComponent<PlayerController>().Damage(arrowPower);
-			Destroy(gameObject);
+			col.GetComponent<PlayerController> ().Damage (arrowPower);
+			Destroy (gameObject);
+		} else if (name == "Arrow" || name == "Bullet"){
+			if (col.tag == "Obstacle") {
+				Destroy (gameObject);
+			}
 		}
 	}
 

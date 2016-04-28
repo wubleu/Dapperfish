@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour {
 
 	// PARAMETERS
 	float maxHealth;
+	GameObject healthbar;
 
 	PlayerController necromancer;
 	SpriteRenderer bar;
@@ -20,6 +22,7 @@ public class HealthBar : MonoBehaviour {
 		transform.localPosition = new Vector3(-12, 10, 9);
 		transform.localScale = new Vector3(1, 1, 1);
 		transform.localEulerAngles = new Vector3(90, 0, 0);
+		gameObject.layer = 5;
 
 		bar = new GameObject().AddComponent<SpriteRenderer>();
 		bar.name = "HealthBar";
@@ -30,9 +33,10 @@ public class HealthBar : MonoBehaviour {
 		bar.color = Color.red; //new Color(0, 100/256, 0, 0.5f);
 
 		maxHealth = maxHP;
+
 	}
 
 	void Update () {
-		bar.transform.localScale = new Vector3( necromancer.hp / maxHealth,1, 1);
+		bar.transform.localScale = new Vector3( necromancer.hp / maxHealth ,1, 1);
 	}
 }
