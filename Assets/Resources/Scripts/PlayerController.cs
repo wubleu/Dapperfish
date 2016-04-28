@@ -6,10 +6,9 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour {
 
 	// PARAMETERS
-	public float hp = 50, size = 1f, speed = 1.8f, castcd = .25f;
-	bool isMelee = true, casted = false;
+	public float hp = 50, size = 1f, speed = 1.8f, castcd = .25f, currentY = 0, unlockTime = 0;
+	public bool isMelee = true, casted = false, hasKey = false, hasFortKey = false, needsNav = false, destined = false;
 	public float[] cd = new float[5] {0.5f, 5, 3, 50, 2}, timers = new float[5] {0, 0, 0, 0, 0};
-	Melee melee;
 	protected Sprite[] cSprites;
 	public Image[] icons = new Image[4];
 	
@@ -25,21 +24,11 @@ public class PlayerController : MonoBehaviour {
 
 	public int minionCount = 0;
 	GameManager gManager;
+	Melee melee;
 	public EnemyManager eManager;
-	public bool hasKey = false;
-	public bool hasFortKey = false;
-	public bool needsNav = false;
-	public bool destined = false;
-	public float currentY = 0;
-	public float unlockTime = 0;
 
 	//Sounds
-
-	public AudioClip BlightClip;
-	public AudioClip RootClip;
-	public AudioClip DamageClip;
-	public AudioClip BlinkClip;
-
+	public AudioClip BlightClip, RootClip, AudioClip, DamageClip, BlinkClip;
 
 	GameObject necromodel, rightarm, leftarm, body, shooter;
 	SpriteRenderer lamodel, bodymodel, ramodel;
@@ -181,32 +170,28 @@ public class PlayerController : MonoBehaviour {
 				switch (i) {
 					case 1: // blight
 						Abilities.Blight (mouse);
-					AudioSource.PlayClipAtPoint (BlightClip, transform.position);	
-
+						AudioSource.PlayClipAtPoint (BlightClip, transform.position);
 						casted = true;
 						lamodel.sprite = cSprites [13];
 						lamodel.transform.localPosition = new Vector3(-0.3f, 1, 0.45f);
 						break;
 					case 2: // root
 						Abilities.Root(mouse);
-					AudioSource.PlayClipAtPoint (RootClip, transform.position);	
-
+						AudioSource.PlayClipAtPoint (RootClip, transform.position);	
 						casted = true;
 						lamodel.sprite = cSprites [12];
 						lamodel.transform.localPosition = new Vector3(-0.3f, 1, 0.45f);
 						break;
-				case 3: // damage
-					
-					Abilities.Damage (transform.position, Mathf.PI / 2 + Mathf.Atan2 (transform.position.x - mouse.x, mouse.z - transform.position.z));
-					AudioSource.PlayClipAtPoint (DamageClip, transform.position);	
-					casted = true;
+					case 3: // damage
+						Abilities.Damage (transform.position, Mathf.PI / 2 + Mathf.Atan2 (transform.position.x - mouse.x, mouse.z - transform.position.z));
+						AudioSource.PlayClipAtPoint (DamageClip, transform.position);	
+						casted = true;
 						lamodel.sprite = cSprites [11];
 						lamodel.transform.localPosition = new Vector3(-0.3f, 1, 0.45f);
 						break;
 					case 4: // blink
 						Abilities.Blink(transform, Mathf.PI / 2 - Mathf.Atan2(mouse.x - transform.position.x, mouse.z - transform.position.z));
-					AudioSource.PlayClipAtPoint (BlinkClip, transform.position);	
-
+						AudioSource.PlayClipAtPoint (BlinkClip, transform.position);	
 						break;
 				}
 			}

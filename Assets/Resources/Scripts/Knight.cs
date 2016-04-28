@@ -3,12 +3,12 @@ using System.Collections;
 
 public class Knight : AIBehavior {
 
-	float chargespeed = 85, normalspeed = 6, wait = 1f, charge = 0.3f, caggro = 4, timer = 0, chargecd = .3f;
+	float chargespeed = 85, normalspeed = 6, wait = 0.5f, charge = 0.3f, caggro = 4, timer = 0, chargecd = .3f;
 	int mode = 0;
+	Vector3 start;
+	KnightMelee melee;
 
 	public void initKnight(GameManager gMan, EnemyManager owner, PlayerController necro) {
-
-		// PARAMETERS
 		allyColor = new Color(0, 0, 0);
 		enemyColor = new Color (1, 1, 1);
 		speed = normalspeed;
@@ -21,9 +21,11 @@ public class Knight : AIBehavior {
 		animmax = .3f;
 		animcount = animmax;
 		base.init(gMan, owner, necro);
-		//this.GetComponentInChildren<SpriteRenderer> ().color = new Color (1, 0, 0);
 		gManager = gMan;
 
+		melee = new GameObject().AddComponent<KnightMelee>();
+		melee.transform.parent = transform;
+		melee.transform.localPosition = new Vector3(0, 0, 0.75f);
 	}
 
 	protected override void Update() {
@@ -31,28 +33,32 @@ public class Knight : AIBehavior {
 			if (mode == 0) { // walking
 				SwitchTargets ();
 				base.Update ();
-				if (target != null && target.name == "Necromancer" && Vector3.Distance (transform.position, target.transform.position) < caggro) {
+				if (target != null && target.name == "Necromancer" && Vector3.Distance(transform.position, target.transform.position) < caggro) {
+					start = target.transform.position;
 					mode = 1;
 					timer = wait;
 					rend.sprite = cSprites [3];
 					agent.speed = 0;
 				}
 			} else if (mode == 1) { // waiting
-				timer -= Time.deltaTime;
-				if (timer < wait - (3 * (wait / 4))) {
-					rend.sprite = cSprites [4];
-				} else if (timer < wait - (2 * (wait / 4))) {
-					rend.sprite = cSprites [5];
-				} else if (timer < wait - (wait / 4)) {
-					rend.sprite = cSprites [6];
-				}
 				if ((timer -= Time.deltaTime) <= 0){
 					mode = 2;
 					timer = charge;
 					agent.speed = chargespeed;
-					float angle = Mathf.PI / 2 - Mathf.Atan2 (target.transform.position.x - transform.position.x, target.transform.position.z - transform.position.z);
-					agent.SetDestination (transform.position + chargespeed * charge * new Vector3 (Mathf.Cos (angle), 0, Mathf.Sin (angle)));
 					rend.sprite = cSprites [7];
+
+					float speed = Vector3.Distance(start, target.transform.position) / wait, angle = Mathf.PI / 2 - Mathf.Atan2(target.transform.position.x - start.x, target.transform.position.z - start.z);
+					start = target.transform.position + speed * 0.25f * new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle));
+					angle = Mathf.PI / 2 - Mathf.Atan2(start.x - transform.position.x, start.z - transform.position.z);
+					agent.SetDestination(transform.position + chargespeed * charge * new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
+				}
+
+				if (timer < wait / 4) {
+					rend.sprite = cSprites [4];
+				} else if (timer < wait / 2) {
+					rend.sprite = cSprites [5];
+				} else if (timer < 3 * wait / 4) {
+					rend.sprite = cSprites [6];
 				}
 			} else if ((timer -= Time.deltaTime) <= 0) { // charging
 				rend.sprite = cSprites [8];
@@ -60,7 +66,7 @@ public class Knight : AIBehavior {
 				timer = chargecd;
 				agent.speed = 0;
 			} else if (mode == 3) {
-				if ((timer-= Time.deltaTime) <= 0){
+				if ((timer-= Time.deltaTime) <= 0) {
 					mode = 0;
 					agent.speed = normalspeed;
 					rend.sprite = cSprites [0];
@@ -75,9 +81,10 @@ public class Knight : AIBehavior {
 	}
 
 	void OnCollisionStay(Collision coll) {
-		if (coll.gameObject == target ) {
-			agent.speed = normalspeed;
+		if (meleeTimer >= meleecd && (coll.collider.gameObject.name == "Necromancer" || (coll.gameObject.gameObject.tag == "AI" && !coll.collider.GetComponent<AIBehavior>().isEnemy))) {
+			rend.sprite = cSprites [0];
+			melee.Enable();
+			meleeTimer = 0;
 		}
-		base.OnCollision (coll);
 	}
 }

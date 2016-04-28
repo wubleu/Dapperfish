@@ -35,6 +35,7 @@ public class Melee : MonoBehaviour {
 
 	public bool Enable() {
 		col.enabled = true;
+		frame = Time.frameCount;
 		GameObject mel = new GameObject ();
 		mel.transform.position = col.transform.position;
 		mel.transform.localEulerAngles = new Vector3 (90, 0, 0);
@@ -45,7 +46,6 @@ public class Melee : MonoBehaviour {
 		Animator anim = mel.AddComponent<Animator> ();
 		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Melee Controller");
 		Destroy (mel.gameObject, .5f);
-		frame = Time.frameCount;
 		return true;
 	}
 }
