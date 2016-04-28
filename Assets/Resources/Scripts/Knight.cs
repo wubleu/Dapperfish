@@ -12,7 +12,7 @@ public class Knight : AIBehavior {
 		allyColor = new Color(0, 0, 0);
 		enemyColor = new Color (1, 1, 1);
 		speed = normalspeed;
-		maxHP = hp = 6;
+		maxHP = hp = 15;
 		meleeThreshold = 1;
 		meleeDamage = 25;
 		aggroRange = 9;

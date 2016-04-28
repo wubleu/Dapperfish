@@ -73,7 +73,7 @@ public class SpellEffect : MonoBehaviour {
 	void OnTriggerStay(Collider col) {
 		if (col.tag == "AI") {
 			AIBehavior AI = col.GetComponent<AIBehavior> ();
-			if (col.name == "Root" && AI.isEnemy) {
+			if (name == "Root" && AI.isEnemy) {
 				AI.Root ();
 			}
 		}

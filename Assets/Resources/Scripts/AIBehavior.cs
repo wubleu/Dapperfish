@@ -6,7 +6,7 @@ public class AIBehavior : MonoBehaviour {
 	// PARAMETERS
 	protected Color allyColor, enemyColor;
 	public float hoverRadius, chaseDist, chaseThreshold, chaseClock, aggroRange, necroAggroModifier, speed,
-		meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp, maxHP, infectionCost, animcount, animmax, meleecd = .2f;
+		meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp, maxHP, infectionCost, animcount, animmax, meleecd = .2f, rootPersistence = .5f;
 	public GameObject target = null;
 	protected GameObject necromancer;
 	public GameManager gManager;
@@ -300,7 +300,7 @@ public class AIBehavior : MonoBehaviour {
 	}
 
 	public virtual void Root() {
-		root = 1.5f;
+		root = rootPersistence;
 		agent.speed = 0;
 	}
 
