@@ -332,7 +332,7 @@ public class PlayerController : MonoBehaviour {
 //	}
 //
 	public void Damage(float damage) {
-		hp -= 1;
+		hp -= damage;
 		if (hp <= 0) {
 			gManager.Death();
 		}
