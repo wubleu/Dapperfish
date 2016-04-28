@@ -23,27 +23,34 @@ public class EnemyManager : MonoBehaviour {
 		string[] instructions = Resources.Load<TextAsset>("Scripts/level1").text.Split(new char[1]{'\n'});
 
 		bool links = true;
-		bool keys = false;
+		int linkCount = 0;
+		bool keys = true;
+		int keyCount = 0;
+		bool readNum = true;
 		foreach (string instruction in instructions) {
-			if (links) {
-				if (instruction == "X") {
-					links = false;
-					keys = true;
-				} else {
+			if (readNum){
+				int num = Int32.Parse(instruction);
+				if(links){
+					linkCount = num;
+				} else{
+					keyCount = num;
+				}
+				readNum = false;
+			} else if (links && linkCount>0) {
 					string[] parts = instruction.Split (new char[1]{ ':' });
 					Vector3 start = new Vector3 (float.Parse (parts [0]), float.Parse (parts [1]), float.Parse (parts [2]));
 					Vector3 end = new Vector3 (float.Parse (parts [3]), float.Parse (parts [4]), float.Parse (parts [5]));
-					;
 					gMan.links.Add (new Link (start, end, parts [6], parts [7], parts [8], parts [9]));
+				linkCount = linkCount - 1;
+				if (linkCount == 0) {
+					links = false;
+					readNum = true;
 				}
-			} else if (keys) {
-				if (instruction == "Y") {
-					keys = false;
-				} else {
+			} else if (keys && keyCount>0) {
 					string[] parts = instruction.Split (new char[1]{ ':' });
 					Vector3 location = new Vector3 (float.Parse (parts [0]), float.Parse (parts [1]), float.Parse (parts [2]));
 					gMan.keys.Add (new KeyInfo (location, parts [3]));
-				}
+				keyCount = keyCount - 1;
 			}else {
 				string[] parts = instruction.Split (new char[1]{ ':' });
 				if (parts.Length == 5) {
