@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour {
 	public int xDimension;
 	public int yDimension;
 	bool done = false;
+	public bool dead = false;
 	public Text objectives;
 	public Text alert;
 	public AudioClip chargeClip;
@@ -23,8 +24,20 @@ public class GameManager : MonoBehaviour {
 	public List<Link> links;
 	public List<KeyInfo> keys;
 
+	// THIS IS JUST UNTIL EVAN GETS THE RESTART BUTTON UP
+	float deathInterval = 3f;
+	float deathTimer = 0;
 
 	void Start() {
+		init ();
+	}
+
+	void init() {
+		// ALSO UNTIL EVAN GETS RESTART BUTTON
+		deathTimer = 0;
+
+		dead = false;
+
 		xDimension = 18;
 		yDimension = 12;
 		links = new List<Link>();
@@ -57,7 +70,15 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Update() {
-		RefillGrid ();
+		//THESE IFS ARE ALSO TEMPORARY TILL BUTTON'S UP
+		if (dead == true) {
+			if ((deathTimer += Time.deltaTime) > deathInterval) {
+				Reset();
+				deathTimer = 0;
+			}
+		} else {
+			RefillGrid ();
+		}
 	}
 
 	public void Death() {
@@ -78,6 +99,7 @@ public class GameManager : MonoBehaviour {
 		alert.text = "Game Over.";
 		Destroy(necromancer.gameObject);
 		Destroy(death, 1);
+		dead = true;
 	}
 
 	public void Finish() {
@@ -88,7 +110,8 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void Reset() {
-
+		alert.text = "";
+		init ();
 	}
 
 	public void EnemyDeath(Vector3 pos, string name, bool enemy){
