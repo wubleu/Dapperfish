@@ -93,7 +93,7 @@ public static class Abilities {
 		return true;
 	}
 
-	public static bool Arrow(Vector3 pos, float angle, bool enemy, float range) {
+	public static bool Arrow(Vector3 pos, float angle, bool enemy, float range, float damage) {
 		GameObject spell = AOE(.3f, Color.red, pos + 0.5f * new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
 		/*Sprite[] cSprites = Resources.LoadAll<Sprite> ("Textures/Skeleton Archer Sprite Sheet");
 		GameObject spell = new GameObject();
@@ -107,7 +107,7 @@ public static class Abilities {
 		spell.transform.localScale = new Vector3(1, 1, 1);
 		spell.AddComponent<BoxCollider>();*/
 		spell.name = "Arrow";
-		spell.AddComponent<SpellEffect>().init(range, 10, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)), enemy);
+		spell.AddComponent<SpellEffect>().init(range, 10, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)), enemy, damage);
 		return true;
 	}
 

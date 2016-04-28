@@ -6,9 +6,10 @@ public class SpellEffect : MonoBehaviour {
 	// PARAMETERS
 	float lifetime, spellSpeed, radius, clock = 0, infectPower = 250;
 	bool enemy;
+	float arrowPower;
 	Vector3 angle;
 
-	public void init(float life, float speed = 0, Vector3 dir = default(Vector3), bool bad = false) {
+	public void init(float life, float speed = 0, Vector3 dir = default(Vector3), bool bad = false, params float[] arrowDamage) {
 		radius = transform.localScale.x;
 		lifetime = life;
 		spellSpeed = speed;
@@ -16,6 +17,7 @@ public class SpellEffect : MonoBehaviour {
 		enemy = bad;
 		if (name == "Arrow") {
 			lifetime = life / speed;
+			arrowPower = arrowDamage[0];
 		}
 	}
 
@@ -59,13 +61,13 @@ public class SpellEffect : MonoBehaviour {
 			case "Arrow":
 				print (col.gameObject.name );
 				if (enemy != AI.isEnemy) {
-					AI.Damage (1);
+					AI.Damage (arrowPower);
 					Destroy (gameObject);
 				}
 				return;
 			}
 		} else if (col.name == "Necromancer" && enemy) {
-			col.GetComponent<PlayerController>().Damage(1);
+			col.GetComponent<PlayerController>().Damage(arrowPower);
 			Destroy(gameObject);
 		}
 	}

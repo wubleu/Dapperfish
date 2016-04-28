@@ -24,7 +24,7 @@ public class Archer : AIBehavior {
 		speed = 6f;
 		maxHP = hp = 3f;
 		meleeThreshold = 1f;
-		meleeDamage = 1f;
+		meleeDamage = 2f;
 		aggroRange = 10f;
 		necroAggroModifier = 1.2f;
 		chaseDist = 2f;
@@ -142,6 +142,7 @@ public class Archer : AIBehavior {
 
 
 	void Fire() {
-		Abilities.Arrow(transform.position, Mathf.PI / 2 - Mathf.Atan2(target.transform.position.x - transform.position.x, target.transform.position.z - transform.position.z), isEnemy, range+1);
+		Abilities.Arrow(transform.position, Mathf.PI / 2 - Mathf.Atan2(target.transform.position.x - transform.position.x,
+			target.transform.position.z - transform.position.z), isEnemy, range+1, meleeDamage);
 	}
 }
