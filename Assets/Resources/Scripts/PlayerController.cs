@@ -315,8 +315,10 @@ public class PlayerController : MonoBehaviour {
 	public void HasKey(){
 		if (!hasFortKey) {
 			hasFortKey = true;
+			gManager.objectives.text = "Get Gate Key from Fort.";
 		} else {
 			hasKey = true;
+			gManager.objectives.text = "Get through the East Gate. \nGate will take 3 seconds to open.";
 			eManager.delayedSpawn ("fort");
 			foreach (Link l in gManager.links) {
 				if (l.name == "gate") {
