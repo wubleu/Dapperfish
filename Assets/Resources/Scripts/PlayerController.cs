@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 		Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		mouse.y = 0;
+		print (hasFortKey);
 		if (timers[0] > 0) {
 			if ((timers[0] -= Time.deltaTime) <= .25f) {
 				ramodel.sprite = cSprites [19];
