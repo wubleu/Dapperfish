@@ -312,15 +312,19 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-//	public void HasKey(){
-//		hasKey = true;
-//		eManager.delayedSpawn ("fort");
-//		foreach (Link l in gManager.links) {
-//			if (l.name == "gate"){
-//				l.unlocked = true;
-//			}
-//		}
-//	}
+	public void HasKey(){
+		if (!hasFortKey) {
+			hasFortKey = true;
+		} else {
+			hasKey = true;
+			eManager.delayedSpawn ("fort");
+			foreach (Link l in gManager.links) {
+				if (l.name == "gate") {
+					l.unlocked = true;
+				}
+			}
+		}
+	}
 //
 //	public void HasFortKey(){
 //		hasFortKey = true;

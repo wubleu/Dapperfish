@@ -24,6 +24,7 @@ public class Key : MonoBehaviour {
 	// Update is called once per frame
 	void OnTriggerEnter (Collider coll) {
 		if (coll.gameObject.name == "Necromancer") {
+			coll.GetComponent<PlayerController> ().HasKey ();
 			AudioSource.PlayClipAtPoint (keyGrab, transform.position);
 			foreach (KeyInfo k in p.gManager.keys) {
 				print (k.location);
