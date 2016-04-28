@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour {
 
 	public void Finish() {
 		if (!done) {
-			alert.text =  "You beat the level!";
+			alert.text =  "Objective Complete! Your Conquest Continues!";
 			done = true;
 		}
 	}
