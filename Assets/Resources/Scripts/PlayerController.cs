@@ -300,7 +300,7 @@ public class PlayerController : MonoBehaviour {
 	public void HasKey(){
 		if (!hasFortKey) {
 			hasFortKey = true;
-			gManager.objectives.text = "Get Gate Key from Fort.";
+			gManager.ChangeObjective("Go to Fort to get gate key.");
 		} else {
 			hasKey = true;
 			gManager.objectives.text = "Get through the East Gate. \nGate will take 3 seconds to open.";

@@ -178,4 +178,8 @@ public class GameManager : MonoBehaviour {
 			enemyGrid [xSquare, ySquare].Add (unit);
 		}
 	}
+
+	public void ChangeObjective(string obj){
+		objectives.text = obj;
+	}
 }
