@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
 
 	// PARAMETERS
 	public float hp = 50, size = 1f, speed = 1.8f, castcd = .25f, currentY = 0, unlockTime = 0;
-	public bool isMelee = true, casted = false, hasKey = false, hasFortKey = false, needsNav = false, destined = false;
+	public bool isMelee = false, casted = false, hasKey = false, hasFortKey = false, needsNav = false, destined = false;
 	public float[] cd = new float[5] {0.5f, 5, 3, 50, 2}, timers = new float[5] {0, 0, 0, 0, 0};
 	protected Sprite[] cSprites;
 	public Image[] icons = new Image[4];
@@ -161,9 +161,6 @@ public class PlayerController : MonoBehaviour {
 				ramodel.transform.localPosition = new Vector3(0.103f, 1, 0.266f);
 				timers[0] = cd[0];
 			}
-		}
-		if (Input.GetKeyDown(controls[5])) {
-			isMelee = !isMelee;
 		}
 		for (int i = 1; i <= 4; i++) {
 			if (Input.GetKeyDown(controls[i]) && timers[i] == 0) {

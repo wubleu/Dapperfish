@@ -15,10 +15,10 @@ public class AIBehavior : MonoBehaviour {
 	protected SpriteRenderer rend;
 	protected NavMeshAgent agent;
 	protected float hoverRads;
-	public bool hovering = false, isEnemy = true, immune = false, hoverPaused = false, windup = false, attacked = false;
+	public bool hovering = false, isEnemy = true, immune = false, hoverPaused = false, windup = false, attacked = false, isElite = false;
 	protected Sprite[] cSprites;
 
-	protected virtual void init(GameManager gMan, EnemyManager owner, PlayerController necro) {
+	protected virtual void init(GameManager gMan, EnemyManager owner, PlayerController necro, params bool[] isElite) {
 		eManager = owner;
 		gManager = gMan;
 		necromancer = necro.gameObject;
@@ -41,6 +41,9 @@ public class AIBehavior : MonoBehaviour {
 		if (name == "Knight") {
 			cSprites = Resources.LoadAll<Sprite> ("Textures/Knight Sprite Sheet");
 			rend.sprite = cSprites [0];
+		}
+		if (isElite.Length != 0) {
+			SetToElite();
 		}
 	}
 
@@ -317,5 +320,10 @@ public class AIBehavior : MonoBehaviour {
 			gManager.EnemyDeath (transform.position, name, isEnemy);
 			Destroy (this.gameObject);
 		}
+	}
+
+	protected void SetToElite() {
+		isElite = true;
+		immune = true;
 	}
 }

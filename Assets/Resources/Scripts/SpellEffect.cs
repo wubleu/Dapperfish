@@ -55,8 +55,10 @@ public class SpellEffect : MonoBehaviour {
 				}
 				return;
 			case "Bullet":
-				AI.Damage (1);
-				Destroy (gameObject);
+				if (enemy != AI.isEnemy) {
+					AI.Damage (1);
+					Destroy (gameObject);
+				}
 				return;
 			case "Arrow":
 				print (col.gameObject.name );
