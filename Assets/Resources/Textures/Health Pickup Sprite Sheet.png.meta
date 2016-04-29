@@ -1,0 +1,134 @@
+fileFormatVersion: 2
+guid: 2523691cd80b94bde878b6d24dd8b974
+timeCreated: 1461894930
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Health Pickup Sprite Sheet_0
+    21300002: Health Pickup Sprite Sheet_3
+    21300004: Health Pickup Sprite Sheet_4
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Health Pickup Sprite Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 224
+        width: 84
+        height: 106
+      alignment: 9
+      pivot: {x: 0.5, y: 0.41821405}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: 61.66931}
+        - {x: -16, y: 61.66931}
+        - {x: -40, y: 49.66931}
+        - {x: -42, y: 45.66931}
+        - {x: -42, y: -32.33069}
+        - {x: -35, y: -44.33069}
+        - {x: 29, y: -44.33069}
+        - {x: 31, y: -43.33069}
+        - {x: 42, y: -24.330688}
+        - {x: 42, y: 27.669312}
+        - {x: 41, y: 38.66931}
+    - name: Health Pickup Sprite Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 224
+        width: 84
+        height: 118
+      alignment: 9
+      pivot: {x: 0.50860053, y: 0.3653073}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 23.277557, y: 56.893738}
+        - {x: -8.722443, y: 56.893738}
+        - {x: -42.722443, y: 40.893738}
+        - {x: -42.722443, y: -27.106262}
+        - {x: -24.722443, y: -43.106262}
+        - {x: 34.277557, y: -43.106262}
+        - {x: 41.277557, y: -29.106262}
+        - {x: 41.277557, y: 35.893738}
+        - {x: 29.277557, y: 50.893738}
+      - - {x: -31.722443, y: 63.893738}
+        - {x: -33.722443, y: 59.893738}
+        - {x: -33.722443, y: 40.893738}
+        - {x: -19.722443, y: 40.893738}
+        - {x: -13.722443, y: 42.893738}
+        - {x: -13.722443, y: 57.893738}
+        - {x: -18.722443, y: 63.893738}
+      - - {x: 12.277557, y: 74.89374}
+        - {x: -1.7224426, y: 74.89374}
+        - {x: -2.7224426, y: 68.89374}
+        - {x: -2.7224426, y: 56.893738}
+        - {x: 0.27755737, y: 55.893738}
+        - {x: 8.277557, y: 55.893738}
+        - {x: 14.277557, y: 61.893738}
+        - {x: 14.277557, y: 73.89374}
+    - name: Health Pickup Sprite Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 24
+        width: 84
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -35, y: 43}
+        - {x: -42, y: 34}
+        - {x: -42, y: -40}
+        - {x: -32, y: -43}
+        - {x: 42, y: -43}
+        - {x: 42, y: 43}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
