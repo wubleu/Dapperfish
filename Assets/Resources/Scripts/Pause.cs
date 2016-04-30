@@ -7,12 +7,11 @@ public class Pause : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		gameObject.AddComponent<Rigidbody> ();
+		gameObject.AddComponent<Rigidbody> ().useGravity = false;
 		pause = gameObject.AddComponent<SphereCollider> ();
 		pause.isTrigger = true;
 		pause.radius = 1000;
 		pause.name = "PauseCollider";
-		print ("PauseCollider made");
 	}
 	
 	void OnTriggerEnter(Collider coll) {

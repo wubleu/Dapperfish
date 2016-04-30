@@ -60,6 +60,10 @@ public class EnemyManager : MonoBehaviour {
 							Spawn (spawner.transform.position, i, Int32.Parse (parts [4]));
 						}
 					}
+				} else if (parts.Length == 2) {
+					if (parts [0] == "9999") {
+						Enemies.makeNecroBoss (gManager, this, necromancerController, GameObject.Find ("Spawn Zone " + parts [1]).transform.position);
+					}
 				}
 			}
 		}

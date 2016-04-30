@@ -15,6 +15,11 @@ public static class Abilities {
 		return spell;
 	}
 
+	public static void Summon(float x, float y, float z) {
+		GameObject summon = new GameObject ();
+		summon.AddComponent<Summon> ().init(new Vector3(x, y, z), .4f);
+	}
+
 	public static void Blight(Vector3 pos) {
 		//GameObject spell = AOE(3, new Color(0, 1, 0, .4f), pos);
 		Sprite[] cSprites = Resources.LoadAll<Sprite> ("Textures/Spell Effects Sprite Sheet");

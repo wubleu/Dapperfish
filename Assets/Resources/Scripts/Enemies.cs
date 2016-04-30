@@ -58,4 +58,12 @@ public static class Enemies {
 
 		return knight;
 	}
+
+	public static GameObject makeNecroBoss(GameManager gMan, EnemyManager owner, PlayerController necro, Vector3 pos) {
+		GameObject necroBoss = makeEnemy (pos, 1f, "Circle");
+		necroBoss.name = "Necromancer Boss";
+		necroBoss.AddComponent<NecromancerBoss> ().initNecroBoss(gMan, owner, necro);
+
+		return necroBoss;
+	}
 }
