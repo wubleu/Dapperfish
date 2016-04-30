@@ -48,6 +48,7 @@
      <Compile Include="Assets\Resources\Scripts\AIBehavior.cs" />
      <Compile Include="Assets\Resources\Scripts\Abilities.cs" />
      <Compile Include="Assets\Resources\Scripts\Archer.cs" />
+     <Compile Include="Assets\Resources\Scripts\Dialogue.cs" />
      <Compile Include="Assets\Resources\Scripts\Enemies.cs" />
      <Compile Include="Assets\Resources\Scripts\EnemyManager.cs" />
      <Compile Include="Assets\Resources\Scripts\FortKey.cs" />
@@ -69,6 +70,11 @@
      <Compile Include="Assets\Resources\Scripts\SpellShot.cs" />
      <Compile Include="Assets\Resources\Scripts\Summon.cs" />
      <None Include="Assets\Resources\Scripts\level1.txt" />
+     <None Include="Assets\Resources\Scripts\Level1Encounter3.txt" />
+     <None Include="Assets\Resources\Scripts\Level1Encounter0.txt" />
+     <None Include="Assets\Resources\Scripts\Level1Encounter99.txt" />
+     <None Include="Assets\Resources\Scripts\Level1Encounter1.txt" />
+     <None Include="Assets\Resources\Scripts\Level1Encounter2.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

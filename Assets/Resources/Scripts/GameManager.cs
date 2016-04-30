@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour {
 	public AudioClip scratch;
 	public List<Link> links;
 	public List<KeyInfo> keys;
-
+	public int Encounter = 0;
 	// THIS IS JUST UNTIL EVAN GETS THE RESTART BUTTON UP
 	float deathInterval = 3f;
 	float deathTimer = 0;
@@ -210,5 +210,19 @@ public class GameManager : MonoBehaviour {
 		if (pause != null) {
 			pause.UnPauseAll ();
 		}
+	}
+
+	public bool AreaClear(){
+		for (int x = 6; x <= 7; x++) {
+			for (int y = 7; y <= 6; y--) {
+				foreach (AIBehavior unit in enemyGrid[x,y]) {
+					if (unit.isEnemy) {
+						return false;
+					}
+				}
+			}
+		}
+
+		return true;
 	}
 }

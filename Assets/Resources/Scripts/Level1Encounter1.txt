@@ -1,0 +1,4 @@
+N
+“I should really check out the village over there.”
+X
+Check out the village. Seriously.
