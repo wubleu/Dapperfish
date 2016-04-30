@@ -200,8 +200,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void PauseGame() {
-		GameObject pauseObj = new GameObject ();
-		pause = pauseObj.AddComponent<Pause> ();
+		if (pause != null) {
+			GameObject pauseObj = new GameObject ();
+			pause = pauseObj.AddComponent<Pause> ();
+		}
 	}
 
 	public void UnPauseGame () {
