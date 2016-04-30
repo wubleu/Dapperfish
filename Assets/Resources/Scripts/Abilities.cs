@@ -17,7 +17,7 @@ public static class Abilities {
 
 	public static void Summon(float x, float y, float z) {
 		GameObject summon = new GameObject ();
-		summon.AddComponent<Summon> ().init(new Vector3(x, y, z), .4f);
+		summon.AddComponent<Summon> ().init(new Vector3(x, y, z));
 	}
 
 	public static void Blight(Vector3 pos) {
@@ -118,7 +118,7 @@ public static class Abilities {
 
 	public static Vector3 NormalizeVector(Vector3 vector, params bool[] isZ) {
 		Vector3 direction;
-		if (isZ[0] == null) {
+		if (isZ.Length == 0) {
 			direction = new Vector3 (vector.x, vector.y);
 		} else {
 			direction = new Vector3 (vector.x, vector.y);

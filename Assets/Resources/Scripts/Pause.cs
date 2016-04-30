@@ -16,14 +16,17 @@ public class Pause : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider coll) {
 		SpellEffect spell = coll.gameObject.GetComponent<SpellEffect> ();
+		Spell bossSpell = coll.gameObject.GetComponent<Spell> ();
 		AIBehavior AI = coll.gameObject.GetComponent<AIBehavior> ();
 		if (AI != null) {
 			AI.PauseAI ();
 		} else if (spell != null) {
 			spell.PauseSpell ();
+		} else if (bossSpell != null) {
+			bossSpell.PauseSpell ();
 		} else if (coll.name == "Necromancer") {
 			coll.GetComponent<PlayerController> ().PausePlayer();
-		}
+		} 
 	}
 
 	public void UnPauseAll() {
@@ -31,6 +34,9 @@ public class Pause : MonoBehaviour {
 			AI.UnPauseAI ();
 		} 
 		foreach (SpellEffect spell in GameObject.FindObjectsOfType<SpellEffect>()) {
+			spell.UnPauseSpell ();
+		}
+		foreach (Spell spell in GameObject.FindObjectsOfType<Spell>()) {
 			spell.UnPauseSpell ();
 		}
 		GameObject.FindObjectOfType<PlayerController> ().UnPausePlayer();

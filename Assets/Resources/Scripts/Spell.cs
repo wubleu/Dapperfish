@@ -7,6 +7,7 @@ public class Spell : MonoBehaviour {
 
 
 	float lifetime;
+	protected bool paused = false;
 
 
 	// Use this for initialization
@@ -27,8 +28,19 @@ public class Spell : MonoBehaviour {
 	
 	// Update is called once per frame
 	protected void Update () {
+		if (paused) {
+			return;
+		}
 		if ((lifetime -= Time.deltaTime) < 0) {
 			Destroy (gameObject);
 		}
+	}
+
+	public void PauseSpell() {
+		paused = true;
+	}
+
+	public void UnPauseSpell() {
+		paused = false;
 	}
 }

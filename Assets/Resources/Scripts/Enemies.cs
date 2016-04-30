@@ -34,7 +34,7 @@ public static class Enemies {
 		return enemy;
 	}
 
-	public static GameObject makePeasant(GameManager gMan, EnemyManager owner, PlayerController necro, Vector3 pos) {
+	public static GameObject makePeasant(GameManager gMan, EnemyManager owner, PlayerController necro, Vector3 pos, params bool[] isElite) {
 		GameObject peasant = makeEnemy(pos, .8f, "Circle");
 		peasant.name = "Peasant";
 		peasant.AddComponent<Peasant>().initPeasant(gMan, owner, necro);
@@ -42,7 +42,7 @@ public static class Enemies {
 		return peasant;
 	}
 
-	public static GameObject makeArcher(GameManager gMan, EnemyManager owner, PlayerController necro, Vector3 pos) {
+	public static GameObject makeArcher(GameManager gMan, EnemyManager owner, PlayerController necro, Vector3 pos, params bool[] isElite) {
 		GameObject archer = makeEnemy(pos, .6f, "Circle");
 		archer.name = "Archer";
 		archer.AddComponent<Archer>().initArcher(gMan, owner, necro);
@@ -50,7 +50,7 @@ public static class Enemies {
 		return archer;
 	}
 
-	public static GameObject makeKnight(GameManager gMan, EnemyManager owner, PlayerController necro, Vector3 pos) {
+	public static GameObject makeKnight(GameManager gMan, EnemyManager owner, PlayerController necro, Vector3 pos, params bool[] isElite) {
 		GameObject knight = makeEnemy(pos, 1f, "Circle");
 		SphereCollider col = knight.GetComponent<SphereCollider>();
 		knight.name = "Knight";
@@ -59,7 +59,7 @@ public static class Enemies {
 		return knight;
 	}
 
-	public static GameObject makeNecroBoss(GameManager gMan, EnemyManager owner, PlayerController necro, Vector3 pos) {
+	public static GameObject makeNecroBoss(GameManager gMan, EnemyManager owner, PlayerController necro, Vector3 pos, params bool[] isElite) {
 		GameObject necroBoss = makeEnemy (pos, 1f, "Circle");
 		necroBoss.name = "Necromancer Boss";
 		necroBoss.AddComponent<NecromancerBoss> ().initNecroBoss(gMan, owner, necro);
