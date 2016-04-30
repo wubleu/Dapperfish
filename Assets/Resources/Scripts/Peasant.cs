@@ -25,6 +25,9 @@ public class Peasant : AIBehavior {
 	}
 		
 	new void Update() {
+		if (paused) {
+			return;
+		}
 		base.Update();
 		SwitchTargets ();
 	}

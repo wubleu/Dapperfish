@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Knight : AIBehavior {
 
-	float chargespeed = 85, normalspeed = 6, wait = 0.5f, charge = 0.3f, caggro = 4, timer = 0, chargecd = .3f;
+	float chargespeed = 100, normalspeed = 6, wait = 0.5f, charge = 0.4f, caggro = 4, timer = 0, chargecd = .3f;
 	int mode = 0;
 	Vector3 start;
 	KnightMelee melee;
@@ -29,6 +29,9 @@ public class Knight : AIBehavior {
 	}
 
 	protected override void Update() {
+		if (paused) {
+			return;
+		}
 		if (target != null) {
 			if (mode == 0) { // walking
 				SwitchTargets ();
@@ -81,7 +84,8 @@ public class Knight : AIBehavior {
 	}
 
 	void OnCollisionStay(Collision coll) {
-		if (meleeTimer >= meleecd && (coll.collider.gameObject.name == "Necromancer" || (coll.gameObject.gameObject.tag == "AI" && !coll.collider.GetComponent<AIBehavior>().isEnemy))) {
+		if (meleeTimer >= meleecd && (coll.collider.gameObject.name == "Necromancer" || 
+			(coll.gameObject.gameObject.tag == "AI" && !coll.collider.GetComponent<AIBehavior>().isEnemy))) {
 			rend.sprite = cSprites [0];
 			melee.Enable();
 			meleeTimer = 0;

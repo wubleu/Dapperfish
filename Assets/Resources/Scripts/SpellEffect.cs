@@ -6,6 +6,7 @@ public class SpellEffect : MonoBehaviour {
 	// PARAMETERS
 	float lifetime, spellSpeed, radius, clock = 0, infectPower = 250;
 	bool enemy;
+	bool paused = false;
 	float arrowPower;
 	Vector3 angle;
 
@@ -22,6 +23,9 @@ public class SpellEffect : MonoBehaviour {
 	}
 
 	void Update() {
+		if (paused) {
+			return;
+		}
 		if ((clock += Time.deltaTime) > lifetime) {
 			Destroy(gameObject);
 		}
@@ -56,12 +60,11 @@ public class SpellEffect : MonoBehaviour {
 				return;
 			case "Bullet":
 				if (enemy != AI.isEnemy) {
-					AI.Damage (1);
+					AI.Damage (2);
 					Destroy (gameObject);
 				}
 				return;
 			case "Arrow":
-				print (col.gameObject.name);
 				if (enemy != AI.isEnemy) {
 					AI.Damage (arrowPower);
 					Destroy (gameObject);
@@ -85,5 +88,13 @@ public class SpellEffect : MonoBehaviour {
 				AI.Root ();
 			}
 		}
+	}
+
+	public void PauseSpell() {
+		paused = true;
+	}
+
+	public void UnPauseSpell() {
+		paused = false;
 	}
 }

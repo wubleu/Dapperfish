@@ -60,6 +60,7 @@
      <Compile Include="Assets\Resources\Scripts\KnightMelee.cs" />
      <Compile Include="Assets\Resources\Scripts\Link.cs" />
      <Compile Include="Assets\Resources\Scripts\Melee.cs" />
+     <Compile Include="Assets\Resources\Scripts\Pause.cs" />
      <Compile Include="Assets\Resources\Scripts\Peasant.cs" />
      <Compile Include="Assets\Resources\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Resources\Scripts\SpellEffect.cs" />

@@ -8,6 +8,9 @@ public class AIBehavior : MonoBehaviour {
 	public float hoverRadius, chaseDist, chaseThreshold, chaseClock, aggroRange, necroAggroModifier, speed,
 		meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp, maxHP, infectionCost,
 		animcount, animmax, meleecd = .2f, rootPersistence = .5f, convertedHp = .8f, convertedStrength = .6f;
+	protected bool paused = false;
+	protected float resumeSpeed;
+	protected float resumeAcceleration;
 	public GameObject target = null;
 	protected GameObject necromancer;
 	public GameManager gManager;
@@ -256,8 +259,8 @@ public class AIBehavior : MonoBehaviour {
 	}
 
 	protected virtual void OnCollision(Collision coll) {
-		if (transform.position.x < 10 && transform.position.z < 10) {
-		}
+//		if (transform.position.x < 10 && transform.position.z < 10) {
+//		}
 		if (coll.gameObject == target) {
 				if (meleeTimer > meleeThreshold) {
 					SwitchTargets ();
@@ -281,7 +284,11 @@ public class AIBehavior : MonoBehaviour {
 	void OnCollisionExit(Collision coll) {
 		if (coll.gameObject == target) {
 			agent.enabled = true;
-			agent.speed = speed;
+			if (paused) {
+				resumeSpeed = agent.speed;
+			} else {
+				agent.speed = resumeSpeed;
+			}
 		}
 	}
 
@@ -305,6 +312,7 @@ public class AIBehavior : MonoBehaviour {
 	}
 
 	public virtual void Root() {
+		
 		root = rootPersistence;
 		agent.speed = 0;
 	}
@@ -325,5 +333,19 @@ public class AIBehavior : MonoBehaviour {
 	protected void SetToElite() {
 		isElite = true;
 		immune = true;
+	}
+
+	public void PauseAI() {
+		paused = true;
+		resumeAcceleration = agent.acceleration;
+		agent.acceleration = 1000;
+		resumeSpeed = agent.speed;
+		agent.speed = 0;
+	}
+
+	public void UnPauseAI () {
+		paused = false;
+		agent.speed = resumeSpeed;
+		agent.acceleration = resumeAcceleration;
 	}
 }
