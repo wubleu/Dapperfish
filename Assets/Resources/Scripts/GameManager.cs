@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour {
 //			UnPauseGame ();
 //			playTimer = 0;
 //		}
-
+		print(Encounter);
 		//THESE IFS ARE ALSO TEMPORARY TILL BUTTON'S UP
 		if (dead == true) {
 			if ((deathTimer += Time.deltaTime) > deathInterval) {

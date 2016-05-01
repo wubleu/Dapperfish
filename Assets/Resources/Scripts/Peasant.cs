@@ -27,7 +27,7 @@ public class Peasant : AIBehavior {
 				base.init (gMan, owner, necro);
 			}
 			if (isElite.Length > 1) {
-				inWave = true;
+				inWave = isElite[1];
 				agent.destination = necromancer.transform.position;
 			}
 		} else {

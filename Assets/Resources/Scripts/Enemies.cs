@@ -37,7 +37,13 @@ public static class Enemies {
 	public static GameObject makePeasant(GameManager gMan, EnemyManager owner, PlayerController necro, Vector3 pos, params bool[] isElite) {
 		GameObject peasant = makeEnemy(pos, .8f, "Circle");
 		peasant.name = "Peasant";
-		peasant.AddComponent<Peasant>().initPeasant(gMan, owner, necro);
+		if (isElite.Length == 0) {
+			peasant.AddComponent<Peasant> ().initPeasant (gMan, owner, necro);
+		} else if (isElite.Length == 1) {
+			peasant.AddComponent<Peasant> ().initPeasant (gMan, owner, necro, isElite [0]);
+		} else if (isElite.Length == 2) {
+			peasant.AddComponent<Peasant> ().initPeasant (gMan, owner, necro, isElite[0], isElite [1]);
+		}
 
 		return peasant;
 	}
@@ -45,7 +51,13 @@ public static class Enemies {
 	public static GameObject makeArcher(GameManager gMan, EnemyManager owner, PlayerController necro, Vector3 pos, params bool[] isElite) {
 		GameObject archer = makeEnemy(pos, .6f, "Circle");
 		archer.name = "Archer";
-		archer.AddComponent<Archer>().initArcher(gMan, owner, necro);
+		if (isElite.Length == 0) {
+			archer.AddComponent<Archer> ().initArcher (gMan, owner, necro);
+		} else if (isElite.Length == 1) {
+			archer.AddComponent<Archer> ().initArcher (gMan, owner, necro, isElite [0]);
+		} else if (isElite.Length == 2) {
+			archer.AddComponent<Archer> ().initArcher (gMan, owner, necro, isElite[0], isElite [1]);
+		}
 
 		return archer;
 	}
@@ -54,7 +66,13 @@ public static class Enemies {
 		GameObject knight = makeEnemy(pos, 1f, "Circle");
 		SphereCollider col = knight.GetComponent<SphereCollider>();
 		knight.name = "Knight";
-		knight.AddComponent<Knight>().initKnight(gMan, owner, necro);
+		if (isElite.Length == 0) {
+			knight.AddComponent<Knight> ().initKnight (gMan, owner, necro);
+		} else if (isElite.Length == 1) {
+			knight.AddComponent<Knight> ().initKnight (gMan, owner, necro, isElite [0]);
+		} else if (isElite.Length == 2) {
+			knight.AddComponent<Knight> ().initKnight (gMan, owner, necro, isElite[0], isElite [1]);
+		}
 
 		return knight;
 	}
