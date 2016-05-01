@@ -10,7 +10,7 @@ public class SpellEffect : MonoBehaviour {
 	float arrowPower;
 	Vector3 angle;
 
-	public void init(float life, float speed = 0, Vector3 dir = default(Vector3), bool bad = false, params float[] arrowDamage) {
+	public void init(float life, bool bad = false, float speed = 0, Vector3 dir = default(Vector3), params float[] arrowDamage) {
 		radius = transform.localScale.x;
 		lifetime = life;
 		spellSpeed = speed;
@@ -70,6 +70,7 @@ public class SpellEffect : MonoBehaviour {
 				AI.Damage (2);
 				Destroy (gameObject);
 			} else if (enemy && col.name == "Necromancer") {
+				print ("necro");  
 				col.GetComponent<PlayerController> ().Damage (2);
 				Destroy (gameObject);
 			} else if (!enemy && col.name == "Necromancer Boss") {

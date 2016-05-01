@@ -24,7 +24,7 @@ public class Peasant : AIBehavior {
 		if (isElite.Length > 0) {
 			base.init (gMan, owner, necro, true);
 		} else {
-			base.init (gMan, owner, necro, true);
+			base.init (gMan, owner, necro, false);
 		}
 	}
 		
