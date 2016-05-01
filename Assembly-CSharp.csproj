@@ -76,6 +76,7 @@
      <None Include="Assets\Resources\Scripts\Level1Encounter99.txt" />
      <None Include="Assets\Resources\Scripts\Level1Encounter1.txt" />
      <None Include="Assets\Resources\Scripts\Level1Encounter2.txt" />
+     <None Include="Assets\Resources\Scripts\Level1Encounter4.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
