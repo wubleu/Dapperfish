@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour {
 	// THIS IS JUST UNTIL EVAN GETS THE RESTART BUTTON UP
 	float deathInterval = 3f;
 	float deathTimer = 0;
+	public int level = 1;
 	// TESTING PURPOSES- FEEL FREE TO DELETE, THESE ARE JUST TO DEMONSTRATE PAUSE FUNCTIONALITY
 //	float playInterval = .2f;
 //	float pauseInterval = 1f;
