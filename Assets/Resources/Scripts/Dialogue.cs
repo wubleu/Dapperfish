@@ -1,0 +1,111 @@
+﻿using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
+
+public class Dialogue : MonoBehaviour {
+
+	public GameManager Gman;
+	public GameObject Dbox;
+	public GameObject Necro;
+	public GameObject Boss;
+	public int encounter;
+	bool complete = false;
+	int encparts = 0;
+	int level = 1;
+	string[] instructions;
+	bool start = false;
+	// Use this for initialization
+	void Start () {
+		instructions = Resources.Load<TextAsset>("Scripts/Level" + level + "Encounter" + encounter).text.Split(new char[1]{'\n'});
+
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		if (start) {
+			if (instructions [encparts] == "N") {
+				Necro.SetActive (true);
+				encparts++;
+			}
+			if (instructions [encparts] == "B") {
+				encparts++;
+
+			}
+			Dbox.GetComponentInChildren<Text> ().text = instructions [encparts];
+
+			if (Input.GetKeyUp (KeyCode.E)) {
+				encparts++;
+			}
+			if (instructions[encparts] == "X") {
+				start = false;
+				Gman.UnPauseGame ();
+				encparts++;
+				Dbox.GetComponentInChildren<Text> ().text = "";
+				Dbox.SetActive (false);
+				Necro.SetActive (false);
+				if (complete) {
+					Gman.objectives.text = instructions [encparts];
+					Gman.Encounter++;
+					Destroy (this.gameObject);
+				}
+				if (encounter == 1 && level == 1) {
+					Gman.objectives.text = instructions [encparts];
+				}
+				if (encounter < Gman.Encounter) {
+					Destroy (this.gameObject);
+				}
+			}
+		}
+
+
+	}
+
+	void OnCollisionStay(Collision collision){
+		if (collision.gameObject.name == "Necromancer") {
+			Dbox.SetActive (true);
+			Gman.PauseGame ();
+			start = true;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			if (encounter == 99 && level == 1) {
+				if (collision.gameObject.GetComponent<PlayerController> ().hasKey) {
+					encounter = 6;
+					instructions = Resources.Load<TextAsset> ("Scripts/Level" + level + "Encounter" + encounter).text.Split (new char[1]{ '\n' });
+				} else {
+					if (collision.gameObject.transform.position.z > transform.position.z + transform.localScale.z/2) {
+						collision.gameObject.transform.position = new Vector3 (collision.gameObject.transform.position.x, collision.gameObject.transform.position.z, collision.gameObject.transform.position.z + .3f);
+					} else if (collision.gameObject.transform.position.z < transform.position.z - transform.localScale.z/2) {
+						collision.gameObject.transform.position = new Vector3 (collision.gameObject.transform.position.x, collision.gameObject.transform.position.z, collision.gameObject.transform.position.z - .3f);
+					} else {
+						collision.gameObject.transform.position = new Vector3 (collision.gameObject.transform.position.x - .3f, collision.gameObject.transform.position.z, collision.gameObject.transform.position.z);
+					}
+					encparts = 0;
+				}
+			}
+			if (encounter == 1 && level == 1) {
+				if (collision.gameObject.transform.position.z > transform.position.z + transform.localScale.z / 2) {
+					collision.gameObject.transform.position = new Vector3 (collision.gameObject.transform.position.x, collision.gameObject.transform.position.z, collision.gameObject.transform.position.z + .3f);
+				} else if (collision.gameObject.transform.position.z < transform.position.z - transform.localScale.z / 2) {
+					collision.gameObject.transform.position = new Vector3 (collision.gameObject.transform.position.x, collision.gameObject.transform.position.z, collision.gameObject.transform.position.z - .3f);
+				} else {
+					collision.gameObject.transform.position = new Vector3 (collision.gameObject.transform.position.x - .3f, collision.gameObject.transform.position.z, collision.gameObject.transform.position.z);
+				}
+				encparts = 0;
+			} else {
+				complete = true;
+			}
+		}
+	}
+}

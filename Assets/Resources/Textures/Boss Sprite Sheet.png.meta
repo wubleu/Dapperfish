@@ -1,9 +1,53 @@
 fileFormatVersion: 2
 guid: 4091db3bff44246bfaecbca57159c02b
-timeCreated: 1461805168
+timeCreated: 1462047290
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Boss Sprite Sheet 0
+    21300002: Boss Sprite Sheet 1
+    21300004: Boss Sprite Sheet 2
+    21300006: Boss Sprite Sheet 3
+    21300008: Boss Sprite Sheet 4
+    21300010: Boss Sprite Sheet 5
+    21300012: Boss Sprite Sheet 6
+    21300014: Boss Sprite Sheet 7
+    21300016: Boss Sprite Sheet_8
+    21300018: Boss Sprite Sheet_9
+    21300020: Boss Sprite Sheet_10
+    21300022: Boss Sprite Sheet_11
+    21300024: Boss Sprite Sheet_12
+    21300026: Boss Sprite Sheet_13
+    21300028: Boss Sprite Sheet_14
+    21300030: Boss Sprite Sheet_15
+    21300032: Boss Sprite Sheet_16
+    21300034: Boss Sprite Sheet_17
+    21300036: Boss Sprite Sheet_18
+    21300038: Boss Sprite Sheet_19
+    21300040: Boss Sprite Sheet_20
+    21300042: Boss Sprite Sheet_21
+    21300044: Boss Sprite Sheet_22
+    21300046: Boss Sprite Sheet_23
+    21300048: Boss Sprite Sheet_24
+    21300050: Boss Sprite Sheet_25
+    21300052: Boss Sprite Sheet_26
+    21300054: Boss Sprite Sheet_27
+    21300056: Boss Sprite Sheet_28
+    21300058: Boss Sprite Sheet_29
+    21300060: Boss Sprite Sheet_30
+    21300062: Boss Sprite Sheet_31
+    21300064: Boss Sprite Sheet_32
+    21300066: Boss Sprite Sheet_33
+    21300068: Boss Sprite Sheet_34
+    21300070: Boss Sprite Sheet_35
+    21300072: Boss Sprite Sheet_36
+    21300074: Boss Sprite Sheet_37
+    21300076: Boss Sprite Sheet_38
+    21300078: Boss Sprite Sheet_39
+    21300080: Boss Sprite Sheet_40
+    21300082: Boss Sprite Sheet_41
+    21300084: Boss Sprite Sheet_42
+    21300086: Boss Sprite Sheet_43
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -29,8 +73,8 @@ TextureImporter:
   textureFormat: -1
   maxTextureSize: 2048
   textureSettings:
-    filterMode: -1
-    aniso: -1
+    filterMode: 1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -38,7 +82,7 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -49,7 +93,793 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Boss Sprite Sheet 0
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 1041
+        width: 128
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 31.146667, y: 25.820007}
+        - {x: -22.853333, y: 25.820007}
+        - {x: -54.853333, y: 10.820007}
+        - {x: -54.853333, y: -7.1799927}
+        - {x: -43.853333, y: -25.179993}
+        - {x: 43.146667, y: -25.179993}
+        - {x: 55.146667, y: -11.179993}
+        - {x: 55.146667, y: 7.8200073}
+        - {x: 47.146667, y: 19.820007}
+    - name: Boss Sprite Sheet 1
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 1031
+        width: 128
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 31.146667, y: 30.786682}
+        - {x: -21.853333, y: 30.786682}
+        - {x: -54.853333, y: 20.786682}
+        - {x: -54.853333, y: -28.213318}
+        - {x: -50.853333, y: -29.213318}
+        - {x: 42.146667, y: -29.213318}
+        - {x: 55.146667, y: -3.2133179}
+        - {x: 55.146667, y: 17.786682}
+    - name: Boss Sprite Sheet 2
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 1001
+        width: 135
+        height: 129
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 8.440002, y: 55.686707}
+        - {x: -28.559998, y: 55.686707}
+        - {x: -57.559998, y: 26.686707}
+        - {x: -57.559998, y: -45.313293}
+        - {x: -36.559998, y: -55.313293}
+        - {x: 33.440002, y: -55.313293}
+        - {x: 58.440002, y: -26.313293}
+        - {x: 58.440002, y: 32.686707}
+        - {x: 56.440002, y: 36.686707}
+    - name: Boss Sprite Sheet 3
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 992
+        width: 218
+        height: 163
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -63.6333, y: 70.506714}
+        - {x: -92.6333, y: 66.506714}
+        - {x: -92.6333, y: -61.493286}
+        - {x: -48.6333, y: -69.493286}
+        - {x: 85.3667, y: -69.493286}
+        - {x: 94.3667, y: -51.493286}
+        - {x: 94.3667, y: 47.506714}
+        - {x: 84.3667, y: 70.506714}
+    - name: Boss Sprite Sheet 4
+      rect:
+        serializedVersion: 2
+        x: 1236
+        y: 981
+        width: 214
+        height: 165
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16.28003, y: 70.619995}
+        - {x: -91.28003, y: 41.619995}
+        - {x: -91.28003, y: -59.380005}
+        - {x: -56.28003, y: -70.380005}
+        - {x: 45.71997, y: -70.380005}
+        - {x: 92.71997, y: -39.380005}
+        - {x: 92.71997, y: 23.619995}
+        - {x: 56.71997, y: 70.619995}
+    - name: Boss Sprite Sheet 5
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 998
+        width: 160
+        height: 123
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 64.70007, y: 41.62671}
+        - {x: 49.700073, y: 53.62671}
+        - {x: -45.299927, y: 53.62671}
+        - {x: -68.29993, y: 46.62671}
+        - {x: -68.29993, y: -40.37329}
+        - {x: -44.299927, y: -50.37329}
+        - {x: 59.700073, y: -50.37329}
+        - {x: 68.70007, y: -29.373291}
+        - {x: 68.70007, y: 38.62671}
+    - name: Boss Sprite Sheet 6
+      rect:
+        serializedVersion: 2
+        x: 1874
+        y: 1001
+        width: 138
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -58.85327, y: 46.686707}
+        - {x: -58.85327, y: -35.313293}
+        - {x: -42.85327, y: -46.313293}
+        - {x: 44.14673, y: -46.313293}
+        - {x: 59.14673, y: -41.313293}
+        - {x: 59.14673, y: 19.686707}
+        - {x: 31.146729, y: 46.686707}
+    - name: Boss Sprite Sheet 7
+      rect:
+        serializedVersion: 2
+        x: 2188
+        y: 1025
+        width: 104
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -31.406616, y: 33.166687}
+        - {x: -44.406616, y: 7.166687}
+        - {x: -44.406616, y: -31.833313}
+        - {x: 33.593384, y: -31.833313}
+        - {x: 44.593384, y: -18.833313}
+        - {x: 44.593384, y: 16.166687}
+        - {x: 22.593384, y: 33.166687}
+    - name: Boss Sprite Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 731
+        width: 72
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -6.6066666, y: -21.213318}
+        - {x: -9.606667, y: -21.213318}
+        - {x: -11.606667, y: -23.213318}
+        - {x: -11.606667, y: -29.213318}
+        - {x: -9.606667, y: -31.213318}
+        - {x: 11.393333, y: -31.213318}
+        - {x: 11.393333, y: -25.213318}
+        - {x: 9.393333, y: -24.213318}
+      - - {x: -30.606667, y: -14.213318}
+        - {x: -30.606667, y: -28.213318}
+        - {x: -28.606667, y: -30.213318}
+        - {x: -15.606667, y: -30.213318}
+        - {x: -11.606667, y: -29.213318}
+        - {x: -11.606667, y: -17.213318}
+        - {x: -21.606667, y: -14.213318}
+      - - {x: -27.606667, y: 32.786682}
+        - {x: -20.606667, y: 21.786682}
+        - {x: -16.606667, y: 17.786682}
+        - {x: -22.606667, y: 14.786682}
+        - {x: -30.606667, y: 9.786682}
+        - {x: -30.606667, y: -3.2133179}
+        - {x: -23.606667, y: -17.213318}
+        - {x: 32.393333, y: -17.213318}
+        - {x: 32.393333, y: 27.786682}
+        - {x: 25.393333, y: 32.786682}
+    - name: Boss Sprite Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 748
+        width: 17
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 745
+        width: 20
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 742
+        width: 126
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -53.67334, y: 25.67334}
+        - {x: -53.67334, y: -3.3266602}
+        - {x: -24.67334, y: -25.32666}
+        - {x: 48.32666, y: -25.32666}
+        - {x: 55.32666, y: -19.32666}
+        - {x: 55.32666, y: 17.67334}
+        - {x: 26.32666, y: 25.67334}
+    - name: Boss Sprite Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 665
+        width: 21
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 678
+        width: 23
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 725
+        width: 69
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 692
+        width: 41
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -7.58667, y: 24.506653}
+        - {x: -14.58667, y: 22.506653}
+        - {x: -17.58667, y: 8.506653}
+        - {x: -17.58667, y: -18.493347}
+        - {x: -9.58667, y: -23.493347}
+        - {x: 18.41333, y: -23.493347}
+        - {x: 18.41333, y: 10.506653}
+        - {x: 11.41333, y: 24.506653}
+    - name: Boss Sprite Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 1055
+        y: 694
+        width: 40
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -10.233337, y: 23.213318}
+        - {x: -17.233337, y: 7.213318}
+        - {x: -17.233337, y: -14.786682}
+        - {x: -6.2333374, y: -22.786682}
+        - {x: 12.766663, y: -22.786682}
+        - {x: 17.766663, y: -20.786682}
+        - {x: 17.766663, y: 16.213318}
+        - {x: 16.766663, y: 23.213318}
+    - name: Boss Sprite Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 1355
+        y: 694
+        width: 40
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -10.233276, y: 23.213318}
+        - {x: -17.233276, y: 7.213318}
+        - {x: -17.233276, y: -14.786682}
+        - {x: -6.2332764, y: -22.786682}
+        - {x: 12.766724, y: -22.786682}
+        - {x: 17.766724, y: -20.786682}
+        - {x: 17.766724, y: 16.213318}
+        - {x: 16.766724, y: 23.213318}
+    - name: Boss Sprite Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 1593
+        y: 710
+        width: 56
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 1893
+        y: 710
+        width: 56
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_20
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 536
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 654
+        y: 371
+        width: 184
+        height: 169
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 60.080017, y: 56.08667}
+        - {x: 23.080017, y: 68.08667}
+        - {x: -43.919983, y: 68.08667}
+        - {x: -56.919983, y: 62.08667}
+        - {x: -56.919983, y: -16.91333}
+        - {x: -31.919983, y: -71.91333}
+        - {x: 17.080017, y: -71.91333}
+        - {x: 27.080017, y: -58.91333}
+        - {x: 63.080017, y: -14.91333}
+        - {x: 63.080017, y: 42.08667}
+      - - {x: 56.080017, y: -19.91333}
+        - {x: 40.080017, y: -19.91333}
+        - {x: 32.080017, y: -33.91333}
+        - {x: 32.080017, y: -57.91333}
+        - {x: 48.080017, y: -57.91333}
+        - {x: 54.080017, y: -55.91333}
+        - {x: 62.080017, y: -45.91333}
+        - {x: 62.080017, y: -28.91333}
+        - {x: 61.080017, y: -20.91333}
+      - - {x: -73.91998, y: -3.91333}
+        - {x: -78.91998, y: -14.91333}
+        - {x: -78.91998, y: -41.91333}
+        - {x: -51.919983, y: -41.91333}
+        - {x: -46.919983, y: -40.91333}
+        - {x: -46.919983, y: -15.91333}
+        - {x: -57.919983, y: -3.91333}
+      - - {x: 53.080017, y: 68.08667}
+        - {x: 50.080017, y: 67.08667}
+        - {x: 50.080017, y: 57.08667}
+        - {x: 54.080017, y: 49.08667}
+        - {x: 58.080017, y: 46.08667}
+        - {x: 67.08002, y: 37.08667}
+        - {x: 73.08002, y: 37.08667}
+        - {x: 79.08002, y: 42.08667}
+        - {x: 79.08002, y: 59.08667}
+        - {x: 70.08002, y: 68.08667}
+      - - {x: -57.919983, y: 73.08667}
+        - {x: -74.91998, y: 61.08667}
+        - {x: -74.91998, y: 53.08667}
+        - {x: -73.91998, y: 50.08667}
+        - {x: -62.919983, y: 50.08667}
+        - {x: -58.919983, y: 51.08667}
+        - {x: -44.919983, y: 65.08667}
+        - {x: -44.919983, y: 73.08667}
+    - name: Boss Sprite Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 856
+        y: 449
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_23
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 293
+        width: 21
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_24
+      rect:
+        serializedVersion: 2
+        x: 893
+        y: 247
+        width: 76
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_25
+      rect:
+        serializedVersion: 2
+        x: 899
+        y: 240
+        width: 65
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_26
+      rect:
+        serializedVersion: 2
+        x: 1217
+        y: 316
+        width: 38
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_27
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 384
+        width: 83
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -13.613312, y: 46.179993}
+        - {x: -23.613312, y: 56.179993}
+        - {x: -35.61331, y: 56.179993}
+        - {x: -35.61331, y: -8.820007}
+        - {x: -14.613312, y: -43.820007}
+        - {x: -2.6133118, y: -54.820007}
+        - {x: 24.386688, y: -54.820007}
+        - {x: 28.386688, y: -52.820007}
+        - {x: 36.38669, y: -46.820007}
+        - {x: 36.38669, y: -15.820007}
+    - name: Boss Sprite Sheet_28
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 309
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_29
+      rect:
+        serializedVersion: 2
+        x: 1223
+        y: 314
+        width: 39
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_30
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 374
+        width: 76
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -32.37333, y: 53.646667}
+        - {x: -32.37333, y: 7.6466675}
+        - {x: -8.373329, y: -53.353333}
+        - {x: 26.62667, y: -53.353333}
+        - {x: 33.62667, y: -48.353333}
+        - {x: 33.62667, y: -32.353333}
+        - {x: -16.37333, y: 53.646667}
+    - name: Boss Sprite Sheet_31
+      rect:
+        serializedVersion: 2
+        x: 1226
+        y: 302
+        width: 28
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_32
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 310
+        width: 29
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_33
+      rect:
+        serializedVersion: 2
+        x: 1245
+        y: 343
+        width: 23
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_34
+      rect:
+        serializedVersion: 2
+        x: 1594
+        y: 417
+        width: 139
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -59.28662, y: 31.839996}
+        - {x: -59.28662, y: 2.8399963}
+        - {x: -43.28662, y: -28.160004}
+        - {x: -35.28662, y: -30.160004}
+        - {x: 35.71338, y: -30.160004}
+        - {x: 59.71338, y: -12.160004}
+        - {x: 59.71338, y: 31.839996}
+    - name: Boss Sprite Sheet_35
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 403
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_36
+      rect:
+        serializedVersion: 2
+        x: 962
+        y: 368
+        width: 177
+        height: 169
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -6.0933228, y: -33.473328}
+        - {x: -10.093323, y: -18.473328}
+        - {x: 5.9066772, y: -28.473328}
+        - {x: 32.906677, y: -26.473328}
+        - {x: 58.906677, y: 7.5266724}
+        - {x: 58.906677, y: 69.52667}
+        - {x: -60.093323, y: 69.52667}
+        - {x: -63.093323, y: 62.526672}
+        - {x: -63.093323, y: 8.526672}
+        - {x: -39.093323, y: -21.473328}
+        - {x: -33.093323, y: -20.473328}
+        - {x: -27.093323, y: -20.473328}
+        - {x: -26.093323, y: -21.473328}
+        - {x: -24.093323, y: -22.473328}
+        - {x: -28.093323, y: -20.473328}
+        - {x: -33.093323, y: -20.473328}
+        - {x: -40.093323, y: -23.473328}
+        - {x: -39.093323, y: -72.47333}
+        - {x: 20.906677, y: -72.47333}
+        - {x: 30.906677, y: -34.473328}
+        - {x: 15.906677, y: -28.473328}
+        - {x: -2.0933228, y: -28.473328}
+      - - {x: 27.906677, y: -35.473328}
+        - {x: 27.906677, y: -58.473328}
+        - {x: 33.906677, y: -59.473328}
+        - {x: 45.906677, y: -59.473328}
+        - {x: 45.906677, y: -44.473328}
+        - {x: 37.906677, y: -35.473328}
+      - - {x: 42.906677, y: -17.473328}
+        - {x: 39.906677, y: -18.473328}
+        - {x: 39.906677, y: -39.473328}
+        - {x: 50.906677, y: -49.473328}
+        - {x: 59.906677, y: -49.473328}
+        - {x: 65.90668, y: -46.473328}
+        - {x: 65.90668, y: -26.473328}
+        - {x: 58.906677, y: -17.473328}
+      - - {x: -73.09332, y: -17.473328}
+        - {x: -75.09332, y: -18.473328}
+        - {x: -75.09332, y: -35.473328}
+        - {x: -64.09332, y: -35.473328}
+        - {x: -61.093323, y: -31.473328}
+        - {x: -61.093323, y: -20.473328}
+        - {x: -62.093323, y: -17.473328}
+      - - {x: 60.906677, y: 57.526672}
+        - {x: 57.906677, y: 52.526672}
+        - {x: 57.906677, y: 41.526672}
+        - {x: 76.90668, y: 41.526672}
+        - {x: 76.90668, y: 57.526672}
+      - - {x: -69.09332, y: 72.52667}
+        - {x: -71.09332, y: 70.52667}
+        - {x: -71.09332, y: 57.526672}
+        - {x: -58.093323, y: 57.526672}
+        - {x: -51.093323, y: 66.52667}
+        - {x: -51.093323, y: 72.52667}
+    - name: Boss Sprite Sheet_37
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 337
+        width: 30
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_38
+      rect:
+        serializedVersion: 2
+        x: 1287
+        y: 373
+        width: 127
+        height: 147
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -38.26001, y: -22.706665}
+        - {x: -38.26001, y: -44.706665}
+        - {x: -33.26001, y: -62.706665}
+        - {x: -9.26001, y: -62.706665}
+        - {x: -9.26001, y: -24.706665}
+        - {x: -22.26001, y: -22.706665}
+      - - {x: 1.7399902, y: -59.706665}
+        - {x: 14.73999, y: -59.706665}
+        - {x: 18.73999, y: -58.706665}
+        - {x: 18.73999, y: -45.706665}
+        - {x: 16.73999, y: -37.706665}
+        - {x: 9.73999, y: -34.706665}
+        - {x: -3.2600098, y: -34.706665}
+        - {x: -3.2600098, y: -54.706665}
+      - - {x: -2.2600098, y: -15.706665}
+        - {x: 0.73999023, y: -18.706665}
+        - {x: 19.73999, y: -18.706665}
+        - {x: 24.73999, y: -16.706665}
+        - {x: 24.73999, y: -3.706665}
+        - {x: 19.73999, y: 4.293335}
+        - {x: -1.2600098, y: 4.293335}
+        - {x: -2.2600098, y: 0.29333496}
+      - - {x: -13.26001, y: 11.293335}
+        - {x: -28.26001, y: 11.293335}
+        - {x: -31.26001, y: 10.293335}
+        - {x: -31.26001, y: -7.706665}
+        - {x: -30.26001, y: -12.706665}
+        - {x: -7.26001, y: -12.706665}
+        - {x: -4.26001, y: -5.706665}
+        - {x: -4.26001, y: 9.293335}
+        - {x: -5.26001, y: 10.293335}
+      - - {x: 4.73999, y: 33.293335}
+        - {x: 4.73999, y: 19.293335}
+        - {x: 14.73999, y: 10.293335}
+        - {x: 29.73999, y: 10.293335}
+        - {x: 32.73999, y: 11.293335}
+        - {x: 32.73999, y: 31.293335}
+        - {x: 26.73999, y: 33.293335}
+      - - {x: 6.73999, y: 63.293335}
+        - {x: 6.73999, y: 17.293335}
+        - {x: 8.73999, y: 13.293335}
+        - {x: 54.73999, y: 13.293335}
+        - {x: 54.73999, y: 51.293335}
+        - {x: 39.73999, y: 63.293335}
+      - - {x: -21.26001, y: 46.293335}
+        - {x: -29.26001, y: 38.293335}
+        - {x: -29.26001, y: 22.293335}
+        - {x: -28.26001, y: 20.293335}
+        - {x: -11.26001, y: 20.293335}
+        - {x: -2.2600098, y: 24.293335}
+        - {x: -2.2600098, y: 46.293335}
+      - - {x: -48.26001, y: 63.293335}
+        - {x: -54.26001, y: 59.293335}
+        - {x: -54.26001, y: 37.293335}
+        - {x: -50.26001, y: 33.293335}
+        - {x: -32.26001, y: 33.293335}
+        - {x: -26.26001, y: 36.293335}
+        - {x: -21.26001, y: 45.293335}
+        - {x: -21.26001, y: 63.293335}
+    - name: Boss Sprite Sheet_39
+      rect:
+        serializedVersion: 2
+        x: 941
+        y: 322
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_40
+      rect:
+        serializedVersion: 2
+        x: 976
+        y: 238
+        width: 33
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_41
+      rect:
+        serializedVersion: 2
+        x: 1025
+        y: 205
+        width: 42
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_42
+      rect:
+        serializedVersion: 2
+        x: 1212
+        y: 305
+        width: 31
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Boss Sprite Sheet_43
+      rect:
+        serializedVersion: 2
+        x: 1223
+        y: 316
+        width: 23
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
     outline: []
   spritePackingTag: 
   userData: 

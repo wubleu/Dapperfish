@@ -47,6 +47,11 @@
   <ItemGroup>
      <Compile Include="Assets\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
      <None Include="Assets\Resources\Scripts\level1.txt" />
+     <None Include="Assets\Resources\Scripts\Level1Encounter3.txt" />
+     <None Include="Assets\Resources\Scripts\Level1Encounter0.txt" />
+     <None Include="Assets\Resources\Scripts\Level1Encounter99.txt" />
+     <None Include="Assets\Resources\Scripts\Level1Encounter1.txt" />
+     <None Include="Assets\Resources\Scripts\Level1Encounter2.txt" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>

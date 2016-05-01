@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
 
 	PlayerController necromancer;
 	EnemyManager eManager;
+	Pause pause;
 	public List<AIBehavior>[,] enemyGrid;
 	public int xGridOrigin = -30;
 	public int yGridOrigin = -90;
@@ -23,10 +24,15 @@ public class GameManager : MonoBehaviour {
 	public AudioClip scratch;
 	public List<Link> links;
 	public List<KeyInfo> keys;
-
+	public int Encounter = 0;
 	// THIS IS JUST UNTIL EVAN GETS THE RESTART BUTTON UP
 	float deathInterval = 3f;
 	float deathTimer = 0;
+	// TESTING PURPOSES- FEEL FREE TO DELETE, THESE ARE JUST TO DEMONSTRATE PAUSE FUNCTIONALITY
+//	float playInterval = .2f;
+//	float pauseInterval = 1f;
+//	float playTimer = 0;
+//	float pauseTimer = 0;
 
 	void Start() {
 		init ();
@@ -70,6 +76,16 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Update() {
+		//GOES WITH THE COMMENTED OUT PLAY/PAUSE TIMER/INTERVAL FIELDS, DEMONSTRATES PAUSE FUNCTIONALITY
+//		if (playTimer < playInterval && (playTimer += Time.deltaTime) > playInterval) {
+//			PauseGame ();
+//			pauseTimer = 0;
+//		}
+//		else if (pauseTimer < pauseInterval && (pauseTimer += Time.deltaTime) > pauseInterval) {
+//			UnPauseGame ();
+//			playTimer = 0;
+//		}
+
 		//THESE IFS ARE ALSO TEMPORARY TILL BUTTON'S UP
 		if (dead == true) {
 			if ((deathTimer += Time.deltaTime) > deathInterval) {
@@ -181,5 +197,32 @@ public class GameManager : MonoBehaviour {
 
 	public void ChangeObjective(string obj){
 		objectives.text = obj;
+	}
+
+	public void PauseGame() {
+		if (pause == null) {
+			GameObject pauseObj = new GameObject ();
+			pause = pauseObj.AddComponent<Pause> ();
+		}
+	}
+
+	public void UnPauseGame () {
+		if (pause != null) {
+			pause.UnPauseAll ();
+		}
+	}
+
+	public bool AreaClear(){
+		for (int x = 6; x <= 7; x++) {
+			for (int y = 7; y <= 6; y--) {
+				foreach (AIBehavior unit in enemyGrid[x,y]) {
+					if (unit.isEnemy) {
+						return false;
+					}
+				}
+			}
+		}
+
+		return true;
 	}
 }

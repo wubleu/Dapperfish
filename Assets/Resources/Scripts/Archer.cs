@@ -35,6 +35,9 @@ public class Archer : AIBehavior {
 	}
 		
 	new void Update() {
+		if (paused) {
+			return;
+		}
 		base.Update();
 		if (root > 0) {
 			return;

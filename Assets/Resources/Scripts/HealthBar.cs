@@ -19,7 +19,7 @@ public class HealthBar : MonoBehaviour {
 		gameObject.AddComponent<SpriteRenderer> ().sprite = cSprites [1];
 		name = "Health";
 		transform.parent = necromancer.transform;
-		transform.localPosition = new Vector3(-12, 10, 9);
+		transform.localPosition = new Vector3(-12, 15, 9);
 		transform.localScale = new Vector3(1, 1, 1);
 		transform.localEulerAngles = new Vector3(90, 0, 0);
 		gameObject.layer = 5;

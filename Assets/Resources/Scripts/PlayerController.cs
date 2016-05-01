@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour {
 	public GameManager gManager;
 	Melee melee;
 	public EnemyManager eManager;
+	bool paused = false;
 
 	//Sounds
 	public AudioClip BlightClip, RootClip, AudioClip, DamageClip, BlinkClip;
@@ -120,6 +121,9 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Update () {
+		if (paused) {
+			return;
+		}
 		Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		mouse.y = 0;
 		print (hasFortKey);
@@ -274,6 +278,9 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void LateUpdate(){
+		if (paused) {
+			return;
+		}
 		Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		mouse.y = 0;
 		necromodel.transform.LookAt (mouse);
@@ -298,7 +305,7 @@ public class PlayerController : MonoBehaviour {
 	public void HasKey(){
 		if (!hasFortKey) {
 			hasFortKey = true;
-			gManager.ChangeObjective("Go to Fort to get gate key.");
+			gManager.ChangeObjective("Open the Fort gate.");
 		} else {
 			hasKey = true;
 			gManager.objectives.text = "Get through the East Gate. \nGate will take 3 seconds to open.";
@@ -325,5 +332,13 @@ public class PlayerController : MonoBehaviour {
 		if (hp <= 0) {
 			gManager.Death();
 		}
+	}
+
+	public void PausePlayer () {
+		paused = true;
+	}
+
+	public void UnPausePlayer () {
+		paused = false;
 	}
 }
