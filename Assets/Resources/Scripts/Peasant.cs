@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Peasant : AIBehavior {
 
-	public void initPeasant(GameManager gMan, EnemyManager owner, PlayerController necro) {
+	public void initPeasant(GameManager gMan, EnemyManager owner, PlayerController necro, params bool[] isElite) {
 
 		// PARAMETERS
 		allyColor = new Color (0, 0, 0);
@@ -20,11 +20,32 @@ public class Peasant : AIBehavior {
 		infectionCost = 25;
 		animmax = .2f;
 		animcount = animmax;
-
-		base.init(gMan, owner, necro);
+		if (isElite.Length > 0) {
+			if (isElite [0] == true) {
+				base.init (gMan, owner, necro, true);
+			} else {
+				base.init (gMan, owner, necro);
+			}
+			if (isElite.Length > 1) {
+				inWave = isElite[1];
+				agent.destination = necromancer.transform.position;
+			}
+		} else {
+			base.init (gMan, owner, necro);
+		}
 	}
 		
 	new void Update() {
+		if (paused) {
+			return;
+		}
+		if (inWave) {
+			if (Vector3.Distance (transform.position, necromancer.transform.position) < aggroRange) {
+				inWave = false;
+			} else {
+				return;
+			}
+		}
 		base.Update();
 		SwitchTargets ();
 	}

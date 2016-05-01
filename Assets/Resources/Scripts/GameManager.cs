@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour {
 
@@ -10,6 +12,7 @@ public class GameManager : MonoBehaviour {
 
 	PlayerController necromancer;
 	EnemyManager eManager;
+	Pause pause;
 	public List<AIBehavior>[,] enemyGrid;
 	public int xGridOrigin = -30;
 	public int yGridOrigin = -90;
@@ -23,10 +26,17 @@ public class GameManager : MonoBehaviour {
 	public AudioClip scratch;
 	public List<Link> links;
 	public List<KeyInfo> keys;
+	public int Encounter = 0;
 
 	// THIS IS JUST UNTIL EVAN GETS THE RESTART BUTTON UP
 	float deathInterval = 3f;
 	float deathTimer = 0;
+	public int level;
+	// TESTING PURPOSES- FEEL FREE TO DELETE, THESE ARE JUST TO DEMONSTRATE PAUSE FUNCTIONALITY
+//	float playInterval = 4f;
+//	float pauseInterval = 1.5f;
+//	float playTimer = 0;
+//	float pauseTimer = 0;
 
 	void Start() {
 		init ();
@@ -37,6 +47,9 @@ public class GameManager : MonoBehaviour {
 		deathTimer = 0;
 
 		dead = false;
+
+		level = Int32.Parse(Application.loadedLevelName.Substring (5));
+		print (level);
 
 		xDimension = 18;
 		yDimension = 12;
@@ -70,6 +83,16 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Update() {
+		//GOES WITH THE COMMENTED OUT PLAY/PAUSE TIMER/INTERVAL FIELDS, DEMONSTRATES PAUSE FUNCTIONALITY
+//		if (playTimer < playInterval && (playTimer += Time.deltaTime) > playInterval) {
+//			PauseGame ();
+//			pauseTimer = 0;
+//		}
+//		else if (pauseTimer < pauseInterval && (pauseTimer += Time.deltaTime) > pauseInterval) {
+//			UnPauseGame ();
+//			playTimer = 0;
+//		}
+		print(Encounter);
 		//THESE IFS ARE ALSO TEMPORARY TILL BUTTON'S UP
 		if (dead == true) {
 			if ((deathTimer += Time.deltaTime) > deathInterval) {
@@ -107,6 +130,7 @@ public class GameManager : MonoBehaviour {
 			alert.text =  "Objective Complete! Your Conquest Continues!";
 			done = true;
 		}
+		NextLevel ();
 	}
 
 	public void Reset() {
@@ -171,15 +195,42 @@ public class GameManager : MonoBehaviour {
 		}
 		foreach (AIBehavior unit in GameObject.FindObjectsOfType<AIBehavior>()) {
 			int xSquare = ((int)unit.gameObject.transform.position.x - xGridOrigin) / 10;
-			int ySquare = ((int)unit.gameObject.transform.position.y - yGridOrigin) / 10;
-			if (unit.transform.position.x < 0) {
-				print (xSquare + "  " + ySquare);
-			}
+			int ySquare = ((int)unit.gameObject.transform.position.z - yGridOrigin) / 10;
 			enemyGrid [xSquare, ySquare].Add (unit);
 		}
 	}
 
 	public void ChangeObjective(string obj){
 		objectives.text = obj;
+	}
+
+	public void PauseGame() {
+		if (pause == null) {
+			pause = new GameObject().AddComponent<Pause> ();
+		}
+	}
+
+	public void UnPauseGame () {
+		if (pause != null) {
+			pause.UnPauseAll ();
+		}
+	}
+
+	public bool AreaClear(){
+		RefillGrid ();
+		for (int x = 5; x <= 6; x++) {
+			for (int y = 6; y <= 7; y++) {
+				foreach (AIBehavior unit in enemyGrid[x,y].ToArray()) {
+					if (unit.isEnemy) {
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	public void NextLevel(){
+		SceneManager.LoadScene (level);
 	}
 }

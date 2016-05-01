@@ -6,8 +6,8 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour {
 
 	// PARAMETERS
-	public float hp = 50, size = 1f, speed = 1.8f, castcd = .25f, currentY = 0, unlockTime = 0;
-	public bool isMelee = true, casted = false, hasKey = false, hasFortKey = false, needsNav = false, destined = false;
+	public float hp = 50, size = 1f, speed = 1.8f, castcd = .25f, currentY = 0, unlockTime = 0, rootDuration = 1f;
+	public bool isMelee = false, casted = false, hasKey = false, hasFortKey = false, needsNav = false, destined = false;
 	public float[] cd = new float[5] {0.5f, 5, 3, 50, 2}, timers = new float[5] {0, 0, 0, 0, 0}, ranges = new float[4] {10, 10, 10, 100};
 	protected Sprite[] cSprites;
 	public Image[] icons = new Image[4];
@@ -16,16 +16,18 @@ public class PlayerController : MonoBehaviour {
 	KeyCode[] controls = new KeyCode[6] {
 		KeyCode.Mouse0, // auto-attack
 		KeyCode.Mouse1, // blight
-		KeyCode.Tab, // root
+		KeyCode.LeftShift, // root
 		KeyCode.F, // damage
 		KeyCode.Space, // blink
 		KeyCode.Q // switch weapon
 	};
 
 	public int minionCount = 0;
+	float rootTimer = 0;
 	public GameManager gManager;
 	Melee melee;
 	public EnemyManager eManager;
+	bool paused = false;
 
 	//Sounds
 	public AudioClip BlightClip, RootClip, AudioClip, DamageClip, BlinkClip;
@@ -127,9 +129,12 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Update () {
+		if (paused || (rootTimer < rootDuration && (rootTimer += Time.deltaTime) > rootDuration)) {
+			return;
+		}
 		Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		mouse.y = 0;
-		print (hasFortKey);
+		//print (hasFortKey);
 		if (timers[0] > 0) {
 			if ((timers[0] -= Time.deltaTime) <= .25f) {
 				ramodel.sprite = cSprites [19];
@@ -168,9 +173,6 @@ public class PlayerController : MonoBehaviour {
 				ramodel.transform.localPosition = new Vector3(0.103f, 1, 0.266f);
 				timers[0] = cd[0];
 			}
-		}
-		if (Input.GetKeyDown(controls[5])) {
-			isMelee = !isMelee;
 		}
 		for (int i = 1; i <= 4; i++) {
 			if (Input.GetKeyDown(controls[i]) && i <= 3) {
@@ -291,6 +293,9 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void LateUpdate(){
+		if (paused) {
+			return;
+		}
 		Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		mouse.y = 0;
 		necromodel.transform.LookAt (mouse);
@@ -315,7 +320,7 @@ public class PlayerController : MonoBehaviour {
 	public void HasKey(){
 		if (!hasFortKey) {
 			hasFortKey = true;
-			gManager.ChangeObjective("Go to Fort to get gate key.");
+			gManager.ChangeObjective("Open the Fort gate.");
 		} else {
 			hasKey = true;
 			gManager.objectives.text = "Get through the East Gate. \nGate will take 3 seconds to open.";
@@ -342,5 +347,17 @@ public class PlayerController : MonoBehaviour {
 		if (hp <= 0) {
 			gManager.Death();
 		}
+	}
+
+	public void Root() {
+		rootTimer = 0;
+	}
+
+	public void PausePlayer () {
+		paused = true;
+	}
+
+	public void UnPausePlayer () {
+		paused = false;
 	}
 }

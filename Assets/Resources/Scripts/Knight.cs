@@ -3,12 +3,12 @@ using System.Collections;
 
 public class Knight : AIBehavior {
 
-	float chargespeed = 85, normalspeed = 6, wait = 0.5f, charge = 0.3f, caggro = 4, timer = 0, chargecd = .3f;
+	float chargespeed = 100, normalspeed = 6, wait = 0.5f, charge = 0.4f, caggro = 4, timer = 0, chargecd = .3f;
 	int mode = 0;
 	Vector3 start;
 	KnightMelee melee;
 
-	public void initKnight(GameManager gMan, EnemyManager owner, PlayerController necro) {
+	public void initKnight(GameManager gMan, EnemyManager owner, PlayerController necro, params bool[] isElite) {
 		allyColor = new Color(0, 0, 0);
 		enemyColor = new Color (1, 1, 1);
 		speed = normalspeed;
@@ -20,7 +20,19 @@ public class Knight : AIBehavior {
 		immune = true;
 		animmax = .3f;
 		animcount = animmax;
-		base.init(gMan, owner, necro);
+		if (isElite.Length > 0) {
+			if (isElite [0] == true) {
+				base.init (gMan, owner, necro, true);
+			} else {
+				base.init (gMan, owner, necro);
+			}
+			if (isElite.Length > 1) {
+				inWave = isElite[1];
+				agent.destination = necromancer.transform.position;
+			}
+		} else {
+			base.init (gMan, owner, necro);
+		}
 		gManager = gMan;
 
 		melee = new GameObject().AddComponent<KnightMelee>();
@@ -29,6 +41,16 @@ public class Knight : AIBehavior {
 	}
 
 	protected override void Update() {
+		if (paused) {
+			return;
+		}
+		if (inWave) {
+			if (Vector3.Distance (transform.position, necromancer.transform.position) < aggroRange) {
+				inWave = false;
+			} else {
+				return;
+			}
+		}
 		if (target != null) {
 			if (mode == 0) { // walking
 				SwitchTargets ();
@@ -86,7 +108,8 @@ public class Knight : AIBehavior {
 		if (mode == 3) {
 			return;
 		}
-		if (meleeTimer >= meleecd && (coll.collider.gameObject.name == "Necromancer" || (coll.gameObject.gameObject.tag == "AI" && !coll.collider.GetComponent<AIBehavior>().isEnemy))) {
+		if (meleeTimer >= meleecd && (coll.collider.gameObject.name == "Necromancer" || 
+			(coll.gameObject.gameObject.tag == "AI" && !coll.collider.GetComponent<AIBehavior>().isEnemy))) {
 			rend.sprite = cSprites [0];
 			melee.Enable();
 			meleeTimer = 0;

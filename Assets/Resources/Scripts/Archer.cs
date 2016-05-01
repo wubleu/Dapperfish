@@ -16,7 +16,7 @@ public class Archer : AIBehavior {
 	float moveTimer = 0;
 	float firingWaitTimer = 0;
 
-	public void initArcher(GameManager gMan, EnemyManager owner, PlayerController necro) {
+	public void initArcher(GameManager gMan, EnemyManager owner, PlayerController necro, params bool[] isElite) {
 
 		// PARAMETERS
 		allyColor = new Color (0, 0, 0);
@@ -29,12 +29,33 @@ public class Archer : AIBehavior {
 		necroAggroModifier = 1.2f;
 		chaseDist = 2f;
 		infectionCost = 35;
-
-		base.init(gMan, owner, necro);
+		if (isElite.Length > 0) {
+			if (isElite [0] == true) {
+				base.init (gMan, owner, necro, true);
+			} else {
+				base.init (gMan, owner, necro);
+			}
+			if (isElite.Length > 1) {
+				inWave = isElite[1];
+				agent.destination = necromancer.transform.position;
+			}
+		} else {
+			base.init (gMan, owner, necro);
+		}
 		GetComponent<NavMeshAgent>().stoppingDistance = 2;
 	}
 		
 	new void Update() {
+		if (paused) {
+			return;
+		}
+		if (inWave) {
+			if (Vector3.Distance (transform.position, necromancer.transform.position) < aggroRange) {
+				inWave = false;
+			} else {
+				return;
+			}
+		}
 		base.Update();
 		if (root > 0) {
 			return;
@@ -101,7 +122,7 @@ public class Archer : AIBehavior {
 
 	protected override float CheckAITargetsInSquare(float targetDist) {
 		int unitGridX = ((int)transform.position.x - gManager.xGridOrigin) / 10;
-		int unitGridY = ((int)transform.position.y - gManager.yGridOrigin) / 10;
+		int unitGridY = ((int)transform.position.z - gManager.yGridOrigin) / 10;
 		int checkingX;
 		int checkingY;
 		for (int x = -1; x < 2; x++) {

@@ -8,6 +8,10 @@ public class AIBehavior : MonoBehaviour {
 	public float hoverRadius, chaseDist, chaseThreshold, chaseClock, aggroRange, necroAggroModifier, speed,
 		meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp, maxHP, infectionCost,
 		animcount, animmax, meleecd = .2f, rootPersistence = .5f, convertedHp = .8f, convertedStrength = .6f;
+	protected bool paused = false;
+	public bool inWave = false;
+	protected float resumeSpeed;
+	protected float resumeAcceleration;
 	public GameObject target = null;
 	protected GameObject necromancer;
 	public GameManager gManager;
@@ -15,10 +19,10 @@ public class AIBehavior : MonoBehaviour {
 	protected SpriteRenderer rend;
 	protected NavMeshAgent agent;
 	protected float hoverRads;
-	public bool hovering = false, isEnemy = true, immune = false, hoverPaused = false, windup = false, attacked = false;
+	public bool hovering = false, isEnemy = true, immune = false, hoverPaused = false, windup = false, attacked = false, isElite = false;
 	protected Sprite[] cSprites;
 
-	protected virtual void init(GameManager gMan, EnemyManager owner, PlayerController necro) {
+	protected virtual void init(GameManager gMan, EnemyManager owner, PlayerController necro, params bool[] isElite) {
 		eManager = owner;
 		gManager = gMan;
 		necromancer = necro.gameObject;
@@ -42,6 +46,10 @@ public class AIBehavior : MonoBehaviour {
 			cSprites = Resources.LoadAll<Sprite> ("Textures/Knight Sprite Sheet");
 			rend.sprite = cSprites [0];
 		}
+		if (isElite.Length != 0) {
+			SetToElite();
+		}
+		resumeSpeed = speed;
 	}
 
 	protected virtual void Update() {
@@ -155,7 +163,7 @@ public class AIBehavior : MonoBehaviour {
 	// takes in the distance to the current target and returns the distance to whatever the target is at the end of the function
 	protected virtual float CheckAITargetsInSquare(float targetDist) {
 		int unitGridX = ((int)transform.position.x - gManager.xGridOrigin) / 10;
-		int unitGridY = ((int)transform.position.y - gManager.yGridOrigin) / 10;
+		int unitGridY = ((int)transform.position.z - gManager.yGridOrigin) / 10;
 		int checkingX;
 		int checkingY;
 		for (int x = -1; x < 2; x++) {
@@ -276,7 +284,11 @@ public class AIBehavior : MonoBehaviour {
 	void OnCollisionExit(Collision coll) {
 		if (coll.gameObject == target) {
 			agent.enabled = true;
-			agent.speed = speed;
+			if (paused) {
+				resumeSpeed = agent.speed;
+			} else {
+				agent.speed = resumeSpeed;
+			}
 		}
 	}
 
@@ -300,6 +312,7 @@ public class AIBehavior : MonoBehaviour {
 	}
 
 	public virtual void Root() {
+		
 		root = rootPersistence;
 		agent.speed = 0;
 	}
@@ -315,5 +328,25 @@ public class AIBehavior : MonoBehaviour {
 			gManager.EnemyDeath (transform.position, name, isEnemy);
 			Destroy (this.gameObject);
 		}
+	}
+
+	protected void SetToElite() {
+		isElite = true;
+		immune = true;
+	}
+
+	public void PauseAI() {
+		paused = true;
+		resumeAcceleration = agent.acceleration;
+		agent.acceleration = 1000;
+		resumeSpeed = agent.speed;
+		agent.speed = 0;
+	}
+
+	public void UnPauseAI () {
+		paused = false;
+		agent.speed = resumeSpeed;
+		agent.acceleration = resumeAcceleration;
+		resumeSpeed = speed;
 	}
 }
