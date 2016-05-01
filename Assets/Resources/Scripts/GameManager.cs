@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour {
 
@@ -29,7 +31,7 @@ public class GameManager : MonoBehaviour {
 	// THIS IS JUST UNTIL EVAN GETS THE RESTART BUTTON UP
 	float deathInterval = 3f;
 	float deathTimer = 0;
-	public int level = 1;
+	public int level;
 	// TESTING PURPOSES- FEEL FREE TO DELETE, THESE ARE JUST TO DEMONSTRATE PAUSE FUNCTIONALITY
 //	float playInterval = 4f;
 //	float pauseInterval = 1.5f;
@@ -45,6 +47,9 @@ public class GameManager : MonoBehaviour {
 		deathTimer = 0;
 
 		dead = false;
+
+		level = Int32.Parse(Application.loadedLevelName.Substring (5));
+		print (level);
 
 		xDimension = 18;
 		yDimension = 12;
@@ -125,6 +130,7 @@ public class GameManager : MonoBehaviour {
 			alert.text =  "Objective Complete! Your Conquest Continues!";
 			done = true;
 		}
+		NextLevel ();
 	}
 
 	public void Reset() {
@@ -222,5 +228,9 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 		return true;
+	}
+
+	public void NextLevel(){
+		SceneManager.LoadScene (level);
 	}
 }
