@@ -4,7 +4,7 @@ using System.Collections;
 public class SpellEffect : MonoBehaviour {
 
 	// PARAMETERS
-	float lifetime, spellSpeed, radius, clock = 0, infectPower = 250;
+	float lifetime, spellSpeed, radius, clock = 0;
 	bool enemy;
 	bool paused = false;
 	float arrowPower;
@@ -42,9 +42,8 @@ public class SpellEffect : MonoBehaviour {
 		AIBehavior AI = col.GetComponent<AIBehavior> ();
 		switch (name) {
 		case "Blight":
-			if (col.tag == "AI" && AI.isEnemy && infectPower >= AI.infectionCost) {
+			if (col.tag == "AI" && AI.isEnemy) {
 				AI.Infect ();
-				infectPower -= AI.infectionCost;
 			}
 			break;
 		case "Root":
@@ -70,7 +69,6 @@ public class SpellEffect : MonoBehaviour {
 				AI.Damage (2);
 				Destroy (gameObject);
 			} else if (enemy && col.name == "Necromancer") {
-				print ("necro");  
 				col.GetComponent<PlayerController> ().Damage (2);
 				Destroy (gameObject);
 			} else if (!enemy && col.name == "Necromancer Boss") {

@@ -6,7 +6,7 @@ public class AIBehavior : MonoBehaviour {
 	// PARAMETERS
 	protected Color allyColor, enemyColor;
 	public float hoverRadius, chaseDist, chaseThreshold, chaseClock, aggroRange, necroAggroModifier, speed,
-		meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp, maxHP, infectionCost,
+		meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp, maxHP,
 		animcount, animmax, meleecd = .2f, rootPersistence = .5f, convertedHp = .8f, convertedStrength = .6f;
 	protected bool paused = false;
 	public bool inWave = false;
