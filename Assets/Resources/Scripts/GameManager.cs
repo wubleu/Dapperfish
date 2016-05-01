@@ -191,7 +191,6 @@ public class GameManager : MonoBehaviour {
 			int xSquare = ((int)unit.gameObject.transform.position.x - xGridOrigin) / 10;
 			int ySquare = ((int)unit.gameObject.transform.position.z - yGridOrigin) / 10;
 			enemyGrid [xSquare, ySquare].Add (unit);
-			//print (xSquare + "  " + ySquare);
 		}
 	}
 
