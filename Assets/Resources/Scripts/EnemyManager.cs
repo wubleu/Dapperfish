@@ -19,8 +19,14 @@ public class EnemyManager : MonoBehaviour {
 		transform.parent = gManager.transform;
 		name = "Enemy Manager";
 		transform.rotation = transform.parent.rotation;
+<<<<<<< HEAD
 		//gManager.level.ToString()
 		string[] instructions = Resources.Load<TextAsset>("Scripts/level1").text.Split(new char[1]{'\n'});
+=======
+		gManager.level = 2;
+		string[] instructions = Resources.Load<TextAsset>("Scripts/level" + gManager.level.ToString()).text.Split(new char[1]{'\n'});
+		print ("Scripts/level" + gManager.level.ToString ());
+>>>>>>> origin/RyanMechanicStudy
 
 		bool links = true;
 		int linkCount = 0;
@@ -70,7 +76,7 @@ public class EnemyManager : MonoBehaviour {
 	}
 
 	public void delayedSpawn(String tag){
-		string[] instructions = Resources.Load<TextAsset>("Scripts/level1").text.Split(new char[1]{'\n'});
+		string[] instructions = Resources.Load<TextAsset>("Scripts/level" + gManager.level.ToString()).text.Split(new char[1]{'\n'});
 
 		foreach (string instruction in instructions) {
 			string[] parts = instruction.Split (new char[1]{ ':' });

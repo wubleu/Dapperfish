@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour {
 
 	// PARAMETERS
-	public float hp = 50, size = 1f, speed = 1.8f, castcd = .25f, currentY = 0, unlockTime = 0;
+	public float hp = 50, size = 1f, speed = 1.8f, castcd = .25f, currentY = 0, unlockTime = 0, rootDuration = 1f;
 	public bool isMelee = false, casted = false, hasKey = false, hasFortKey = false, needsNav = false, destined = false;
 	public float[] cd = new float[5] {0.5f, 5, 3, 50, 2}, timers = new float[5] {0, 0, 0, 0, 0};
 	protected Sprite[] cSprites;
@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour {
 	};
 
 	public int minionCount = 0;
+	float rootTimer = 0;
 	public GameManager gManager;
 	Melee melee;
 	public EnemyManager eManager;
@@ -121,12 +122,12 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Update () {
-		if (paused) {
+		if (paused || (rootTimer < rootDuration && (rootTimer += Time.deltaTime) > rootDuration)) {
 			return;
 		}
 		Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		mouse.y = 0;
-		print (hasFortKey);
+		//print (hasFortKey);
 		if (timers[0] > 0) {
 			if ((timers[0] -= Time.deltaTime) <= .25f) {
 				ramodel.sprite = cSprites [19];
@@ -332,6 +333,10 @@ public class PlayerController : MonoBehaviour {
 		if (hp <= 0) {
 			gManager.Death();
 		}
+	}
+
+	public void Root() {
+		rootTimer = 0;
 	}
 
 	public void PausePlayer () {

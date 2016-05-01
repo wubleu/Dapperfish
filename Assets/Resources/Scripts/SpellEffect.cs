@@ -10,7 +10,7 @@ public class SpellEffect : MonoBehaviour {
 	float arrowPower;
 	Vector3 angle;
 
-	public void init(float life, float speed = 0, Vector3 dir = default(Vector3), bool bad = false, params float[] arrowDamage) {
+	public void init(float life, bool bad = false, float speed = 0, Vector3 dir = default(Vector3), params float[] arrowDamage) {
 		radius = transform.localScale.x;
 		lifetime = life;
 		spellSpeed = speed;
@@ -39,54 +39,73 @@ public class SpellEffect : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col) {
-		if (col.tag == "AI") {
-			AIBehavior AI = col.GetComponent<AIBehavior> ();
-			switch (name) {
-			case "Blight":
-				if (AI != null && infectPower >= AI.infectionCost) {
-					AI.Infect ();
-					infectPower -= AI.infectionCost;
-				}
-				return;
-			case "Root":
-				if (AI.isEnemy) {
-					AI.Root ();
-				}
-				return;
-			case "Damage":
-				if (AI.isEnemy) {
-					AI.Damage (10);
-				}
-				return;
-			case "Bullet":
-				if (enemy != AI.isEnemy) {
-					AI.Damage (2);
-					Destroy (gameObject);
-				}
-				return;
-			case "Arrow":
-				if (enemy != AI.isEnemy) {
-					AI.Damage (arrowPower);
-					Destroy (gameObject);
-				}
-				return;
+		AIBehavior AI = col.GetComponent<AIBehavior> ();
+		switch (name) {
+		case "Blight":
+			if (col.tag == "AI" && AI.isEnemy && infectPower >= AI.infectionCost) {
+				AI.Infect ();
+				infectPower -= AI.infectionCost;
 			}
-		} else if (col.name == "Necromancer" && enemy) {
-			col.GetComponent<PlayerController> ().Damage (arrowPower);
-			Destroy (gameObject);
-		} else if (name == "Arrow" || name == "Bullet"){
-			if (col.tag == "Obstacle") {
+			return;
+		case "Root":
+			if (col.tag == "AI" && enemy != AI.isEnemy) {
+				AI.Root ();
+			} else if (enemy && col.name == "Necromancer") {
+				col.GetComponent<PlayerController> ().Root ();
+			} else if (!enemy && col.name == "Necromancer Boss") {
+				col.GetComponent<NecromancerBoss> ().Root ();
+			}
+			return;
+		case "Damage":
+			if (col.tag == "AI" && enemy != AI.isEnemy) {
+				AI.Damage (10);
+			} else if (enemy && col.name == "Necromancer") {
+				col.GetComponent<PlayerController> ().Damage (10);
+			} else if (!enemy && col.name == "Necromancer Boss") {
+				col.GetComponent<NecromancerBoss> ().Damage (10);
+			}
+			return;
+		case "Bullet":
+			if (col.tag == "AI" && enemy != AI.isEnemy) {
+				AI.Damage (2);
+				Destroy (gameObject);
+			} else if (enemy && col.name == "Necromancer") {
+				print ("necro");  
+				col.GetComponent<PlayerController> ().Damage (2);
+				Destroy (gameObject);
+			} else if (!enemy && col.name == "Necromancer Boss") {
+				col.GetComponent<NecromancerBoss> ().Damage (2);
 				Destroy (gameObject);
 			}
+			return;
+		case "Arrow":
+			if (col.tag == "AI" && enemy != AI.isEnemy) {
+				AI.Damage (arrowPower);
+				Destroy (gameObject);
+			} else if (enemy && col.name == "Necromancer") {
+				col.GetComponent<PlayerController> ().Damage (arrowPower);
+				Destroy (gameObject);
+			} else if (!enemy && col.name == "Necromancer Boss") {
+				col.GetComponent<NecromancerBoss> ().Damage (arrowPower);
+				Destroy (gameObject);
+			}
+			return;
+		} 
+		if ((name == "Arrow" || name == "Bullet") && col.tag == "Obstacle") {
+			Destroy (gameObject);
 		}
 	}
 
 	void OnTriggerStay(Collider col) {
 		if (col.tag == "AI") {
 			AIBehavior AI = col.GetComponent<AIBehavior> ();
-			if (name == "Root" && AI.isEnemy) {
+			if (name == "Root" && enemy != AI.isEnemy) {
 				AI.Root ();
 			}
+		} else if (enemy && col.name == "Necromancer") {
+			col.GetComponent<PlayerController> ().Root ();
+		} else if (enemy && col.name == "Necromancer Boss") {
+			col.GetComponent<NecromancerBoss> ().Root ();
 		}
 	}
 

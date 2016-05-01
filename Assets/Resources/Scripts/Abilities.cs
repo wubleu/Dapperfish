@@ -37,7 +37,7 @@ public static class Abilities {
 		spell.AddComponent<SpellEffect>().init(.4f);
 	}
 
-	public static void Root(Vector3 pos) {
+	public static void Root(Vector3 pos, params bool[] isEnemy) {
 		Sprite[] cSprites = Resources.LoadAll<Sprite> ("Textures/Spell Effects Sprite Sheet");
 		GameObject spell = new GameObject();
 		spell.AddComponent<SpriteRenderer>();
@@ -50,10 +50,16 @@ public static class Abilities {
 		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Root Controller");
 		spell.AddComponent<SphereCollider> ().isTrigger = true;
 		spell.name = "Root";
-		spell.AddComponent<SpellEffect>().init(2f);
+		bool enemy;
+		if (isEnemy.Length > 0) {
+			enemy = true;
+		} else {
+			enemy = false;
+		}
+		spell.AddComponent<SpellEffect>().init(2f, enemy);
 	}
 
-	public static void Damage(Vector3 pos, float angle) {
+	public static void Damage(Vector3 pos, float angle, params bool[] isEnemy) {
 		Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		Sprite[] cSprites = Resources.LoadAll<Sprite> ("Textures/Spell Effects Sprite Sheet");
 		GameObject spell = new GameObject();
@@ -69,7 +75,13 @@ public static class Abilities {
 		spell.AddComponent<SphereCollider> ().isTrigger = true;
 		spell.transform.LookAt(mouse);
 		spell.name = "Damage";
-		spell.AddComponent<SpellEffect>().init(2, 5, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle))); 
+		bool enemy;
+		if (isEnemy.Length > 0) {
+			enemy = true;
+		} else {
+			enemy = false;
+		}
+		spell.AddComponent<SpellEffect>().init(2, enemy, 5, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle))); 
 	}
 
 	public static void Blink(Transform me, float angle) {
@@ -99,7 +111,7 @@ public static class Abilities {
 		GameObject.Destroy (end.gameObject, .3f);
 	}
 
-	public static bool Bullet(Vector3 pos, float angle) {
+	public static bool Bullet(Vector3 pos, float angle, params bool[] isEnemy) {
 		Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		//GameObject spell = AOE(.3f, Color.black, pos + 0.5f * new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
 		Sprite[] cSprites = Resources.LoadAll<Sprite> ("Textures/Spell Effects Sprite Sheet");
@@ -117,7 +129,13 @@ public static class Abilities {
 		spell.transform.LookAt(mouse);
 		spell.GetComponent<SphereCollider>().isTrigger = true;
 		spell.name = "Bullet";
-		spell.AddComponent<SpellEffect>().init(1, 10, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
+		bool enemy;
+		if (isEnemy.Length > 0) {
+			enemy = true;
+		} else {
+			enemy = false;
+		}
+		spell.AddComponent<SpellEffect>().init(1, enemy, 10, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
 		return true;
 	}
 
@@ -135,7 +153,7 @@ public static class Abilities {
 		spell.transform.localScale = new Vector3(1, 1, 1);
 		spell.AddComponent<BoxCollider>();*/
 		spell.name = "Arrow";
-		spell.AddComponent<SpellEffect>().init(range, 10, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)), enemy, damage);
+		spell.AddComponent<SpellEffect>().init(range, enemy, 10, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)), damage);
 		return true;
 	}
 

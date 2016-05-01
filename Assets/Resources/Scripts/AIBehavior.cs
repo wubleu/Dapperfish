@@ -48,6 +48,7 @@ public class AIBehavior : MonoBehaviour {
 		if (isElite.Length != 0) {
 			SetToElite();
 		}
+		resumeSpeed = speed;
 	}
 
 	protected virtual void Update() {
@@ -347,5 +348,6 @@ public class AIBehavior : MonoBehaviour {
 		paused = false;
 		agent.speed = resumeSpeed;
 		agent.acceleration = resumeAcceleration;
+		resumeSpeed = speed;
 	}
 }

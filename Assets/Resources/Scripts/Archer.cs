@@ -16,7 +16,7 @@ public class Archer : AIBehavior {
 	float moveTimer = 0;
 	float firingWaitTimer = 0;
 
-	public void initArcher(GameManager gMan, EnemyManager owner, PlayerController necro) {
+	public void initArcher(GameManager gMan, EnemyManager owner, PlayerController necro, params bool[] isElite) {
 
 		// PARAMETERS
 		allyColor = new Color (0, 0, 0);
@@ -30,7 +30,11 @@ public class Archer : AIBehavior {
 		chaseDist = 2f;
 		infectionCost = 35;
 
-		base.init(gMan, owner, necro);
+		if (isElite.Length > 0) {
+			base.init (gMan, owner, necro, true);
+		} else {
+			base.init (gMan, owner, necro, false);
+		}
 		GetComponent<NavMeshAgent>().stoppingDistance = 2;
 	}
 		

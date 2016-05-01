@@ -25,9 +25,14 @@ public class GameManager : MonoBehaviour {
 	public List<Link> links;
 	public List<KeyInfo> keys;
 	public int Encounter = 0;
+
 	// THIS IS JUST UNTIL EVAN GETS THE RESTART BUTTON UP
 	float deathInterval = 3f;
 	float deathTimer = 0;
+<<<<<<< HEAD
+=======
+	public int level = 1;
+>>>>>>> origin/RyanMechanicStudy
 	// TESTING PURPOSES- FEEL FREE TO DELETE, THESE ARE JUST TO DEMONSTRATE PAUSE FUNCTIONALITY
 //	float playInterval = 4f;
 //	float pauseInterval = 1.5f;
@@ -199,8 +204,7 @@ public class GameManager : MonoBehaviour {
 
 	public void PauseGame() {
 		if (pause == null) {
-			GameObject pauseObj = new GameObject ();
-			pause = pauseObj.AddComponent<Pause> ();
+			pause = new GameObject().AddComponent<Pause> ();
 		}
 	}
 

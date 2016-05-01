@@ -7,26 +7,17 @@ public class Pause : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		gameObject.AddComponent<Rigidbody> ().useGravity = false;
-		pause = gameObject.AddComponent<SphereCollider> ();
-		pause.isTrigger = true;
-		pause.radius = 1000;
-		pause.name = "PauseCollider";
-	}
-	
-	void OnTriggerEnter(Collider coll) {
-		SpellEffect spell = coll.gameObject.GetComponent<SpellEffect> ();
-		Spell bossSpell = coll.gameObject.GetComponent<Spell> ();
-		AIBehavior AI = coll.gameObject.GetComponent<AIBehavior> ();
-		if (AI != null) {
+		foreach (AIBehavior AI in GameObject.FindObjectsOfType<AIBehavior>()) {
 			AI.PauseAI ();
-		} else if (spell != null) {
-			spell.PauseSpell ();
-		} else if (bossSpell != null) {
-			bossSpell.PauseSpell ();
-		} else if (coll.name == "Necromancer") {
-			coll.GetComponent<PlayerController> ().PausePlayer();
 		} 
+		foreach (SpellEffect spell in GameObject.FindObjectsOfType<SpellEffect>()) {
+			spell.PauseSpell ();
+		}
+		foreach (Spell spell in GameObject.FindObjectsOfType<Spell>()) {
+			spell.PauseSpell ();
+		}
+		GameObject.FindObjectOfType<PlayerController> ().PausePlayer();
+		GameObject.FindObjectOfType<NecromancerBoss> ().PauseBoss ();
 	}
 
 	public void UnPauseAll() {
@@ -40,6 +31,7 @@ public class Pause : MonoBehaviour {
 			spell.UnPauseSpell ();
 		}
 		GameObject.FindObjectOfType<PlayerController> ().UnPausePlayer();
+		GameObject.FindObjectOfType<NecromancerBoss> ().UnPauseBoss ();
 		Destroy (gameObject);
 	}
 }
