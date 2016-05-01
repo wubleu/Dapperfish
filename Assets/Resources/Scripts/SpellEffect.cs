@@ -46,7 +46,7 @@ public class SpellEffect : MonoBehaviour {
 				AI.Infect ();
 				infectPower -= AI.infectionCost;
 			}
-			return;
+			break;
 		case "Root":
 			if (col.tag == "AI" && enemy != AI.isEnemy) {
 				AI.Root ();
@@ -55,7 +55,7 @@ public class SpellEffect : MonoBehaviour {
 			} else if (!enemy && col.name == "Necromancer Boss") {
 				col.GetComponent<NecromancerBoss> ().Root ();
 			}
-			return;
+			break;
 		case "Damage":
 			if (col.tag == "AI" && enemy != AI.isEnemy) {
 				AI.Damage (10);
@@ -64,7 +64,7 @@ public class SpellEffect : MonoBehaviour {
 			} else if (!enemy && col.name == "Necromancer Boss") {
 				col.GetComponent<NecromancerBoss> ().Damage (10);
 			}
-			return;
+			break;
 		case "Bullet":
 			if (col.tag == "AI" && enemy != AI.isEnemy) {
 				AI.Damage (2);
@@ -77,7 +77,7 @@ public class SpellEffect : MonoBehaviour {
 				col.GetComponent<NecromancerBoss> ().Damage (2);
 				Destroy (gameObject);
 			}
-			return;
+			break;
 		case "Arrow":
 			if (col.tag == "AI" && enemy != AI.isEnemy) {
 				AI.Damage (arrowPower);
@@ -89,9 +89,9 @@ public class SpellEffect : MonoBehaviour {
 				col.GetComponent<NecromancerBoss> ().Damage (arrowPower);
 				Destroy (gameObject);
 			}
-			return;
+			break;
 		} 
-		if ((name == "Arrow" || name == "Bullet") && col.tag == "Obstacle") {
+		if ((name == "Arrow" || name == "Bullet") && col.gameObject.tag == "Obstacle") {
 			Destroy (gameObject);
 		}
 	}
