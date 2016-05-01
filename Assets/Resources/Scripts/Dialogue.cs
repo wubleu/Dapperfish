@@ -21,7 +21,6 @@ public class Dialogue : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-
 		if (level == 1 && encounter == 3 ) {
 			gameObject.GetComponent<BoxCollider> ().enabled = false;
 			print (Gman.AreaClear ());
@@ -86,6 +85,9 @@ public class Dialogue : MonoBehaviour {
 				Gman.PauseGame ();
 				start = true;
 
+				if (encounter == 3 && level == 1 || encounter == 5 && level == 1) {
+					gameObject.transform.localScale = new Vector3 (1, 1, 1);
+				} 
 				if (encounter == 99 && level == 1) {
 					if (collision.gameObject.GetComponent<PlayerController> ().hasKey) {
 						encounter = 6;
@@ -110,9 +112,6 @@ public class Dialogue : MonoBehaviour {
 						collision.gameObject.transform.position = new Vector3 (collision.gameObject.transform.position.x - .3f, collision.gameObject.transform.position.z, collision.gameObject.transform.position.z);
 					}
 					encparts = 0;
-				}
-				if (encounter == 3 && level == 1 || encounter == 5 && level == 1) {
-					gameObject.transform.localScale = new Vector3 (1, 1, 1);
 				} else {
 					complete = true;
 				}
