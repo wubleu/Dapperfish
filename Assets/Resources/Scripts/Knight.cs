@@ -21,9 +21,17 @@ public class Knight : AIBehavior {
 		animmax = .3f;
 		animcount = animmax;
 		if (isElite.Length > 0) {
-			base.init (gMan, owner, necro, true);
+			if (isElite [0] == true) {
+				base.init (gMan, owner, necro, true);
+			} else {
+				base.init (gMan, owner, necro);
+			}
+			if (isElite.Length > 1) {
+				inWave = true;
+				agent.destination = necromancer.transform.position;
+			}
 		} else {
-			base.init (gMan, owner, necro, false);
+			base.init (gMan, owner, necro);
 		}
 		gManager = gMan;
 
@@ -35,6 +43,13 @@ public class Knight : AIBehavior {
 	protected override void Update() {
 		if (paused) {
 			return;
+		}
+		if (inWave) {
+			if (Vector3.Distance (transform.position, necromancer.transform.position) < aggroRange) {
+				inWave = false;
+			} else {
+				return;
+			}
 		}
 		if (target != null) {
 			if (mode == 0) { // walking

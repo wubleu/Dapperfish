@@ -9,6 +9,7 @@ public class AIBehavior : MonoBehaviour {
 		meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp, maxHP, infectionCost,
 		animcount, animmax, meleecd = .2f, rootPersistence = .5f, convertedHp = .8f, convertedStrength = .6f;
 	protected bool paused = false;
+	public bool inWave = false;
 	protected float resumeSpeed;
 	protected float resumeAcceleration;
 	public GameObject target = null;
@@ -162,7 +163,7 @@ public class AIBehavior : MonoBehaviour {
 	// takes in the distance to the current target and returns the distance to whatever the target is at the end of the function
 	protected virtual float CheckAITargetsInSquare(float targetDist) {
 		int unitGridX = ((int)transform.position.x - gManager.xGridOrigin) / 10;
-		int unitGridY = ((int)transform.position.y - gManager.yGridOrigin) / 10;
+		int unitGridY = ((int)transform.position.z - gManager.yGridOrigin) / 10;
 		int checkingX;
 		int checkingY;
 		for (int x = -1; x < 2; x++) {

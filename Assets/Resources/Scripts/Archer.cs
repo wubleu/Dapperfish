@@ -29,11 +29,18 @@ public class Archer : AIBehavior {
 		necroAggroModifier = 1.2f;
 		chaseDist = 2f;
 		infectionCost = 35;
-
 		if (isElite.Length > 0) {
-			base.init (gMan, owner, necro, true);
+			if (isElite [0] == true) {
+				base.init (gMan, owner, necro, true);
+			} else {
+				base.init (gMan, owner, necro);
+			}
+			if (isElite.Length > 1) {
+				inWave = true;
+				agent.destination = necromancer.transform.position;
+			}
 		} else {
-			base.init (gMan, owner, necro, false);
+			base.init (gMan, owner, necro);
 		}
 		GetComponent<NavMeshAgent>().stoppingDistance = 2;
 	}
@@ -41,6 +48,13 @@ public class Archer : AIBehavior {
 	new void Update() {
 		if (paused) {
 			return;
+		}
+		if (inWave) {
+			if (Vector3.Distance (transform.position, necromancer.transform.position) < aggroRange) {
+				inWave = false;
+			} else {
+				return;
+			}
 		}
 		base.Update();
 		if (root > 0) {
@@ -108,7 +122,7 @@ public class Archer : AIBehavior {
 
 	protected override float CheckAITargetsInSquare(float targetDist) {
 		int unitGridX = ((int)transform.position.x - gManager.xGridOrigin) / 10;
-		int unitGridY = ((int)transform.position.y - gManager.yGridOrigin) / 10;
+		int unitGridY = ((int)transform.position.z - gManager.yGridOrigin) / 10;
 		int checkingX;
 		int checkingY;
 		for (int x = -1; x < 2; x++) {
