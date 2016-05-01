@@ -21,9 +21,9 @@ public class Dialogue : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		if (level == 1 && encounter == 3 ) {
+		if (level == 1 && encounter == 3 || encounter == 5 && level == 1 ) {
 			gameObject.GetComponent<BoxCollider> ().enabled = false;
-			print (Gman.AreaClear ());
+			//print (Gman.AreaClear ());
 			if (Gman.AreaClear ()) {
 				gameObject.GetComponent<BoxCollider> ().enabled = true;
 			}
@@ -31,7 +31,7 @@ public class Dialogue : MonoBehaviour {
 		if (level == 1 && encounter == 4 && Gman.Encounter == 3) {
 			gameObject.GetComponent<BoxCollider> ().enabled = true;
 		}
-
+			
 
 		if (start) {
 			if (instructions [encparts] == "N") {

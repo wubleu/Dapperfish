@@ -22,7 +22,7 @@ public class HealthBar : MonoBehaviour {
 		transform.localPosition = new Vector3(-12, 15, 9);
 		transform.localScale = new Vector3(1, 1, 1);
 		transform.localEulerAngles = new Vector3(90, 0, 0);
-		gameObject.layer = 5;
+		gameObject.GetComponent<SpriteRenderer> ().sortingOrder = 1;
 
 		bar = new GameObject().AddComponent<SpriteRenderer>();
 		bar.name = "HealthBar";
@@ -31,7 +31,7 @@ public class HealthBar : MonoBehaviour {
 		bar.transform.localEulerAngles = new Vector3(0, 0, 0);
 		bar.sprite = cSprites [0];
 		bar.color = Color.red; //new Color(0, 100/256, 0, 0.5f);
-
+		bar.GetComponent<SpriteRenderer>().sortingOrder = 1;
 		maxHealth = maxHP;
 
 	}
