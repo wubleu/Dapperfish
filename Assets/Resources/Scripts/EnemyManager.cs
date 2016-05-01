@@ -19,7 +19,6 @@ public class EnemyManager : MonoBehaviour {
 		transform.parent = gManager.transform;
 		name = "Enemy Manager";
 		transform.rotation = transform.parent.rotation;
-		gManager.level = 1;
 		string[] instructions = Resources.Load<TextAsset>("Scripts/level" + gManager.level.ToString()).text.Split(new char[1]{'\n'});
 		print ("Scripts/level" + gManager.level.ToString ());
 
