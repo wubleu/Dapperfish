@@ -17,7 +17,7 @@ public class Pause : MonoBehaviour {
 			spell.PauseSpell ();
 		}
 		GameObject.FindObjectOfType<PlayerController> ().PausePlayer();
-		GameObject.FindObjectOfType<NecromancerBoss> ().PauseBoss ();
+		//GameObject.FindObjectOfType<NecromancerBoss> ().PauseBoss ();
 	}
 
 	public void UnPauseAll() {
@@ -31,7 +31,7 @@ public class Pause : MonoBehaviour {
 			spell.UnPauseSpell ();
 		}
 		GameObject.FindObjectOfType<PlayerController> ().UnPausePlayer();
-		GameObject.FindObjectOfType<NecromancerBoss> ().UnPauseBoss ();
+		//GameObject.FindObjectOfType<NecromancerBoss> ().UnPauseBoss ();
 		Destroy (gameObject);
 	}
 }

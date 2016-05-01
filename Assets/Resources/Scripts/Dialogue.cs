@@ -19,7 +19,6 @@ public class Dialogue : MonoBehaviour {
 		instructions = Resources.Load<TextAsset>("Scripts/Level" + level + "Encounter" + encounter).text.Split(new char[1]{'\n'});
 
 	}
-	
 	// Update is called once per frame
 	void Update () {
 
