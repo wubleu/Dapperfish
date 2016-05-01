@@ -61,13 +61,17 @@
      <Compile Include="Assets\Resources\Scripts\KnightMelee.cs" />
      <Compile Include="Assets\Resources\Scripts\Link.cs" />
      <Compile Include="Assets\Resources\Scripts\Melee.cs" />
+     <Compile Include="Assets\Resources\Scripts\NecromancerBoss.cs" />
      <Compile Include="Assets\Resources\Scripts\Pause.cs" />
      <Compile Include="Assets\Resources\Scripts\Peasant.cs" />
      <Compile Include="Assets\Resources\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Resources\Scripts\Spell.cs" />
      <Compile Include="Assets\Resources\Scripts\SpellEffect.cs" />
      <Compile Include="Assets\Resources\Scripts\SpellShot.cs" />
+     <Compile Include="Assets\Resources\Scripts\Summon.cs" />
      <None Include="Assets\Resources\Scripts\level1.txt" />
      <None Include="Assets\Resources\Scripts\Level1Encounter3.txt" />
+     <None Include="Assets\Resources\Scripts\level2.txt" />
      <None Include="Assets\Resources\Scripts\Level1Encounter0.txt" />
      <None Include="Assets\Resources\Scripts\Level1Encounter99.txt" />
      <None Include="Assets\Resources\Scripts\Level1Encounter1.txt" />
