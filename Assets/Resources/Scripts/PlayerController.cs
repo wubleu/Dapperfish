@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour {
 	KeyCode[] controls = new KeyCode[6] {
 		KeyCode.Mouse0, // auto-attack
 		KeyCode.Mouse1, // blight
-		KeyCode.Tab, // root
+		KeyCode.LeftShift, // root
 		KeyCode.F, // damage
 		KeyCode.Space, // blink
 		KeyCode.Q // switch weapon
