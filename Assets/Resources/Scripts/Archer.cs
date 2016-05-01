@@ -28,7 +28,6 @@ public class Archer : AIBehavior {
 		aggroRange = 10f;
 		necroAggroModifier = 1.2f;
 		chaseDist = 2f;
-		infectionCost = 35;
 		if (isElite.Length > 0) {
 			if (isElite [0] == true) {
 				base.init (gMan, owner, necro, true);

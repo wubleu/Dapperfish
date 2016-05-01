@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour {
 	// PARAMETERS
 	public float hp = 50, size = 1f, speed = 1.8f, castcd = .25f, currentY = 0, unlockTime = 0, rootDuration = 1f;
 	public bool isMelee = false, casted = false, hasKey = false, hasFortKey = false, needsNav = false, destined = false;
-	public float[] cd = new float[5] {0.5f, 5, 3, 50, 2}, timers = new float[5] {0, 0, 0, 0, 0}, ranges = new float[4] {10, 10, 10, 100}, area = new float[3] {3, 3, 3};
+	public float[] cd = new float[5] {0.5f, 5, 3, 50, 2}, timers = new float[5] {0, 0, 0, 0, 0}, ranges = new float[4] {10, 10, 10, 100}, area = new float[3] {3.4f, 3.56f, 2.43f};
 	protected Sprite[] cSprites;
 	public Image[] icons = new Image[4];
 	
@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour {
 
 		AOE = new GameObject().AddComponent<SpriteRenderer>();
 		AOE.color = Color.clear;
-		AOE.sprite = Resources.Load<Sprite>("Textures/SolidCircle");
+		AOE.sprite = Resources.Load<Sprite>("Textures/BenCircle");
 		AOE.transform.eulerAngles = new Vector3(90, 0, 0);
 
 		DamageClip = Resources.Load ("Sounds/Damage") as AudioClip;
@@ -181,12 +181,12 @@ public class PlayerController : MonoBehaviour {
 		}
 		for (int i = 1; i <= 4; i++) {
 			if (Input.GetKeyDown(controls[i]) && i <= 3) {
-				spellRange.transform.localScale = new Vector3(ranges[i - 1], ranges[i - 1], 1);
+				spellRange.transform.localScale = new Vector3(ranges[i - 1] / 1.15f, ranges[i - 1] / 1.15f, 1);
 				spellRange.color = Color.black;
 				AOE.transform.localScale = new Vector3(area[i - 1], area[i - 1], 1);
 				AOE.color = new Color(1, 0, 0, 0.25f);
 			}
-			if (Input.GetKeyDown(controls[i]) && i <= 3) {
+			if (Input.GetKey(controls[i]) && i <= 3) {
 				AOE.transform.position = mouse + new Vector3(0, 1, 0);
 			}
 			if (Input.GetKeyUp(controls[i])) {
