@@ -23,10 +23,11 @@ public class Dialogue : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (level == 1 && encounter == 3) {
-			gameObject.GetComponent<Rigidbody> ().isKinematic = true;
+		if (level == 1 && encounter == 3 ) {
+			gameObject.GetComponent<BoxCollider> ().enabled = false;
+			print (Gman.AreaClear ());
 			if (Gman.AreaClear ()) {
-				gameObject.GetComponent<Rigidbody> ().isKinematic = false;
+				gameObject.GetComponent<BoxCollider> ().enabled = true;
 			}
 		}
 
@@ -59,10 +60,10 @@ public class Dialogue : MonoBehaviour {
 				if (encounter == 1 && level == 1) {
 					Gman.objectives.text = instructions [encparts];
 				}
-				if (encounter < Gman.Encounter) {
-					Destroy (this.gameObject);
-				}
 			}
+		}
+		if (encounter < Gman.Encounter) {
+			Destroy (this.gameObject);
 		}
 
 
