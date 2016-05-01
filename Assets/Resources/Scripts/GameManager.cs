@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour {
 	// THIS IS JUST UNTIL EVAN GETS THE RESTART BUTTON UP
 	float deathInterval = 3f;
 	float deathTimer = 0;
-	float finishTimer = 0;
 	public int level;
 	// TESTING PURPOSES- FEEL FREE TO DELETE, THESE ARE JUST TO DEMONSTRATE PAUSE FUNCTIONALITY
 //	float playInterval = 4f;
@@ -95,11 +94,7 @@ public class GameManager : MonoBehaviour {
 //		}
 		print(Encounter);
 		//THESE IFS ARE ALSO TEMPORARY TILL BUTTON'S UP
-		if (done) {
-			if ((finishTimer += Time.deltaTime) > 2) {
-				NextLevel ();
-			}
-		}else if (dead == true) {
+		if (dead == true) {
 			if ((deathTimer += Time.deltaTime) > deathInterval) {
 				Reset();
 				deathTimer = 0;
@@ -135,6 +130,7 @@ public class GameManager : MonoBehaviour {
 			alert.text =  "Objective Complete! Your Conquest Continues!";
 			done = true;
 		}
+		NextLevel ();
 	}
 
 	public void Reset() {
