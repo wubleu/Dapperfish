@@ -189,7 +189,7 @@ public class GameManager : MonoBehaviour {
 		}
 		foreach (AIBehavior unit in GameObject.FindObjectsOfType<AIBehavior>()) {
 			int xSquare = ((int)unit.gameObject.transform.position.x - xGridOrigin) / 10;
-			int ySquare = ((int)unit.gameObject.transform.position.y - yGridOrigin) / 10;
+			int ySquare = ((int)unit.gameObject.transform.position.z - yGridOrigin) / 10;
 			enemyGrid [xSquare, ySquare].Add (unit);
 		}
 	}

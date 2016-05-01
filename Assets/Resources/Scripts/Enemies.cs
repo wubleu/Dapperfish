@@ -37,7 +37,7 @@ public static class Enemies {
 	public static GameObject makePeasant(GameManager gMan, EnemyManager owner, PlayerController necro, Vector3 pos, params bool[] isElite) {
 		GameObject peasant = makeEnemy(pos, .8f, "Circle");
 		peasant.name = "Peasant";
-		peasant.AddComponent<Peasant>().initPeasant(gMan, owner, necro, true);
+		peasant.AddComponent<Peasant>().initPeasant(gMan, owner, necro);
 
 		return peasant;
 	}
@@ -45,7 +45,7 @@ public static class Enemies {
 	public static GameObject makeArcher(GameManager gMan, EnemyManager owner, PlayerController necro, Vector3 pos, params bool[] isElite) {
 		GameObject archer = makeEnemy(pos, .6f, "Circle");
 		archer.name = "Archer";
-		archer.AddComponent<Archer>().initArcher(gMan, owner, necro, true);
+		archer.AddComponent<Archer>().initArcher(gMan, owner, necro);
 
 		return archer;
 	}
@@ -54,7 +54,7 @@ public static class Enemies {
 		GameObject knight = makeEnemy(pos, 1f, "Circle");
 		SphereCollider col = knight.GetComponent<SphereCollider>();
 		knight.name = "Knight";
-		knight.AddComponent<Knight>().initKnight(gMan, owner, necro, true);
+		knight.AddComponent<Knight>().initKnight(gMan, owner, necro);
 
 		return knight;
 	}
