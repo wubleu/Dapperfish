@@ -19,8 +19,8 @@ public class EnemyManager : MonoBehaviour {
 		transform.parent = gManager.transform;
 		name = "Enemy Manager";
 		transform.rotation = transform.parent.rotation;
-		
-		string[] instructions = Resources.Load<TextAsset>("Scripts/level" + gManager.level.ToString()).text.Split(new char[1]{'\n'});
+		//gManager.level.ToString()
+		string[] instructions = Resources.Load<TextAsset>("Scripts/level1").text.Split(new char[1]{'\n'});
 
 		bool links = true;
 		int linkCount = 0;
@@ -60,11 +60,11 @@ public class EnemyManager : MonoBehaviour {
 							Spawn (spawner.transform.position, i, Int32.Parse (parts [4]));
 						}
 					}
-				} else if (parts.Length == 2) {
+				} /*else if (parts.Length == 2) {
 					if (parts [0] == "9999") {
 						Enemies.makeNecroBoss (gManager, this, necromancerController, GameObject.Find ("Spawn Zone " + parts [1]).transform.position);
 					}
-				}
+				}*/
 			}
 		}
 	}

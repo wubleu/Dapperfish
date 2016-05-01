@@ -28,10 +28,9 @@ public class GameManager : MonoBehaviour {
 	// THIS IS JUST UNTIL EVAN GETS THE RESTART BUTTON UP
 	float deathInterval = 3f;
 	float deathTimer = 0;
-	public int level = 2;
 	// TESTING PURPOSES- FEEL FREE TO DELETE, THESE ARE JUST TO DEMONSTRATE PAUSE FUNCTIONALITY
-//	float playInterval = .2f;
-//	float pauseInterval = 1f;
+//	float playInterval = 4f;
+//	float pauseInterval = 1.5f;
 //	float playTimer = 0;
 //	float pauseTimer = 0;
 
@@ -189,10 +188,8 @@ public class GameManager : MonoBehaviour {
 		foreach (AIBehavior unit in GameObject.FindObjectsOfType<AIBehavior>()) {
 			int xSquare = ((int)unit.gameObject.transform.position.x - xGridOrigin) / 10;
 			int ySquare = ((int)unit.gameObject.transform.position.y - yGridOrigin) / 10;
-			if (unit.transform.position.x < 0) {
-				print (xSquare + "  " + ySquare);
-			}
 			enemyGrid [xSquare, ySquare].Add (unit);
+			print (xSquare + "  " + ySquare);
 		}
 	}
 
@@ -214,16 +211,16 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public bool AreaClear(){
+		RefillGrid ();
 		for (int x = 6; x <= 7; x++) {
-			for (int y = 7; y <= 6; y--) {
-				foreach (AIBehavior unit in enemyGrid[x,y]) {
+			for (int y = 8; y >= 7; y--) {
+				foreach (AIBehavior unit in enemyGrid[x,y].ToArray()) {
 					if (unit.isEnemy) {
 						return false;
 					}
 				}
 			}
 		}
-
 		return true;
 	}
 }
