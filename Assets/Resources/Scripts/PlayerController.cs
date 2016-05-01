@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour {
 	// PARAMETERS
 	public float hp = 50, size = 1f, speed = 1.8f, castcd = .25f, currentY = 0, unlockTime = 0;
 	public bool isMelee = true, casted = false, hasKey = false, hasFortKey = false, needsNav = false, destined = false;
-	public float[] cd = new float[5] {0.5f, 5, 3, 50, 2}, timers = new float[5] {0, 0, 0, 0, 0};
+	public float[] cd = new float[5] {0.5f, 5, 3, 50, 2}, timers = new float[5] {0, 0, 0, 0, 0}, ranges = new float[4] {10, 10, 10, 100};
 	protected Sprite[] cSprites;
 	public Image[] icons = new Image[4];
 	
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour {
 	public AudioClip BlightClip, RootClip, AudioClip, DamageClip, BlinkClip;
 
 	GameObject necromodel, rightarm, leftarm, body, shooter;
-	SpriteRenderer lamodel, bodymodel, ramodel;
+	SpriteRenderer lamodel, bodymodel, ramodel, spellRange;
 
 	public void init (GameManager owner, EnemyManager eMan) {
 		eManager = eMan;
@@ -112,6 +112,13 @@ public class PlayerController : MonoBehaviour {
 		melee.transform.parent = transform;
 		melee.transform.localPosition = new Vector3(0, 1, 0);
 
+		spellRange = new GameObject().AddComponent<SpriteRenderer>();
+		spellRange.color = Color.clear;
+		spellRange.sprite = Resources.Load<Sprite>("Textures/Circle");
+		spellRange.transform.parent = transform;
+		spellRange.transform.localPosition = new Vector3(0, 1, 0);
+		spellRange.transform.eulerAngles = new Vector3(90, 0, 0);
+
 		DamageClip = Resources.Load ("Sounds/Damage") as AudioClip;
 		BlightClip = Resources.Load ("Sounds/Blight") as AudioClip;
 		RootClip = Resources.Load ("Sounds/Root") as AudioClip;
@@ -166,7 +173,14 @@ public class PlayerController : MonoBehaviour {
 			isMelee = !isMelee;
 		}
 		for (int i = 1; i <= 4; i++) {
-			if (Input.GetKeyDown(controls[i]) && timers[i] == 0) {
+			if (Input.GetKeyDown(controls[i]) && i <= 3) {
+				spellRange.transform.localScale = new Vector3(ranges[i - 1], ranges[i - 1], 1);
+				spellRange.color = new Color(1, 0, 0, 0.25f);
+			}
+			if (Input.GetKeyUp(controls[i])) {
+				spellRange.color = Color.clear;
+			}
+			if (Input.GetKeyUp(controls[i]) && timers[i] == 0 && Vector3.Distance(mouse, transform.position) <= ranges[i - 1]) {
 				timers[i] = cd[i];
 				switch (i) {
 					case 1: // blight

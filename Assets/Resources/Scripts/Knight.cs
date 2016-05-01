@@ -65,8 +65,10 @@ public class Knight : AIBehavior {
 				mode = 3;
 				timer = chargecd;
 				agent.speed = 0;
+				melee.Charge();
 			} else if (mode == 3) {
 				if ((timer-= Time.deltaTime) <= 0) {
+					melee.Disable();
 					mode = 0;
 					agent.speed = normalspeed;
 					rend.sprite = cSprites [0];
@@ -81,6 +83,9 @@ public class Knight : AIBehavior {
 	}
 
 	void OnCollisionStay(Collision coll) {
+		if (mode == 3) {
+			return;
+		}
 		if (meleeTimer >= meleecd && (coll.collider.gameObject.name == "Necromancer" || (coll.gameObject.gameObject.tag == "AI" && !coll.collider.GetComponent<AIBehavior>().isEnemy))) {
 			rend.sprite = cSprites [0];
 			melee.Enable();

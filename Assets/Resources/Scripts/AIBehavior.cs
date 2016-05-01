@@ -253,8 +253,6 @@ public class AIBehavior : MonoBehaviour {
 	}
 
 	protected virtual void OnCollision(Collision coll) {
-		if (transform.position.x < 10 && transform.position.z < 10) {
-		}
 		if (coll.gameObject == target) {
 				if (meleeTimer > meleeThreshold) {
 					SwitchTargets ();

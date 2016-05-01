@@ -5,6 +5,7 @@ public class KnightMelee : MonoBehaviour {
 
 	int frame;
 	SphereCollider col;
+	bool charging = false;
 
 	void Start () {
 		name = "KnightMelee";
@@ -14,7 +15,7 @@ public class KnightMelee : MonoBehaviour {
 	}
 
 	void Update () {
-		if (col.enabled) {
+		if (col.enabled && !charging) {
 			if (frame != Time.frameCount) {
 				col.enabled = false;
 			}
@@ -23,23 +24,26 @@ public class KnightMelee : MonoBehaviour {
 
 	void OnTriggerStay(Collider other) {
 		if (other.name == "Necromancer") {
-			print("KnightMelee hit necro");
-			Vector3 direction = other.transform.position - transform.position;
-			if (Vector3.Angle(direction, transform.right) < 45) {
-				other.GetComponent<PlayerController>().Damage(5);
+			other.GetComponent<PlayerController>().Damage(5);
+			if (charging) {
+				col.enabled = false;
 			}
 		} else if (other.tag == "AI" && !other.GetComponent<AIBehavior>().isEnemy) {
-			print("KnightMelee hit ai");
-			Vector3 direction = other.transform.position - transform.position;
-			if (Vector3.Angle(direction, transform.right) < 45) {
-				other.GetComponent<AIBehavior>().Damage(5);
-			}
+			other.GetComponent<AIBehavior>().Damage(5);
 		}
 	}
 
 	public void Enable() {
-		print("KnightMelee enabled");
 		col.enabled = true;
 		frame = Time.frameCount;
+	}
+
+	public void Charge() {
+		col.enabled = true;
+		charging = true;
+	}
+
+	public void Disable() {
+		col.enabled = false;
 	}
 }
