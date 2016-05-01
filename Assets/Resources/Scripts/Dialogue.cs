@@ -22,6 +22,14 @@ public class Dialogue : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (level == 1 && encounter == 3) {
+			gameObject.GetComponent<Rigidbody> ().isKinematic = true;
+			if (Gman.AreaClear ()) {
+				gameObject.GetComponent<Rigidbody> ().isKinematic = false;
+			}
+		}
+
 		if (start) {
 			if (instructions [encparts] == "N") {
 				Necro.SetActive (true);
@@ -65,19 +73,6 @@ public class Dialogue : MonoBehaviour {
 			Dbox.SetActive (true);
 			Gman.PauseGame ();
 			start = true;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 			if (encounter == 99 && level == 1) {
 				if (collision.gameObject.GetComponent<PlayerController> ().hasKey) {

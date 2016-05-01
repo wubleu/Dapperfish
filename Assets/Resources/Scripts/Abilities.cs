@@ -73,7 +73,30 @@ public static class Abilities {
 	}
 
 	public static void Blink(Transform me, float angle) {
+		Sprite[] cSprites = Resources.LoadAll<Sprite> ("Textures/Teleport Sprite Sheet");
+		GameObject start = new GameObject ();
+		start.AddComponent<SpriteRenderer> ();
+		start.AddComponent<Animator> ();
+		start.GetComponent<SpriteRenderer> ().sprite = cSprites [0];
+		start.transform.position = new Vector3 (me.position.x, me.position.y, me.position.z);
+		start.transform.localEulerAngles = new Vector3 (90, 0, 0);
+		Animator anim = start.GetComponent<Animator> ();
+		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Blink Start Controller");
+		start.name = "Blink Start";
+		GameObject.Destroy (start.gameObject, .5f);
 		me.Translate(4 * new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
+		GameObject end = new GameObject ();
+		end.AddComponent<SpriteRenderer> ();
+		end.AddComponent<Animator> ();
+		end.GetComponent<SpriteRenderer> ().sprite = cSprites [0];
+		end.transform.position = new Vector3 (me.position.x, me.position.y, me.position.z);
+		end.transform.localEulerAngles = new Vector3 (90, 0, 0);
+		anim = end.GetComponent<Animator> ();
+		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Blink End Controller");
+		start.name = "Blink End";
+		end.GetComponent<SpriteRenderer> ().sortingLayerName = "PlayerController";
+		end.GetComponent<SpriteRenderer> ().sortingOrder = 5;
+		GameObject.Destroy (end.gameObject, .3f);
 	}
 
 	public static bool Bullet(Vector3 pos, float angle) {
