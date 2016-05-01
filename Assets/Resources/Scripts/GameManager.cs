@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour {
 	public List<Link> links;
 	public List<KeyInfo> keys;
 	public int Encounter = 0;
+
 	// THIS IS JUST UNTIL EVAN GETS THE RESTART BUTTON UP
 	float deathInterval = 3f;
 	float deathTimer = 0;
@@ -188,9 +189,6 @@ public class GameManager : MonoBehaviour {
 		foreach (AIBehavior unit in GameObject.FindObjectsOfType<AIBehavior>()) {
 			int xSquare = ((int)unit.gameObject.transform.position.x - xGridOrigin) / 10;
 			int ySquare = ((int)unit.gameObject.transform.position.y - yGridOrigin) / 10;
-			if (unit.transform.position.x < 0) {
-				print (xSquare + "  " + ySquare);
-			}
 			enemyGrid [xSquare, ySquare].Add (unit);
 		}
 	}
@@ -201,8 +199,7 @@ public class GameManager : MonoBehaviour {
 
 	public void PauseGame() {
 		if (pause == null) {
-			GameObject pauseObj = new GameObject ();
-			pause = pauseObj.AddComponent<Pause> ();
+			pause = new GameObject().AddComponent<Pause> ();
 		}
 	}
 

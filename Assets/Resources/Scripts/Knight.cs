@@ -8,7 +8,7 @@ public class Knight : AIBehavior {
 	Vector3 start;
 	KnightMelee melee;
 
-	public void initKnight(GameManager gMan, EnemyManager owner, PlayerController necro) {
+	public void initKnight(GameManager gMan, EnemyManager owner, PlayerController necro, params bool[] isElite) {
 		allyColor = new Color(0, 0, 0);
 		enemyColor = new Color (1, 1, 1);
 		speed = normalspeed;
@@ -20,7 +20,11 @@ public class Knight : AIBehavior {
 		immune = true;
 		animmax = .3f;
 		animcount = animmax;
-		base.init(gMan, owner, necro);
+		if (isElite.Length > 0) {
+			base.init (gMan, owner, necro, true);
+		} else {
+			base.init (gMan, owner, necro, true);
+		}
 		gManager = gMan;
 
 		melee = new GameObject().AddComponent<KnightMelee>();
