@@ -21,11 +21,18 @@ public class Dialogue : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		if (level == 1 && encounter == 3 || encounter == 5 && level == 1 ) {
+		if (level == 1 && encounter == 3 ) {
 			gameObject.GetComponent<BoxCollider> ().enabled = false;
 			//print (Gman.AreaClear ());
 			if (Gman.AreaClear ()) {
 				gameObject.GetComponent<BoxCollider> ().enabled = true;
+			}
+		} else if (level == 1 && encounter == 5 && Gman.Encounter == 4) {
+			gameObject.GetComponent<BoxCollider> ().enabled = false;
+			if (GameObject.Find ("Necromancer").GetComponent<PlayerController> ().hasKey) {
+				if (Gman.AreaClear ()) {
+					gameObject.GetComponent<BoxCollider> ().enabled = true;
+				}
 			}
 		}
 		if (level == 1 && encounter == 4 && Gman.Encounter == 3) {

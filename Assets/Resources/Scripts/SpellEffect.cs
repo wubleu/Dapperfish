@@ -75,7 +75,7 @@ public class SpellEffect : MonoBehaviour {
 				Destroy (gameObject);
 			} else if (!enemy && col.name == "Necromancer Boss") {
 				col.GetComponent<NecromancerBoss> ().Damage (2);
-				Destroy (gameObject);
+				Destroy (this.gameObject);
 			}
 			break;
 		case "Arrow":
