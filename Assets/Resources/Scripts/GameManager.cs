@@ -212,8 +212,8 @@ public class GameManager : MonoBehaviour {
 
 	public bool AreaClear(){
 		RefillGrid ();
-		for (int x = 6; x <= 7; x++) {
-			for (int y = 8; y >= 7; y--) {
+		for (int x = 5; x <= 6; x++) {
+			for (int y = 6; y <= 7; y++) {
 				foreach (AIBehavior unit in enemyGrid[x,y].ToArray()) {
 					if (unit.isEnemy) {
 						return false;
