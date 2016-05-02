@@ -34,7 +34,7 @@ public class Peasant : AIBehavior {
 		}
 	}
 		
-	new void Update() {
+	protected override void Update() {
 		if (paused) {
 			return;
 		}
@@ -45,12 +45,7 @@ public class Peasant : AIBehavior {
 				return;
 			}
 		}
+		SwitchTargets();
 		base.Update();
-		SwitchTargets ();
 	}
-
-	void OnCollisionStay(Collision coll) {
-		base.OnCollision (coll);
-	}
-
 }
