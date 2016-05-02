@@ -98,6 +98,7 @@ public class Dialogue : MonoBehaviour {
 				if (encounter == 99 && level == 1) {
 					if (collision.gameObject.GetComponent<PlayerController> ().hasKey) {
 						encounter = 6;
+						gameObject.transform.localScale = new Vector3 (1, 1, 1);
 						instructions = Resources.Load<TextAsset> ("Scripts/Level" + level + "Encounter" + encounter).text.Split (new char[1]{ '\n' });
 					} else {
 						if (collision.gameObject.transform.position.z > transform.position.z + transform.localScale.z / 2) {
