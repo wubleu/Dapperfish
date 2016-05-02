@@ -17,7 +17,6 @@ public class Peasant : AIBehavior {
 		chaseThreshold = 1f;
 		chaseDist = 1f;
 		hoverRadius = 1.5f;
-		infectionCost = 25;
 		animmax = .2f;
 		animcount = animmax;
 		if (isElite.Length > 0) {
