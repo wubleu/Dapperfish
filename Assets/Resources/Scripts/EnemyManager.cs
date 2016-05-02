@@ -10,10 +10,18 @@ public class EnemyManager : MonoBehaviour {
 	GameManager gManager;
 	public PlayerController necromancerController;
 	public int peasantCount = 0;
-	
+	public float wave = 0;
+	public float wave2 = 5;
+	public float wave3 = 5;
+	public int waveCount = 3;
+	public int[] waveNumbers;
 
 	// Use this for initialization
 	public void init (GameManager gMan, PlayerController pController) {
+		waveNumbers = new int[3];
+		waveNumbers [0] = 3;
+		waveNumbers [1] = 2;
+		waveNumbers [2] = 1;
 		gManager = gMan;
 		necromancerController = pController;
 		transform.parent = gManager.transform;
@@ -57,21 +65,37 @@ public class EnemyManager : MonoBehaviour {
 					GameObject spawner = GameObject.Find ("Spawn Zone " + parts [0]);
 					for (int i = 1; i <= 3; i++) {
 						for (int j = 0; j < Int32.Parse (parts [i]); j++) {
-							Spawn (spawner.transform.position, i, Int32.Parse (parts [4]));
+							bool[] isElite = new bool[2];
+							isElite [0] = false;
+							isElite [1] = false;
+							Spawn (spawner.transform.position, i, Int32.Parse (parts [4]), isElite);
 						}
 					}
-				} /*else if (parts.Length == 2) {
+				} else if (parts.Length == 2) {
 					if (parts [0] == "9999") {
 						Enemies.makeNecroBoss (gManager, this, necromancerController, GameObject.Find ("Spawn Zone " + parts [1]).transform.position);
 					}
-				}*/
+				}
 			}
 		}
 	}
 
-	public void delayedSpawn(String tag){
-		string[] instructions = Resources.Load<TextAsset>("Scripts/level" + gManager.level.ToString()).text.Split(new char[1]{'\n'});
+	void Update(){
+		if (gManager.level == 2) {
+			
+		} else if (gManager.level == 3) {
+			if ((wave+=Time.deltaTime)>wave3){
+				wave = 0;
+				delayedSpawn ("wave",true);
+			}
+		}
+	}
 
+	public void delayedSpawn(String tag, bool isWave){
+		string[] instructions = Resources.Load<TextAsset>("Scripts/level" + gManager.level.ToString()).text.Split(new char[1]{'\n'});
+		bool[] isElite = new bool[2];
+		isElite [0] = false;
+		isElite [1] = isWave;
 		foreach (string instruction in instructions) {
 			string[] parts = instruction.Split (new char[1]{ ':' });
 			if (parts.Length == 6) {
@@ -79,7 +103,11 @@ public class EnemyManager : MonoBehaviour {
 					GameObject spawner = GameObject.Find ("Spawn Zone " + parts [0]);
 					for (int i = 1; i <= 3; i++) {
 						for (int j = 0; j < Int32.Parse (parts [i]); j++) {
-							Spawn (spawner.transform.position, i, Int32.Parse (parts [4]));
+							if (!isWave) {
+								Spawn (spawner.transform.position, i, Int32.Parse (parts [4]),isElite);
+							} else {
+								Spawn (spawner.transform.position, i, Int32.Parse (parts [4]),isElite);
+							}
 						}
 					}
 				}
@@ -87,19 +115,19 @@ public class EnemyManager : MonoBehaviour {
 		}
 	}
 
-	void Spawn(Vector3 zone, int type, int radius) {
+	void Spawn(Vector3 zone, int type, int radius, bool[] isElite) {
 		zone = new Vector3 (zone.x + UnityEngine.Random.Range (-radius, radius) + UnityEngine.Random.value, 0, zone.z + UnityEngine.Random.Range (-radius, radius) + UnityEngine.Random.value);
 		switch (type) {
 			case 1:
-				Enemies.makePeasant(gManager, this, necromancerController, zone);
+			Enemies.makePeasant(gManager, this, necromancerController, zone, isElite);
 				peasantCount++;
 				break;
 			case 2:
-				Enemies.makeArcher(gManager, this, necromancerController, zone);
+			Enemies.makeArcher(gManager, this, necromancerController, zone, isElite);
 				peasantCount++;
 				break;
 			case 3:
-				Enemies.makeKnight(gManager, this, necromancerController, zone);
+			Enemies.makeKnight(gManager, this, necromancerController, zone, isElite);
 				peasantCount++;
 				break;
 		}
