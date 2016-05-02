@@ -46,8 +46,12 @@ public class AIBehavior : MonoBehaviour {
 			cSprites = Resources.LoadAll<Sprite> ("Textures/Knight Sprite Sheet");
 			rend.sprite = cSprites [0];
 		}
-		if (isElite.Length != 0) {
+		if (isElite.Length >= 1 && isElite[0] == true) {
 			SetToElite();
+		}
+		if (isElite.Length >= 2 && (inWave = isElite [1]) == true) {
+			agent.destination = necromancer.transform.position;
+			target = necromancer;
 		}
 		resumeSpeed = speed;
 	}
@@ -55,12 +59,6 @@ public class AIBehavior : MonoBehaviour {
 	protected virtual void Update() {
 		if (talert > 0 && (talert -= Time.deltaTime) <= 0) {
 			aggroRange -= 100;
-		}
-		if (root > 0 && (root -= Time.deltaTime) <= 0) {
-			agent.speed = speed;
-			meleeTimer = 0;
-		} else if (root > 0) {
-			return;
 		}
 		meleeTimer += Time.deltaTime;
 		if (meleeTimer >= meleeThreshold / 5) {

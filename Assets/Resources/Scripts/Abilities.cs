@@ -15,9 +15,9 @@ public static class Abilities {
 		return spell;
 	}
 
-	public static void Summon(float x, float y, float z) {
+	public static int Summon(float x, float y, float z) {
 		GameObject summon = new GameObject ();
-		summon.AddComponent<Summon> ().init(new Vector3(x, y, z));
+		return summon.AddComponent<Summon> ().init(new Vector3(x, y, z));
 	}
 
 	private static GameObject makeSphere(Vector3 pos, int spr, float scale, float rad, string animation) {

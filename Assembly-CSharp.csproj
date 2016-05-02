@@ -55,7 +55,10 @@
      <Compile Include="Assets\Resources\Scripts\FortKey.cs" />
      <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
      <Compile Include="Assets\Resources\Scripts\Gate.cs" />
+<<<<<<< HEAD
      <Compile Include="Assets\Resources\Scripts\Gate2.cs" />
+=======
+>>>>>>> origin/RyanMechanicStudy
      <Compile Include="Assets\Resources\Scripts\HealthBar.cs" />
      <Compile Include="Assets\Resources\Scripts\HealthPack.cs" />
      <Compile Include="Assets\Resources\Scripts\Key.cs" />

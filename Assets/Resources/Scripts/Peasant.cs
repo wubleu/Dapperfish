@@ -12,36 +12,38 @@ public class Peasant : AIBehavior {
 		maxHP = hp = 4f;
 		meleeThreshold = 1f;
 		meleeDamage = .3f;
-		aggroRange = 9f;
+		aggroRange = 2f;
 		necroAggroModifier = 1.2f;
 		chaseThreshold = 1f;
 		chaseDist = 1f;
 		hoverRadius = 1.5f;
 		animmax = .2f;
 		animcount = animmax;
-		if (isElite.Length > 0) {
-			if (isElite [0] == true) {
-				base.init (gMan, owner, necro, true);
-			} else {
-				base.init (gMan, owner, necro);
-			}
-			if (isElite.Length > 1) {
-				inWave = isElite[1];
-				agent.destination = necromancer.transform.position;
-			}
-		} else {
+		if (isElite.Length == 0) {
 			base.init (gMan, owner, necro);
-		}
+		} else if (isElite.Length == 1) {
+			base.init (gMan, owner, necro, isElite[0]);
+		} else {
+			base.init (gMan, owner, necro, isElite[0], isElite[1]);
+		} 
 	}
 		
 	protected override void Update() {
 		if (paused) {
 			return;
 		}
+		if (root > 0 && (root -= Time.deltaTime) <= 0) {
+			agent.speed = speed;
+			meleeTimer = 0;
+		} else if (root > 0) {
+			return;
+		}
 		if (inWave) {
 			if (Vector3.Distance (transform.position, necromancer.transform.position) < aggroRange) {
 				inWave = false;
 			} else {
+				transform.LookAt (necromancer.transform);
+				agent.destination = necromancer.transform.position;
 				return;
 			}
 		}

@@ -34,10 +34,10 @@ public class Pause : MonoBehaviour {
 			spell.UnPauseSpell ();
 		}
 		GameObject.FindObjectOfType<PlayerController> ().UnPausePlayer();
-		//NecromancerBoss necroBoss = GameObject.FindObjectOfType<NecromancerBoss> ();
-		/*if (necroBoss != null) {
+		NecromancerBoss necroBoss = GameObject.FindObjectOfType<NecromancerBoss> ();
+		if (necroBoss != null) {
 			necroBoss.UnPauseBoss ();
-		}*/
+		}
 		Destroy (gameObject);
 	}
 }

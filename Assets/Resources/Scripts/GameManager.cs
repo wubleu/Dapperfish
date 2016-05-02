@@ -111,6 +111,10 @@ public class GameManager : MonoBehaviour {
 		foreach (SpellShot unit in FindObjectsOfType<SpellShot>()) {
 			Destroy (unit.gameObject);
 		}
+		NecromancerBoss necroBoss = FindObjectOfType<NecromancerBoss> ();
+		if (necroBoss != null) {
+			Destroy (necroBoss);
+		}
 		Destroy(eManager);
 		GameObject death = new GameObject();
 		death.transform.position = necromancer.transform.position;
