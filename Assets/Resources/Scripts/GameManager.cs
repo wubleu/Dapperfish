@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour {
 	public List<Link> links;
 	public List<KeyInfo> keys;
 	public int Encounter = 0;
+	public bool waveclear = false;
 
 	// THIS IS JUST UNTIL EVAN GETS THE RESTART BUTTON UP
 	float deathInterval = 3f;

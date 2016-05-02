@@ -11,11 +11,12 @@ public class Dialogue : MonoBehaviour {
 	public int encounter;
 	bool complete = false;
 	int encparts = 0;
-	int level = 1;
+	int level;
 	string[] instructions;
 	bool start = false;
 	// Use this for initialization
 	void Start () {
+		level = Gman.level;
 		instructions = Resources.Load<TextAsset>("Scripts/Level" + level + "Encounter" + encounter).text.Split(new char[1]{'\n'});
 
 	}

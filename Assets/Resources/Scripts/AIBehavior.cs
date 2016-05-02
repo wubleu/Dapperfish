@@ -288,6 +288,13 @@ public class AIBehavior : MonoBehaviour {
 	protected void SetToElite() {
 		isElite = true;
 		immune = true;
+		Sprite[] ESprites;
+		GameObject elite = new GameObject ();
+		elite.transform.parent = this.transform;
+		elite.transform.localPosition = new Vector3 (0, 0, 0);
+		elite.AddComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("Textures/Elite Symbol");
+		elite.transform.localEulerAngles = new Vector3 (90, 0, 0);
+		elite.name = "Elite Symbol";
 	}
 
 	public void PauseAI() {
