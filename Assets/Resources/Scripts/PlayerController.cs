@@ -336,7 +336,7 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			hasKey = true;
 			//gManager.objectives.text = "Get through the East Gate. \nGate will take 3 seconds to open.";
-			eManager.delayedSpawn ("fort");
+			eManager.delayedSpawn ("fort", false);
 			foreach (Link l in gManager.links) {
 				if (l.name == "gate") {
 					l.unlocked = true;
