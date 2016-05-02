@@ -9,13 +9,16 @@ public class HealthPack : MonoBehaviour {
 		name = "HealthPack";
 		transform.position = pos;
 		transform.eulerAngles = new Vector3(90, 0, 0);
+		transform.localScale = new Vector3 (.75f, .75f, .75f);
+		rend = gameObject.AddComponent<SpriteRenderer>();
+		rend.sprite = Resources.LoadAll<Sprite>("Textures/Health Pickup Sprite Sheet")[0];
+		rend.sortingOrder = 1;
 		SphereCollider coll = gameObject.AddComponent<SphereCollider>();
 		coll.radius = 0.5f;
 		coll.isTrigger = true;
 
-		rend = gameObject.AddComponent<SpriteRenderer>();
-		rend.sprite = Resources.Load<Sprite>("Textures/BenCircle");
-		rend.color = Color.green;
+		Animator anim = gameObject.AddComponent<Animator> ();
+		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Health Drop Controller");
 	}
 
 	void OnTriggerEnter(Collider coll) {
