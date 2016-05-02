@@ -92,7 +92,11 @@ public class GameManager : MonoBehaviour {
 //			UnPauseGame ();
 //			playTimer = 0;
 //		}
-		print(Encounter);
+<<<<<<< HEAD
+		//print(Encounter);
+=======
+//		print(Encounter);
+>>>>>>> origin/RyanMechanicStudy
 		//THESE IFS ARE ALSO TEMPORARY TILL BUTTON'S UP
 		if (dead == true) {
 			if ((deathTimer += Time.deltaTime) > deathInterval) {
@@ -218,8 +222,8 @@ public class GameManager : MonoBehaviour {
 
 	public bool AreaClear(){
 		RefillGrid ();
-		for (int x = 4; x <= 7; x++) {
-			for (int y = 5; y <= 6; y++) {
+		for (int x = 5; x <= 6; x++) {
+			for (int y = 6; y <= 7; y++) {
 				foreach (AIBehavior unit in enemyGrid[x,y].ToArray()) {
 					if (unit.isEnemy) {
 						return false;

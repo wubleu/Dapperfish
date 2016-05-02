@@ -17,8 +17,6 @@ public class Archer : AIBehavior {
 	float firingWaitTimer = 0;
 
 	public void initArcher(GameManager gMan, EnemyManager owner, PlayerController necro, params bool[] isElite) {
-
-		// PARAMETERS
 		allyColor = new Color (0, 0, 0);
 		enemyColor = new Color (1, 1, 1);
 		speed = 6f;
@@ -44,7 +42,7 @@ public class Archer : AIBehavior {
 		GetComponent<NavMeshAgent>().stoppingDistance = 2;
 	}
 		
-	new void Update() {
+	protected override void Update() {
 		if (paused) {
 			return;
 		}
@@ -55,12 +53,9 @@ public class Archer : AIBehavior {
 				return;
 			}
 		}
+		SwitchTargets();
 		base.Update();
-		if (root > 0) {
-			return;
-		}
 		if (moving) {
-			SwitchTargets ();
 			if (target != null) {
 				float targetDist = Vector3.Distance (necromancer.transform.position, transform.position);
 				if (targetDist < preferredRange) {
@@ -87,8 +82,7 @@ public class Archer : AIBehavior {
 				}
 				agent.speed = speed/2;
 			}
-		} else if (!moving) {
-			SwitchTargets ();
+		} else {
 			if ((firingWaitTimer += Time.deltaTime) > firingWaitThreshold / 2f && target != null && !hasFired) {
 				if (isEnemy) {
 					rend.sprite = cSprites [1];
@@ -147,7 +141,7 @@ public class Archer : AIBehavior {
 		return targetDist;
 	}
 
-	protected override float CheckNecro(float targetDist) {
+	protected override void CheckNecro(float targetDist) {
 		if (isEnemy) {
 			float rawNecroDist = Vector3.Distance (necromancer.transform.position, transform.position);
 			float necroDist = Mathf.Abs (aggroRange - rawNecroDist);
@@ -157,7 +151,6 @@ public class Archer : AIBehavior {
 				agent.destination = necromancer.transform.position;
 			}
 		}
-		return targetDist;
 	}
 
 

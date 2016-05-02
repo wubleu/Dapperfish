@@ -104,7 +104,7 @@ public class Knight : AIBehavior {
 		}
 	}
 
-	void OnCollisionStay(Collision coll) {
+	protected override void OnCollisionStay(Collision coll) {
 		if (mode == 3) {
 			return;
 		}

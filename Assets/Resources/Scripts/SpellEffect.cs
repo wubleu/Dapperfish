@@ -4,7 +4,7 @@ using System.Collections;
 public class SpellEffect : MonoBehaviour {
 
 	// PARAMETERS
-	float lifetime, spellSpeed, radius, clock = 0;
+	float lifetime, spellSpeed, radius;
 	bool enemy;
 	bool paused = false;
 	float arrowPower;
@@ -26,19 +26,19 @@ public class SpellEffect : MonoBehaviour {
 		if (paused) {
 			return;
 		}
-		if ((clock += Time.deltaTime) > lifetime) {
+		if ((lifetime -= Time.deltaTime) <= 0) {
 			Destroy(gameObject);
 		}
 		if (name == "Damage" || name == "Bullet" || name == "Arrow") {
 			transform.Translate(angle * spellSpeed * Time.deltaTime, Space.World);
 			transform.position = new Vector3 (transform.position.x, .5f, transform.position.z);
-		} /*else {
-			radius -= radius * (Time.deltaTime / lifetime);
-			gameObject.transform.localScale = new Vector3(radius, radius, radius);
-		}*/
+		}
 	}
 
 	void OnTriggerEnter(Collider col) {
+		if ((name == "Arrow" || name == "Bullet") && col.gameObject.tag == "Obstacle") {
+			Destroy (gameObject);
+		}
 		AIBehavior AI = col.GetComponent<AIBehavior> ();
 		switch (name) {
 		case "Blight":
@@ -88,9 +88,6 @@ public class SpellEffect : MonoBehaviour {
 				Destroy (gameObject);
 			}
 			break;
-		} 
-		if ((name == "Arrow" || name == "Bullet") && col.gameObject.tag == "Obstacle") {
-			Destroy (gameObject);
 		}
 	}
 

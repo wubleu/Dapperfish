@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour {
 
 	// PARAMETERS
-	public float hp = 50, size = 1f, speed = 1.8f, castcd = .25f, currentY = 0, unlockTime = 0, rootDuration = 1f;
+	public float maxhp = 50, hp, size = 1f, speed = 1.8f, castcd = .25f, currentY = 0, unlockTime = 0, rootDuration = 1f;
 	public bool isMelee = false, casted = false, hasKey = false, hasFortKey = false, needsNav = false, destined = false;
 	public float[] cd = new float[5] {0.5f, 5, 3, 50, 2}, timers = new float[5] {0, 0, 0, 0, 0}, ranges = new float[4] {10, 10, 10, 100}, area = new float[3] {3.4f, 3.56f, 2.43f};
 	protected Sprite[] cSprites;
@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour {
 		eManager = eMan;
 		gManager = owner;
 		gameObject.name = "Necromancer";
+
+		hp = maxhp;
 
 		cSprites = Resources.LoadAll<Sprite> ("Textures/Necromancer Sprite Sheet 0");
 
@@ -141,7 +143,6 @@ public class PlayerController : MonoBehaviour {
 		}
 		Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		mouse.y = 0;
-		//print (hasFortKey);
 		if (timers[0] > 0) {
 			if ((timers[0] -= Time.deltaTime) <= .25f) {
 				ramodel.sprite = cSprites [19];
@@ -336,7 +337,7 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			hasKey = true;
 			//gManager.objectives.text = "Get through the East Gate. \nGate will take 3 seconds to open.";
-			eManager.delayedSpawn ("fort");
+			eManager.delayedSpawn ("fort", false);
 			foreach (Link l in gManager.links) {
 				if (l.name == "gate") {
 					l.unlocked = true;
@@ -358,6 +359,9 @@ public class PlayerController : MonoBehaviour {
 		hp -= damage;
 		if (hp <= 0) {
 			gManager.Death();
+		}
+		if (hp > maxhp) {
+			hp = maxhp;
 		}
 	}
 
