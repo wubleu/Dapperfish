@@ -10,7 +10,10 @@ public class EnemyManager : MonoBehaviour {
 	GameManager gManager;
 	public PlayerController necromancerController;
 	public int peasantCount = 0;
-	
+	public float wave = 0;
+	public float wave2 = 5;
+	public float wave3 = 5;
+	public int waveCount = 3;
 
 	// Use this for initialization
 	public void init (GameManager gMan, PlayerController pController) {
@@ -60,11 +63,22 @@ public class EnemyManager : MonoBehaviour {
 							Spawn (spawner.transform.position, i, Int32.Parse (parts [4]));
 						}
 					}
-				} /*else if (parts.Length == 2) {
+				} else if (parts.Length == 2) {
 					if (parts [0] == "9999") {
 						Enemies.makeNecroBoss (gManager, this, necromancerController, GameObject.Find ("Spawn Zone " + parts [1]).transform.position);
 					}
-				}*/
+				}
+			}
+		}
+	}
+
+	void Update(){
+		if (gManager.level == 2) {
+			
+		} else if (gManager.level == 3) {
+			if ((wave+=Time.deltaTime)>wave3){
+				wave = 0;
+				delayedSpawn ("wave");
 			}
 		}
 	}
