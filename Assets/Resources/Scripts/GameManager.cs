@@ -92,11 +92,6 @@ public class GameManager : MonoBehaviour {
 //			UnPauseGame ();
 //			playTimer = 0;
 //		}
-<<<<<<< HEAD
-		//print(Encounter);
-=======
-//		print(Encounter);
->>>>>>> origin/RyanMechanicStudy
 		//THESE IFS ARE ALSO TEMPORARY TILL BUTTON'S UP
 		if (dead == true) {
 			if ((deathTimer += Time.deltaTime) > deathInterval) {
