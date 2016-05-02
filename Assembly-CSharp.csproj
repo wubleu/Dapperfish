@@ -55,6 +55,7 @@
      <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
      <Compile Include="Assets\Resources\Scripts\Gate.cs" />
      <Compile Include="Assets\Resources\Scripts\HealthBar.cs" />
+     <Compile Include="Assets\Resources\Scripts\HealthPack.cs" />
      <Compile Include="Assets\Resources\Scripts\Key.cs" />
      <Compile Include="Assets\Resources\Scripts\KeyInfo.cs" />
      <Compile Include="Assets\Resources\Scripts\Knight.cs" />
