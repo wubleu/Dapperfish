@@ -4,9 +4,10 @@ using System.Collections;
 public class NecromancerBoss : MonoBehaviour {
 
 	// PARAMETERS
-	float teleportCooldown = 10f, rootDuration = 1f, teleportCooldownTimer = 9.5f, maxHp = 10f;
+	float teleportCooldown = 5f, summonCooldown = 10f, damageCooldown = 20f, rootDuration = 1f, maxHp = 10f;
 
-	float rootTimer = 0, hp;
+	float rootTimer = 0f, teleportCooldownTimer = 0f, summonCooldownTimer = 9.5f, damageCooldownTimer = 0f, hp;
+	int minionCount = 0;
 	bool paused = false;
 	GameManager gManager;
 	EnemyManager eManager;
@@ -31,12 +32,12 @@ public class NecromancerBoss : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (paused || (rootTimer < rootDuration && (rootTimer += Time.deltaTime) > rootDuration)) {
+		if (paused || (rootTimer < rootDuration && (rootTimer += Time.deltaTime) < rootDuration)) {
 			return;
 		}
 		// JUST BEING USED FOR TESTING PURPOSES NOW- not at all reflective of final behavior. just tweaking summon a bit.
 		if ((teleportCooldownTimer += Time.deltaTime) > teleportCooldown) {
-			Abilities.Summon (transform.position.x + Random.Range (-6f, 6f), transform.position.y, transform.position.z + Random.Range (-6f, 6f));
+			minionCount += Abilities.Summon (transform.position.x + Random.Range (-6f, 6f), transform.position.y, transform.position.z + Random.Range (-6f, 6f));
 			teleportCooldownTimer = 0;
 		}
 	}

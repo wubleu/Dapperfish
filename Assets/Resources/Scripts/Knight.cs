@@ -20,19 +20,13 @@ public class Knight : AIBehavior {
 		immune = true;
 		animmax = .3f;
 		animcount = animmax;
-		if (isElite.Length > 0) {
-			if (isElite [0] == true) {
-				base.init (gMan, owner, necro, true);
-			} else {
-				base.init (gMan, owner, necro);
-			}
-			if (isElite.Length > 1) {
-				inWave = isElite[1];
-				agent.destination = necromancer.transform.position;
-			}
-		} else {
+		if (isElite.Length == 0) {
 			base.init (gMan, owner, necro);
-		}
+		} else if (isElite.Length == 1) {
+			base.init (gMan, owner, necro, isElite[0]);
+		} else {
+			base.init (gMan, owner, necro, isElite[0], isElite[1]);
+		} 
 		gManager = gMan;
 
 		melee = new GameObject().AddComponent<KnightMelee>();
@@ -44,10 +38,18 @@ public class Knight : AIBehavior {
 		if (paused) {
 			return;
 		}
+		if (root > 0 && (root -= Time.deltaTime) <= 0) {
+			agent.speed = speed;
+			meleeTimer = 0;
+		} else if (root > 0) {
+			return;
+		}
 		if (inWave) {
 			if (Vector3.Distance (transform.position, necromancer.transform.position) < aggroRange) {
 				inWave = false;
 			} else {
+				transform.LookAt (necromancer.transform);
+				agent.destination = necromancer.transform.position;
 				return;
 			}
 		}
