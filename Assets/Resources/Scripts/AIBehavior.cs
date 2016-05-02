@@ -7,7 +7,7 @@ public class AIBehavior : MonoBehaviour {
 	protected Color allyColor, enemyColor;
 	public float hoverRadius, chaseDist, chaseThreshold, chaseClock, aggroRange, necroAggroModifier, speed,
 		meleeThreshold, meleeDamage, switchDirTimer = 0, meleeTimer = 0, root = 0, hp, maxHP, infectionCost,
-		animcount, animmax, meleecd = .2f, rootPersistence = .5f, convertedHp = .8f, convertedStrength = .6f;
+		animcount, animmax, rootPersistence = .5f, convertedHp = .8f, convertedStrength = .6f;
 	protected bool paused = false;
 	public bool inWave = false;
 	protected float resumeSpeed;
@@ -90,10 +90,10 @@ public class AIBehavior : MonoBehaviour {
 			}
 		}
 		if (attacked) {
-			meleecd -= Time.deltaTime;
-			if (meleecd <= 0) {
+			meleeTimer -= Time.deltaTime;
+			if (meleeTimer <= 0) {
 				attacked = false;
-				meleecd = .2f;
+				meleeTimer = 1f;
 				rend.sprite = cSprites [0];
 			}
 		}
