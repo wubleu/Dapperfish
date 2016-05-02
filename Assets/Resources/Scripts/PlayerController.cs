@@ -120,11 +120,13 @@ public class PlayerController : MonoBehaviour {
 		spellRange.transform.parent = transform;
 		spellRange.transform.localPosition = new Vector3(0, 1, 0);
 		spellRange.transform.eulerAngles = new Vector3(90, 0, 0);
+		spellRange.name = "SpellRange";
 
 		AOE = new GameObject().AddComponent<SpriteRenderer>();
 		AOE.color = Color.clear;
 		AOE.sprite = Resources.Load<Sprite>("Textures/BenCircle");
 		AOE.transform.eulerAngles = new Vector3(90, 0, 0);
+		AOE.name = "AOE";
 
 		DamageClip = Resources.Load ("Sounds/Damage") as AudioClip;
 		BlightClip = Resources.Load ("Sounds/Blight") as AudioClip;

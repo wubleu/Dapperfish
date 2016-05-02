@@ -239,6 +239,8 @@ public class AIBehavior : MonoBehaviour {
 				transform.localPosition = new Vector3 (hoverRadius * hoverPos.x, 0, hoverRadius * hoverPos.y);
 			}
 		}
+		float angle = Mathf.PI / 2 + Mathf.Atan2(transform.position.x - necromancer.transform.position.x, necromancer.transform.position.z - transform.position.z);
+		transform.localEulerAngles = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle));
 	}
 
 	protected void Melee(Collision coll, float damage = 1) {
@@ -326,8 +328,13 @@ public class AIBehavior : MonoBehaviour {
 				necromancer.GetComponent<PlayerController>().minionCount -= 1;
 			}
 			gManager.EnemyDeath (transform.position, name, isEnemy);
+			Death();
 			Destroy (this.gameObject);
 		}
+	}
+
+	protected virtual void Death() {
+		
 	}
 
 	protected void SetToElite() {

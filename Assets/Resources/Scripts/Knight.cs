@@ -115,4 +115,8 @@ public class Knight : AIBehavior {
 			meleeTimer = 0;
 		}
 	}
+
+	protected override void Death() {
+		new GameObject().AddComponent<HealthPack>().init(transform.position);
+	}
 }
