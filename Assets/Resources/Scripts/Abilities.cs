@@ -20,21 +20,31 @@ public static class Abilities {
 		summon.AddComponent<Summon> ().init(new Vector3(x, y, z));
 	}
 
-	public static void Blight(Vector3 pos) {
-		//GameObject spell = AOE(3, new Color(0, 1, 0, .4f), pos);
-		Sprite[] cSprites = Resources.LoadAll<Sprite> ("Textures/Spell Effects Sprite Sheet");
+	private static GameObject makeSphere(Vector3 pos, int spr, float scale, float rad, string animation) {
 		GameObject spell = new GameObject();
-		spell.AddComponent<SpriteRenderer>();
-		spell.AddComponent<Animator>();
-		spell.GetComponent<SpriteRenderer> ().sprite = cSprites [0];
 		spell.transform.position = pos;
-		spell.transform.localScale = new Vector3(.75f, .75f, .75f);
-		spell.transform.localEulerAngles = new Vector3(90, 0, 0);
-		Animator anim = spell.GetComponent<Animator> ();
-		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Blight Controller");
-		spell.AddComponent<SphereCollider> ().isTrigger = true;
+
+		SphereCollider coll = spell.AddComponent<SphereCollider>();
+		coll.isTrigger = true;
+		coll.radius = rad;
+
+		Sprite[] cSprites = Resources.LoadAll<Sprite>("Textures/Spell Effects Sprite Sheet");
+		GameObject model = new GameObject();
+		model.transform.parent = spell.transform;
+		model.transform.localPosition = new Vector3(0, 1, 0);
+		model.transform.localEulerAngles = new Vector3(90, 0, 0);
+		model.transform.localScale = new Vector3(scale, scale, scale);
+		model.AddComponent<SpriteRenderer>().sprite = cSprites[spr];
+
+		model.AddComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/" + animation);
+
+		return spell;
+	}
+
+	public static void Blight(Vector3 pos) {
+		GameObject spell = makeSphere(pos, 0, 0.7f, 1.5f, "Blight Controller");
 		spell.name = "Blight";
-		spell.AddComponent<SpellEffect>().init(.4f);
+		spell.AddComponent<SpellEffect>().init(0.4f);
 	}
 
 	public static void Root(Vector3 pos, params bool[] isEnemy) {

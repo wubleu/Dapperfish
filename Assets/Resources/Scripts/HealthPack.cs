@@ -8,6 +8,7 @@ public class HealthPack : MonoBehaviour {
 	public void init(Vector3 pos) {
 		name = "HealthPack";
 		transform.position = pos;
+		transform.eulerAngles = new Vector3(90, 0, 0);
 		SphereCollider coll = gameObject.AddComponent<SphereCollider>();
 		coll.radius = 0.5f;
 		coll.isTrigger = true;
@@ -17,7 +18,7 @@ public class HealthPack : MonoBehaviour {
 		rend.color = Color.green;
 	}
 
-	void OnTrigger(Collider coll) {
+	void OnTriggerEnter(Collider coll) {
 		if (coll.name == "Necromancer") {
 			coll.GetComponent<PlayerController>().Damage(-10);
 			Destroy(gameObject);
