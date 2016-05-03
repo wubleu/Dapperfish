@@ -10,9 +10,9 @@ public class EnemyManager : MonoBehaviour {
 	GameManager gManager;
 	public PlayerController necromancerController;
 	public int peasantCount = 0;
-	public float wave = 0; //do not change. This is just a counter
-	public float wave2 = 10; //wave interval for level 2
-	public float wave3 = 10; //wave interval for level 3
+	public float wave = 13; //do not change. This is just a counter
+	public float wave2 = 18; //wave interval for level 2
+	public float wave3 = 13; //wave interval for level 3
 	public int currentWave = 1; //for level 2. the wave currently being done. if 1, then wave1 will be called in delayedSpawn
 	public int waveCount = 3; //number of wave types in level 2
 	public int[] waveNumbers; //count of each wave type in level 2. set in init
@@ -22,9 +22,9 @@ public class EnemyManager : MonoBehaviour {
 	// Use this for initialization
 	public void init (GameManager gMan, PlayerController pController) {
 		waveNumbers = new int[3];
-		waveNumbers [0] = 3;
-		waveNumbers [1] = 2;
-		waveNumbers [2] = 1;
+		waveNumbers [0] = 4;
+		waveNumbers [1] = 3;
+		waveNumbers [2] = 2;
 		gManager = gMan;
 		necromancerController = pController;
 		transform.parent = gManager.transform;
@@ -114,6 +114,9 @@ public class EnemyManager : MonoBehaviour {
 		bool[] isElite = new bool[2];
 		isElite [0] = false;
 		isElite [1] = isWave;
+		if (tag == "wave3") {
+			isElite [0] = true;
+		}
 		foreach (string instruction in instructions) {
 			string[] parts = instruction.Split (new char[1]{ ':' });
 			if (parts.Length == 6) {
