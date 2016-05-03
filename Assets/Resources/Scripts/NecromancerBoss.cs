@@ -60,6 +60,9 @@ public class NecromancerBoss : MonoBehaviour {
 		}
 
 		if (shootingTimer > 0) {
+			if (target == null) {
+				SetTarget ();
+			}
 			if (((teleportCooldownTimer += Time.deltaTime) > teleportCooldown &&
 			   Vector3.Distance (transform.position, target.transform.position) < aggroToAIRange) ||
 			   teleportCooldownTimer > teleportCooldown * 2) {
@@ -83,8 +86,11 @@ public class NecromancerBoss : MonoBehaviour {
 	}
 
 	void SetTarget() {
+		if (target == null) {
+			target = necromancer.gameObject;
+		}
 		float targetDist = Vector3.Distance (transform.position, target.transform.position);
-		if (target == null || Vector3.Distance (transform.position, necromancer.transform.position) < targetDist) {
+		if (Vector3.Distance (transform.position, necromancer.transform.position) < targetDist) {
 			target = necromancer.gameObject;
 		} else if (targetDist > aggroToAIRange*1.5 || (target != necromancer.gameObject && targetDist > aggroToAIRange)) {
 			int unitGridX = ((int)transform.position.x - gManager.xGridOrigin) / 10;
