@@ -125,6 +125,22 @@ public class GameManager : MonoBehaviour {
 			wavebegin = true;
 			necromancer.EnableRoot ();
 		}
+		if (Encounter == 4 && level == 2) {
+			NextLevel ();
+		}
+
+		if (level == 2 && Encounter == 3) {
+			Destroy (GameObject.Find ("Boss"));
+		}
+
+		if (Encounter == 2 && level == 3) {
+			wavebegin = true;
+			GameObject.Find ("Necromancer Boss").GetComponent<NecromancerBoss> ().waiting = false;
+		}
+		if (Encounter == 3 && level == 3) {
+			alert.text = "You Win?";
+			GameObject.Find ("Necromancer Boss").GetComponent<NecromancerBoss> ().Die ();
+		}
 
 		RefillGrid ();
 	}
@@ -240,10 +256,10 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public bool AreaClear(){
+	public bool AreaClear(int minx, int maxx, int miny, int maxy){
 		RefillGrid ();
-		for (int x = 6; x <= 7; x++) {
-			for (int y = 6; y <= 7; y++) {
+		for (int x = minx; x <= maxx; x++) {
+			for (int y = miny; y <= maxy; y++) {
 				foreach (AIBehavior unit in enemyGrid[x,y].ToArray()) {
 					if (unit.isEnemy) {
 						return false;

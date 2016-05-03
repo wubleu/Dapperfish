@@ -11,14 +11,15 @@ public class NecromancerBoss : MonoBehaviour {
 	float rootTimer = 0f, teleportCooldownTimer = 0f, summonCooldownTimer = 0f, summonCooldown = 5f, damageCooldownTimer = 0f,
 			shootingTimer, nextShotTimer, teleportGridXLoc, teleportGridYLoc, hp;
 	int minionCount = 0;
-	bool paused = false, waiting = true;
+	bool paused = false;
+	public bool waiting = true;
 	GameObject target;
 	GameManager gManager;
 	EnemyManager eManager;
 	PlayerController necromancer;
 	SpriteRenderer rend;
 	Sprite[] cSprites;
-
+	public bool dead = false;
 
 	public void initNecroBoss (GameManager gMan, EnemyManager owner, PlayerController necro) {
 		gManager = gMan;
@@ -47,11 +48,7 @@ public class NecromancerBoss : MonoBehaviour {
 			return;
 		}
 		if (waiting) {
-			if (transform.position.x - necromancer.transform.position.x < 10) {
-				waiting = false;
-			} else {
-				return;
-			}
+			return;
 		}
 		if (shootingTimer < shootingPeriod && (shootingTimer += Time.deltaTime) > 0) { 
 			if ((nextShotTimer += Time.deltaTime) > shootingFreq) {
@@ -163,13 +160,22 @@ public class NecromancerBoss : MonoBehaviour {
 	}
 
 	public void Die() {
-		Destroy (gameObject);
+		GameObject death = new GameObject();
+		death.transform.position = transform.position;
+		death.transform.localScale = transform.localScale;
+		death.transform.localEulerAngles = new Vector3 (90, 0, 0);
+		death.AddComponent<SpriteRenderer>();
+		Animator anim = death.AddComponent<Animator>();
+		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Boss Death Controller");
+		Destroy(this.gameObject);
+		Destroy(death, 1.5f);
 	}
 
 	public void Damage(float damage) {
 		hp -= damage;
 		if (hp <= 0) {
-			Die ();
+			dead = true;
+			//Die ();
 		}
 	}
 
