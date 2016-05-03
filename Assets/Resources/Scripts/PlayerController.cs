@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour {
 
 	// PARAMETERS
-	public float maxhp = 50, hp, size = 1f, speed = 1.8f, castcd = .25f, currentY = 0, unlockTime = 0, rootDuration = 1f;
+	public float maxhp = 50, hp, size = 1f, speed = 4f, castcd = .25f, currentY = 0, unlockTime = 0, rootDuration = 1f;
 	public bool isMelee = false, casted = false, hasKey = false, hasFortKey = false, needsNav = false, destined = false;
 	public float[] cd = new float[5] {0.5f, 5, 3, 50, 2}, timers = new float[5] {0, 0, 0, 0, 0}, ranges = new float[4] {10, 10, 10, 100}, area = new float[3] {3.4f, 3.56f, 2.43f};
 	protected Sprite[] cSprites;
@@ -182,6 +182,23 @@ public class PlayerController : MonoBehaviour {
 				timers[0] = cd[0];
 			}
 		}
+		int[] b = new int[2] {0, 0};
+		if (Input.GetKey(KeyCode.A)) {
+			b[0] = -1;
+		} else if (Input.GetKey(KeyCode.D)) {
+			b[0] = 1;
+		}
+		if (Input.GetKey(KeyCode.W)) {
+			b[1] = 1;
+		} else if (Input.GetKey(KeyCode.S) ) {
+			b[1] = -1;
+		}
+		if (b[0] != 0 && b[1] != 0) {
+			transform.Translate(b[0] * speed * Time.deltaTime / Mathf.Sqrt(2), 0, b[1] * speed * Time.deltaTime / Mathf.Sqrt(2));
+		} else {
+			transform.Translate(b[0] * speed * Time.deltaTime, 0, b[1] * speed * Time.deltaTime);
+		}
+
 		for (int i = 1; i <= 4; i++) {
 			if (Input.GetKeyDown(controls[i]) && i <= 3 && timers[i] == 0) {
 				spellRange.transform.localScale = new Vector3(ranges[i - 1] / 3.2f, ranges[i - 1] / 3.2f, 1);
@@ -220,31 +237,20 @@ public class PlayerController : MonoBehaviour {
 						lamodel.transform.localPosition = new Vector3(-0.3f, 1, 0.45f);
 						break;
 					case 4: // blink
-						Abilities.Blink(transform, Mathf.PI / 2 - Mathf.Atan2(mouse.x - transform.position.x, mouse.z - transform.position.z));
+						float angle = 15;
+						if (b[0] != 0 && b[1] != 0) {
+							angle = 90 - b[0] * 90 + b[0] * b[1] * 45;
+						} else if (b[0] != 0) {
+							angle = 90 - b[0] * 90;
+						} else if (b[1] != 0) {
+							angle = b[1] * 90;
+						}
+						Abilities.Blink(transform, angle);
+//						Abilities.Blink(transform, Mathf.PI / 2 - Mathf.Atan2(mouse.x - transform.position.x, mouse.z - transform.position.z));
 						AudioSource.PlayClipAtPoint (BlinkClip, transform.position);	
 						break;
 				}
 			}
-		}
-		int[] b = new int[2] {0, 0};
-		if (Input.GetKey(KeyCode.A)) {
-			b[0] = -1;
-			transform.Translate(-speed*Time.deltaTime, 0, 0);
-		} else if (Input.GetKey(KeyCode.D)) {
-			b[0] = 1;
-			transform.Translate(speed*Time.deltaTime, 0, 0);
-		}
-		if (Input.GetKey(KeyCode.W)) {
-			b[1] = 1;
-			transform.Translate(0, 0, speed*Time.deltaTime);
-		} else if (Input.GetKey(KeyCode.S) ) {
-			b[1] = -1;
-			transform.Translate(0, 0, -speed*Time.deltaTime);
-		}
-		if (b[0] != 0 && b[1] != 0) {
-			transform.Translate(b[0] * speed * Time.deltaTime / Mathf.Sqrt(2), 0, b[1] * speed * Time.deltaTime / Mathf.Sqrt(2));
-		} else {
-			transform.Translate(b[0] * speed * Time.deltaTime, 0, b[1] * speed * Time.deltaTime);
 		}
 
 		if (transform.position.x > 105) {
