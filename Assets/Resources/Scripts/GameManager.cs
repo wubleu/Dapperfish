@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour {
 
 	public void Finish() {
 		if (!done) {
-			alert.text =  "Objective Complete! Your Conquest Continues!";
+			//alert.text =  "Objective Complete! Your Conquest Continues!";
 			done = true;
 		}
 		NextLevel ();

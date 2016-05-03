@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Knight : AIBehavior {
 
-	float chargespeed = 100, wait = 0.5f, charge = 0.4f, caggro = 4, timer = 0, chargecd = .5f;
+	float chargespeed = 100, wait = 0.5f, charge = 0.3f, caggro = 4, timer = 0, chargecd = 1f;
 	public int mode = 0;
 	Vector3 start;
 	KnightMelee melee;
@@ -11,9 +11,9 @@ public class Knight : AIBehavior {
 	public void initKnight(GameManager gMan, EnemyManager owner, PlayerController necro, params bool[] isElite) {
 		allyColor = new Color(0, 0, 0);
 		enemyColor = new Color (1, 1, 1);
-		speed = 6;
-		maxHP = hp = 25;
-		meleeThreshold = 3;
+		speed = 4;
+		maxHP = hp = 20;
+		meleeThreshold = 2;
 		meleeDamage = 25;
 		aggroRange = 9;
 		necroAggroModifier = 2;
