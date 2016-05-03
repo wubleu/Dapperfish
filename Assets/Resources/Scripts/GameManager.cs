@@ -283,4 +283,11 @@ public class GameManager : MonoBehaviour {
 	public void Restart(){
 		SceneManager.LoadScene("Level "+ level);
 	}
+	public void Menu(){
+
+		SceneManager.LoadScene (3);
+	}
+	public void Quit(){
+		Application.Quit ();
+	}
 }
