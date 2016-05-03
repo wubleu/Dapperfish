@@ -26,6 +26,10 @@ public class Dialogue : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
+		if (level == 1 && encounter == 99 && Gman.Encounter == 6) {
+			Destroy (this.gameObject);
+		}
+
 		if (level == 1 && encounter == 3 ) {
 			gameObject.GetComponent<BoxCollider> ().enabled = false;
 			//print (Gman.AreaClear ());
@@ -50,7 +54,7 @@ public class Dialogue : MonoBehaviour {
 			gameObject.GetComponent<BoxCollider> ().enabled = true;
 		}
 
-		if (Gman.waveclear && encounter == 3) {
+		if (Gman.waveclear && encounter == 3 && level == 3) {
 			Dbox.SetActive (true);
 			Gman.PauseGame ();
 			start = true;
