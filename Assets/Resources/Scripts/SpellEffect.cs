@@ -48,6 +48,14 @@ public class SpellEffect : MonoBehaviour {
 			break;
 		case "Root":
 			if (col.tag == "AI" && enemy != AI.isEnemy) {
+				GameObject stun = new GameObject ();
+				stun.AddComponent<SpriteRenderer> ().sortingOrder = 1;
+				stun.transform.parent = AI.transform;
+				stun.transform.localPosition = new Vector3 (0, .5f, 0);
+				//stun.transform.localScale = transform.localScale;
+				stun.transform.localEulerAngles = new Vector3 (90, 0, 0);
+				stun.AddComponent<Animator> ().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Stun Controller");
+				stun.name = "Stun";
 				AI.Root ();
 			} else if (enemy && col.name == "Necromancer") {
 				col.GetComponent<PlayerController> ().Root ();

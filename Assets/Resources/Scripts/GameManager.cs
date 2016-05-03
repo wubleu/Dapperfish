@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour {
 	public bool waveclear = false;
 	public bool wavebegin = false;
 	public int dungeonKeys = 0;
+	public GameObject Gate3;
 
 	// THIS IS JUST UNTIL EVAN GETS THE RESTART BUTTON UP
 	public int level;
@@ -138,9 +139,11 @@ public class GameManager : MonoBehaviour {
 		if (Encounter == 2 && level == 3) {
 			wavebegin = true;
 			GameObject.Find ("Necromancer Boss").GetComponent<NecromancerBoss> ().waiting = false;
+			Gate3.GetComponent<Gate3> ().finalfight = true;
 		}
 		if (Encounter == 3 && level == 3) {
 			alert.text = "You Win?";
+
 			GameObject.Find ("Necromancer Boss").GetComponent<NecromancerBoss> ().Die ();
 			Encounter++;
 		}
@@ -242,7 +245,7 @@ public class GameManager : MonoBehaviour {
 		foreach (AIBehavior unit in GameObject.FindObjectsOfType<AIBehavior>()) {
 			int xSquare = ((int)unit.gameObject.transform.position.x - xGridOrigin) / 10;
 			int ySquare = ((int)unit.gameObject.transform.position.z - yGridOrigin) / 10;
-			print (xSquare + "   " + ySquare + "   " + unit.transform.position);
+			//print (xSquare + "   " + ySquare + "   " + unit.transform.position);
 			enemyGrid [xSquare, ySquare].Add (unit);
 		}
 	}
