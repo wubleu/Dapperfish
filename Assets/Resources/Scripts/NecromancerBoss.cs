@@ -4,9 +4,9 @@ using System.Collections;
 public class NecromancerBoss : MonoBehaviour {
 
 	// PARAMETERS
-	float teleportCooldown = 5f, summonCooldown = 10f, damageCooldown = 20f, rootDuration = 1f, maxHp = 10f, aggroToAIRange = 4;
+	float teleportCooldown = 5f, minSummonCooldown = 5f, maxSummonCooldown = 15f, damageCooldown = 20f, rootDuration = 1f, maxHp = 50f, aggroToAIRange = 4;
 
-	float rootTimer = 0f, teleportCooldownTimer = 0f, summonCooldownTimer = 9.5f, damageCooldownTimer = 0f,
+	float rootTimer = 0f, teleportCooldownTimer = 0f, summonCooldownTimer = 0f, summonCooldown = 5f, damageCooldownTimer = 0f,
 			teleportGridXLoc, teleportGridYLoc, hp;
 	int minionCount = 0;
 	bool paused = false;

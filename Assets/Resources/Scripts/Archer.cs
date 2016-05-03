@@ -156,6 +156,18 @@ public class Archer : AIBehavior {
 				agent.destination = necromancer.transform.position;
 			}
 		}
+		NecromancerBoss nBoss = GameObject.FindObjectOfType<NecromancerBoss> ();
+		if (nBoss != null && !isEnemy) {
+			GameObject necroBoss = nBoss.gameObject;
+			float rawNecroDist = Vector3.Distance (necroBoss.transform.position, transform.position);
+			float necroDist = Mathf.Abs (aggroRange - rawNecroDist);
+			if (necroDist < targetDist * necroAggroModifier && rawNecroDist < aggroRange) {
+				agent.enabled = true;
+				targetDist = necroDist;
+				target = necroBoss;
+				agent.destination = necroBoss.transform.position;
+			}
+		}
 	}
 
 

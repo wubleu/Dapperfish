@@ -115,7 +115,7 @@ public class AIBehavior : MonoBehaviour {
 		float targetDist = aggroRange;
 		bool aggro = false;
 		if (target != null) { // if the target is within aggroRange, keeps target
-			if (target.name != "Necromancer" && !isEnemy && !target.GetComponent<AIBehavior> ().isEnemy) {
+			if (target.name != "Necromancer" && target.name != "Necromancer Boss" && !isEnemy && !target.GetComponent<AIBehavior> ().isEnemy) {
 				target = null;
 			} else {
 				float currTargetDist = Vector3.Distance (target.transform.position, transform.position);
@@ -196,14 +196,24 @@ public class AIBehavior : MonoBehaviour {
 				agent.destination = necromancer.transform.position;
 			}
 		}
+		NecromancerBoss nBoss = GameObject.FindObjectOfType<NecromancerBoss> ();
+		if (nBoss != null && !isEnemy) {
+			GameObject necroBoss = nBoss.gameObject;
+			float necroDist = Vector3.Distance (necroBoss.transform.position, transform.position);
+			if (necroDist < targetDist * necroAggroModifier && necroDist < aggroRange) {
+				agent.enabled = true;
+				target = necroBoss;
+				agent.destination = necroBoss.transform.position;
+			}
+		}
 	}
 
 	protected void Melee(Collision coll, float damage = 1) {
-		if (coll.gameObject.tag != "AI" && coll.gameObject.name != "Necromancer") {
+		if (coll.gameObject.tag != "AI" && coll.gameObject.name != "Necromancer" && coll.gameObject.name != "Necromancer Boss") {
 			return;
 		}
 		AudioSource.PlayClipAtPoint (gManager.scratch, transform.position);
-		if (coll.gameObject.name == "Necromancer") {
+		if ((coll.gameObject.name == "Necromancer" && isEnemy) || (coll.gameObject.name == "Necromancer Boss")) {
 			if (isEnemy) {
 				coll.gameObject.GetComponent<PlayerController> ().TakeHit (coll.gameObject);
 				meleeTimer = 0;
