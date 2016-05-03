@@ -46,7 +46,7 @@ public class NecromancerBoss : MonoBehaviour {
 		// JUST BEING USED FOR TESTING PURPOSES NOW- not at all reflective of final behavior. just tweaking summon a bit.
 		if ((teleportCooldownTimer += Time.deltaTime) > teleportCooldown && 
 			Vector3.Distance(transform.position, target.transform.position) < aggroToAIRange) {
-
+			Teleport ();
 			teleportCooldownTimer = 0;
 		}
 		SetTarget ();
@@ -88,8 +88,8 @@ public class NecromancerBoss : MonoBehaviour {
 			newX = Random.Range (0, 2);
 			newY = Random.Range(0, 4);
 		}
-		transform.position = new Vector3 (((newX * 5) + 20) + Random.Range (0, 5), transform.position.y, 
-			((newY * 5) - 10) + Random.Range (0, 5));
+		transform.position = new Vector3 (((newX * 5f) + 20f) + Random.Range (0f, 5f), transform.position.y, 
+			((newY * 5f) - 10f) + Random.Range (0f, 5f));
 		teleportGridXLoc = newX;
 		teleportGridYLoc = newY;
 	}
