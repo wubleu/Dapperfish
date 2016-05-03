@@ -4,7 +4,7 @@ using System.Collections;
 public class Summon : Spell {
 
 	//PARAMETERS
-	float size = 1, lifeLength = .8f, percentPeasant = 50, percentArcher = 30;
+	float size = 1, lifeLength = .8f, percentPeasant = 55, percentArcher = 35;
 	int minNumEnemies = 2, maxNumEnemies = 4;
 
 
