@@ -14,7 +14,7 @@ public class Gate3 : MonoBehaviour {
 	void Update () {
 		if (Gman.dungeonKeys == 2) {
 			Destroy (this.gameObject);
-			Gman.wavebegin = true;
+			//Gman.wavebegin = true;
 		}
 	}
 }

@@ -96,7 +96,7 @@ public class EnemyManager : MonoBehaviour {
 			} 
 			if (currentWave > waveCount) {
 				if ((countdown -= Time.deltaTime) <= 0) {
-					if (gManager.AreaClear (7, 11, 3, 8)) {
+					if (gManager.AreaClear (7, 11, 2, 9)) {
 						gManager.waveclear = true;
 					}
 				}

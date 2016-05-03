@@ -133,6 +133,11 @@ public class GameManager : MonoBehaviour {
 			Destroy (GameObject.Find ("Boss"));
 		}
 
+		if (Encounter == 2 && level == 3) {
+			wavebegin = true;
+			GameObject.Find ("Necromancer Boss").GetComponent<NecromancerBoss> ().waiting = false;
+		}
+
 		RefillGrid ();
 	}
 

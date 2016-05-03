@@ -10,7 +10,8 @@ public class NecromancerBoss : MonoBehaviour {
 	float rootTimer = 0f, teleportCooldownTimer = 0f, summonCooldownTimer = 0f, summonCooldown = 5f, damageCooldownTimer = 0f,
 			teleportGridXLoc, teleportGridYLoc, hp;
 	int minionCount = 0;
-	bool paused = false, waiting = true;
+	bool paused = false;
+	public bool waiting = true;
 	GameObject target;
 	GameManager gManager;
 	EnemyManager eManager;
@@ -43,11 +44,7 @@ public class NecromancerBoss : MonoBehaviour {
 			return;
 		}
 		if (waiting) {
-			if (transform.position.x - necromancer.transform.position.x < 10) {
-				waiting = false;
-			} else {
-				return;
-			}
+			return;
 		}
 
 		if ((teleportCooldownTimer += Time.deltaTime) > teleportCooldown && 
