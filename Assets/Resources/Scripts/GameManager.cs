@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour {
 	public List<KeyInfo> keys;
 	public int Encounter = 0;
 	public bool waveclear = false;
+	public bool wavebegin = false;
 
 	// THIS IS JUST UNTIL EVAN GETS THE RESTART BUTTON UP
 	public int level;
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour {
 
 	void init() {
 		// ALSO UNTIL EVAN GETS RESTART BUTTON
-		restart.gameObject.SetActive (false);
+//		restart.gameObject.SetActive (false);
 		dead = false;
 
 		level = Int32.Parse(Application.loadedLevelName.Substring (5));
