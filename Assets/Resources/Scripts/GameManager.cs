@@ -140,6 +140,7 @@ public class GameManager : MonoBehaviour {
 		if (Encounter == 3 && level == 3) {
 			alert.text = "You Win?";
 			GameObject.Find ("Necromancer Boss").GetComponent<NecromancerBoss> ().Die ();
+			Encounter++;
 		}
 
 		RefillGrid ();
