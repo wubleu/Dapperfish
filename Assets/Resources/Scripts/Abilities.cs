@@ -76,8 +76,7 @@ public static class Abilities {
 		spell.AddComponent<SpriteRenderer>();
 		spell.AddComponent<Animator>();
 		spell.GetComponent<SpriteRenderer> ().sprite = cSprites [10];
-		spell.transform.position = pos;
-		spell.transform.position = new Vector3 (spell.transform.position.x, .5f, spell.transform.position.z);
+		spell.transform.position = new Vector3 (pos.x, .5f, pos.z) + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle));
 		spell.transform.localScale = new Vector3(.5f, .5f, .5f);
 		spell.transform.localEulerAngles = new Vector3 (90, GameObject.Find("Necromancer").transform.localEulerAngles.y, 0);
 		Animator anim = spell.GetComponent<Animator> ();
@@ -129,8 +128,7 @@ public static class Abilities {
 		spell.AddComponent<SpriteRenderer>();
 		spell.AddComponent<Animator>();
 		spell.GetComponent<SpriteRenderer> ().sprite = cSprites [13];
-		spell.transform.position = pos;
-		spell.transform.position = new Vector3 (spell.transform.position.x, .5f, spell.transform.position.z);
+		spell.transform.position = new Vector3 (pos.x, .5f, pos.z) + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle));
 		spell.transform.localScale = new Vector3(.4f, .4f, .4f);
 		spell.transform.localEulerAngles = new Vector3 (90, GameObject.Find("Necromancer").transform.localEulerAngles.y, 0);
 		Animator anim = spell.GetComponent<Animator> ();
