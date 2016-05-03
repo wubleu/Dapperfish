@@ -5,7 +5,7 @@ public class Summon : Spell {
 
 	//PARAMETERS
 	float size = 2, lifeLength = .8f, percentPeasantvsArcher = 60, percentKnight = 15;
-	int minNumEnemies = 2, maxNumEnemies = 4;
+	int minNumEnemies = 1, maxNumEnemies = 3;
 
 
 	// Use this for initialization
