@@ -10,16 +10,6 @@ public class ScreenController : MonoBehaviour {
 	public Button quitGame;
 	public GameObject help;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 
 	public void StartGame(){
 		SceneManager.LoadScene ("Level 1");

@@ -285,7 +285,7 @@ public class GameManager : MonoBehaviour {
 	}
 	public void Menu(){
 
-		SceneManager.LoadScene (3);
+		SceneManager.LoadScene (0);
 	}
 	public void Quit(){
 		Application.Quit ();

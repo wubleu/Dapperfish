@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelButton : MonoBehaviour {
 
-	void OnMouseButtonDown() {
+	void OnMouseDown() {
 		switch (name) {
 			case "Square1":
 				SceneManager.LoadScene(1);
