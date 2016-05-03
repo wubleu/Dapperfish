@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
 	public float maxhp = 50, hp, size = 1f, speed = 4f, castcd = .25f, currentY = 0, unlockTime = 0, rootDuration = 1f;
 	public bool isMelee = false, casted = false, hasKey = false, hasFortKey = false, needsNav = false, destined = false;
 	public float[] cd = new float[5] {0.5f, 5, 3, 50, 2}, timers = new float[5] {0, 0, 0, 0, 0}, ranges = new float[4] {10, 10, 10, 100}, area = new float[3] {3.4f, 3.56f, 2.43f};
+	bool[] unlock = new bool[4] {false, false, false, false};
 	protected Sprite[] cSprites;
 	public Image[] icons = new Image[4];
 	
@@ -200,6 +201,9 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		for (int i = 1; i <= 4; i++) {
+			if (!unlock[i]) {
+				continue;
+			}
 			if (Input.GetKeyDown(controls[i]) && i <= 3 && timers[i] == 0) {
 				spellRange.transform.localScale = new Vector3(ranges[i - 1] / 3.2f, ranges[i - 1] / 3.2f, 1);
 				spellRange.color = Color.black;
@@ -381,5 +385,25 @@ public class PlayerController : MonoBehaviour {
 
 	public void UnPausePlayer () {
 		paused = false;
+	}
+
+	public void EnableBlight() {
+		unlock[0] = true;
+		GameObject.Find("CD1").GetComponent<Image>().color = Color.black;
+	}
+
+	public void EnableRoot() {
+		unlock[1] = true;
+		GameObject.Find("CD2").GetComponent<Image>().color = Color.white;
+	}
+
+	public void EnableDamage() {
+		unlock[2] = true;
+		GameObject.Find("CD3").GetComponent<Image>().color = Color.red;
+	}
+
+	public void EnableBlink() {
+		unlock[3] = true;
+		GameObject.Find("CD4").GetComponent<Image>().color = Color.blue;
 	}
 }
