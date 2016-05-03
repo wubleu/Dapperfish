@@ -79,6 +79,7 @@ public static class Enemies {
 
 	public static GameObject makeNecroBoss(GameManager gMan, EnemyManager owner, PlayerController necro, Vector3 pos, params bool[] isElite) {
 		GameObject necroBoss = makeEnemy (pos, 1.5f, "Circle");
+		necroBoss.transform.localEulerAngles = new Vector3 (0, -90, 0);
 		necroBoss.name = "Necromancer Boss";
 		necroBoss.AddComponent<NecromancerBoss> ().initNecroBoss(gMan, owner, necro);
 

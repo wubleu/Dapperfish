@@ -93,7 +93,7 @@ public static class Abilities {
 		spell.AddComponent<SpellEffect>().init(2, enemy, 5, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle))); 
 	}
 
-	public static void Blink(Transform me, float angle) {
+	public static void Blink(Transform me, float angle, params Vector3[] dest) {
 		Sprite[] cSprites = Resources.LoadAll<Sprite> ("Textures/Teleport Sprite Sheet");
 		GameObject start = new GameObject ();
 		start.AddComponent<SpriteRenderer> ();
@@ -102,18 +102,32 @@ public static class Abilities {
 		start.transform.position = new Vector3 (me.position.x, me.position.y, me.position.z);
 		start.transform.localEulerAngles = new Vector3 (90, 0, 0);
 		Animator anim = start.GetComponent<Animator> ();
-		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Blink Start Controller");
+		string animationName;
+		if (dest.Length == 1) {
+			animationName = "Animations/Boss Blink Start Controller";
+			start.transform.localScale *= 2;
+		} else {
+			animationName = "Animations/Blink Start Controller";
+		}
+		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> (animationName);
 		start.name = "Blink Start";
 		GameObject.Destroy (start.gameObject, .5f);
-		me.Translate(4 * new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
 		GameObject end = new GameObject ();
 		end.AddComponent<SpriteRenderer> ();
 		end.AddComponent<Animator> ();
 		end.GetComponent<SpriteRenderer> ().sprite = cSprites [0];
+		if (dest.Length == 1) {
+			me.transform.position = dest [0];
+			animationName = "Animations/Boss Blink End Controller";
+			end.transform.localScale *= 2;
+		} else {
+			me.Translate (4 * new Vector3 (Mathf.Cos (angle), 0, Mathf.Sin (angle)));
+			animationName = "Animations/Blink End Controller";
+		}
 		end.transform.position = new Vector3 (me.position.x, me.position.y, me.position.z);
 		end.transform.localEulerAngles = new Vector3 (90, 0, 0);
 		anim = end.GetComponent<Animator> ();
-		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Blink End Controller");
+		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> (animationName);
 		end.name = "Blink End";
 		//end.GetComponent<SpriteRenderer> ().sortingLayerName = "PlayerController";
 		//end.GetComponent<SpriteRenderer> ().sortingOrder = 5;
@@ -143,7 +157,11 @@ public static class Abilities {
 		} else {
 			enemy = false;
 		}
-		spell.AddComponent<SpellEffect>().init(1, enemy, 10, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
+		float speed = 10;
+		if (enemy) {
+			speed = 5f;
+		}
+		spell.AddComponent<SpellEffect>().init(1, enemy, speed, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
 		return true;
 	}
 

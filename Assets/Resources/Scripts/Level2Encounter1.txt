@@ -1,0 +1,3 @@
+0:“I’ve made it to the capital.  That Necromancer must be in the throne room.”
+0:”There doesn’t seem to be anybody around……strange.”
+2: Go to the throne room.

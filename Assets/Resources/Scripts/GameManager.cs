@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
 	PlayerController necromancer;
 	EnemyManager eManager;
 	Pause pause;
+	BossSpawner bSpawner;
 	public List<AIBehavior>[,] enemyGrid;
 	public int xGridOrigin = -30;
 	public int yGridOrigin = -90;
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour {
 	public int Encounter = 0;
 	public bool waveclear = false;
 	public bool wavebegin = false;
+	public int dungeonKeys = 0;
 
 	// THIS IS JUST UNTIL EVAN GETS THE RESTART BUTTON UP
 	public int level;
@@ -49,6 +51,7 @@ public class GameManager : MonoBehaviour {
 
 		level = Int32.Parse(Application.loadedLevelName.Substring (5));
 		print (level);
+
 
 		xDimension = 18;
 		yDimension = 12;
@@ -78,6 +81,21 @@ public class GameManager : MonoBehaviour {
 		foreach (KeyInfo k in keys) {
 			print (k.location);
 		}
+		ChangeObjective ("");
+
+		if (level == 2) {
+			necromancer.EnableBlight ();
+			necromancer.EnableBlink ();
+			necromancer.EnableDamage ();
+		}
+
+		if (level == 3) {
+			necromancer.EnableRoot ();
+			necromancer.EnableBlight ();
+			necromancer.EnableBlink ();
+			necromancer.EnableDamage ();
+			bSpawner = new GameObject ().AddComponent<BossSpawner> ();
+		}
 	}
 
 	void Update() {
@@ -91,13 +109,49 @@ public class GameManager : MonoBehaviour {
 //			playTimer = 0;
 //		}
 		//THESE IFS ARE ALSO TEMPORARY TILL BUTTON'S UP
-		if (Encounter == 7) {
+
+		if (Encounter == 2 && level == 1) {
+			necromancer.EnableBlight ();
+		}
+		if (Encounter == 4 && level == 1) {
+			necromancer.EnableBlink ();
+		}
+		if (Encounter == 6 && level == 1) {
+			necromancer.EnableDamage ();
+		}
+		if (Encounter == 7 && level == 1) {
 			NextLevel ();
 		}
+
+		if (Encounter == 2 && level == 2) {
+			wavebegin = true;
+			necromancer.EnableRoot ();
+		}
+		if (Encounter == 4 && level == 2) {
+			NextLevel ();
+		}
+
+		if (level == 2 && Encounter == 3) {
+			Destroy (GameObject.Find ("Boss"));
+		}
+
+		if (Encounter == 2 && level == 3) {
+			wavebegin = true;
+			GameObject.Find ("Necromancer Boss").GetComponent<NecromancerBoss> ().waiting = false;
+		}
+		if (Encounter == 3 && level == 3) {
+			alert.text = "You Win?";
+			GameObject.Find ("Necromancer Boss").GetComponent<NecromancerBoss> ().Die ();
+			Encounter++;
+		}
+
 		RefillGrid ();
 	}
 
 	public void Death() {
+		if (bSpawner != null) {
+			Destroy (bSpawner);
+		}
 		restart.gameObject.SetActive (true);
 		Camera.main.transform.SetParent (null, true);
 		foreach (AIBehavior unit in FindObjectsOfType<AIBehavior>()) {
@@ -208,10 +262,10 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public bool AreaClear(){
+	public bool AreaClear(int minx, int maxx, int miny, int maxy){
 		RefillGrid ();
-		for (int x = 6; x <= 7; x++) {
-			for (int y = 6; y <= 7; y++) {
+		for (int x = minx; x <= maxx; x++) {
+			for (int y = miny; y <= maxy; y++) {
 				foreach (AIBehavior unit in enemyGrid[x,y].ToArray()) {
 					if (unit.isEnemy) {
 						return false;
@@ -228,5 +282,12 @@ public class GameManager : MonoBehaviour {
 
 	public void Restart(){
 		SceneManager.LoadScene("Level "+ level);
+	}
+	public void Menu(){
+
+		SceneManager.LoadScene (3);
+	}
+	public void Quit(){
+		Application.Quit ();
 	}
 }
