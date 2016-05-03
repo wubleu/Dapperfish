@@ -32,9 +32,8 @@ public class NecromancerBoss : MonoBehaviour {
 		Rigidbody rbody = gameObject.GetComponent<Rigidbody> ();
 		rbody.isKinematic = true;
 
-		teleportGridXLoc = ((int)transform.position.x - 20) / 5;
+		teleportGridXLoc = ((int)transform.position.x - 15) / 5;
 		teleportGridYLoc = ((int)transform.position.z + 10) / 5;
-		SetTeleportGridLocation ();
 	}
 	
 	// Update is called once per frame
@@ -82,25 +81,17 @@ public class NecromancerBoss : MonoBehaviour {
 	}
 
 	void Teleport() {
-		float newX = Random.Range(0, 2), newY = Random.Range(0, 4);
+		float newX = Random.Range(0, 4), newY = Random.Range(0, 4);
 		while ((newX == teleportGridXLoc && (newY <= teleportGridYLoc + 1 && newY >= teleportGridYLoc - 1)) || 
-			(newY == teleportGridYLoc && (newX <= teleportGridXLoc + 1 && newX >= teleportGridXLoc - 1))) {
-			newX = Random.Range (0, 2);
+			(newY == teleportGridYLoc && (newX <= teleportGridXLoc + 1 && newX >= teleportGridXLoc - 1)) || 
+			(newX == 0 && (newY == 0 || newY == 3)) || (newY == 0 && (newX == 0 || newX == 3))  ) {
+			newX = Random.Range (0, 4);
 			newY = Random.Range(0, 4);
 		}
-		transform.position = new Vector3 (((newX * 5f) + 20f) + Random.Range (0f, 5f), transform.position.y, 
-			((newY * 5f) - 10f) + Random.Range (0f, 5f));
+		Abilities.Blink(transform, 0, new Vector3 (((newX * 5f) + 15f) + Random.Range (0f, 5f), transform.position.y, 
+			((newY * 5f) - 10f) + Random.Range (0f, 5f)));
 		teleportGridXLoc = newX;
 		teleportGridYLoc = newY;
-	}
-
-	void SetTeleportGridLocation() {
-		if (transform.position.x > 25) {
-			teleportGridXLoc = 1;
-		} else {
-			teleportGridXLoc = 0;
-		}
-		teleportGridYLoc = ((int)transform.position.z + 20) / 10;
 	}
 
 	public void Die() {
