@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour {
 	public int Encounter = 0;
 	public bool waveclear = false;
 	public bool wavebegin = false;
+	public int dungeonKeys = 0;
 
 	// THIS IS JUST UNTIL EVAN GETS THE RESTART BUTTON UP
 	public int level;

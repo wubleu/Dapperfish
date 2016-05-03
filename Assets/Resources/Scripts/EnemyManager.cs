@@ -12,7 +12,7 @@ public class EnemyManager : MonoBehaviour {
 	public int peasantCount = 0;
 	public float wave = 0; //do not change. This is just a counter
 	public float wave2 = 10; //wave interval for level 2
-	public float wave3 = 5; //wave interval for level 3
+	public float wave3 = 10; //wave interval for level 3
 	public int currentWave = 1; //for level 2. the wave currently being done. if 1, then wave1 will be called in delayedSpawn
 	public int waveCount = 3; //number of wave types in level 2
 	public int[] waveNumbers; //count of each wave type in level 2. set in init
@@ -99,7 +99,7 @@ public class EnemyManager : MonoBehaviour {
 					gManager.waveclear = true;
 				}
 			}
-		} else if (gManager.level == 3 && !gManager.waveclear) {
+		} else if (gManager.level == 3 && !gManager.waveclear && gManager.wavebegin) {
 			if ((wave+=Time.deltaTime)>wave3){
 				wave = 0;
 				delayedSpawn ("wave",true);
