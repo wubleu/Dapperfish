@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour {
 		level = Int32.Parse(Application.loadedLevelName.Substring (5));
 		print (level);
 
+
 		xDimension = 18;
 		yDimension = 12;
 		links = new List<Link>();
@@ -77,6 +78,20 @@ public class GameManager : MonoBehaviour {
 		foreach (KeyInfo k in keys) {
 			print (k.location);
 		}
+		ChangeObjective ("");
+
+		if (level == 2) {
+			necromancer.EnableBlight ();
+			necromancer.EnableBlink ();
+			necromancer.EnableDamage ();
+		}
+
+		if (level == 3) {
+			necromancer.EnableRoot ();
+			necromancer.EnableBlight ();
+			necromancer.EnableBlink ();
+			necromancer.EnableDamage ();
+		}
 	}
 
 	void Update() {
@@ -90,7 +105,17 @@ public class GameManager : MonoBehaviour {
 //			playTimer = 0;
 //		}
 		//THESE IFS ARE ALSO TEMPORARY TILL BUTTON'S UP
-		if (Encounter == 7) {
+
+		if (Encounter == 2 && level == 1) {
+			necromancer.EnableBlight ();
+		}
+		if (Encounter == 4 && level == 1) {
+			necromancer.EnableBlink ();
+		}
+		if (Encounter == 6 && level == 1) {
+			necromancer.EnableDamage ();
+		}
+		if (Encounter == 7 && level == 1) {
 			NextLevel ();
 		}
 		RefillGrid ();
