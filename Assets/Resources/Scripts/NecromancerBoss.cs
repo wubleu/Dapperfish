@@ -4,11 +4,12 @@ using System.Collections;
 public class NecromancerBoss : MonoBehaviour {
 
 	// PARAMETERS
-	float teleportCooldown = 5f, minSummonCooldown = 5f, maxSummonCooldown = 15f, summonRandomizeRange = 4f, damageCooldown = 20f,
-		rootDuration = 1f, maxHp = 500f, aggroToAIRange = 4;
+	float teleportCooldown = 3f, minSummonCooldown = 5f, maxSummonCooldown = 15f, summonRandomizeRange = 4f, 
+	damageCooldown = 20f, rootDuration = 1f, maxHp = 500f, aggroToAIRange = 4, shootingPeriod = 2f, shootingFreq = .14f, 
+	shootingAngle = 30f, shootingPause = .6f, shootChance = 60;
 
 	float rootTimer = 0f, teleportCooldownTimer = 0f, summonCooldownTimer = 0f, summonCooldown = 5f, damageCooldownTimer = 0f,
-			teleportGridXLoc, teleportGridYLoc, hp;
+			shootingTimer, nextShotTimer, teleportGridXLoc, teleportGridYLoc, hp;
 	int minionCount = 0;
 	bool paused = false, waiting = true;
 	GameObject target;
@@ -26,6 +27,8 @@ public class NecromancerBoss : MonoBehaviour {
 		target = necromancer.gameObject;
 		tag = "Untagged";
 		hp = maxHp;
+		shootingTimer = shootingPeriod;
+		nextShotTimer = shootingFreq;
 		cSprites = Resources.LoadAll<Sprite> ("Textures/Boss Sprite Sheet");
 		rend = GetComponentInChildren<SpriteRenderer>();
 		rend.gameObject.transform.localScale = new Vector3 (1f, 1f, 1f);
@@ -39,6 +42,7 @@ public class NecromancerBoss : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		print ("waiting: " + waiting + ",  paused: " + paused + ",  root: " + rootTimer);
 		if (paused || (rootTimer < rootDuration && (rootTimer += Time.deltaTime) < rootDuration)) {
 			return;
 		}
@@ -49,33 +53,34 @@ public class NecromancerBoss : MonoBehaviour {
 				return;
 			}
 		}
-
-		if ((teleportCooldownTimer += Time.deltaTime) > teleportCooldown && 
-			Vector3.Distance(transform.position, target.transform.position) < aggroToAIRange) {
-			Teleport ();
-			teleportCooldownTimer = 0;
-		}
-		if ((summonCooldownTimer += Time.deltaTime) > summonCooldown) {
-			Vector3 summonCenter = FindCenterOfMinions ();
-			float xOffset, yOffset, modifiedRandRange;
-			if (Random.Range (0, 2) == 0) {
-				xOffset = Random.Range (-summonRandomizeRange, summonRandomizeRange);
-				modifiedRandRange = summonRandomizeRange - Mathf.Abs (xOffset / 2);
-				yOffset = Random.Range (-modifiedRandRange, modifiedRandRange);
-			} else {
-				yOffset = Random.Range (-summonRandomizeRange, summonRandomizeRange);
-				modifiedRandRange = summonRandomizeRange - Mathf.Abs (yOffset / 2);
-				xOffset = Random.Range (-modifiedRandRange, modifiedRandRange);
+		if (shootingTimer < shootingPeriod && (shootingTimer += Time.deltaTime) > 0) { 
+			if ((nextShotTimer += Time.deltaTime) > shootingFreq) {
+				print("shot");
+				nextShotTimer -= shootingFreq;
+				Abilities.Bullet (transform.position, 
+					-Mathf.Deg2Rad * (transform.eulerAngles.y + Random.Range (-shootingAngle, shootingAngle)) + Mathf.PI / 2, true);
 			}
-			Vector3 summonLoc = new Vector3(summonCenter.x + xOffset, transform.position.y, summonCenter.z + yOffset);
-			Abilities.Summon (summonLoc.x, summonLoc.y, summonLoc.z);
-			if (Vector3.Distance (summonLoc, transform.position) < 3) {
+		}
+
+		if (shootingTimer > 0) {
+			if (((teleportCooldownTimer += Time.deltaTime) > teleportCooldown &&
+			   Vector3.Distance (transform.position, target.transform.position) < aggroToAIRange) ||
+			   teleportCooldownTimer > teleportCooldown * 2) {
 				Teleport ();
 				teleportCooldownTimer = 0;
+				if (Random.Range (0, 100) < shootChance) {
+					shootingTimer = -shootingPause;
+				}
 			}
-			summonCooldown = Random.Range (minSummonCooldown, maxSummonCooldown);
-			summonCooldownTimer = 0;
+
+			if ((summonCooldownTimer += Time.deltaTime) > summonCooldown) {
+				CastSummon ();
+				if (Random.Range (0, 100) < shootChance) {
+					shootingTimer = -shootingPause;
+				}
+			}
 		}
+
 		SetTarget ();
 		transform.LookAt (target.transform);
 	}
@@ -120,6 +125,28 @@ public class NecromancerBoss : MonoBehaviour {
 			((newY * 5f) - 10f) + Random.Range (0f, 5f)));
 		teleportGridXLoc = newX;
 		teleportGridYLoc = newY;
+	}
+
+	void CastSummon() {
+		Vector3 summonCenter = FindCenterOfMinions ();
+		float xOffset, yOffset, modifiedRandRange;
+		if (Random.Range (0, 2) == 0) {
+			xOffset = Random.Range (-summonRandomizeRange, summonRandomizeRange);
+			modifiedRandRange = summonRandomizeRange - Mathf.Abs (xOffset / 2);
+			yOffset = Random.Range (-modifiedRandRange, modifiedRandRange);
+		} else {
+			yOffset = Random.Range (-summonRandomizeRange, summonRandomizeRange);
+			modifiedRandRange = summonRandomizeRange - Mathf.Abs (yOffset / 2);
+			xOffset = Random.Range (-modifiedRandRange, modifiedRandRange);
+		}
+		Vector3 summonLoc = new Vector3(summonCenter.x + xOffset, transform.position.y, summonCenter.z + yOffset);
+		//Abilities.Summon (summonLoc.x, summonLoc.y, summonLoc.z);
+		if (Vector3.Distance (summonLoc, transform.position) < 3) {
+			Teleport ();
+			teleportCooldownTimer = 0;
+		}
+		summonCooldown = Random.Range (minSummonCooldown, maxSummonCooldown);
+		summonCooldownTimer = 0;
 	}
 					
 	Vector3 FindCenterOfMinions() {

@@ -261,6 +261,7 @@ public class AIBehavior : MonoBehaviour {
 
 	public virtual void Infect() {
 		if (isEnemy && !immune) {
+			root = 0;
 			isEnemy = false;
 			transform.parent = eManager.transform;
 			eManager.peasantCount--;

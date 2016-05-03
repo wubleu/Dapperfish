@@ -97,9 +97,9 @@ public class SpellEffect : MonoBehaviour {
 			if (name == "Root" && enemy != AI.isEnemy) {
 				AI.Root ();
 			}
-		} else if (enemy && col.name == "Necromancer") {
+		} else if (name == "Root" && enemy && col.name == "Necromancer") {
 			col.GetComponent<PlayerController> ().Root ();
-		} else if (enemy && col.name == "Necromancer Boss") {
+		} else if (name == "Root" && !enemy && col.name == "Necromancer Boss") {
 			col.GetComponent<NecromancerBoss> ().Root ();
 		}
 	}
