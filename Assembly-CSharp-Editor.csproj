@@ -48,14 +48,15 @@
      <Compile Include="Assets\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
      <None Include="Assets\Resources\Scripts\level1.txt" />
      <None Include="Assets\Resources\Scripts\Level1Encounter7.txt" />
-     <None Include="Assets\Resources\Scripts\Level2Encounter0.txt" />
      <None Include="Assets\Resources\Scripts\Level1Encounter3.txt" />
+     <None Include="Assets\Resources\Scripts\Level2Encounter2.txt" />
      <None Include="Assets\Resources\Scripts\level2.txt" />
      <None Include="Assets\Resources\Scripts\level3.txt" />
      <None Include="Assets\Resources\Scripts\Level1Encounter0.txt" />
      <None Include="Assets\EmptyTextFile.txt" />
      <None Include="Assets\Resources\Scripts\Level1Encounter5.txt" />
      <None Include="Assets\Resources\Scripts\Level1Encounter99.txt" />
+     <None Include="Assets\Resources\Scripts\Level2Encounter1.txt" />
      <None Include="Assets\Resources\Scripts\Level1Encounter6.txt" />
      <None Include="Assets\Resources\Scripts\Level1Encounter1.txt" />
      <None Include="Assets\Resources\Scripts\Level1Encounter2.txt" />

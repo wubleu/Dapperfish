@@ -120,6 +120,12 @@ public class GameManager : MonoBehaviour {
 		if (Encounter == 7 && level == 1) {
 			NextLevel ();
 		}
+
+		if (Encounter == 2 && level == 2) {
+			wavebegin = true;
+			necromancer.EnableRoot ();
+		}
+
 		RefillGrid ();
 	}
 
