@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
      <None Include="Assets\Resources\Scripts\level1.txt" />
+     <None Include="Assets\Resources\Scripts\Level1Encounter7.txt" />
      <None Include="Assets\Resources\Scripts\Level1Encounter3.txt" />
      <None Include="Assets\Resources\Scripts\level2.txt" />
      <None Include="Assets\Resources\Scripts\level3.txt" />

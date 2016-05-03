@@ -49,5 +49,11 @@ public class Peasant : AIBehavior {
 		}
 		SwitchTargets();
 		base.Update();
+
+		if (meleeTimer < meleeThreshold) {
+			agent.speed = 0;
+		} else {
+			agent.speed = speed;
+		}
 	}
 }

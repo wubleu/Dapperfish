@@ -24,7 +24,7 @@ public class KnightMelee : MonoBehaviour {
 
 	void OnTriggerStay(Collider other) {
 		if (other.name == "Necromancer") {
-			other.GetComponent<PlayerController>().Damage(5);
+			other.GetComponent<PlayerController>().Damage(3);
 			if (charging) {
 				col.enabled = false;
 				charging = false;

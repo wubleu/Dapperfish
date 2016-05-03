@@ -73,7 +73,6 @@ public class GameManager : MonoBehaviour {
 		eManager = new GameObject().AddComponent<EnemyManager> ();
 		eManager.init(this, necromancer);
 		necromancer.init(this, eManager);
-		testing123();
 		RefillGrid ();
 
 		foreach (KeyInfo k in keys) {
@@ -92,6 +91,9 @@ public class GameManager : MonoBehaviour {
 //			playTimer = 0;
 //		}
 		//THESE IFS ARE ALSO TEMPORARY TILL BUTTON'S UP
+		if (Encounter == 7) {
+			NextLevel ();
+		}
 		RefillGrid ();
 	}
 
@@ -123,7 +125,7 @@ public class GameManager : MonoBehaviour {
 
 	public void Finish() {
 		if (!done) {
-			alert.text =  "Objective Complete! Your Conquest Continues!";
+			//alert.text =  "Objective Complete! Your Conquest Continues!";
 			done = true;
 		}
 		NextLevel ();
@@ -162,12 +164,6 @@ public class GameManager : MonoBehaviour {
 			cSprites = Resources.LoadAll<Sprite> ("Textures/Knight Sprite Sheet");
 			rend.sprite = cSprites [9];
 			Destroy (death.gameObject, 2f);
-		}
-	}
-
-	void testing123() {
-		for (int i = 0; i < 5; i++) {
-			Enemies.makeArcher(this, eManager, necromancer, new Vector3(40 + i, 0, 4));
 		}
 	}
 
@@ -214,7 +210,7 @@ public class GameManager : MonoBehaviour {
 
 	public bool AreaClear(){
 		RefillGrid ();
-		for (int x = 5; x <= 6; x++) {
+		for (int x = 6; x <= 7; x++) {
 			for (int y = 6; y <= 7; y++) {
 				foreach (AIBehavior unit in enemyGrid[x,y].ToArray()) {
 					if (unit.isEnemy) {

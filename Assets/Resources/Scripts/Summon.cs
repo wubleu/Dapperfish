@@ -15,7 +15,7 @@ public class Summon : Spell {
 		for (int i = 1; i <= (retVal = Random.Range (minNumEnemies, maxNumEnemies)); i++) {
 			int rand = Random.Range (1, 100);
 			if (rand <= percentPeasant) {
-				Enemies.makePeasant (GameObject.FindObjectOfType<GameManager>(), GameObject.FindObjectOfType<EnemyManager>(), GameObject.FindObjectOfType<PlayerController>(), pos, true, true);
+				Enemies.makePeasant (GameObject.FindObjectOfType<GameManager>(), GameObject.FindObjectOfType<EnemyManager>(), GameObject.FindObjectOfType<PlayerController>(), pos, true);
 			} else if (rand <= percentArcher+percentPeasant) {
 				Enemies.makeArcher (GameObject.FindObjectOfType<GameManager>(), GameObject.FindObjectOfType<EnemyManager>(), GameObject.FindObjectOfType<PlayerController>(), pos, true);
 			} else {

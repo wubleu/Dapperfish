@@ -30,13 +30,19 @@ public class Dialogue : MonoBehaviour {
 			gameObject.GetComponent<BoxCollider> ().enabled = false;
 			//print (Gman.AreaClear ());
 			if (Gman.AreaClear ()) {
-				gameObject.GetComponent<BoxCollider> ().enabled = true;
+				Dbox.SetActive (true);
+				Gman.PauseGame ();
+				start = true;
+				complete = true;
 			}
 		} else if (level == 1 && encounter == 5 && Gman.Encounter == 4) {
 			gameObject.GetComponent<BoxCollider> ().enabled = false;
 			if (GameObject.Find ("Necromancer").GetComponent<PlayerController> ().hasKey) {
 				if (Gman.AreaClear ()) {
-					gameObject.GetComponent<BoxCollider> ().enabled = true;
+					Dbox.SetActive (true);
+					Gman.PauseGame ();
+					start = true;
+					complete = true;
 				}
 			}
 		}
@@ -71,7 +77,9 @@ public class Dialogue : MonoBehaviour {
 				Dbox.SetActive (false);
 				Necro.SetActive (false);
 				if (complete) {
-					Gman.objectives.text = line[1];
+					if (encounter != 99 || encounter != 1) {
+						Gman.objectives.text = line [1];
+					}
 					Gman.Encounter++;
 					Destroy (this.gameObject);
 				}
@@ -120,7 +128,7 @@ public class Dialogue : MonoBehaviour {
 						encparts = 0;
 					}
 				}
-				if (encounter == 1 && level == 1) {
+				 else if (encounter == 1 && level == 1) {
 					if (collision.gameObject.transform.position.z > transform.position.z + transform.localScale.z / 2) {
 						collision.gameObject.transform.position = new Vector3 (collision.gameObject.transform.position.x, collision.gameObject.transform.position.z, collision.gameObject.transform.position.z + .3f);
 					} else if (collision.gameObject.transform.position.z < transform.position.z - transform.localScale.z / 2) {
