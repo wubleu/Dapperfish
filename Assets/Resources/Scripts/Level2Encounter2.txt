@@ -1,11 +1,11 @@
-0:“I can see him through the gate!”
-0:“He even looks like me.”
-0:“The gate seems to be locked tight.”
+0:“I can see him!”
+0:“He even looks like me!”
+0:“Hmmm. The gate seems to be locked tight.”
 0:“I’ll have to look around from some way to open it.”
 0:……
 0:………
-0:……………*rumble*……
-0:“I knew it was strange no undead were around.  They were all hiding.”
+0:…………*rumble*……
+0:“I knew it was strange no undead were around!  He held them back to ambush me!”
 0:“I’ll have to survive long enough to find a way past this gate.”
 0:“With so many undead around I should be able to call up a few from the ground to root any enemies that get too close.”
 0:“Pressing shift should let me root enemies in place, as long as it’s not on cool down.”

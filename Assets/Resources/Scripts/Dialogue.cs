@@ -29,7 +29,7 @@ public class Dialogue : MonoBehaviour {
 		if (level == 1 && encounter == 3 ) {
 			gameObject.GetComponent<BoxCollider> ().enabled = false;
 			//print (Gman.AreaClear ());
-			if (Gman.AreaClear ()) {
+			if (Gman.AreaClear (6, 7, 6, 7)) {
 				Dbox.SetActive (true);
 				Gman.PauseGame ();
 				start = true;
@@ -38,7 +38,7 @@ public class Dialogue : MonoBehaviour {
 		} else if (level == 1 && encounter == 5 && Gman.Encounter == 4) {
 			gameObject.GetComponent<BoxCollider> ().enabled = false;
 			if (GameObject.Find ("Necromancer").GetComponent<PlayerController> ().hasKey) {
-				if (Gman.AreaClear ()) {
+				if (Gman.AreaClear (6, 7, 6, 7)) {
 					Dbox.SetActive (true);
 					Gman.PauseGame ();
 					start = true;
@@ -48,6 +48,13 @@ public class Dialogue : MonoBehaviour {
 		}
 		if (level == 1 && encounter == 4 && Gman.Encounter == 3) {
 			gameObject.GetComponent<BoxCollider> ().enabled = true;
+		}
+
+		if (Gman.waveclear && encounter == 3) {
+			Dbox.SetActive (true);
+			Gman.PauseGame ();
+			start = true;
+			complete = true;
 		}
 
 		if (start) {
