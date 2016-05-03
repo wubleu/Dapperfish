@@ -201,7 +201,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		for (int i = 1; i <= 4; i++) {
-			if (!unlock[i]) {
+			if (!unlock[i - 1]) {
 				continue;
 			}
 			if (Input.GetKeyDown(controls[i]) && i <= 3 && timers[i] == 0) {
