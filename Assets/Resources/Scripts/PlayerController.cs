@@ -8,19 +8,18 @@ public class PlayerController : MonoBehaviour {
 	// PARAMETERS
 	public float maxhp = 50, hp, size = 1f, speed = 4f, castcd = .25f, currentY = 0, unlockTime = 0, rootDuration = 1f;
 	public bool isMelee = false, casted = false, hasKey = false, hasFortKey = false, needsNav = false, destined = false;
-	public float[] cd = new float[5] {0.5f, 5, 3, 50, 2}, timers = new float[5] {0, 0, 0, 0, 0}, ranges = new float[4] {10, 10, 10, 100}, area = new float[3] {3.4f, 3.56f, 2.43f};
+	public float[] cd = new float[5] {5, 5, 15, 2, 0.5f}, timers = new float[5] {0, 0, 0, 0, 0}, ranges = new float[4] {10, 10, 10, 100}, area = new float[3] {3.4f, 3.56f, 2.43f};
 	bool[] unlock = new bool[4] {false, false, false, false};
 	protected Sprite[] cSprites;
 	public Image[] icons = new Image[4];
 	
 	// CONTROLS PARAMETERS
-	KeyCode[] controls = new KeyCode[6] {
-		KeyCode.Mouse0, // auto-attack
+	KeyCode[] controls = new KeyCode[5] {
 		KeyCode.Mouse1, // blight
 		KeyCode.LeftShift, // root
 		KeyCode.F, // damage
 		KeyCode.Space, // blink
-		KeyCode.Q // switch weapon
+		KeyCode.Mouse0 // auto-attack
 	};
 
 	public int minionCount = 0;
@@ -144,8 +143,8 @@ public class PlayerController : MonoBehaviour {
 		}
 		Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		mouse.y = 0;
-		if (timers[0] > 0) {
-			if ((timers[0] -= Time.deltaTime) <= .25f) {
+		if (timers[4] > 0) {
+			if ((timers[4] -= Time.deltaTime) <= .25f) {
 				ramodel.sprite = cSprites [19];
 				ramodel.transform.localPosition = new Vector3(0.12f, 1, 0.29f);
 				if (!casted) {
@@ -153,11 +152,11 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 		}
-		for (int i = 1; i <= 4; i++) {
+		for (int i = 0; i <= 3; i++) {
 			if (timers[i] > 0 && (timers[i] -= Time.deltaTime) < 0) {
 				timers[i] = 0;
 			}
-			icons[i - 1].fillAmount = 1 - (timers[i] / cd[i]);
+			icons[i].fillAmount = 1 - (timers[i] / cd[i]);
 		}
 		if (casted) {
 			castcd -= Time.deltaTime;
@@ -168,20 +167,14 @@ public class PlayerController : MonoBehaviour {
 			lamodel.transform.localPosition = new Vector3(-0.136f, 1, 0.382f);
 			lamodel.sprite = cSprites [14];
 		}
-		if (timers[0] <= 0) {
-			if (Input.GetKeyDown(controls[0]) && isMelee) {
-				melee.Enable();
-				timers[0] = cd[0];
+		if (timers[4] <= 0 && Input.GetKey(controls[4])) {
+			Abilities.Bullet(shooter.transform.position, Mathf.PI / 2 + Mathf.Atan2(transform.position.x - mouse.x, mouse.z - transform.position.z));
+			ramodel.sprite = cSprites [17];
+			if (!casted) {
+				lamodel.transform.localPosition = new Vector3 (-0.126f, 1, 0.347f);
 			}
-			if (Input.GetKey(controls[0]) && !isMelee) {
-				Abilities.Bullet(shooter.transform.position, Mathf.PI / 2 + Mathf.Atan2(transform.position.x - mouse.x, mouse.z - transform.position.z));
-				ramodel.sprite = cSprites [17];
-				if (!casted) {
-					lamodel.transform.localPosition = new Vector3 (-0.126f, 1, 0.347f);
-				}
-				ramodel.transform.localPosition = new Vector3(0.103f, 1, 0.266f);
-				timers[0] = cd[0];
-			}
+			ramodel.transform.localPosition = new Vector3(0.103f, 1, 0.266f);
+			timers[4] = cd[4];
 		}
 		int[] b = new int[2] {0, 0};
 		if (Input.GetKey(KeyCode.A)) {
@@ -200,57 +193,57 @@ public class PlayerController : MonoBehaviour {
 			transform.Translate(b[0] * speed * Time.deltaTime, 0, b[1] * speed * Time.deltaTime);
 		}
 
-		for (int i = 1; i <= 4; i++) {
-			if (!unlock[i - 1]) {
+		for (int i = 0; i <= 3; i++) {
+			if (!unlock[i]) {
 				continue;
 			}
-			if (Input.GetKeyDown(controls[i]) && i <= 3 && timers[i] == 0) {
-				spellRange.transform.localScale = new Vector3(ranges[i - 1] / 3.2f, ranges[i - 1] / 3.2f, 1);
+			if (Input.GetKeyDown(controls[i]) && i <= 2 && timers[i] == 0) {
+				spellRange.transform.localScale = new Vector3(ranges[i] / 3.2f, ranges[i] / 3.2f, 1);
 				spellRange.color = Color.black;
-				AOE.transform.localScale = new Vector3(area[i - 1], area[i - 1], 1);
+				AOE.transform.localScale = new Vector3(area[i], area[i], 1);
 				AOE.color = new Color(1, 0, 0, 0.25f);
 			}
-			if (Input.GetKey(controls[i]) && i <= 3) {
+			if (Input.GetKey(controls[i]) && i <= 2) {
 				AOE.transform.position = mouse + new Vector3(0, 1, 0);
 			}
 			if (Input.GetKeyUp(controls[i])) {
 				spellRange.color = AOE.color = Color.clear;
 			}
-			if (Input.GetKeyUp(controls[i]) && timers[i] == 0 && Vector3.Distance(mouse, transform.position) <= ranges[i - 1]) {
+			if (Input.GetKeyUp(controls[i]) && timers[i] == 0 && Vector3.Distance(mouse, transform.position) <= ranges[i]) {
 				timers[i] = cd[i];
 				switch (i) {
-					case 1: // blight
+					case 0: // blight
 						Abilities.Blight (mouse);
 						AudioSource.PlayClipAtPoint (BlightClip, transform.position);
 						casted = true;
 						lamodel.sprite = cSprites [13];
 						lamodel.transform.localPosition = new Vector3(-0.3f, 1, 0.45f);
 						break;
-					case 2: // root
+					case 1: // root
 						Abilities.Root(mouse);
 						AudioSource.PlayClipAtPoint (RootClip, transform.position);	
 						casted = true;
 						lamodel.sprite = cSprites [12];
 						lamodel.transform.localPosition = new Vector3(-0.3f, 1, 0.45f);
 						break;
-					case 3: // damage
+					case 2: // damage
 						Abilities.Damage (transform.position, Mathf.PI / 2 + Mathf.Atan2 (transform.position.x - mouse.x, mouse.z - transform.position.z));
 						AudioSource.PlayClipAtPoint (DamageClip, transform.position);	
 						casted = true;
 						lamodel.sprite = cSprites [11];
 						lamodel.transform.localPosition = new Vector3(-0.3f, 1, 0.45f);
 						break;
-					case 4: // blink
-						float angle = 15;
-						if (b[0] != 0 && b[1] != 0) {
-							angle = 90 - b[0] * 90 + b[0] * b[1] * 45;
-						} else if (b[0] != 0) {
-							angle = 90 - b[0] * 90;
-						} else if (b[1] != 0) {
-							angle = b[1] * 90;
-						}
-						Abilities.Blink(transform, angle);
-//						Abilities.Blink(transform, Mathf.PI / 2 - Mathf.Atan2(mouse.x - transform.position.x, mouse.z - transform.position.z));
+					case 3: // blink
+//						float angle = 15;
+//						if (b[0] != 0 && b[1] != 0) {
+//							angle = 90 - b[0] * 90 + b[0] * b[1] * 45;
+//						} else if (b[0] != 0) {
+//							angle = 90 - b[0] * 90;
+//						} else if (b[1] != 0) {
+//							angle = b[1] * 90;
+//						}
+//						Abilities.Blink(transform, angle);
+						Abilities.Blink(transform, Mathf.PI / 2 - Mathf.Atan2(mouse.x - transform.position.x, mouse.z - transform.position.z));
 						AudioSource.PlayClipAtPoint (BlinkClip, transform.position);	
 						break;
 				}
