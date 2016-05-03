@@ -27,6 +27,7 @@ public class KnightMelee : MonoBehaviour {
 			other.GetComponent<PlayerController>().Damage(5);
 			if (charging) {
 				col.enabled = false;
+				charging = false;
 			}
 		} else if (other.tag == "AI" && !other.GetComponent<AIBehavior>().isEnemy) {
 			other.GetComponent<AIBehavior>().Damage(5);

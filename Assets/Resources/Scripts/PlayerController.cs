@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour {
 
 		spellRange = new GameObject().AddComponent<SpriteRenderer>();
 		spellRange.color = Color.clear;
-		spellRange.sprite = Resources.Load<Sprite>("Textures/HollowCircle");
+		spellRange.sprite = Resources.Load<Sprite>("Textures/SmoothHollowCircle");
 		spellRange.transform.parent = transform;
 		spellRange.transform.localPosition = new Vector3(0, 1, 0);
 		spellRange.transform.eulerAngles = new Vector3(90, 0, 0);
@@ -183,8 +183,8 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 		for (int i = 1; i <= 4; i++) {
-			if (Input.GetKeyDown(controls[i]) && i <= 3) {
-				spellRange.transform.localScale = new Vector3(ranges[i - 1] / 1.15f, ranges[i - 1] / 1.15f, 1);
+			if (Input.GetKeyDown(controls[i]) && i <= 3 && timers[i] == 0) {
+				spellRange.transform.localScale = new Vector3(ranges[i - 1] / 3.2f, ranges[i - 1] / 3.2f, 1);
 				spellRange.color = Color.black;
 				AOE.transform.localScale = new Vector3(area[i - 1], area[i - 1], 1);
 				AOE.color = new Color(1, 0, 0, 0.25f);

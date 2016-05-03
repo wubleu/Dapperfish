@@ -12,7 +12,7 @@ public class Peasant : AIBehavior {
 		maxHP = hp = 4f;
 		meleeThreshold = 1f;
 		meleeDamage = .3f;
-		aggroRange = 2f;
+		aggroRange = 9f;
 		necroAggroModifier = 1.2f;
 		chaseThreshold = 1f;
 		chaseDist = 1f;

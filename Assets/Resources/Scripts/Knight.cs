@@ -3,15 +3,15 @@ using System.Collections;
 
 public class Knight : AIBehavior {
 
-	float chargespeed = 100, normalspeed = 6, wait = 0.5f, charge = 0.4f, caggro = 4, timer = 0, chargecd = .5f;
-	int mode = 0;
+	float chargespeed = 100, wait = 0.5f, charge = 0.4f, caggro = 4, timer = 0, chargecd = .5f;
+	public int mode = 0;
 	Vector3 start;
 	KnightMelee melee;
 
 	public void initKnight(GameManager gMan, EnemyManager owner, PlayerController necro, params bool[] isElite) {
 		allyColor = new Color(0, 0, 0);
 		enemyColor = new Color (1, 1, 1);
-		speed = normalspeed;
+		speed = 6;
 		maxHP = hp = 25;
 		meleeThreshold = 3;
 		meleeDamage = 25;
@@ -38,11 +38,12 @@ public class Knight : AIBehavior {
 		if (paused) {
 			return;
 		}
-		if (root > 0 && (root -= Time.deltaTime) <= 0) {
-			agent.speed = speed;
-			meleeTimer = 0;
-		} else if (root > 0) {
-			return;
+		if (meleeTimer > 0) {
+			if ((meleeTimer -= Time.deltaTime) <= meleeThreshold - 0.5f) {
+				rend.sprite = cSprites[3];
+			} else {
+				rend.sprite = cSprites[2];
+			}
 		}
 		if (inWave) {
 			if (Vector3.Distance (transform.position, necromancer.transform.position) < aggroRange) {
@@ -55,13 +56,14 @@ public class Knight : AIBehavior {
 		}
 		if (target != null) {
 			if (mode == 0) { // walking
-				SwitchTargets ();
-				base.Update ();
-				if (target != null && target.name == "Necromancer" && Vector3.Distance(transform.position, target.transform.position) < caggro) {
+				SwitchTargets();
+				if (timer > 0) {
+					timer -= Time.deltaTime;
+				}
+				if (target != null && target.name == "Necromancer" && timer <= 0 && Vector3.Distance(transform.position, target.transform.position) < caggro) {
 					start = target.transform.position;
 					mode = 1;
 					timer = wait;
-					rend.sprite = cSprites [3];
 					agent.speed = 0;
 				}
 			} else if (mode == 1) { // waiting
@@ -69,12 +71,14 @@ public class Knight : AIBehavior {
 					mode = 2;
 					timer = charge;
 					agent.speed = chargespeed;
-					rend.sprite = cSprites [7];
+					rend.sprite = cSprites [8];
 
 					float speed = Vector3.Distance(start, target.transform.position) / wait, angle = Mathf.PI / 2 - Mathf.Atan2(target.transform.position.x - start.x, target.transform.position.z - start.z);
 					start = target.transform.position + speed * 0.25f * new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle));
 					angle = Mathf.PI / 2 - Mathf.Atan2(start.x - transform.position.x, start.z - transform.position.z);
 					agent.SetDestination(transform.position + chargespeed * charge * new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
+
+					melee.Charge();
 				}
 
 				if (timer < wait / 4) {
@@ -85,37 +89,37 @@ public class Knight : AIBehavior {
 					rend.sprite = cSprites [6];
 				}
 			} else if ((timer -= Time.deltaTime) <= 0) { // charging
-				rend.sprite = cSprites [8];
-				mode = 3;
+				rend.sprite = cSprites [3];
+				mode = 0;
 				timer = chargecd;
-				agent.speed = 0;
-				melee.Charge();
-			} else if (mode == 3) {
-				if ((timer-= Time.deltaTime) <= 0) {
-					melee.Disable();
-					mode = 0;
-					agent.speed = normalspeed;
-					rend.sprite = cSprites [0];
-				}
+				agent.speed = speed;
+				melee.Disable();
 			}
 		} else {
 			SwitchTargets();
-			base.Update();
 			mode = 0;
-			agent.speed = normalspeed;
+		}
+		if (root > 0 && (root -= Time.deltaTime) <= 0) {
+			agent.speed = speed;
 		}
 	}
 
 	protected override void OnCollisionStay(Collision coll) {
-		if (mode == 3) {
+		if (mode == 2 || root > 0) {
 			return;
 		}
-		if (meleeTimer >= meleeThreshold && (coll.collider.gameObject.name == "Necromancer" || 
-			(coll.gameObject.gameObject.tag == "AI" && !coll.collider.GetComponent<AIBehavior>().isEnemy))) {
-			rend.sprite = cSprites [0];
+		if (meleeTimer <= 0 && (coll.collider.gameObject.name == "Necromancer" || 
+			(coll.gameObject.tag == "AI" && !coll.collider.GetComponent<AIBehavior>().isEnemy))) {
+			rend.sprite = cSprites [1];
 			melee.Enable();
-			meleeTimer = 0;
+			meleeTimer = meleeThreshold;
 		}
+	}
+
+	public override void Root() {
+		root = rootPersistence;
+		agent.speed = 0;
+		melee.Disable();
 	}
 
 	protected override void Death() {

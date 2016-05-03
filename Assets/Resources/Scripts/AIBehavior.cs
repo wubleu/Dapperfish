@@ -19,8 +19,9 @@ public class AIBehavior : MonoBehaviour {
 	protected SpriteRenderer rend;
 	protected NavMeshAgent agent;
 	protected float hoverRads;
-	public bool hovering = false, isEnemy = true, immune = false, hoverPaused = false, windup = false, attacked = false, isElite = false;
+	public bool isEnemy = true, immune = false, hoverPaused = false, windup = false, attacked = false, isElite = false;
 	protected Sprite[] cSprites;
+	Vector3 origin;
 
 	protected virtual void init(GameManager gMan, EnemyManager owner, PlayerController necro, params bool[] isElite) {
 		eManager = owner;
@@ -54,6 +55,7 @@ public class AIBehavior : MonoBehaviour {
 			target = necromancer;
 		}
 		resumeSpeed = speed;
+		origin = transform.position;
 	}
 
 	protected virtual void Update() {
@@ -99,7 +101,6 @@ public class AIBehavior : MonoBehaviour {
 			}
 		} else if (target != null) {
 			transform.LookAt (target.transform);
-			agent.enabled = true;
 			agent.SetDestination(target.transform.position);
 		}
 	}
@@ -111,11 +112,9 @@ public class AIBehavior : MonoBehaviour {
 	}
 
 	protected void SwitchTargets() {
-		hovering = false;
 		float targetDist = aggroRange;
 		bool aggro = false;
 		if (target != null) { // if the target is within aggroRange, keeps target
-			agent.enabled = true;
 			if (target.name != "Necromancer" && !isEnemy && !target.GetComponent<AIBehavior> ().isEnemy) {
 				target = null;
 			} else {
@@ -135,21 +134,27 @@ public class AIBehavior : MonoBehaviour {
 		CheckNecro(targetDist); // enemy AIs check the necro. necro is a bit more intimidating than other targets.
 		if (target == null) {
 			if (!isEnemy) {
-				hovering = true;
+				agent.SetDestination(necromancer.transform.position);
+				agent.stoppingDistance = 2;
+				agent.speed = speed;
+				transform.LookAt(necromancer.transform);
+			} else if (agent.enabled == true) {
+				if (Vector3.Distance(transform.position, origin) > 1) {
+					agent.SetDestination(origin);
+					agent.speed = speed;
+					transform.LookAt(origin);
+					agent.stoppingDistance = 0;
+				} else {
+					agent.enabled = false;
+				}
 			}
-		} else if (!isEnemy) {
-			transform.parent = eManager.transform;
-		} else if (aggro) {
-			Alarm();
-		}
-
-		if (hovering) {
-			agent.SetDestination(necromancer.transform.position);
-			agent.stoppingDistance = 2f;
-			agent.speed = speed;
-			transform.LookAt(necromancer.transform);
 		} else {
 			agent.stoppingDistance = .2f;
+			if (!isEnemy) {
+				transform.parent = eManager.transform;
+			} else if (aggro) {
+				Alarm();
+			}
 		}
 	}
 
@@ -186,6 +191,7 @@ public class AIBehavior : MonoBehaviour {
 		if (isEnemy) {
 			float necroDist = Vector3.Distance (necromancer.transform.position, transform.position);
 			if (necroDist < targetDist * necroAggroModifier && necroDist < aggroRange) {
+				agent.enabled = true;
 				target = necromancer;
 				agent.destination = necromancer.transform.position;
 			}
@@ -288,7 +294,6 @@ public class AIBehavior : MonoBehaviour {
 	protected void SetToElite() {
 		isElite = true;
 		immune = true;
-		Sprite[] ESprites;
 		GameObject elite = new GameObject ();
 		elite.transform.parent = this.transform;
 		elite.transform.localPosition = new Vector3 (0, 0, 0);
@@ -318,6 +323,8 @@ public class AIBehavior : MonoBehaviour {
 
 	public void Alert() {
 		if (target == null) {
+			agent.enabled = true;
+			agent.destination = necromancer.transform.position;
 			target = necromancer;
 			aggroRange += 100;
 			talert = 1;

@@ -150,6 +150,7 @@ public class Archer : AIBehavior {
 			float rawNecroDist = Vector3.Distance (necromancer.transform.position, transform.position);
 			float necroDist = Mathf.Abs (aggroRange - rawNecroDist);
 			if (necroDist < targetDist * necroAggroModifier && rawNecroDist < aggroRange) {
+				agent.enabled = true;
 				targetDist = necroDist;
 				target = necromancer;
 				agent.destination = necromancer.transform.position;
