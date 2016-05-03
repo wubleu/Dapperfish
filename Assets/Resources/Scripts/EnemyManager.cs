@@ -85,7 +85,7 @@ public class EnemyManager : MonoBehaviour {
 	}
 
 	void Update(){
-		if (gManager.level == 2) {
+		if (gManager.level == 2 && gManager.wavebegin) {
 			if ((wave += Time.deltaTime) > wave2 && currentWave <= waveCount) {
 				wave = 0;
 				delayedSpawn ("wave" + currentWave.ToString (), true);
