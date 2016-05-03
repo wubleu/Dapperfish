@@ -13,6 +13,6 @@
 1:“I just wanted to take over the kingdom.”
 1:“Why do you think there were so many undead around?”
 0:”But…”
-“But…But!”
+0:“But…But!”
 0:“DAMN IT!”
 2:Congratulations………

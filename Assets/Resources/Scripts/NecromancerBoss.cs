@@ -5,7 +5,7 @@ public class NecromancerBoss : MonoBehaviour {
 
 	// PARAMETERS
 	float teleportCooldown = 5f, minSummonCooldown = 5f, maxSummonCooldown = 15f, summonRandomizeRange = 4f, damageCooldown = 20f,
-		rootDuration = 1f, maxHp = 500f, aggroToAIRange = 4;
+		rootDuration = 1f, maxHp = 50f, aggroToAIRange = 4;
 
 	float rootTimer = 0f, teleportCooldownTimer = 0f, summonCooldownTimer = 0f, summonCooldown = 5f, damageCooldownTimer = 0f,
 			teleportGridXLoc, teleportGridYLoc, hp;
@@ -18,7 +18,7 @@ public class NecromancerBoss : MonoBehaviour {
 	PlayerController necromancer;
 	SpriteRenderer rend;
 	Sprite[] cSprites;
-
+	public bool dead = false;
 
 	public void initNecroBoss (GameManager gMan, EnemyManager owner, PlayerController necro) {
 		gManager = gMan;
@@ -133,13 +133,22 @@ public class NecromancerBoss : MonoBehaviour {
 	}
 
 	public void Die() {
-		Destroy (gameObject);
+		GameObject death = new GameObject();
+		death.transform.position = transform.position;
+		death.transform.localScale = transform.localScale;
+		death.transform.localEulerAngles = new Vector3 (90, 0, 0);
+		death.AddComponent<SpriteRenderer>();
+		Animator anim = death.AddComponent<Animator>();
+		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Boss Death Controller");
+		Destroy(this.gameObject);
+		Destroy(death, 1.5f);
 	}
 
 	public void Damage(float damage) {
 		hp -= damage;
 		if (hp <= 0) {
-			Die ();
+			dead = true;
+			//Die ();
 		}
 	}
 

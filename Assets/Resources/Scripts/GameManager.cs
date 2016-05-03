@@ -137,6 +137,10 @@ public class GameManager : MonoBehaviour {
 			wavebegin = true;
 			GameObject.Find ("Necromancer Boss").GetComponent<NecromancerBoss> ().waiting = false;
 		}
+		if (Encounter == 3 && level == 3) {
+			alert.text = "You Win?";
+			GameObject.Find ("Necromancer Boss").GetComponent<NecromancerBoss> ().Die ();
+		}
 
 		RefillGrid ();
 	}

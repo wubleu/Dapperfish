@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour {
 
 	// PARAMETERS
-	public float maxhp = 200, hp, size = 1f, speed = 4f, castcd = .25f, currentY = 0, unlockTime = 0, rootDuration = 1f;
+	public float maxhp = 50, hp, size = 1f, speed = 4f, castcd = .25f, currentY = 0, unlockTime = 0, rootDuration = 1f;
 	public bool isMelee = false, casted = false, hasKey = false, hasFortKey = false, needsNav = false, destined = false;
 	public float[] cd = new float[5] {5, 5, 15, 2, 0.5f}, timers = new float[5] {0, 0, 0, 0, 0}, ranges = new float[4] {10, 10, 10, 100}, area = new float[3] {3.4f, 3.56f, 2.43f};
 	bool[] unlock = new bool[4] {false, false, false, false};

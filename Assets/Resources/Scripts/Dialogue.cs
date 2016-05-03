@@ -57,6 +57,14 @@ public class Dialogue : MonoBehaviour {
 			complete = true;
 		}
 
+		if (GameObject.Find ("Necromancer Boss").GetComponent<NecromancerBoss> ().dead && level == 3 && encounter==3) {
+			Dbox.SetActive (true);
+			Gman.PauseGame ();
+			start = true;
+			complete = true;
+			Gman.waveclear = true;
+		}
+
 		if (start) {
 			line = instructions [encparts].Split (new char[1]{ ':' });
 			if (line.Length == 2) {
