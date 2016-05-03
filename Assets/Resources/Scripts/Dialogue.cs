@@ -48,7 +48,7 @@ public class Dialogue : MonoBehaviour {
 			}
 			if (instructions [encparts] == "B") {
 				encparts++;
-
+				Boss.SetActive (true);
 			}
 			Dbox.GetComponentInChildren<Text> ().text = instructions [encparts];
 

@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
 
 	// PARAMETERS
 	public float gridSize = 10f;
-
+	public Button restart;
 	PlayerController necromancer;
 	EnemyManager eManager;
 	Pause pause;
@@ -30,8 +30,6 @@ public class GameManager : MonoBehaviour {
 	public bool waveclear = false;
 
 	// THIS IS JUST UNTIL EVAN GETS THE RESTART BUTTON UP
-	float deathInterval = 3f;
-	float deathTimer = 0;
 	public int level;
 	// TESTING PURPOSES- FEEL FREE TO DELETE, THESE ARE JUST TO DEMONSTRATE PAUSE FUNCTIONALITY
 //	float playInterval = 4f;
@@ -45,8 +43,7 @@ public class GameManager : MonoBehaviour {
 
 	void init() {
 		// ALSO UNTIL EVAN GETS RESTART BUTTON
-		deathTimer = 0;
-
+		restart.gameObject.SetActive (false);
 		dead = false;
 
 		level = Int32.Parse(Application.loadedLevelName.Substring (5));
@@ -94,17 +91,11 @@ public class GameManager : MonoBehaviour {
 //			playTimer = 0;
 //		}
 		//THESE IFS ARE ALSO TEMPORARY TILL BUTTON'S UP
-		if (dead == true) {
-			if ((deathTimer += Time.deltaTime) > deathInterval) {
-				Reset();
-				deathTimer = 0;
-			}
-		} else {
-			RefillGrid ();
-		}
+		RefillGrid ();
 	}
 
 	public void Death() {
+		restart.gameObject.SetActive (true);
 		Camera.main.transform.SetParent (null, true);
 		foreach (AIBehavior unit in FindObjectsOfType<AIBehavior>()) {
 			Destroy (unit.gameObject);
@@ -236,5 +227,9 @@ public class GameManager : MonoBehaviour {
 
 	public void NextLevel(){
 		SceneManager.LoadScene (level);
+	}
+
+	public void Restart(){
+		SceneManager.LoadScene ("Level" + level);
 	}
 }

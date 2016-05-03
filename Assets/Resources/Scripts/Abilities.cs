@@ -116,9 +116,9 @@ public static class Abilities {
 		end.transform.localEulerAngles = new Vector3 (90, 0, 0);
 		anim = end.GetComponent<Animator> ();
 		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Blink End Controller");
-		start.name = "Blink End";
-		end.GetComponent<SpriteRenderer> ().sortingLayerName = "PlayerController";
-		end.GetComponent<SpriteRenderer> ().sortingOrder = 5;
+		end.name = "Blink End";
+		//end.GetComponent<SpriteRenderer> ().sortingLayerName = "PlayerController";
+		//end.GetComponent<SpriteRenderer> ().sortingOrder = 5;
 		GameObject.Destroy (end.gameObject, .3f);
 	}
 
