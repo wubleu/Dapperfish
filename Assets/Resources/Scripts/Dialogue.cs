@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Dialogue : MonoBehaviour {
 
@@ -13,12 +16,13 @@ public class Dialogue : MonoBehaviour {
 	int encparts = 0;
 	int level;
 	string[] instructions;
+	string[] line;
 	bool start = false;
+	int indicator;
 	// Use this for initialization
 	void Start () {
 		level = Gman.level;
 		instructions = Resources.Load<TextAsset>("Scripts/Level" + level + "Encounter" + encounter).text.Split(new char[1]{'\n'});
-
 	}
 	// Update is called once per frame
 	void Update () {
@@ -39,23 +43,27 @@ public class Dialogue : MonoBehaviour {
 		if (level == 1 && encounter == 4 && Gman.Encounter == 3) {
 			gameObject.GetComponent<BoxCollider> ().enabled = true;
 		}
-			
 
 		if (start) {
-			if (instructions [encparts] == 0.ToString()) {
-				Necro.SetActive (true);
-				encparts++;
+			line = instructions [encparts].Split (new char[1]{ ':' });
+			if (line.Length == 2) {
+				if (Int32.Parse(line[0]) == 0) {
+					Necro.SetActive (true);
+					Boss.SetActive (false);
+					Dbox.GetComponentInChildren<Text> ().text = line[1];
+				}
+				if (Int32.Parse(line[0]) == 1) {
+					Dbox.GetComponentInChildren<Text> ().text = line[1];
+					Boss.SetActive (true);
+					Necro.SetActive (false);
+				}
 			}
-			if (instructions [encparts] == 1.ToString()) {
-				encparts++;
-				Boss.SetActive (true);
-			}
-			Dbox.GetComponentInChildren<Text> ().text = instructions [encparts];
+			//Dbox.GetComponentInChildren<Text> ().text = instructions [encparts];
 
 			if (Input.GetKeyUp (KeyCode.E)) {
 				encparts++;
 			}
-			if (instructions[encparts] == 2.ToString()) {
+			if (Int32.Parse(line[0]) == 2) {
 				start = false;
 				Gman.UnPauseGame ();
 				encparts++;
@@ -63,12 +71,12 @@ public class Dialogue : MonoBehaviour {
 				Dbox.SetActive (false);
 				Necro.SetActive (false);
 				if (complete) {
-					Gman.objectives.text = instructions [encparts];
+					Gman.objectives.text = line[1];
 					Gman.Encounter++;
 					Destroy (this.gameObject);
 				}
 				if (encounter == 1 && level == 1) {
-					Gman.objectives.text = instructions [encparts];
+					Gman.objectives.text = line[1];
 				}
 			}
 		}

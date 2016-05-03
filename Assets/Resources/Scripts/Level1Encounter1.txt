@@ -1,4 +1,2 @@
-N
-“I should really check out the village over there.”
-X
-Check out the village. Seriously.
+0:“I should really check out the village over there.”
+2:Check out the village. Seriously.

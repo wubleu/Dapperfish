@@ -1,7 +1,5 @@
-N
-“I’ve figured it out!  This must be the work of another Necromancer. The fool thinks he’s better than me.  ME!  Well I’ll show him.”
-“Looks like the key to the East Gate is in this Fort.  I’ll need to find the key to the Fort gate first.”
-“The Key should be somewhere close, I should check down south.”
-“I sense a large undead army to the east.  I should avoid going there for now until I have both the key and a sizable army.”
-X
-Get the key to the Fort gate.
+0:“I’ve figured it out!  This must be the work of another Necromancer. The fool thinks he’s better than me.  ME!  Well I’ll show him.”
+0:“Looks like the key to the East Gate is in this Fort.  I’ll need to find the key to the Fort gate first.”
+0:“The Key should be somewhere close, I should check down south.”
+0:“I sense a large undead army to the east.  I should avoid going there for now until I have both the key and a sizable army.”
+2:Get the key to the Fort gate.
