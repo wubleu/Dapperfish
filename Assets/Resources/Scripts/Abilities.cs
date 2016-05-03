@@ -16,7 +16,6 @@ public static class Abilities {
 	}
 
 	public static int Summon(float x, float y, float z) {
-		//Sprite[] cSprites = Resources.LoadAll<Sprite>("Textures/Spell Effects Sprite Sheet");
 		GameObject summon = new GameObject ();
 		return summon.AddComponent<Summon> ().init(new Vector3(x, y, z));
 	}
