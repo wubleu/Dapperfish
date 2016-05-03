@@ -49,6 +49,7 @@
      <Compile Include="Assets\Resources\Scripts\Abilities.cs" />
      <Compile Include="Assets\Resources\Scripts\Alarm.cs" />
      <Compile Include="Assets\Resources\Scripts\Archer.cs" />
+     <Compile Include="Assets\Resources\Scripts\BossSpawner.cs" />
      <Compile Include="Assets\Resources\Scripts\Dialogue.cs" />
      <Compile Include="Assets\Resources\Scripts\DungeonKey.cs" />
      <Compile Include="Assets\Resources\Scripts\Enemies.cs" />
