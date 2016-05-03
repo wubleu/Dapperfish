@@ -11,12 +11,13 @@ public class EnemyManager : MonoBehaviour {
 	public PlayerController necromancerController;
 	public int peasantCount = 0;
 	public float wave = 0; //do not change. This is just a counter
-	public float wave2 = 5; //wave interval for level 2
+	public float wave2 = 10; //wave interval for level 2
 	public float wave3 = 5; //wave interval for level 3
 	public int currentWave = 1; //for level 2. the wave currently being done. if 1, then wave1 will be called in delayedSpawn
 	public int waveCount = 3; //number of wave types in level 2
 	public int[] waveNumbers; //count of each wave type in level 2. set in init
 	public bool beginWaves = true; //ultimately will only be set true once waves should begin
+	public float countdown = 5;
 
 	// Use this for initialization
 	public void init (GameManager gMan, PlayerController pController) {
@@ -87,13 +88,18 @@ public class EnemyManager : MonoBehaviour {
 		if (gManager.level == 2) {
 			if ((wave += Time.deltaTime) > wave2 && currentWave <= waveCount) {
 				wave = 0;
-				delayedSpawn ("wave" + currentWave.ToString(), true);
-				waveNumbers [currentWave-1] -= 1;
-				if (waveNumbers [currentWave-1] == 0) {
+				delayedSpawn ("wave" + currentWave.ToString (), true);
+				waveNumbers [currentWave - 1] -= 1;
+				if (waveNumbers [currentWave - 1] == 0) {
 					currentWave += 1;
 				}
+			} 
+			if (currentWave > waveCount) {
+				if ((countdown -= Time.deltaTime) <= 0) {
+					gManager.waveclear = true;
+				}
 			}
-		} else if (gManager.level == 3) {
+		} else if (gManager.level == 3 && !gManager.waveclear) {
 			if ((wave+=Time.deltaTime)>wave3){
 				wave = 0;
 				delayedSpawn ("wave",true);
