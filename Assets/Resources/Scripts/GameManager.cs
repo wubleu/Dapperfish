@@ -91,6 +91,9 @@ public class GameManager : MonoBehaviour {
 //			playTimer = 0;
 //		}
 		//THESE IFS ARE ALSO TEMPORARY TILL BUTTON'S UP
+		if (Encounter == 7) {
+			NextLevel ();
+		}
 		RefillGrid ();
 	}
 
@@ -213,7 +216,7 @@ public class GameManager : MonoBehaviour {
 
 	public bool AreaClear(){
 		RefillGrid ();
-		for (int x = 5; x <= 6; x++) {
+		for (int x = 6; x <= 7; x++) {
 			for (int y = 6; y <= 7; y++) {
 				foreach (AIBehavior unit in enemyGrid[x,y].ToArray()) {
 					if (unit.isEnemy) {
