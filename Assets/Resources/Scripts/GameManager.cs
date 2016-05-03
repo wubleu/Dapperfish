@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour {
 			necromancer.EnableBlight ();
 			necromancer.EnableBlink ();
 			necromancer.EnableDamage ();
-			bSpawner = new GameObject ().AddComponent<BossSpawner> ();
+//			bSpawner = new GameObject ().AddComponent<BossSpawner> ();
 		}
 	}
 
