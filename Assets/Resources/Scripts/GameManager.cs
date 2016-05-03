@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
 	PlayerController necromancer;
 	EnemyManager eManager;
 	Pause pause;
+	BossSpawner bSpawner;
 	public List<AIBehavior>[,] enemyGrid;
 	public int xGridOrigin = -30;
 	public int yGridOrigin = -90;
@@ -93,6 +94,7 @@ public class GameManager : MonoBehaviour {
 			necromancer.EnableBlight ();
 			necromancer.EnableBlink ();
 			necromancer.EnableDamage ();
+			bSpawner = new GameObject ().AddComponent<BossSpawner> ();
 		}
 	}
 
@@ -147,6 +149,9 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void Death() {
+		if (bSpawner != null) {
+			Destroy (bSpawner);
+		}
 		restart.gameObject.SetActive (true);
 		Camera.main.transform.SetParent (null, true);
 		foreach (AIBehavior unit in FindObjectsOfType<AIBehavior>()) {

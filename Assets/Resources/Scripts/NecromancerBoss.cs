@@ -4,9 +4,9 @@ using System.Collections;
 public class NecromancerBoss : MonoBehaviour {
 
 	// PARAMETERS
-	float teleportCooldown = 3f, minSummonCooldown = 5f, maxSummonCooldown = 15f, summonRandomizeRange = 4f, 
-	damageCooldown = 20f, rootDuration = 1f, maxHp = 500f, aggroToAIRange = 4, shootingPeriod = 2f, shootingFreq = .14f, 
-	shootingAngle = 30f, shootingPause = .6f, shootChance = 60;
+	float teleportCooldown = 3f, minSummonCooldown = 10f, maxSummonCooldown = 18f, summonRandomizeRange = 4f, 
+	damageCooldown = 20f, rootDuration = 1f, maxHp = 150f, aggroToAIRange = 4, shootingPeriod = 2f, shootingFreq = .26f, 
+	shootingAngle = 30f, shootingPause = .6f, shootChance = 40;
 
 	float rootTimer = 0f, teleportCooldownTimer = 0f, summonCooldownTimer = 0f, summonCooldown = 5f, damageCooldownTimer = 0f,
 			shootingTimer, nextShotTimer, teleportGridXLoc, teleportGridYLoc, hp;
@@ -43,7 +43,6 @@ public class NecromancerBoss : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		print ("waiting: " + waiting + ",  paused: " + paused + ",  root: " + rootTimer);
 		if (paused || (rootTimer < rootDuration && (rootTimer += Time.deltaTime) < rootDuration)) {
 			return;
 		}
@@ -143,7 +142,7 @@ public class NecromancerBoss : MonoBehaviour {
 			xOffset = Random.Range (-modifiedRandRange, modifiedRandRange);
 		}
 		Vector3 summonLoc = new Vector3(summonCenter.x + xOffset, transform.position.y, summonCenter.z + yOffset);
-		//Abilities.Summon (summonLoc.x, summonLoc.y, summonLoc.z);
+		Abilities.Summon (summonLoc.x, summonLoc.y, summonLoc.z);
 		if (Vector3.Distance (summonLoc, transform.position) < 3) {
 			Teleport ();
 			teleportCooldownTimer = 0;

@@ -157,7 +157,11 @@ public static class Abilities {
 		} else {
 			enemy = false;
 		}
-		spell.AddComponent<SpellEffect>().init(1, enemy, 10, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
+		float speed = 10;
+		if (enemy) {
+			speed = 5f;
+		}
+		spell.AddComponent<SpellEffect>().init(1, enemy, speed, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
 		return true;
 	}
 

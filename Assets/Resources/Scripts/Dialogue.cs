@@ -56,8 +56,8 @@ public class Dialogue : MonoBehaviour {
 			start = true;
 			complete = true;
 		}
-
-		if (GameObject.Find ("Necromancer Boss").GetComponent<NecromancerBoss> ().dead && level == 3 && encounter==3) {
+		NecromancerBoss nBoss = FindObjectOfType<NecromancerBoss> ();
+		if (nBoss != null && nBoss.dead && level == 3 && encounter==3) {
 			Dbox.SetActive (true);
 			Gman.PauseGame ();
 			start = true;
