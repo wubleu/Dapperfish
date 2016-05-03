@@ -42,11 +42,11 @@ public class Dialogue : MonoBehaviour {
 			
 
 		if (start) {
-			if (instructions [encparts] == "N") {
+			if (instructions [encparts] == 0.ToString()) {
 				Necro.SetActive (true);
 				encparts++;
 			}
-			if (instructions [encparts] == "B") {
+			if (instructions [encparts] == 1.ToString()) {
 				encparts++;
 				Boss.SetActive (true);
 			}
@@ -55,7 +55,7 @@ public class Dialogue : MonoBehaviour {
 			if (Input.GetKeyUp (KeyCode.E)) {
 				encparts++;
 			}
-			if (instructions[encparts] == "X") {
+			if (instructions[encparts] == 2.ToString()) {
 				start = false;
 				Gman.UnPauseGame ();
 				encparts++;
