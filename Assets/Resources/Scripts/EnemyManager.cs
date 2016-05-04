@@ -13,11 +13,13 @@ public class EnemyManager : MonoBehaviour {
 	public float wave = 13; //do not change. This is just a counter
 	public float wave2 = 18; //wave interval for level 2
 	public float wave3 = 13; //wave interval for level 3
+	public float wave4 = 8;
 	public int currentWave = 1; //for level 2. the wave currently being done. if 1, then wave1 will be called in delayedSpawn
 	public int waveCount = 3; //number of wave types in level 2
 	public int[] waveNumbers; //count of each wave type in level 2. set in init
 	public bool beginWaves = true; //ultimately will only be set true once waves should begin
 	public float countdown = 5;
+	public int arenaWave = 0;
 
 	// Use this for initialization
 	public void init (GameManager gMan, PlayerController pController) {
@@ -105,6 +107,13 @@ public class EnemyManager : MonoBehaviour {
 			if ((wave+=Time.deltaTime)>wave3){
 				wave = 0;
 				delayedSpawn ("wave",true);
+			}
+		}
+		else if (gManager.level == 4) {
+			if ((wave+=Time.deltaTime)>wave4){
+				wave = 0;
+				delayedSpawn ("wave" + arenaWave.ToString(),true);
+				arenaWave = (arenaWave + 1) % 2;
 			}
 		}
 	}

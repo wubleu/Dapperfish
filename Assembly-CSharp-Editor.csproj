@@ -50,6 +50,7 @@
      <None Include="Assets\Resources\Scripts\Level1Encounter7.txt" />
      <None Include="Assets\Resources\Scripts\Level3Encounter3.txt" />
      <None Include="Assets\Resources\Scripts\Level2Encounter3.txt" />
+     <None Include="Assets\Resources\Scripts\level4.txt" />
      <None Include="Assets\Resources\Scripts\Level2Encounter4.txt" />
      <None Include="Assets\Resources\Scripts\Level1Encounter3.txt" />
      <None Include="Assets\Resources\Scripts\Level2Encounter2.txt" />
