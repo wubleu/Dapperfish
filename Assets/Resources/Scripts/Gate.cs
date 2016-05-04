@@ -14,7 +14,7 @@ public class Gate : MonoBehaviour {
 		void OnCollisionEnter(Collision coll){
 			if (coll.gameObject.name == "Necromancer") {
 				if (coll.gameObject.GetComponent<PlayerController> ().hasKey) {
-					Destroy (this.gameObject, 3);
+					Destroy (this.gameObject, 1);
 				}
 			}
 		}

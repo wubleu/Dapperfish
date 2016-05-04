@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 4091db3bff44246bfaecbca57159c02b
-timeCreated: 1462047290
+timeCreated: 1462325938
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -15,34 +15,34 @@ TextureImporter:
     21300016: Boss Sprite Sheet_8
     21300018: Boss Sprite Sheet_9
     21300020: Boss Sprite Sheet_10
-    21300022: Boss Sprite Sheet_11
+    21300022: Boss Sprite Sheet_9
     21300024: Boss Sprite Sheet_12
     21300026: Boss Sprite Sheet_13
-    21300028: Boss Sprite Sheet_14
-    21300030: Boss Sprite Sheet_15
-    21300032: Boss Sprite Sheet_16
-    21300034: Boss Sprite Sheet_17
-    21300036: Boss Sprite Sheet_18
+    21300028: Boss Sprite Sheet_10
+    21300030: Boss Sprite Sheet_11
+    21300032: Boss Sprite Sheet_12
+    21300034: Boss Sprite Sheet_13
+    21300036: Boss Sprite Sheet_14
     21300038: Boss Sprite Sheet_19
     21300040: Boss Sprite Sheet_20
-    21300042: Boss Sprite Sheet_21
+    21300042: Boss Sprite Sheet_17
     21300044: Boss Sprite Sheet_22
     21300046: Boss Sprite Sheet_23
     21300048: Boss Sprite Sheet_24
     21300050: Boss Sprite Sheet_25
     21300052: Boss Sprite Sheet_26
-    21300054: Boss Sprite Sheet_27
+    21300054: Boss Sprite Sheet_16
     21300056: Boss Sprite Sheet_28
     21300058: Boss Sprite Sheet_29
-    21300060: Boss Sprite Sheet_30
+    21300060: Boss Sprite Sheet_15
     21300062: Boss Sprite Sheet_31
     21300064: Boss Sprite Sheet_32
     21300066: Boss Sprite Sheet_33
-    21300068: Boss Sprite Sheet_34
+    21300068: Boss Sprite Sheet_20
     21300070: Boss Sprite Sheet_35
-    21300072: Boss Sprite Sheet_36
+    21300072: Boss Sprite Sheet_18
     21300074: Boss Sprite Sheet_37
-    21300076: Boss Sprite Sheet_38
+    21300076: Boss Sprite Sheet_19
     21300078: Boss Sprite Sheet_39
     21300080: Boss Sprite Sheet_40
     21300082: Boss Sprite Sheet_41
@@ -286,34 +286,12 @@ TextureImporter:
     - name: Boss Sprite Sheet_9
       rect:
         serializedVersion: 2
-        x: 250
-        y: 748
-        width: 17
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_10
-      rect:
-        serializedVersion: 2
-        x: 209
-        y: 745
-        width: 20
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_11
-      rect:
-        serializedVersion: 2
         x: 383
         y: 742
         width: 126
         height: 59
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -53.67334, y: 25.67334}
@@ -323,29 +301,7 @@ TextureImporter:
         - {x: 55.32666, y: -19.32666}
         - {x: 55.32666, y: 17.67334}
         - {x: 26.32666, y: 25.67334}
-    - name: Boss Sprite Sheet_12
-      rect:
-        serializedVersion: 2
-        x: 139
-        y: 665
-        width: 21
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_13
-      rect:
-        serializedVersion: 2
-        x: 173
-        y: 678
-        width: 23
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_14
+    - name: Boss Sprite Sheet_10
       rect:
         serializedVersion: 2
         x: 583
@@ -353,10 +309,10 @@ TextureImporter:
         width: 69
         height: 34
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Boss Sprite Sheet_15
+    - name: Boss Sprite Sheet_11
       rect:
         serializedVersion: 2
         x: 754
@@ -364,7 +320,7 @@ TextureImporter:
         width: 41
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -7.58667, y: 24.506653}
@@ -375,7 +331,7 @@ TextureImporter:
         - {x: 18.41333, y: -23.493347}
         - {x: 18.41333, y: 10.506653}
         - {x: 11.41333, y: 24.506653}
-    - name: Boss Sprite Sheet_16
+    - name: Boss Sprite Sheet_12
       rect:
         serializedVersion: 2
         x: 1055
@@ -383,7 +339,7 @@ TextureImporter:
         width: 40
         height: 53
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -10.233337, y: 23.213318}
@@ -394,7 +350,7 @@ TextureImporter:
         - {x: 17.766663, y: -20.786682}
         - {x: 17.766663, y: 16.213318}
         - {x: 16.766663, y: 23.213318}
-    - name: Boss Sprite Sheet_17
+    - name: Boss Sprite Sheet_13
       rect:
         serializedVersion: 2
         x: 1355
@@ -402,7 +358,7 @@ TextureImporter:
         width: 40
         height: 53
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -10.233276, y: 23.213318}
@@ -413,7 +369,7 @@ TextureImporter:
         - {x: 17.766724, y: -20.786682}
         - {x: 17.766724, y: 16.213318}
         - {x: 16.766724, y: 23.213318}
-    - name: Boss Sprite Sheet_18
+    - name: Boss Sprite Sheet_14
       rect:
         serializedVersion: 2
         x: 1593
@@ -421,32 +377,10 @@ TextureImporter:
         width: 56
         height: 36
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_19
-      rect:
-        serializedVersion: 2
-        x: 1893
-        y: 710
-        width: 56
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_20
-      rect:
-        serializedVersion: 2
-        x: 560
-        y: 536
-        width: 32
-        height: 26
-      alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Boss Sprite Sheet_21
+    - name: Boss Sprite Sheet_17
       rect:
         serializedVersion: 2
         x: 654
@@ -501,62 +435,7 @@ TextureImporter:
         - {x: -58.919983, y: 51.08667}
         - {x: -44.919983, y: 65.08667}
         - {x: -44.919983, y: 73.08667}
-    - name: Boss Sprite Sheet_22
-      rect:
-        serializedVersion: 2
-        x: 856
-        y: 449
-        width: 33
-        height: 33
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_23
-      rect:
-        serializedVersion: 2
-        x: 906
-        y: 293
-        width: 21
-        height: 18
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_24
-      rect:
-        serializedVersion: 2
-        x: 893
-        y: 247
-        width: 76
-        height: 71
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_25
-      rect:
-        serializedVersion: 2
-        x: 899
-        y: 240
-        width: 65
-        height: 73
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_26
-      rect:
-        serializedVersion: 2
-        x: 1217
-        y: 316
-        width: 38
-        height: 34
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_27
+    - name: Boss Sprite Sheet_16
       rect:
         serializedVersion: 2
         x: 386
@@ -564,7 +443,7 @@ TextureImporter:
         width: 83
         height: 129
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -13.613312, y: 46.179993}
@@ -577,29 +456,7 @@ TextureImporter:
         - {x: 28.386688, y: -52.820007}
         - {x: 36.38669, y: -46.820007}
         - {x: 36.38669, y: -15.820007}
-    - name: Boss Sprite Sheet_28
-      rect:
-        serializedVersion: 2
-        x: 907
-        y: 309
-        width: 21
-        height: 17
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_29
-      rect:
-        serializedVersion: 2
-        x: 1223
-        y: 314
-        width: 39
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_30
+    - name: Boss Sprite Sheet_15
       rect:
         serializedVersion: 2
         x: 98
@@ -607,7 +464,7 @@ TextureImporter:
         width: 76
         height: 125
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -32.37333, y: 53.646667}
@@ -617,40 +474,7 @@ TextureImporter:
         - {x: 33.62667, y: -48.353333}
         - {x: 33.62667, y: -32.353333}
         - {x: -16.37333, y: 53.646667}
-    - name: Boss Sprite Sheet_31
-      rect:
-        serializedVersion: 2
-        x: 1226
-        y: 302
-        width: 28
-        height: 27
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_32
-      rect:
-        serializedVersion: 2
-        x: 1194
-        y: 310
-        width: 29
-        height: 23
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_33
-      rect:
-        serializedVersion: 2
-        x: 1245
-        y: 343
-        width: 23
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_34
+    - name: Boss Sprite Sheet_20
       rect:
         serializedVersion: 2
         x: 1594
@@ -658,7 +482,7 @@ TextureImporter:
         width: 139
         height: 71
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: -59.28662, y: 31.839996}
@@ -668,18 +492,7 @@ TextureImporter:
         - {x: 35.71338, y: -30.160004}
         - {x: 59.71338, y: -12.160004}
         - {x: 59.71338, y: 31.839996}
-    - name: Boss Sprite Sheet_35
-      rect:
-        serializedVersion: 2
-        x: 562
-        y: 403
-        width: 37
-        height: 41
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_36
+    - name: Boss Sprite Sheet_18
       rect:
         serializedVersion: 2
         x: 962
@@ -744,18 +557,7 @@ TextureImporter:
         - {x: -58.093323, y: 57.526672}
         - {x: -51.093323, y: 66.52667}
         - {x: -51.093323, y: 72.52667}
-    - name: Boss Sprite Sheet_37
-      rect:
-        serializedVersion: 2
-        x: 1208
-        y: 337
-        width: 30
-        height: 25
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_38
+    - name: Boss Sprite Sheet_19
       rect:
         serializedVersion: 2
         x: 1287
@@ -825,61 +627,6 @@ TextureImporter:
         - {x: -26.26001, y: 36.293335}
         - {x: -21.26001, y: 45.293335}
         - {x: -21.26001, y: 63.293335}
-    - name: Boss Sprite Sheet_39
-      rect:
-        serializedVersion: 2
-        x: 941
-        y: 322
-        width: 15
-        height: 19
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_40
-      rect:
-        serializedVersion: 2
-        x: 976
-        y: 238
-        width: 33
-        height: 51
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_41
-      rect:
-        serializedVersion: 2
-        x: 1025
-        y: 205
-        width: 42
-        height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_42
-      rect:
-        serializedVersion: 2
-        x: 1212
-        y: 305
-        width: 31
-        height: 46
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: Boss Sprite Sheet_43
-      rect:
-        serializedVersion: 2
-        x: 1223
-        y: 316
-        width: 23
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
     outline: []
   spritePackingTag: 
   userData: 

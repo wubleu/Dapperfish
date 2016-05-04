@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour {
 		if (Encounter == 6 && level == 1) {
 			necromancer.EnableDamage ();
 		}
-		if (Encounter == 7 && level == 1) {
+		if (Encounter == 8 && level == 1) {
 			NextLevel ();
 		}
 
