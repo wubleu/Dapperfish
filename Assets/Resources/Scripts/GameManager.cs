@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour {
 			necromancer.EnableDamage ();
 		}
 
-		if (level == 3) {
+		if (level == 3 || level == 4) {
 			necromancer.EnableRoot ();
 			necromancer.EnableBlight ();
 			necromancer.EnableBlink ();
