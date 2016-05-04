@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour {
 	public bool waveclear = false;
 	public bool wavebegin = false;
 	public int dungeonKeys = 0;
+	public GameObject Gate3;
 
 	// THIS IS JUST UNTIL EVAN GETS THE RESTART BUTTON UP
 	public int level;
@@ -94,7 +95,7 @@ public class GameManager : MonoBehaviour {
 			necromancer.EnableBlight ();
 			necromancer.EnableBlink ();
 			necromancer.EnableDamage ();
-			bSpawner = new GameObject ().AddComponent<BossSpawner> ();
+//			bSpawner = new GameObject ().AddComponent<BossSpawner> ();
 		}
 	}
 
@@ -138,9 +139,11 @@ public class GameManager : MonoBehaviour {
 		if (Encounter == 2 && level == 3) {
 			wavebegin = true;
 			GameObject.Find ("Necromancer Boss").GetComponent<NecromancerBoss> ().waiting = false;
+			Gate3.GetComponent<Gate3> ().finalfight = true;
 		}
 		if (Encounter == 3 && level == 3) {
 			alert.text = "You Win?";
+
 			GameObject.Find ("Necromancer Boss").GetComponent<NecromancerBoss> ().Die ();
 			Encounter++;
 		}
@@ -163,6 +166,9 @@ public class GameManager : MonoBehaviour {
 		NecromancerBoss necroBoss = FindObjectOfType<NecromancerBoss> ();
 		if (necroBoss != null) {
 			Destroy (necroBoss);
+		}
+		foreach (Dialogue encounter in FindObjectsOfType<Dialogue>()){
+			Destroy(encounter);
 		}
 		Destroy(eManager);
 		GameObject death = new GameObject();
@@ -242,6 +248,7 @@ public class GameManager : MonoBehaviour {
 		foreach (AIBehavior unit in GameObject.FindObjectsOfType<AIBehavior>()) {
 			int xSquare = ((int)unit.gameObject.transform.position.x - xGridOrigin) / 10;
 			int ySquare = ((int)unit.gameObject.transform.position.z - yGridOrigin) / 10;
+			//print (xSquare + "   " + ySquare + "   " + unit.transform.position);
 			enemyGrid [xSquare, ySquare].Add (unit);
 		}
 	}
@@ -277,10 +284,17 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void NextLevel(){
-		SceneManager.LoadScene (level);
+		SceneManager.LoadScene ("Level " + level++);
 	}
 
 	public void Restart(){
 		SceneManager.LoadScene("Level "+ level);
+	}
+	public void Menu(){
+
+		SceneManager.LoadScene (0);
+	}
+	public void Quit(){
+		Application.Quit ();
 	}
 }

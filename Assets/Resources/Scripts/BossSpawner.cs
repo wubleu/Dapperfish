@@ -5,7 +5,7 @@ public class BossSpawner : MonoBehaviour {
 
 	// populated w spawn points going clockwise starting from the gate
 	Vector3[] spawnPoints;
-	float minInterval = .1f, maxInterval = 8f;
+	float minInterval = .1f, maxInterval = 6f;
 	float peasantRate = 70f;
 	float spawnInterval;
 	float clock = 0;

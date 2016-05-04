@@ -26,10 +26,14 @@ public class Dialogue : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
+		if (level == 1 && encounter == 99 && Gman.Encounter == 6) {
+			Destroy (this.gameObject);
+		}
+
 		if (level == 1 && encounter == 3 ) {
 			gameObject.GetComponent<BoxCollider> ().enabled = false;
 			//print (Gman.AreaClear ());
-			if (Gman.AreaClear (6, 7, 6, 7)) {
+			if (Gman.AreaClear (5, 6, 5, 6)) {
 				Dbox.SetActive (true);
 				Gman.PauseGame ();
 				start = true;
@@ -38,7 +42,7 @@ public class Dialogue : MonoBehaviour {
 		} else if (level == 1 && encounter == 5 && Gman.Encounter == 4) {
 			gameObject.GetComponent<BoxCollider> ().enabled = false;
 			if (GameObject.Find ("Necromancer").GetComponent<PlayerController> ().hasKey) {
-				if (Gman.AreaClear (6, 7, 6, 7)) {
+				if (Gman.AreaClear (5, 6, 5, 6)) {
 					Dbox.SetActive (true);
 					Gman.PauseGame ();
 					start = true;
@@ -50,7 +54,7 @@ public class Dialogue : MonoBehaviour {
 			gameObject.GetComponent<BoxCollider> ().enabled = true;
 		}
 
-		if (Gman.waveclear && encounter == 3) {
+		if (Gman.waveclear && encounter == 3 && level == 2) {
 			Dbox.SetActive (true);
 			Gman.PauseGame ();
 			start = true;
@@ -132,6 +136,7 @@ public class Dialogue : MonoBehaviour {
 						encounter = 6;
 						gameObject.transform.localScale = new Vector3 (1, 1, 1);
 						Gman.Encounter++;
+						complete = true;
 						instructions = Resources.Load<TextAsset> ("Scripts/Level" + level + "Encounter" + encounter).text.Split (new char[1]{ '\n' });
 					} else {
 						if (collision.gameObject.transform.position.z > transform.position.z + transform.localScale.z / 2) {

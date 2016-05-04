@@ -65,12 +65,14 @@
      <Compile Include="Assets\Resources\Scripts\KeyInfo.cs" />
      <Compile Include="Assets\Resources\Scripts\Knight.cs" />
      <Compile Include="Assets\Resources\Scripts\KnightMelee.cs" />
+     <Compile Include="Assets\Resources\Scripts\LevelButton.cs" />
      <Compile Include="Assets\Resources\Scripts\Link.cs" />
      <Compile Include="Assets\Resources\Scripts\Melee.cs" />
      <Compile Include="Assets\Resources\Scripts\NecromancerBoss.cs" />
      <Compile Include="Assets\Resources\Scripts\Pause.cs" />
      <Compile Include="Assets\Resources\Scripts\Peasant.cs" />
      <Compile Include="Assets\Resources\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Resources\Scripts\ScreenController.cs" />
      <Compile Include="Assets\Resources\Scripts\Spell.cs" />
      <Compile Include="Assets\Resources\Scripts\SpellEffect.cs" />
      <Compile Include="Assets\Resources\Scripts\SpellShot.cs" />
