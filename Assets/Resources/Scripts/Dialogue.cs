@@ -11,6 +11,7 @@ public class Dialogue : MonoBehaviour {
 	public GameObject Dbox;
 	public GameObject Necro;
 	public GameObject Boss;
+	public GameObject advance;
 	public int encounter;
 	bool complete = false;
 	int encparts = 0;
@@ -23,6 +24,7 @@ public class Dialogue : MonoBehaviour {
 	void Start () {
 		level = Gman.level;
 		instructions = Resources.Load<TextAsset>("Scripts/Level" + level + "Encounter" + encounter).text.Split(new char[1]{'\n'});
+		//advance = GameObject.Find ("Advance");
 	}
 	// Update is called once per frame
 	void Update () {
@@ -30,7 +32,7 @@ public class Dialogue : MonoBehaviour {
 			Destroy (this.gameObject);
 		}
 
-		if (level == 1 && encounter == 3 ) {
+		if (level == 1 && encounter == 3 && Gman.Encounter == 2) {
 			gameObject.GetComponent<BoxCollider> ().enabled = false;
 			//print (Gman.AreaClear ());
 			if (Gman.AreaClear (5, 6, 5, 6)) {
@@ -72,17 +74,25 @@ public class Dialogue : MonoBehaviour {
 
 		if (start) {
 			line = instructions [encparts].Split (new char[1]{ ':' });
-			if (line.Length == 2) {
+			if (line.Length == 2 || line.Length == 3) {
 				if (Int32.Parse(line[0]) == 0) {
 					Necro.SetActive (true);
 					Boss.SetActive (false);
 					Dbox.GetComponentInChildren<Text> ().text = line[1];
+					advance.GetComponent<Text> ().text = "Press E to Advance";
 				}
 				if (Int32.Parse(line[0]) == 1) {
 					Dbox.GetComponentInChildren<Text> ().text = line[1];
+					advance.GetComponent<Text> ().text = "Press E to Advance";
 					Boss.SetActive (true);
 					Necro.SetActive (false);
 				}
+			}
+			if (line.Length == 3) {
+				if (Int32.Parse (line [2]) == 0) {
+					advance.GetComponent<Text> ().text = "Press E to Resume";
+				}
+
 			}
 			//Dbox.GetComponentInChildren<Text> ().text = instructions [encparts];
 

@@ -3,7 +3,7 @@
 1:“Very well, I acknowledge your skill.”
 1:“You are a greater necromancer than I.”
 0:“Of course I am!”
-0:“Now that you’re out of the way the land will be mine!  I will be the king all the people of this land will serve me however I wish!”
+0:“Now that you’re out of the way the land will be mine!  I will be king!”
 0:“I’ll have servants to do all my bidding!”
 1:“But I killed all the servants.”
 1:“Everyone really.”
@@ -13,6 +13,6 @@
 1:“I just wanted to take over the kingdom.”
 1:“Why do you think there were so many undead around?”
 0:”But…”
-0:“But…But!”
-0:“DAMN IT!”
+0:“But…But…”
+0:“DAMN IT!”:0
 2:Congratulations………

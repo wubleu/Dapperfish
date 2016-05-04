@@ -1,4 +1,4 @@
 0:“Zombies?  Skeletons?!? How is this possible?  I’M the one who should be raising the undead!”  
 0:“As long as I’m here I can use these undead to build up my army.”
-0:“I can click the right mouse button to spread Blight and convert them to my control.  This is my most essential spell!  However, I can only cast it every few seconds so I need get as many undead in the area of effect as possible.”
+0:“I can click the right mouse button to spread Blight and convert them to my control. I can only cast it every few seconds so I need get as many undead in the area of effect as possible.”:0
 2:Defeat the Undead in the village.

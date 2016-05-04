@@ -1,6 +1,5 @@
 0:“This is it. There’s nowhere to run! This. Ends. NOW!”
 0:“Aaaaand another gate.”
 0:“Let’s see…”
-0:“I’m just going to assume there’s a key at the end of one of those other pathways.”
-0:“If there are any undead I should definitely Blight them.  I’ll need as much help as I can get.”
+0:“I’m just going to assume there’s a key at the end of one of those other pathways.”:0
 2: Find the key, open the gate.

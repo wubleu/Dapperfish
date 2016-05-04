@@ -1,2 +1,2 @@
-0:“I should hold off fighting the guards until I have both the key and a large army.”
+0:“I should hold off fighting the guards until I have both the key and a large army.”:0
 2:

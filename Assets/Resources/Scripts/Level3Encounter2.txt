@@ -1,4 +1,4 @@
-1:“Who are you to get in the way of my dream to take over this kingdom with an army of undead?”
+1:“Who are you to get in the way of my dream to take over this kingdom?”
 0:“Fool, that's MY dream.  You stole it from me!”
 1:“No I didn’t!”
 0:“Yes you did!”
@@ -7,5 +7,5 @@
 1:“And they only had time to re-color the robe!”
 1:“In any case you won’t stop me!  I will be the greatest necromancer in all the land!”
 0:“Over my dead body!”
-1:“That can be arranged.”
+1:“That can be arranged.”:0
 2:Defeat the Necromancer!

@@ -1,12 +1,12 @@
-0:“Alright, Now to open this gate.”
+0:“Alright, now to open this gate.”
 0:………
 0:………………
 0:…………………………
 0:“IT BROKE!”
 0:“What kind of useless key is this? What was it doing out in the middle of the woods anyway?!?”
 0:“……hmmm”
-0:“I suppose I could use my Blink spell to get past the gate.”
-0:“By pressing the space bar I can Blink a short distance in the direction I’m facing.  It’s got a short cool down too so I can use it to get out of sticky situations.”
+0:“I suppose I could Blink past the gate.”
+0:“Pressing the space bar will let me Blink a short distance in the direction I’m facing.  Great for getting out of danger.”
 0:“I wonder why I never thought of that until now?”
-0:“Oh well.”
+0:“Oh well.”:0
 2:Blink into the Fort and get the key.  You idiot.

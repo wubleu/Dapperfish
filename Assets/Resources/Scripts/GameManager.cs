@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour {
 
 	void Start() {
 		init ();
+		GameObject.Find ("DBox").SetActive (false);
 	}
 
 	void init() {

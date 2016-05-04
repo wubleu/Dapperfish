@@ -1,4 +1,4 @@
 0:“The gate! It’s opened up!”
 0:“Inviting me in eh?”
-0:“Very well!”
+0:“Very well!”:0
 2: Enter the throne room.

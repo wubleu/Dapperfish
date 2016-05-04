@@ -1,7 +1,7 @@
 0:“I have the key and I have my army.  The gate will take time to open and these pathetic undead want to get in my way?!?”
 0:“Have a taste of my most powerful spell!”
-0:“By pressing the F key I can summon an enormous wave of magic that annihilates all in its path.  It has the longest cool down of all my spells so I cannot waste it.”
-0:“NOW!”
-0:“CHARGE MY MINIONS!”
-0:“LET THE WORLD KNOW OF MY POWER!”
-2:Fight to the Gate and wait for it to open.
+0:“By pressing the F key I can summon an enormous wave of magic that annihilates all in its path."
+0:“It takes a long time to recharge so I can't waste it.”
+0:“NOW CHARGE MY MINIONS!”
+0:“LET THE WORLD KNOW OF MY POWER!”:0
+2:Fight to through the gate.

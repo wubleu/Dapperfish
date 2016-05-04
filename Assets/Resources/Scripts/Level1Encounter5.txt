@@ -1,5 +1,4 @@
-0:“What a pathetic excuse for an ambush.”
 0:“Okay I can get through the East Gate now.”
-0:“It will take time for the gate to open. That army waiting at the gate is pretty big so I need to build up my army.”
-0:“I’m sure there are scattered undead around I can Blight.”
+0:“It will take time for the gate to open, and that army waiting at the gate is big so I need to build up my army.”
+0:“I’m sure there are scattered undead around I can Blight.”:0
 2:Build up your army then fight to the gate.
