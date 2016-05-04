@@ -43,6 +43,12 @@ public class Archer : AIBehavior {
 			return;
 		}
 		if (root > 0 && (root -= Time.deltaTime) <= 0) {
+			SpriteRenderer[] x = GetComponentsInChildren<SpriteRenderer> ();
+			for (int i = 0; i < x.Length; i++) {
+				if (x[i].name == "Stun") {
+					Destroy (x[i].gameObject);
+				}
+			}
 			agent.speed = speed;
 			meleeTimer = 0;
 		} else if (root > 0) {

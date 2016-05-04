@@ -40,6 +40,12 @@ public class Knight : AIBehavior {
 		}
 		if (meleeTimer > 0) {
 			if ((meleeTimer -= Time.deltaTime) <= meleeThreshold - 0.5f) {
+				SpriteRenderer[] x = GetComponentsInChildren<SpriteRenderer> ();
+				for (int i = 0; i < x.Length; i++) {
+					if (x[i].name == "Stun") {
+						Destroy (x[i].gameObject);
+					}
+				}
 				rend.sprite = cSprites[3];
 			} else {
 				rend.sprite = cSprites[2];
