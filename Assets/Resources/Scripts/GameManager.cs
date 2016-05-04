@@ -167,6 +167,9 @@ public class GameManager : MonoBehaviour {
 		if (necroBoss != null) {
 			Destroy (necroBoss);
 		}
+		foreach (Dialogue encounter in FindObjectsOfType<Dialogue>()){
+			Destroy(encounter);
+		}
 		Destroy(eManager);
 		GameObject death = new GameObject();
 		death.transform.position = necromancer.transform.position;
@@ -281,7 +284,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void NextLevel(){
-		SceneManager.LoadScene (level);
+		SceneManager.LoadScene ("Level " + level++);
 	}
 
 	public void Restart(){

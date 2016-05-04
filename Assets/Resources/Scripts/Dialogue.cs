@@ -54,7 +54,7 @@ public class Dialogue : MonoBehaviour {
 			gameObject.GetComponent<BoxCollider> ().enabled = true;
 		}
 
-		if (Gman.waveclear && encounter == 3 && level == 3) {
+		if (Gman.waveclear && encounter == 3 && level == 2) {
 			Dbox.SetActive (true);
 			Gman.PauseGame ();
 			start = true;
@@ -136,6 +136,7 @@ public class Dialogue : MonoBehaviour {
 						encounter = 6;
 						gameObject.transform.localScale = new Vector3 (1, 1, 1);
 						Gman.Encounter++;
+						complete = true;
 						instructions = Resources.Load<TextAsset> ("Scripts/Level" + level + "Encounter" + encounter).text.Split (new char[1]{ '\n' });
 					} else {
 						if (collision.gameObject.transform.position.z > transform.position.z + transform.localScale.z / 2) {
