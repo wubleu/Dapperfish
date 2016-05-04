@@ -192,7 +192,7 @@ public class GameManager : MonoBehaviour {
 			//alert.text =  "Objective Complete! Your Conquest Continues!";
 			done = true;
 		}
-		NextLevel ();
+		//NextLevel ();
 	}
 
 	public void Reset() {
@@ -288,11 +288,12 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void NextLevel(){
-		SceneManager.LoadScene ("Level " + level++);
+		String nextlevel = "Level " + (level + 1);
+		SceneManager.LoadScene (nextlevel);
 	}
 
 	public void Restart(){
-		SceneManager.LoadScene("Level "+ level);
+		SceneManager.LoadScene("Level " + level);
 	}
 	public void Menu(){
 

@@ -268,6 +268,12 @@ public class AIBehavior : MonoBehaviour {
 			necromancer.GetComponent<PlayerController>().minionCount++;
 			target = null;
 			SwitchTargets();
+			SpriteRenderer[] x = GetComponentsInChildren<SpriteRenderer> ();
+			for (int i = 0; i < x.Length; i++) {
+				if (x[i].name == "Stun") {
+					Destroy (x[i].gameObject);
+				}
+			}
 			if (name == "Archer") {
 				rend.sprite = cSprites [3];
 			}
