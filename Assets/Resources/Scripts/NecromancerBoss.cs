@@ -6,12 +6,15 @@ public class NecromancerBoss : MonoBehaviour {
 	// PARAMETERS
 	float teleportCooldown = 3f, minSummonCooldown = 10f, maxSummonCooldown = 18f, summonRandomizeRange = 4f, 
 	damageCooldown = 20f, rootDuration = 1f, maxHp = 150f, aggroToAIRange = 4, shootingPeriod = 2f, shootingFreq = .26f, 
-	shootingAngle = 30f, shootingPause = .6f, shootChance = 40;
+	shootingAngle = 30f, shootingPause = .6f, shootChance = 40, castleftcd = .5f, castrightcd = .5f;
 
 	float rootTimer = 0f, teleportCooldownTimer = 0f, summonCooldownTimer = 0f, summonCooldown = 5f, damageCooldownTimer = 0f,
 			shootingTimer, nextShotTimer, teleportGridXLoc, teleportGridYLoc, hp;
 	int minionCount = 0;
 	bool paused = false;
+	bool castleft = false;
+	bool castright = false;
+	bool begin = false;
 	public bool waiting = true;
 	GameObject target;
 	GameManager gManager;
@@ -20,6 +23,12 @@ public class NecromancerBoss : MonoBehaviour {
 	SpriteRenderer rend;
 	Sprite[] cSprites;
 	public bool dead = false;
+	GameObject body;
+	SpriteRenderer bodymodel;
+	GameObject leftarm;
+	SpriteRenderer lamodel;
+	GameObject rightarm;
+	SpriteRenderer ramodel;
 
 	public void initNecroBoss (GameManager gMan, EnemyManager owner, PlayerController necro) {
 		gManager = gMan;
@@ -34,6 +43,38 @@ public class NecromancerBoss : MonoBehaviour {
 		rend = GetComponentInChildren<SpriteRenderer>();
 		rend.gameObject.transform.localScale = new Vector3 (1f, 1f, 1f);
 		rend.sprite = cSprites [0];
+		rend.sortingOrder = 3;
+
+		body = new GameObject ();
+		bodymodel = body.AddComponent<SpriteRenderer> ();
+		bodymodel.name = "Boss Body Model";
+		bodymodel.transform.parent = rend.gameObject.transform;
+		bodymodel.transform.localPosition = new Vector3(0, -0.16f, 0);
+		bodymodel.transform.localEulerAngles = new Vector3(0, 0, 0);
+		bodymodel.transform.localScale = new Vector3(1, 1, 1);
+		//bodymodel.sortingLayerName = "PlayerController";
+		bodymodel.sortingOrder = 0;
+
+		leftarm = new GameObject ();
+		lamodel = leftarm.AddComponent<SpriteRenderer> ();
+		lamodel.name = "Left Arm Model";
+		lamodel.transform.parent = rend.gameObject.transform;
+		lamodel.transform.localPosition = new Vector3(0.25f,-0.331f,0);
+		lamodel.transform.localEulerAngles = new Vector3(0, 0, 0);
+		lamodel.transform.localScale = new Vector3(1, 1, 1);
+		lamodel.sortingOrder = 2;
+
+		rightarm = new GameObject ();
+		ramodel = rightarm.AddComponent<SpriteRenderer> ();
+		ramodel.name = "Right Arm Model";
+		ramodel.transform.parent = rend.gameObject.transform;
+		ramodel.transform.localPosition = new Vector3(-0.319f,-0.111f,0);
+		ramodel.transform.localEulerAngles = new Vector3(0, 0, 310);
+		ramodel.transform.localScale = new Vector3(1, 1, 1);
+		ramodel.sortingOrder = 1;
+		ramodel.flipX = true;
+
+
 		Rigidbody rbody = gameObject.GetComponent<Rigidbody> ();
 		rbody.isKinematic = true;
 
@@ -43,14 +84,42 @@ public class NecromancerBoss : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (castleft) {
+			castleftcd -= Time.deltaTime;
+		}
+		if (castleftcd <= 0) {
+			castleft = false;
+			lamodel.sprite = cSprites [14];
+			lamodel.transform.localPosition = new Vector3(0.25f,-0.331f,0);
+			castleftcd = .5f;
+		}
+		if (castright) {
+			castrightcd -= Time.deltaTime;
+		}
+		if (castrightcd <= 0) {
+			castright = false;
+			ramodel.sprite = cSprites [14];
+			ramodel.transform.localPosition = new Vector3(-0.319f,-0.111f,0);
+			ramodel.transform.localEulerAngles = new Vector3(0, 0, 310);
+			castrightcd = .5f;
+		}
+
 		if (paused || (rootTimer < rootDuration && (rootTimer += Time.deltaTime) < rootDuration)) {
 			return;
 		}
 		if (waiting) {
 			return;
 		}
+		if (!waiting && !begin) {
+			Activate ();
+			begin = true;
+		}
 		if (shootingTimer < shootingPeriod && (shootingTimer += Time.deltaTime) > 0) { 
 			if ((nextShotTimer += Time.deltaTime) > shootingFreq) {
+				ramodel.sprite = cSprites [11];
+				castright = true;
+				ramodel.transform.localPosition = new Vector3(-0.292f,-0.339f,0);
+				ramodel.transform.localEulerAngles = new Vector3(0, 0, 3);
 				print("shot");
 				nextShotTimer -= shootingFreq;
 				Abilities.Bullet (transform.position, 
@@ -74,6 +143,9 @@ public class NecromancerBoss : MonoBehaviour {
 
 			if ((summonCooldownTimer += Time.deltaTime) > summonCooldown) {
 				CastSummon ();
+				lamodel.sprite = cSprites [13];
+				lamodel.transform.localPosition = new Vector3(0.286f,-0.498f,0);
+				castleft = true;
 				if (Random.Range (0, 100) < shootChance) {
 					shootingTimer = -shootingPause;
 				}
@@ -194,5 +266,12 @@ public class NecromancerBoss : MonoBehaviour {
 
 	public void UnPauseBoss() {
 		paused = false;
+	}
+
+	public void Activate(){
+		rend.sprite = cSprites [9];
+		bodymodel.sprite = cSprites [10];
+		ramodel.sprite = cSprites [14];
+		lamodel.sprite = cSprites [14];
 	}
 }

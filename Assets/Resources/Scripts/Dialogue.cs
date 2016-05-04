@@ -69,6 +69,7 @@ public class Dialogue : MonoBehaviour {
 			Gman.waveclear = true;
 		}
 
+
 		if (start) {
 			line = instructions [encparts].Split (new char[1]{ ':' });
 			if (line.Length == 2) {

@@ -137,9 +137,13 @@ public class GameManager : MonoBehaviour {
 		}
 
 		if (Encounter == 2 && level == 3) {
-			wavebegin = true;
-			GameObject.Find ("Necromancer Boss").GetComponent<NecromancerBoss> ().waiting = false;
-			Gate3.GetComponent<Gate3> ().finalfight = true;
+			if (!wavebegin) {
+				GameObject.Find ("Necromancer Boss").GetComponent<NecromancerBoss> ().waiting = false;
+				wavebegin = true;
+				Gate3.GetComponent<Gate3> ().finalfight = true;
+				Gate3.SetActive (true);
+			}
+
 		}
 		if (Encounter == 3 && level == 3) {
 			alert.text = "You Win?";

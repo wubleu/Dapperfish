@@ -17,6 +17,7 @@ public class Gate3 : MonoBehaviour {
 		}
 		if (finalfight) {
 			gameObject.SetActive (true);
+			Gman.dungeonKeys = 0;
 		}
 	}
 }
