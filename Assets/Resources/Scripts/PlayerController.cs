@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour {
 		shooter = new GameObject ();
 		shooter.transform.parent = ramodel.transform;
 
-		new GameObject().AddComponent<HealthBar>().init(hp);
+		new GameObject().AddComponent<HealthBar>().init(hp, gameObject);
 		for (int i = 1; i <= 4; i++) {
 			icons[i - 1] = GameObject.Find("CD" + i).GetComponent<Image>();
 		}

@@ -9,7 +9,7 @@ public class NecromancerBoss : MonoBehaviour {
 	shootingAngle = 30f, shootingPause = .6f, shootChance = 40, castleftcd = .5f, castrightcd = .5f, 
 	damageExplosionWait = .1f, damageExplosionCount = 8, damageExplosionTriggerIntervals = 49;
 
-	float rootTimer = 0f, teleportCooldownTimer = 0f, summonCooldownTimer = 0f, summonCooldown = 5f, damageCooldownTimer = 0f, 
+	public float rootTimer = 0f, teleportCooldownTimer = 0f, summonCooldownTimer = 0f, summonCooldown = 5f, damageCooldownTimer = 0f, 
 		damageExplosionTimer = 0, damageExplosionsSoFar = 0, shootingTimer, nextShotTimer, teleportGridXLoc, teleportGridYLoc, hp;
 	float damageExplosionAngle;
 	float damageExplosionStartAngle;
@@ -78,6 +78,7 @@ public class NecromancerBoss : MonoBehaviour {
 		ramodel.sortingOrder = 1;
 		ramodel.flipX = true;
 
+		new GameObject().AddComponent<HealthBar>().init(hp, gameObject);
 
 		Rigidbody rbody = gameObject.GetComponent<Rigidbody> ();
 		rbody.isKinematic = true;
@@ -276,6 +277,13 @@ public class NecromancerBoss : MonoBehaviour {
 		if (damageExplosionsSoFar == damageExplosionCount) {
 			damageExplosionsSoFar = 0;
 			exploding = false;
+			SuperExplosion();
+		}
+	}
+
+	void SuperExplosion() {
+		for (int i = 0; i < 10; i++) {
+			Abilities.Damage(transform.position, i * Mathf.PI / 5, true);
 		}
 	}
 

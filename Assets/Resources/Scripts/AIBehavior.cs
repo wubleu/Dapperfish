@@ -138,7 +138,7 @@ public class AIBehavior : MonoBehaviour {
 				agent.stoppingDistance = 2;
 				agent.speed = speed;
 				transform.LookAt(necromancer.transform);
-			} else if (agent.enabled == true) {
+			} else if (agent.enabled == true && !inWave) {
 				if (Vector3.Distance(transform.position, origin) > 1) {
 					agent.SetDestination(origin);
 					agent.speed = speed;

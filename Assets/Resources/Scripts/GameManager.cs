@@ -76,8 +76,8 @@ public class GameManager : MonoBehaviour {
 		Camera.main.transform.localPosition = new Vector3(0, 20, 0);
 		Camera.main.orthographicSize = 10;
 		eManager = new GameObject().AddComponent<EnemyManager> ();
-		eManager.init(this, necromancer);
 		necromancer.init(this, eManager);
+		eManager.init(this, necromancer);
 		RefillGrid ();
 
 		foreach (KeyInfo k in keys) {

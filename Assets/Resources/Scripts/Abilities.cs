@@ -70,7 +70,6 @@ public static class Abilities {
 	}
 
 	public static void Damage(Vector3 pos, float angle, params bool[] isEnemy) {
-		Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		Sprite[] cSprites = Resources.LoadAll<Sprite> ("Textures/Spell Effects Sprite Sheet");
 		GameObject spell = new GameObject();
 		spell.AddComponent<SpriteRenderer>();
@@ -78,17 +77,17 @@ public static class Abilities {
 		spell.GetComponent<SpriteRenderer> ().sprite = cSprites [10];
 		spell.transform.position = new Vector3 (pos.x, .5f, pos.z) + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle));
 		spell.transform.localScale = new Vector3(.5f, .5f, .5f);
-		spell.transform.localEulerAngles = new Vector3 (90, GameObject.Find("Necromancer").transform.localEulerAngles.y, 0);
 		Animator anim = spell.GetComponent<Animator> ();
 		anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController> ("Animations/Wave Controller");
 		spell.AddComponent<SphereCollider> ().isTrigger = true;
-		spell.transform.LookAt(mouse);
 		spell.name = "Damage";
 		bool enemy;
 		if (isEnemy.Length > 0) {
 			enemy = true;
+			spell.transform.localEulerAngles = new Vector3 (90, 270 - angle * Mathf.Rad2Deg, 0);
 		} else {
 			enemy = false;
+			spell.transform.LookAt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 		}
 		spell.AddComponent<SpellEffect>().init(2, enemy, 5, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle))); 
 	}
@@ -152,16 +151,17 @@ public static class Abilities {
 		spell.GetComponent<SphereCollider>().isTrigger = true;
 		spell.name = "Bullet";
 		bool enemy;
+		float life, speed;
 		if (isEnemy.Length > 0) {
 			enemy = true;
+			speed = 10;
+			life = 1;
 		} else {
 			enemy = false;
+			speed = 5;
+			life = 3;
 		}
-		float speed = 10;
-		if (enemy) {
-			speed = 5f;
-		}
-		spell.AddComponent<SpellEffect>().init(1, enemy, speed, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
+		spell.AddComponent<SpellEffect>().init(life, enemy, speed, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
 		return true;
 	}
 
