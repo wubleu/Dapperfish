@@ -143,8 +143,8 @@ public class EnemyManager : MonoBehaviour {
 		}
 		foreach (string instruction in instructions) {
 			string[] parts = instruction.Split (new char[1]{ ':' });
-			if (parts.Length == 6) {
-				if (parts [5] == tag) {
+			if (parts.Length > 6) {
+				if (parts [5] == tag || parts[5] == (tag+"/r")) {
 					GameObject spawner = GameObject.Find ("Spawn Zone " + parts [0]);
 					for (int i = 1; i <= 3; i++) {
 						for (int j = 0; j < Int32.Parse (parts [i]); j++) {
