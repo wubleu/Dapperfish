@@ -268,8 +268,9 @@ public class NecromancerBoss : MonoBehaviour {
 		if ((damageExplosionTimer += Time.deltaTime) > damageExplosionWait) {
 			damageExplosionTimer = 0;
 			damageExplosionsSoFar++;
-			Abilities.Damage (transform.position, transform.eulerAngles.y * Mathf.PI, true);
-			damageExplosionAngle += damageExplosionAngle + 360 / damageExplosionCount;
+			Abilities.Damage (transform.position, damageExplosionAngle * Mathf.Deg2Rad, true);
+			damageExplosionAngle = (damageExplosionAngle + (360 / damageExplosionCount)) % 360;
+			print(damageExplosionAngle);
 		}
 		if (damageExplosionsSoFar == damageExplosionCount) {
 			damageExplosionsSoFar = 0;
@@ -295,6 +296,7 @@ public class NecromancerBoss : MonoBehaviour {
 		if (prevHP <= 10 && hp % damageExplosionTriggerIntervals >= damageExplosionTriggerIntervals - 10) {
 			exploding = true;
 			damageExplosionStartAngle = transform.eulerAngles.y;
+			damageExplosionAngle = damageExplosionStartAngle;
 			damageExplosionTimer = damageExplosionWait;
 		}
 		if (hp <= 0) {
