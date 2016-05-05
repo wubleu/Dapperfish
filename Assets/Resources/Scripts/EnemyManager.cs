@@ -10,9 +10,9 @@ public class EnemyManager : MonoBehaviour {
 	GameManager gManager;
 	public PlayerController necromancerController;
 	public int peasantCount = 0;
-	public float wave = 12; //do not change. This is just a counter
+	public float wave = 9; //do not change. This is just a counter
 	public float wave2 = 18; //wave interval for level 2
-	public float wave3 = 12; //wave interval for level 3
+	public float wave3 = 10; //wave interval for level 3
 	public float wave4 = 12;
 	public int currentWave = 1; //for level 2. the wave currently being done. if 1, then wave1 will be called in delayedSpawn
 	public int waveCount = 3; //number of wave types in level 2
@@ -110,6 +110,7 @@ public class EnemyManager : MonoBehaviour {
 				wave = UnityEngine.Random.Range(0,4);
 				int w = UnityEngine.Random.Range (1, 6);
 				delayedSpawn ("wave" + w.ToString(),true);
+				delayedSpawn ("wave" + ((w+1)%6).ToString(),true);
 			}
 		}
 		else if (gManager.level == 4) {
