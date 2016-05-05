@@ -154,12 +154,12 @@ public static class Abilities {
 		float life, speed;
 		if (isEnemy.Length > 0) {
 			enemy = true;
-			speed = 10;
-			life = 1;
-		} else {
-			enemy = false;
 			speed = 5;
 			life = 3;
+		} else {
+			enemy = false;
+			speed = 10;
+			life = .8f;
 		}
 		spell.AddComponent<SpellEffect>().init(life, enemy, speed, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
 		return true;
