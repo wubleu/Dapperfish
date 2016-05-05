@@ -7,7 +7,7 @@ public class NecromancerBoss : MonoBehaviour {
 	float teleportCooldown = 3f, minSummonCooldown = 10f, maxSummonCooldown = 18f, summonRandomizeRange = 4f, 
 	damageCooldown = 20f, rootDuration = 1f, maxHp = 150f, aggroToAIRange = 4, shootingPeriod = 2f, shootingFreq = .26f, 
 	shootingAngle = 30f, shootingPause = .6f, shootChance = 40, castleftcd = .5f, castrightcd = .5f, 
-	damageExplosionWait = .1f, damageExplosionCount = 8, damageExplosionTriggerIntervals = 49;
+	damageExplosionWait = .1f, damageExplosionCount = 5, damageExplosionTriggerIntervals = 49;
 
 	public float rootTimer = 0f, teleportCooldownTimer = 0f, summonCooldownTimer = 0f, summonCooldown = 5f, damageCooldownTimer = 0f, 
 		damageExplosionTimer = 0, damageExplosionsSoFar = 0, shootingTimer, nextShotTimer, teleportGridXLoc, teleportGridYLoc, hp;
@@ -281,7 +281,6 @@ public class NecromancerBoss : MonoBehaviour {
 		if (damageExplosionsSoFar == damageExplosionCount) {
 			damageExplosionsSoFar = 0;
 			exploding = false;
-			SuperExplosion();
 		}
 	}
 
