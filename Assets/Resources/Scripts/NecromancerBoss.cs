@@ -111,6 +111,14 @@ public class NecromancerBoss : MonoBehaviour {
 		if (paused || (rootTimer < rootDuration && (rootTimer += Time.deltaTime) < rootDuration)) {
 			return;
 		}
+		if (rootTimer > rootDuration) {
+			SpriteRenderer[] x = GetComponentsInChildren<SpriteRenderer> ();
+			for (int i = 0; i < x.Length; i++) {
+				if (x[i].name == "Stun") {
+					Destroy (x[i].gameObject);
+				}
+			}
+		}
 		if (waiting) {
 			return;
 		}
@@ -121,12 +129,22 @@ public class NecromancerBoss : MonoBehaviour {
 
 		if (exploding == true) {
 			DamageExplosion ();
+			ramodel.sprite = cSprites [11];
+			castright = true;
+			castleft = true;
+			castrightcd = .5f;
+			castleftcd = .5f;
+			ramodel.transform.localPosition = new Vector3(-0.292f,-0.339f,0);
+			ramodel.transform.localEulerAngles = new Vector3(0, 0, 3);
+			lamodel.sprite = cSprites [11];
+			lamodel.transform.localPosition = new Vector3(0.286f,-0.498f,0);
 		}
 
 		if (shootingTimer < shootingPeriod && (shootingTimer += Time.deltaTime) > 0) { 
 			if ((nextShotTimer += Time.deltaTime) > shootingFreq) {
 				ramodel.sprite = cSprites [11];
 				castright = true;
+				castrightcd = .5f;
 				ramodel.transform.localPosition = new Vector3(-0.292f,-0.339f,0);
 				ramodel.transform.localEulerAngles = new Vector3(0, 0, 3);
 				print("shot");
@@ -155,6 +173,7 @@ public class NecromancerBoss : MonoBehaviour {
 				lamodel.sprite = cSprites [13];
 				lamodel.transform.localPosition = new Vector3(0.286f,-0.498f,0);
 				castleft = true;
+				castleftcd = .5f;
 				if (Random.Range (0, 100) < shootChance) {
 					shootingTimer = -shootingPause;
 				}
