@@ -55,7 +55,7 @@ public class Archer : AIBehavior {
 			return;
 		}
 		if (inWave) {
-			if (Vector3.Distance (transform.position, necromancer.transform.position) < aggroRange) {
+			if (Vector3.Distance (transform.position, necromancer.transform.position) < aggroRange-1) {
 				inWave = false;
 			} else {
 				transform.LookAt (necromancer.transform);

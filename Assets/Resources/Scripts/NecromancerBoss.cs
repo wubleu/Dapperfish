@@ -6,12 +6,16 @@ public class NecromancerBoss : MonoBehaviour {
 	// PARAMETERS
 	float teleportCooldown = 3f, minSummonCooldown = 10f, maxSummonCooldown = 18f, summonRandomizeRange = 4f, 
 	damageCooldown = 20f, rootDuration = 1f, maxHp = 150f, aggroToAIRange = 4, shootingPeriod = 2f, shootingFreq = .26f, 
-	shootingAngle = 30f, shootingPause = .6f, shootChance = 40, castleftcd = .5f, castrightcd = .5f;
+	shootingAngle = 30f, shootingPause = .6f, shootChance = 40, castleftcd = .5f, castrightcd = .5f, 
+	damageExplosionWait = .2f, damageExplosionCount = 8, damageExplosionTriggerIntervals = 30;
 
-	float rootTimer = 0f, teleportCooldownTimer = 0f, summonCooldownTimer = 0f, summonCooldown = 5f, damageCooldownTimer = 0f,
-			shootingTimer, nextShotTimer, teleportGridXLoc, teleportGridYLoc, hp;
+	float rootTimer = 0f, teleportCooldownTimer = 0f, summonCooldownTimer = 0f, summonCooldown = 5f, damageCooldownTimer = 0f, 
+		damageExplosionTimer = 0, damageExplosionsSoFar = 0, shootingTimer, nextShotTimer, teleportGridXLoc, teleportGridYLoc, hp;
+	float damageExplosionAngle;
+	float damageExplosionStartAngle;
 	int minionCount = 0;
 	bool paused = false;
+	bool exploding = false;
 	bool castleft = false;
 	bool castright = false;
 	bool begin = false;
@@ -114,6 +118,11 @@ public class NecromancerBoss : MonoBehaviour {
 			Activate ();
 			begin = true;
 		}
+
+		if (exploding == true) {
+			DamageExplosion ();
+		}
+
 		if (shootingTimer < shootingPeriod && (shootingTimer += Time.deltaTime) > 0) { 
 			if ((nextShotTimer += Time.deltaTime) > shootingFreq) {
 				ramodel.sprite = cSprites [11];
@@ -236,6 +245,19 @@ public class NecromancerBoss : MonoBehaviour {
 		return new Vector3 (xSum/xDivisor, necromancer.transform.position.y, ySum/yDivisor);
 	}
 
+	void DamageExplosion() {
+		if ((damageExplosionTimer += Time.deltaTime) > damageExplosionWait) {
+			damageExplosionTimer = 0;
+			damageExplosionsSoFar++;
+			Abilities.Damage (transform.position, transform.eulerAngles.y * Mathf.PI, true);
+			damageExplosionAngle += damageExplosionAngle + 360 / damageExplosionCount;
+		}
+		if (damageExplosionsSoFar == damageExplosionCount) {
+			damageExplosionsSoFar = 0;
+			exploding = false;
+		}
+	}
+
 	public void Die() {
 		GameObject death = new GameObject();
 		death.transform.position = transform.position;
@@ -249,10 +271,15 @@ public class NecromancerBoss : MonoBehaviour {
 	}
 
 	public void Damage(float damage) {
+		float prevHP = hp%damageExplosionTriggerIntervals;
 		hp -= damage;
+		if (prevHP <= 10 && hp % damageExplosionTriggerIntervals >= damageExplosionTriggerIntervals - 10) {
+			exploding = true;
+			damageExplosionStartAngle = transform.eulerAngles.y;
+			damageExplosionTimer = damageExplosionWait;
+		}
 		if (hp <= 0) {
 			dead = true;
-			//Die ();
 		}
 	}
 
