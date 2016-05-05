@@ -7,7 +7,7 @@ public class NecromancerBoss : MonoBehaviour {
 	float teleportCooldown = 3f, minSummonCooldown = 10f, maxSummonCooldown = 18f, summonRandomizeRange = 4f, 
 	damageCooldown = 20f, rootDuration = 1f, maxHp = 150f, aggroToAIRange = 4, shootingPeriod = 2f, shootingFreq = .26f, 
 	shootingAngle = 30f, shootingPause = .6f, shootChance = 40, castleftcd = .5f, castrightcd = .5f, 
-	damageExplosionWait = .2f, damageExplosionCount = 8, damageExplosionTriggerIntervals = 30;
+	damageExplosionWait = .1f, damageExplosionCount = 8, damageExplosionTriggerIntervals = 49;
 
 	float rootTimer = 0f, teleportCooldownTimer = 0f, summonCooldownTimer = 0f, summonCooldown = 5f, damageCooldownTimer = 0f, 
 		damageExplosionTimer = 0, damageExplosionsSoFar = 0, shootingTimer, nextShotTimer, teleportGridXLoc, teleportGridYLoc, hp;
@@ -138,6 +138,7 @@ public class NecromancerBoss : MonoBehaviour {
 			ramodel.transform.localEulerAngles = new Vector3(0, 0, 3);
 			lamodel.sprite = cSprites [11];
 			lamodel.transform.localPosition = new Vector3(0.286f,-0.498f,0);
+			return;
 		}
 
 		if (shootingTimer < shootingPeriod && (shootingTimer += Time.deltaTime) > 0) { 
