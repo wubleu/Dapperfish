@@ -33,6 +33,7 @@ public class NecromancerBoss : MonoBehaviour {
 	SpriteRenderer lamodel;
 	GameObject rightarm;
 	SpriteRenderer ramodel;
+	GameObject healthbar;
 
 	public void initNecroBoss (GameManager gMan, EnemyManager owner, PlayerController necro) {
 		gManager = gMan;
@@ -78,7 +79,9 @@ public class NecromancerBoss : MonoBehaviour {
 		ramodel.sortingOrder = 1;
 		ramodel.flipX = true;
 
-		new GameObject().AddComponent<HealthBar>().init(hp, gameObject);
+		healthbar = new GameObject ();
+		healthbar.AddComponent<HealthBar>().init(hp, gameObject);
+		healthbar.SetActive (false);
 
 		Rigidbody rbody = gameObject.GetComponent<Rigidbody> ();
 		rbody.isKinematic = true;
@@ -126,6 +129,7 @@ public class NecromancerBoss : MonoBehaviour {
 		if (!waiting && !begin) {
 			Activate ();
 			begin = true;
+			healthbar.SetActive (true);
 		}
 
 		if (exploding == true) {
