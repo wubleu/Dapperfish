@@ -13,12 +13,15 @@ public class EnemyManager : MonoBehaviour {
 	public float wave = 12; //do not change. This is just a counter
 	public float wave2 = 18; //wave interval for level 2
 	public float wave3 = 12; //wave interval for level 3
+	public float wave4 = 12;
 	public int currentWave = 1; //for level 2. the wave currently being done. if 1, then wave1 will be called in delayedSpawn
 	public int waveCount = 3; //number of wave types in level 2
 	public int[] waveNumbers; //count of each wave type in level 2. set in init
 	public bool beginWaves = true; //ultimately will only be set true once waves should begin
 	public float countdown = 5;
 	public int arenaWave = 0;
+	public int offset = 0;
+	public int arenaWaves = 3;
 
 	// Use this for initialization
 	public void init (GameManager gMan, PlayerController pController) {
@@ -110,10 +113,21 @@ public class EnemyManager : MonoBehaviour {
 			}
 		}
 		else if (gManager.level == 4) {
-			if ((wave+=Time.deltaTime)>wave3){
+			if ((wave+=Time.deltaTime)>wave4){
+				print (arenaWave);
 				wave = 0;
-				delayedSpawn ("wave" + arenaWave.ToString(),true);
+				delayedSpawn ("wave" + (arenaWave + offset).ToString(),true);
 				arenaWave = (arenaWave + 1) % 2;
+				if (arenaWave == 0) {
+					arenaWaves -= 1;
+					if (arenaWaves == 0) {
+						offset += 2;
+						arenaWaves = 3;
+						if (offset > 4) {
+							offset = 4;
+						}
+					}
+				}
 			}
 		}
 	}
@@ -123,7 +137,7 @@ public class EnemyManager : MonoBehaviour {
 		bool[] isElite = new bool[2];
 		isElite [0] = false;
 		isElite [1] = isWave;
-		if (tag == "wave3") {
+		if (tag == "wave3" && gManager.level==3) {
 			isElite [0] = true;
 		}
 		foreach (string instruction in instructions) {
