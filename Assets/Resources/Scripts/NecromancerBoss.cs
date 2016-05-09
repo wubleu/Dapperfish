@@ -4,7 +4,7 @@ using System.Collections;
 public class NecromancerBoss : MonoBehaviour {
 
 	// PARAMETERS
-	float teleportCooldown = 3f, minSummonCooldown = 10f, maxSummonCooldown = 18f, summonRandomizeRange = 4f, 
+	float teleportCooldown = 3f, minSummonCooldown = 10f, maxSummonCooldown = 18f, summonRandomizeRange = 10f, 
 	damageCooldown = 20f, rootDuration = 1f, maxHp = 150f, aggroToAIRange = 4, shootingPeriod = 2f, shootingFreq = .26f, 
 	shootingAngle = 30f, shootingPause = .6f, shootChance = 40, castleftcd = .5f, castrightcd = .5f, 
 	damageExplosionWait = .1f, damageExplosionCount = 5, damageExplosionTriggerIntervals = 49;
