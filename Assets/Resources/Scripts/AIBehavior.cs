@@ -112,22 +112,28 @@ public class AIBehavior : MonoBehaviour {
 	}
 
 	protected void SwitchTargets() {
-		float targetDist = aggroRange;
+		float targetDist;
+		if (inWave) { 
+			targetDist = aggroRange;
+		}
+		else {
+			targetDist = Vector3.Distance (transform.position, necromancer.transform.position) + 1;
+		}
 		bool aggro = false;
 		if (target != null) { // if the target is within aggroRange, keeps target
 			if (target.name != "Necromancer" && target.name != "Necromancer Boss" && !isEnemy && !target.GetComponent<AIBehavior> ().isEnemy) {
 				target = null;
 			} else {
 				float currTargetDist = Vector3.Distance (target.transform.position, transform.position);
-				if (currTargetDist < aggroRange || (target == necromancer && currTargetDist < aggroRange*necroAggroModifier)) {
-//					targetDist = currTargetDist/2f;	
+				if (currTargetDist < aggroRange || inWave || (target == necromancer && currTargetDist < aggroRange*necroAggroModifier)) {
+					targetDist = currTargetDist - 1;	
 					agent.destination = target.transform.position;
 					transform.LookAt (target.transform);
 				} else {
 					target = null;
 				}
 			}
-		} else {
+		} else if (!inWave) {
 			aggro = true;
 		}
 		targetDist = CheckAITargetsInSquare(targetDist); // checks all AI's whose allegiance is different from this AI's
@@ -267,6 +273,7 @@ public class AIBehavior : MonoBehaviour {
 			eManager.peasantCount--;
 			necromancer.GetComponent<PlayerController>().minionCount++;
 			target = null;
+			inWave = false;
 			SwitchTargets();
 			SpriteRenderer[] x = GetComponentsInChildren<SpriteRenderer> ();
 			for (int i = 0; i < x.Length; i++) {

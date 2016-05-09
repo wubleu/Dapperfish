@@ -45,15 +45,6 @@ public class Knight : AIBehavior {
 				rend.sprite = cSprites[2];
 			}
 		}
-		if (inWave) {
-			if (Vector3.Distance (transform.position, necromancer.transform.position) < aggroRange-1) {
-				inWave = false;
-			} else {
-				transform.LookAt (necromancer.transform);
-				agent.destination = necromancer.transform.position;
-				return;
-			}
-		}
 		if (target != null) {
 			if (mode == 0) { // walking
 				SwitchTargets();
