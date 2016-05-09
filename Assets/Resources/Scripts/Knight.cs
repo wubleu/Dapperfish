@@ -11,7 +11,7 @@ public class Knight : AIBehavior {
 	public void initKnight(GameManager gMan, EnemyManager owner, PlayerController necro, params bool[] isElite) {
 		allyColor = new Color(0, 0, 0);
 		enemyColor = new Color (1, 1, 1);
-		speed = 4.75f;
+		speed = 4.5f;
 		maxHP = hp = 20;
 		meleeThreshold = 2;
 		meleeDamage = 25;
@@ -43,6 +43,15 @@ public class Knight : AIBehavior {
 				rend.sprite = cSprites[3];
 			} else {
 				rend.sprite = cSprites[2];
+			}
+		}
+		if (inWave) {
+			if (Vector3.Distance (transform.position, necromancer.transform.position) < aggroRange-1) {
+				inWave = false;
+			} else {
+				transform.LookAt (necromancer.transform);
+				agent.destination = necromancer.transform.position;
+				return;
 			}
 		}
 		if (target != null) {

@@ -54,6 +54,15 @@ public class Archer : AIBehavior {
 		} else if (root > 0) {
 			return;
 		}
+		if (inWave) {
+			if (Vector3.Distance (transform.position, necromancer.transform.position) < aggroRange-1) {
+				inWave = false;
+			} else {
+				transform.LookAt (necromancer.transform);
+				agent.destination = necromancer.transform.position;
+				return;
+			}
+		}
 		SwitchTargets();
 		base.Update();
 		if (moving) {
