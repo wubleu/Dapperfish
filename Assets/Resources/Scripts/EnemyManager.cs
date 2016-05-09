@@ -11,7 +11,7 @@ public class EnemyManager : MonoBehaviour {
 	public PlayerController necromancerController;
 	public int peasantCount = 0;
 	public float wave = 20; //do not change. This is just a counter
-	public float wave2 = 15; //wave interval for level 2
+	public float wave2 = 19; //wave interval for level 2
 	public float wave3 = 7; //wave interval for level 3
 	public float wave4 = 10;
 	public int currentWave = 1; //for level 2. the wave currently being done. if 1, then wave1 will be called in delayedSpawn
