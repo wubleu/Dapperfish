@@ -10,7 +10,7 @@ public class EnemyManager : MonoBehaviour {
 	GameManager gManager;
 	public PlayerController necromancerController;
 	public int peasantCount = 0;
-	public float wave = 9; //do not change. This is just a counter
+	public float wave = 20; //do not change. This is just a counter
 	public float wave2 = 18; //wave interval for level 2
 	public float wave3 = 10; //wave interval for level 3
 	public float wave4 = 12;
