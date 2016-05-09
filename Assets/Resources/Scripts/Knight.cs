@@ -11,7 +11,7 @@ public class Knight : AIBehavior {
 	public void initKnight(GameManager gMan, EnemyManager owner, PlayerController necro, params bool[] isElite) {
 		allyColor = new Color(0, 0, 0);
 		enemyColor = new Color (1, 1, 1);
-		speed = 4.5f;
+		speed = 4.75f;
 		maxHP = hp = 20;
 		meleeThreshold = 2;
 		meleeDamage = 25;
