@@ -20,10 +20,13 @@ public class Dialogue : MonoBehaviour {
 	string[] line;
 	bool start = false;
 	int indicator;
+	public AudioClip click;
 	// Use this for initialization
 	void Start () {
 		level = Gman.level;
 		instructions = Resources.Load<TextAsset>("Scripts/Level" + level + "Encounter" + encounter).text.Split(new char[1]{'\n'});
+		click = Resources.Load ("Sounds/click") as AudioClip;
+
 		//advance = GameObject.Find ("Advance");
 	}
 	// Update is called once per frame
@@ -98,6 +101,8 @@ public class Dialogue : MonoBehaviour {
 
 			if (Input.GetKeyUp (KeyCode.E)) {
 				encparts++;
+				AudioSource.PlayClipAtPoint (click, transform.position);
+
 			}
 			if (Int32.Parse(line[0]) == 2) {
 				start = false;

@@ -1,30 +1,26 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Scripts/NecromancerBoss.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Scripts/EnemyManager.cs">
     <Files>
-      <File FileName="Assets/Resources/Scripts/EnemyManager.cs" Line="62" Column="1" />
+      <File FileName="Assets/Resources/Scripts/level3.txt" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/level2.txt" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/level1.txt" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/PlayerController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/Key.cs" Line="9" Column="12" />
+      <File FileName="Assets/Resources/Scripts/GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/EnemyManager.cs" Line="34" Column="37" />
+      <File FileName="Assets/Resources/Scripts/Link.cs" Line="3" Column="1" />
+      <File FileName="Assets/Resources/Scripts/HealthBar.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/KeyInfo.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/AIBehavior.cs" Line="1" Column="1" />
       <File FileName="Assets/Resources/Scripts/Enemies.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/GameManager.cs" Line="125" Column="1" />
-      <File FileName="Assets/Resources/Scripts/Peasant.cs" Line="51" Column="17" />
-      <File FileName="Assets/Resources/Scripts/Archer.cs" Line="56" Column="56" />
-      <File FileName="Assets/Resources/Scripts/NecromancerBoss.cs" Line="47" Column="3" />
-      <File FileName="Assets/Resources/Scripts/Knight.cs" Line="53" Column="12" />
-      <File FileName="Assets/Resources/Scripts/level1.txt" Line="27" Column="8" />
-      <File FileName="Assets/Resources/Scripts/Pause.cs" Line="37" Column="3" />
-      <File FileName="Assets/Resources/Scripts/Abilities.cs" Line="20" Column="10" />
-      <File FileName="Assets/Resources/Scripts/Summon.cs" Line="8" Column="23" />
-      <File FileName="Assets/Resources/Scripts/SpellEffect.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/AIBehavior.cs" Line="166" Column="110" />
-      <File FileName="Assets/Resources/Scripts/level3.txt" Line="1" Column="2" />
-      <File FileName="Assets/Resources/Scripts/Spell.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/NecromancerBoss.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/Archer.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/Gate2.cs" Line="20" Column="1" />
+      <File FileName="Assets/Resources/Scripts/Gate3.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/DungeonKey.cs" Line="20" Column="1" />
+      <File FileName="Assets/Resources/Scripts/level4.txt" Line="1" Column="1" />
     </Files>
-    <Pads>
-      <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State name="__root__">
-          <Node name="Dapperfish" expanded="True" selected="True" />
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

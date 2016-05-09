@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour {
 	bool paused = false;
 
 	//Sounds
-	public AudioClip BlightClip, RootClip, AudioClip, DamageClip, BlinkClip;
+	public AudioClip BlightClip, RootClip, AudioClip, DamageClip, BlinkClip, DeathClip;
 
 	GameObject necromodel, rightarm, leftarm, body, shooter;
 	SpriteRenderer lamodel, bodymodel, ramodel, spellRange, AOE;
@@ -134,6 +134,7 @@ public class PlayerController : MonoBehaviour {
 		BlightClip = Resources.Load ("Sounds/Blight") as AudioClip;
 		RootClip = Resources.Load ("Sounds/Root") as AudioClip;
 		BlinkClip = Resources.Load ("Sounds/Blink") as AudioClip;
+		DeathClip = Resources.Load ("Sounds/death") as AudioClip;
 
 	}
 
@@ -330,6 +331,8 @@ public class PlayerController : MonoBehaviour {
 		hp -= 1;
 		if (hp <= 0) {
 			gManager.Death ();
+			AudioSource.PlayClipAtPoint (DeathClip, transform.position);
+
 		}
 	}
 

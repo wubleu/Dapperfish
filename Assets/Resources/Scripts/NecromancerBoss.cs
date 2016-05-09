@@ -35,6 +35,9 @@ public class NecromancerBoss : MonoBehaviour {
 	SpriteRenderer ramodel;
 	GameObject healthbar;
 
+	public AudioClip BlightClipN, AudioClipN, DamageClipN, BlinkClipN, DeathClipN;
+
+
 	public void initNecroBoss (GameManager gMan, EnemyManager owner, PlayerController necro) {
 		gManager = gMan;
 		eManager = owner;
@@ -88,6 +91,12 @@ public class NecromancerBoss : MonoBehaviour {
 
 		teleportGridXLoc = ((int)transform.position.x - 15) / 5;
 		teleportGridYLoc = ((int)transform.position.z + 10) / 5;
+
+		DamageClipN = Resources.Load ("Sounds/DamageN") as AudioClip;
+		BlightClipN = Resources.Load ("Sounds/BlightN") as AudioClip;
+		BlinkClipN = Resources.Load ("Sounds/BlinkN") as AudioClip;
+		DeathClipN = Resources.Load ("Sounds/deathN") as AudioClip;
+
 	}
 	
 	// Update is called once per frame
@@ -231,6 +240,7 @@ public class NecromancerBoss : MonoBehaviour {
 		}
 		Abilities.Blink(transform, 0, new Vector3 (((newX * 5f) + 15f) + Random.Range (0f, 5f), transform.position.y, 
 			((newY * 5f) - 10f) + Random.Range (0f, 5f)));
+		AudioSource.PlayClipAtPoint (BlinkClipN, transform.position);
 		teleportGridXLoc = newX;
 		teleportGridYLoc = newY;
 	}
@@ -249,6 +259,7 @@ public class NecromancerBoss : MonoBehaviour {
 		}
 		Vector3 summonLoc = new Vector3(summonCenter.x + xOffset, transform.position.y, summonCenter.z + yOffset);
 		Abilities.Summon (summonLoc.x, summonLoc.y, summonLoc.z);
+		AudioSource.PlayClipAtPoint (BlightClipN, transform.position);
 		if (Vector3.Distance (summonLoc, transform.position) < 3) {
 			Teleport ();
 			teleportCooldownTimer = 0;
@@ -275,6 +286,7 @@ public class NecromancerBoss : MonoBehaviour {
 			damageExplosionTimer = 0;
 			damageExplosionsSoFar++;
 			Abilities.Damage (transform.position, damageExplosionAngle * Mathf.Deg2Rad, true);
+			AudioSource.PlayClipAtPoint (DamageClipN, transform.position);
 			damageExplosionAngle = (damageExplosionAngle + (360 / damageExplosionCount)) % 360;
 			print(damageExplosionAngle);
 		}
@@ -287,11 +299,13 @@ public class NecromancerBoss : MonoBehaviour {
 	void SuperExplosion() {
 		for (int i = 0; i < 10; i++) {
 			Abilities.Damage(transform.position, i * Mathf.PI / 5, true);
+			AudioSource.PlayClipAtPoint (DamageClipN, transform.position);
 		}
 	}
 
 	public void Die() {
 		GameObject death = new GameObject();
+		AudioSource.PlayClipAtPoint (DeathClipN, transform.position);
 		death.transform.position = transform.position;
 		death.transform.localScale = transform.localScale;
 		death.transform.localEulerAngles = new Vector3 (90, 0, 0);
