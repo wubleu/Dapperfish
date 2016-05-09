@@ -12,6 +12,8 @@ public class SpellShot : MonoBehaviour {
 	SpriteRenderer spellShot;
 	Vector3 direction;
 	Animator anim;
+	public AudioClip gun;
+	public AudioClip impact;
 
 	// Use this for initialization
 	public void init (PlayerController owner, GameManager gMan) {
@@ -32,6 +34,10 @@ public class SpellShot : MonoBehaviour {
 		float directionMagnitude = Mathf.Sqrt (Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.y, 2));
 		direction = new Vector3 (direction.x / directionMagnitude, direction.y / directionMagnitude, 0);
 		transform.Translate (direction.x*.3f, direction.y*.3f, 0);
+
+		gun = Resources.Load ("Sounds/gun") as AudioClip;
+		impact = Resources.Load ("Sounds/impact") as AudioClip;
+		AudioSource.PlayClipAtPoint (gun, transform.position);
 	}
 
 
@@ -46,6 +52,8 @@ public class SpellShot : MonoBehaviour {
 
 	void OnTriggerEnter(Collider coll) {
 		if (coll.name != "Necromancer") {
+			AudioSource.PlayClipAtPoint (impact, transform.position);
+
 			Destroy (gameObject);
 		}
 	}

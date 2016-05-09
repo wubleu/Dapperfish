@@ -3,6 +3,7 @@ using System.Collections;
 
 public static class Abilities {
 
+
 	private static GameObject AOE(float radius, Color color, Vector3 pos) {
 		GameObject spell = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 		spell.transform.position = pos;
@@ -161,7 +162,9 @@ public static class Abilities {
 			speed = 10;
 			life = .8f;
 		}
+
 		spell.AddComponent<SpellEffect>().init(life, enemy, speed, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)));
+
 		return true;
 	}
 

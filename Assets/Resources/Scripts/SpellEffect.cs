@@ -9,6 +9,8 @@ public class SpellEffect : MonoBehaviour {
 	bool paused = false;
 	float arrowPower;
 	Vector3 angle;
+	public AudioClip impact;
+
 
 	public void init(float life, bool bad = false, float speed = 0, Vector3 dir = default(Vector3), params float[] arrowDamage) {
 		radius = transform.localScale.x;
@@ -20,6 +22,8 @@ public class SpellEffect : MonoBehaviour {
 			lifetime = life / speed;
 			arrowPower = arrowDamage[0];
 		}
+		impact = Resources.Load ("Sounds/impact") as AudioClip;
+
 	}
 
 	void Update() {
@@ -90,12 +94,18 @@ public class SpellEffect : MonoBehaviour {
 			break;
 		case "Bullet":
 			if (col.tag == "AI" && enemy != AI.isEnemy) {
+				AudioSource.PlayClipAtPoint (impact, transform.position);
+
 				AI.Damage (2);
 				Destroy (gameObject);
 			} else if (enemy && col.name == "Necromancer") {
+				AudioSource.PlayClipAtPoint (impact, transform.position);
+
 				col.GetComponent<PlayerController> ().Damage (1);
 				Destroy (gameObject);
 			} else if (!enemy && col.name == "Necromancer Boss") {
+				AudioSource.PlayClipAtPoint (impact, transform.position);
+
 				col.GetComponent<NecromancerBoss> ().Damage (2);
 				Destroy (this.gameObject);
 			}

@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour {
 	Melee melee;
 	public EnemyManager eManager;
 	bool paused = false;
+	public AudioClip gun;
+
 
 	//Sounds
 	public AudioClip BlightClip, RootClip, AudioClip, DamageClip, BlinkClip, DeathClip;
@@ -135,6 +137,7 @@ public class PlayerController : MonoBehaviour {
 		RootClip = Resources.Load ("Sounds/Root") as AudioClip;
 		BlinkClip = Resources.Load ("Sounds/Blink") as AudioClip;
 		DeathClip = Resources.Load ("Sounds/death") as AudioClip;
+		gun = Resources.Load ("Sounds/gun") as AudioClip;
 
 	}
 
@@ -170,6 +173,8 @@ public class PlayerController : MonoBehaviour {
 		}
 		if (timers[4] <= 0 && Input.GetKey(controls[4])) {
 			Abilities.Bullet(shooter.transform.position, Mathf.PI / 2 + Mathf.Atan2(transform.position.x - mouse.x, mouse.z - transform.position.z));
+			AudioSource.PlayClipAtPoint (gun, transform.position);
+
 			ramodel.sprite = cSprites [17];
 			if (!casted) {
 				lamodel.transform.localPosition = new Vector3 (-0.126f, 1, 0.347f);
