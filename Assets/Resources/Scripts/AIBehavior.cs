@@ -345,7 +345,6 @@ public class AIBehavior : MonoBehaviour {
 			target = necromancer;
 			aggroRange += 100;
 			talert = 1;
-			Alarm();
 		}
 	}
 }
