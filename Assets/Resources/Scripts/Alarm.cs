@@ -7,7 +7,7 @@ public class Alarm : MonoBehaviour {
 
 	public void init(Vector3 pos) {
 		SphereCollider coll = gameObject.AddComponent<SphereCollider>();
-		coll.radius = 5;
+		coll.radius = 3;
 		coll.isTrigger = true;
 		transform.position = pos;
 	}

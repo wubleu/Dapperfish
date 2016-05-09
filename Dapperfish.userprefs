@@ -1,25 +1,21 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Scripts/EnemyManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../Hull Breach/Assets/Resources/JERF/level2.txt">
     <Files>
-      <File FileName="Assets/Resources/Scripts/level3.txt" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/level2.txt" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/level1.txt" Line="1" Column="1" />
       <File FileName="Assets/Resources/Scripts/PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/Key.cs" Line="9" Column="12" />
       <File FileName="Assets/Resources/Scripts/GameManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/EnemyManager.cs" Line="34" Column="37" />
-      <File FileName="Assets/Resources/Scripts/Link.cs" Line="3" Column="1" />
+      <File FileName="Assets/Resources/Scripts/EnemyManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/Link.cs" Line="1" Column="1" />
       <File FileName="Assets/Resources/Scripts/HealthBar.cs" Line="1" Column="1" />
       <File FileName="Assets/Resources/Scripts/KeyInfo.cs" Line="1" Column="1" />
       <File FileName="Assets/Resources/Scripts/AIBehavior.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/Enemies.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/Knight.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/Peasant.cs" Line="1" Column="1" />
       <File FileName="Assets/Resources/Scripts/NecromancerBoss.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/Archer.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/Gate2.cs" Line="20" Column="1" />
-      <File FileName="Assets/Resources/Scripts/Gate3.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/DungeonKey.cs" Line="20" Column="1" />
-      <File FileName="Assets/Resources/Scripts/level4.txt" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/level3.txt" Line="5" Column="6" />
+      <File FileName="Assets/Resources/Scripts/Summon.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Scripts/Alarm.cs" Line="10" Column="18" />
+      <File FileName="../Hull Breach/Assets/Resources/JERF/level2.txt" Line="3" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
