@@ -130,7 +130,7 @@ public class Dialogue : MonoBehaviour {
 
 	}
 
-	void OnCollisionStay(Collision collision){
+	void OnTriggerStay(Collider collision){
 		if (collision.gameObject.name == "Necromancer") {
 			if (encounter == 4 && level == 1) {
 				if (collision.gameObject.GetComponent<PlayerController> ().hasFortKey) {

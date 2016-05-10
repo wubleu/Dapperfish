@@ -1,5 +1,7 @@
 0:“This is it. There’s nowhere to run! This. Ends. NOW!”
 0:“Aaaaand another gate.”
 0:“Let’s see…”
-0:“I’m just going to assume there’s a key at the end of one of those other pathways.”:0
+0:“I’m just going to assume there’s a key at the end of one of those other pathways.”
+0:“I could get the key and Blight any enemies I find.”
+0:“Or I could just Blink across.”:0
 2: Find the key, open the gate.
