@@ -105,15 +105,14 @@ public class GameManager : MonoBehaviour {
 			Destroy (gM);
 		}
 		if (checkpoint && level == 1) {
-			Encounter = 4;
-			objectives.text = "Open the Fort gate.";
+			Encounter = 3;
+			objectives.text = "Blink into the Fort and get the key.  You idiot.";
 			Destroy (GameObject.Find ("Encounter0"));
 			Destroy (GameObject.Find ("Encounter1"));
 			Destroy (GameObject.Find ("Encounter1"));
 			Destroy (GameObject.Find ("Encounter1"));
 			Destroy (GameObject.Find ("Encounter2"));
 			Destroy (GameObject.Find ("Encounter3"));
-			Destroy (GameObject.Find ("Encounter4"));
 			necromancer.EnableBlight ();
 			foreach (Key key in GameObject.FindObjectsOfType<Key>()) {
 				if (key.transform.position.x > 50) {
