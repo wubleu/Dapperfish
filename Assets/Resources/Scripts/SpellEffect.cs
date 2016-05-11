@@ -85,9 +85,13 @@ public class SpellEffect : MonoBehaviour {
 			break;
 		case "Damage":
 			if (col.tag == "AI" && enemy != AI.isEnemy) {
-				AI.Damage (10);
+				if (AI.isEnemy) {
+					AI.Damage (10);
+				} else {
+					AI.Damage (3);
+				}
 			} else if (enemy && col.name == "Necromancer") {
-				col.GetComponent<PlayerController> ().Damage (10);
+				col.GetComponent<PlayerController> ().Damage (5);
 			} else if (!enemy && col.name == "Necromancer Boss") {
 				col.GetComponent<NecromancerBoss> ().Damage (10);
 			}

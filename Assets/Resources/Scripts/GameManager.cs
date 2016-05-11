@@ -178,6 +178,7 @@ public class GameManager : MonoBehaviour {
 				wavebegin = true;
 				Gate3.GetComponent<Gate3> ().finalfight = true;
 				Gate3.SetActive (true);
+				Gate3.GetComponent<NavMeshObstacle> ().center = new Vector3(-3, 0, 0);
 			}
 
 		}
