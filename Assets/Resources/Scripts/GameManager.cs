@@ -114,7 +114,6 @@ public class GameManager : MonoBehaviour {
 			Destroy(GameObject.Find ("Encounter2"));
 			Destroy(GameObject.Find ("Encounter3"));
 			Destroy(GameObject.Find ("Encounter4"));
-			GameObject.Find ("Encounter5").GetComponent<BoxCollider> ().enabled = false;
 			necromancer.EnableBlight ();
 			foreach (Key key in GameObject.FindObjectsOfType<Key>()) {
 				if (key.transform.position.x > 50) {
@@ -129,7 +128,7 @@ public class GameManager : MonoBehaviour {
 					Destroy (unit.gameObject);
 				}
 			}
-			necromancer.transform.position = new Vector3 (35.5f, necromancer.transform.position.y, -30f);
+			necromancer.transform.position = new Vector3 (40f, necromancer.transform.position.y, -22f);
 		}
 	}
 
@@ -340,6 +339,7 @@ public class GameManager : MonoBehaviour {
 			name = "tempGManager";
 		}
 		SceneManager.LoadScene("Level " + level);
+		Destroy(GameObject.Find ("Encounter3"));
 	}
 
 	public void Menu(){
