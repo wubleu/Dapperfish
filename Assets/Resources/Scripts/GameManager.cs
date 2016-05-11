@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour {
 				}
 			}
 			necromancer.transform.position = new Vector3 (40f, necromancer.transform.position.y, -22f);
-		} else {
+		} else if (level == 1) {
 			GameObject.Find ("Encounter3").GetComponent<BoxCollider> ().enabled = true;
 		}
 	}
