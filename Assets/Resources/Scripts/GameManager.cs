@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour {
 		}
 		if (checkpoint && level == 1) {
 			Encounter = 3;
-			objectives.text = "Blink into the Fort and get the key.  You idiot.";
+			objectives.text = "Get the key to the Fort gate.";
 			Destroy (GameObject.Find ("Encounter0"));
 			Destroy (GameObject.Find ("Encounter1"));
 			Destroy (GameObject.Find ("Encounter1"));
