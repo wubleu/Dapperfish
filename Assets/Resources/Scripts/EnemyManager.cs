@@ -115,11 +115,12 @@ public class EnemyManager : MonoBehaviour {
 		}
 		else if (gManager.level == 4) {
 			if ((wave+=Time.deltaTime)>wave4){
-				print (arenaWave);
+				print (arenaWave + offset);
 				wave = 0;
-				delayedSpawn ("wave" + (arenaWave + offset).ToString(),true);
+				delayedSpawn ("wave" + (arenaWave + offset + 1).ToString(),true);
 				arenaWave = (arenaWave + 1) % 2;
 				if (arenaWave == 0) {
+					print ("here" + arenaWaves.ToString ());
 					arenaWaves -= 1;
 					if (arenaWaves == 0) {
 						offset += 2;
