@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour {
 	public int xDimension;
 	public int yDimension;
 	bool done = false;
+	public bool checkpoint = false;
 	public bool dead = false;
 	public Text objectives;
 	public Text alert;
@@ -98,6 +99,36 @@ public class GameManager : MonoBehaviour {
 			necromancer.EnableDamage ();
 //			bSpawner = new GameObject ().AddComponent<BossSpawner> ();
 		}
+		GameObject gM = GameObject.Find ("tempGManager");
+		if (gM != null && level == 1) {
+			checkpoint = gM.GetComponent<GameManager>().checkpoint;
+			Destroy (gM);
+		}
+		if (checkpoint && level == 1) {
+			Encounter = 3;
+			objectives.text = "Open the Fort gate.";
+			Destroy(GameObject.Find ("Encounter0"));
+			Destroy(GameObject.Find ("Encounter1"));
+			Destroy(GameObject.Find ("Encounter1"));
+			Destroy(GameObject.Find ("Encounter1"));
+			Destroy(GameObject.Find ("Encounter2"));
+			Destroy(GameObject.Find ("Encounter3"));
+			necromancer.EnableBlight ();
+			foreach (Key key in GameObject.FindObjectsOfType<Key>()) {
+				if (key.transform.position.x > 50) {
+					Destroy (key.gameObject);
+				}
+			}
+			necromancer.hasFortKey = true;
+
+			foreach (AIBehavior unit in GameObject.FindObjectsOfType<AIBehavior>()) {
+				if ((unit.transform.position.x > 25 && unit.transform.position.x < 55) &&
+				    (unit.transform.position.y > -30 && unit.transform.position.y < -5)) {
+					Destroy (unit.gameObject);
+				}
+			}
+			necromancer.transform.position = new Vector3 (53, necromancer.transform.position.y, -48);
+		}
 	}
 
 	void Update() {
@@ -115,6 +146,9 @@ public class GameManager : MonoBehaviour {
 		if (Encounter == 2 && level == 1) {
 			necromancer.EnableBlight ();
 		}
+		if (Encounter == 3 && level == 1) {
+			checkpoint = true;
+		}
 		if (Encounter == 4 && level == 1) {
 			necromancer.EnableBlink ();
 		}
@@ -122,6 +156,7 @@ public class GameManager : MonoBehaviour {
 			necromancer.EnableDamage ();
 		}
 		if (Encounter == 8 && level == 1) {
+			checkpoint = false;
 			NextLevel ();
 		}
 
@@ -150,6 +185,12 @@ public class GameManager : MonoBehaviour {
 			alert.text = "You Win?";
 
 			GameObject.Find ("Necromancer Boss").GetComponent<NecromancerBoss> ().Die ();
+			foreach (AIBehavior unit in FindObjectsOfType<AIBehavior>()) {
+				Destroy (unit.gameObject);
+			}
+			foreach (SpellShot unit in FindObjectsOfType<SpellShot>()) {
+				Destroy (unit.gameObject);
+			}
 			Encounter++;
 		}
 
@@ -245,8 +286,8 @@ public class GameManager : MonoBehaviour {
 	}
 
 	private void RefillGrid() {
-		for (int x = 0; x < xDimension; x++) {
-			for (int y = 0; y < yDimension; y++) {
+		for (int x = 0; x < xDimension; ++x) {
+			for (int y = 0; y < yDimension; ++y) {
 				enemyGrid [x, y].Clear ();
 			}
 		}
@@ -294,8 +335,13 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void Restart(){
+		if (checkpoint) {
+			DontDestroyOnLoad (gameObject);
+			name = "tempGManager";
+		}
 		SceneManager.LoadScene("Level " + level);
 	}
+
 	public void Menu(){
 
 		SceneManager.LoadScene (0);
