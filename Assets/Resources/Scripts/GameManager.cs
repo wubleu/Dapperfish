@@ -107,13 +107,13 @@ public class GameManager : MonoBehaviour {
 		if (checkpoint && level == 1) {
 			Encounter = 4;
 			objectives.text = "Open the Fort gate.";
-			Destroy(GameObject.Find ("Encounter0"));
-			Destroy(GameObject.Find ("Encounter1"));
-			Destroy(GameObject.Find ("Encounter1"));
-			Destroy(GameObject.Find ("Encounter1"));
-			Destroy(GameObject.Find ("Encounter2"));
-			Destroy(GameObject.Find ("Encounter3"));
-			Destroy(GameObject.Find ("Encounter4"));
+			Destroy (GameObject.Find ("Encounter0"));
+			Destroy (GameObject.Find ("Encounter1"));
+			Destroy (GameObject.Find ("Encounter1"));
+			Destroy (GameObject.Find ("Encounter1"));
+			Destroy (GameObject.Find ("Encounter2"));
+			Destroy (GameObject.Find ("Encounter3"));
+			Destroy (GameObject.Find ("Encounter4"));
 			necromancer.EnableBlight ();
 			foreach (Key key in GameObject.FindObjectsOfType<Key>()) {
 				if (key.transform.position.x > 50) {
@@ -124,11 +124,13 @@ public class GameManager : MonoBehaviour {
 
 			foreach (AIBehavior unit in GameObject.FindObjectsOfType<AIBehavior>()) {
 				if ((unit.transform.position.x > 25 && unit.transform.position.x < 55) &&
-					(unit.transform.position.z > -30 && unit.transform.position.z < -5)) {
+				    (unit.transform.position.z > -30 && unit.transform.position.z < -5)) {
 					Destroy (unit.gameObject);
 				}
 			}
 			necromancer.transform.position = new Vector3 (40f, necromancer.transform.position.y, -22f);
+		} else {
+			GameObject.Find ("Encounter3").GetComponent<BoxCollider> ().enabled = true;
 		}
 	}
 
