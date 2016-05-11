@@ -219,6 +219,7 @@ public class AIBehavior : MonoBehaviour {
 				meleeTimer = 0;
 			} else {
 				coll.gameObject.GetComponent<NecromancerBoss> ().TakeHit ();
+				meleeTimer = 0;
 			}
 			return;
 		}

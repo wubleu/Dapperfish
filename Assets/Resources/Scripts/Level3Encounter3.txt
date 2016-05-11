@@ -15,4 +15,4 @@
 0:”But…”
 0:“But…But…”
 0:“DAMN IT!”:0
-2:Congratulations………
+2:Congratulations, Try Endless Mode.
