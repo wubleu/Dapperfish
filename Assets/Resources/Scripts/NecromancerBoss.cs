@@ -330,6 +330,13 @@ public class NecromancerBoss : MonoBehaviour {
 		}
 	}
 
+	public void TakeHit() {
+		hp -= 1;
+		if (hp <= 0) {
+			dead = true;
+		}
+	}
+
 	public void Root() {
 		rootTimer = 0;
 	}

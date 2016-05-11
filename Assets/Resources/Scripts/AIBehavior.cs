@@ -217,6 +217,8 @@ public class AIBehavior : MonoBehaviour {
 			if (isEnemy) {
 				coll.gameObject.GetComponent<PlayerController> ().TakeHit (coll.gameObject);
 				meleeTimer = 0;
+			} else {
+				coll.gameObject.GetComponent<NecromancerBoss> ().TakeHit ();
 			}
 			return;
 		}
