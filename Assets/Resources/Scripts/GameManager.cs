@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour {
 					Destroy (unit.gameObject);
 				}
 			}
-			necromancer.transform.position = new Vector3 (53, necromancer.transform.position.y, -48);
+			necromancer.transform.position = new Vector3 (53, necromancer.transform.position.y, -50);
 		}
 	}
 
@@ -145,9 +145,6 @@ public class GameManager : MonoBehaviour {
 
 		if (Encounter == 2 && level == 1) {
 			necromancer.EnableBlight ();
-		}
-		if (Encounter == 3 && level == 1) {
-			checkpoint = true;
 		}
 		if (Encounter == 4 && level == 1) {
 			necromancer.EnableBlink ();

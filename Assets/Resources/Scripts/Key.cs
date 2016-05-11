@@ -25,6 +25,9 @@ public class Key : MonoBehaviour {
 	void OnTriggerEnter (Collider coll) {
 		if (coll.gameObject.name == "Necromancer") {
 			coll.GetComponent<PlayerController> ().HasKey ();
+			if (GameObject.FindObjectOfType<GameManager> ().level == 1) {
+				GameObject.FindObjectOfType<GameManager>().checkpoint = true;
+			}
 			AudioSource.PlayClipAtPoint (keyGrab, transform.position);
 			foreach (KeyInfo k in p.gManager.keys) {
 				print (k.location);
