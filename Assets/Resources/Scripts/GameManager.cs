@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour {
 					Destroy (unit.gameObject);
 				}
 			}
-			necromancer.transform.position = new Vector3 (49.5f, necromancer.transform.position.y, -25f);
+			necromancer.transform.position = new Vector3 (35.5f, necromancer.transform.position.y, -30f);
 		}
 	}
 
